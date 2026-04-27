@@ -972,6 +972,22 @@
   }
   .back-btn:hover { color: var(--neutral-900); }
 
+  /* ─── WELCOME SCREEN IMAGE ───────────────────────────────────── */
+  #screen-welcome .wizard-left {
+    background-image: url('welcome-hero.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  #screen-welcome .wizard-left .caption,
+  #screen-welcome .wizard-left .quote-card p,
+  #screen-welcome .wizard-left .quote-card cite { color: rgba(255,255,255,0.92); }
+  #screen-welcome .wizard-left .quote-card {
+    background: rgba(15,64,48,0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  #screen-welcome .wizard-left .brand { color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+
   /* ─── RESPONSIVE TWEAKS ───────────────────────────────────── */
   @media (max-width: 900px) {
     .wizard-left { display: none; }
