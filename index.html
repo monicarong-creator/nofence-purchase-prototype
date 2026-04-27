@@ -1005,7 +1005,7 @@
     <main class="wizard-right">
       <div class="wizard-topbar">
         <span class="step-label">Step 1 of 5</span>
-        <button class="skip-link" onclick="goTo('screen-purchase')">Skip, I know what I need →</button>
+        <button class="skip-link" onclick="goTo('screen-purchase')">If you're ready to buy and want to skip the set-up questions, click here.</button>
       </div>
       <div class="progress-dots">
         <div class="dot active" style="width:32px"></div>
@@ -1015,8 +1015,16 @@
         <div class="dot" style="width:8px"></div>
       </div>
       <div class="wizard-content">
-        <h1 class="wizard-heading">Let's find your perfect setup</h1>
-        <p class="wizard-sub">Answer 4 quick questions and we'll recommend the right collar bundle for your herd and land.</p>
+        <h1 class="wizard-heading">Let's get started!</h1>
+        <p class="wizard-sub">Nofence can be customized to meet your operation's specific needs. We'll ask you a few questions about your operation, land, and livestock to find the best set-up for your herd.</p>
+        <div class="input-group">
+          <label for="country-input">Country</label>
+          <input type="text" id="country-input" placeholder="e.g. United States" autocomplete="country-name" style="width:100%;height:52px;border:1.5px solid var(--neutral-200);border-radius:var(--radius-md);padding:0 16px;font-size:15px;color:var(--neutral-900);outline:none;font-family:inherit;">
+        </div>
+        <div class="input-group">
+          <label for="region-input">Region / County / State</label>
+          <input type="text" id="region-input" placeholder="e.g. Montana" autocomplete="address-level1" style="width:100%;height:52px;border:1.5px solid var(--neutral-200);border-radius:var(--radius-md);padding:0 16px;font-size:15px;color:var(--neutral-900);outline:none;font-family:inherit;">
+        </div>
         <div class="input-group">
           <label for="email-input">Email address</label>
           <input type="email" id="email-input" placeholder="you@farm.com" autocomplete="email">
@@ -1026,13 +1034,45 @@
           <p>I agree to receive personalised recommendations by email. Unsubscribe anytime.</p>
         </div>
         <div class="btn-row">
-          <button class="btn btn-primary" onclick="goTo('screen-q1')">Get my recommendation &nbsp;→</button>
+          <button class="btn btn-primary" onclick="goTo('screen-email-confirm')">Continue &nbsp;→</button>
         </div>
         <div class="trust-row">
           <span class="trust-item">🔒 GDPR safe</span>
           <span class="trust-item">⭐ 4.8/5 rating</span>
           <span class="trust-item">🌍 15+ countries</span>
         </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN 1b: EMAIL CONFIRMATION
+════════════════════════════════════════════════════════════ -->
+<div id="screen-email-confirm" class="screen">
+  <div class="wizard-layout">
+    <aside class="wizard-left">
+      <a class="brand" href="#">Nofence</a>
+      <div class="illus">✉️</div>
+      <p class="caption">Check your inbox to continue</p>
+      <div class="quote-card">
+        <p>"The setup process was surprisingly straightforward — the team walked us through every step."</p>
+        <cite>— Maria K., Sheep farmer, New Zealand</cite>
+      </div>
+    </aside>
+    <main class="wizard-right">
+      <div class="wizard-topbar">
+        <span class="step-label">Almost there</span>
+        <button class="skip-link" onclick="goTo('screen-purchase')">If you're ready to buy and want to skip the set-up questions, click here.</button>
+      </div>
+      <div class="wizard-content" style="justify-content:center;padding-top:40px">
+        <div style="width:72px;height:72px;background:var(--green-50);border-radius:36px;display:flex;align-items:center;justify-content:center;font-size:32px">✉️</div>
+        <h1 class="wizard-heading" style="font-size:32px">Check your email to continue</h1>
+        <p class="wizard-sub">To continue building your set-up, click the link we sent to your email. If you haven't received your link within 2 mins, check your spam folder or try again with a different email address.</p>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="goTo('screen-q1')">I've confirmed my email &nbsp;→</button>
+        </div>
+        <p class="text-small" style="text-align:center">Didn't get the email? <span style="color:var(--green-700);cursor:pointer;text-decoration:underline" onclick="goTo('screen-welcome')">Try a different address</span></p>
       </div>
     </main>
   </div>
@@ -1055,7 +1095,7 @@
     <main class="wizard-right">
       <div class="wizard-topbar">
         <span class="step-label">Step 2 of 5</span>
-        <button class="skip-link" onclick="goTo('screen-purchase')">Skip, I know what I need →</button>
+        <button class="skip-link" onclick="goTo('screen-purchase')">If you're ready to buy and want to skip the set-up questions, click here.</button>
       </div>
       <div class="progress-dots">
         <div class="dot done" style="width:8px"></div>
@@ -1065,8 +1105,8 @@
         <div class="dot" style="width:8px"></div>
       </div>
       <div class="wizard-content">
-        <h1 class="wizard-heading">What livestock do you have?</h1>
-        <p class="wizard-sub">This helps us recommend the right collar model for your animals.</p>
+        <h1 class="wizard-heading">What type of livestock do you have?</h1>
+        <p class="wizard-sub">Choose the right type of collar(s) for your herd.</p>
         <div class="option-list">
           <div class="option-card selected" data-group="animal" data-value="cattle" onclick="selectOption(this, 'animal')">
             <div class="option-icon">🐄</div>
@@ -1119,7 +1159,7 @@
     <main class="wizard-right">
       <div class="wizard-topbar">
         <span class="step-label">Step 3 of 5</span>
-        <button class="skip-link" onclick="goTo('screen-purchase')">Skip, I know what I need →</button>
+        <button class="skip-link" onclick="goTo('screen-purchase')">If you're ready to buy and want to skip the set-up questions, click here.</button>
       </div>
       <div class="progress-dots">
         <div class="dot done" style="width:8px"></div>
@@ -1129,8 +1169,13 @@
         <div class="dot" style="width:8px"></div>
       </div>
       <div class="wizard-content">
-        <h1 class="wizard-heading">How many animals are in your herd?</h1>
-        <p class="wizard-sub">All adult animals must wear a collar. A minimum of 5 collars is required per herd.</p>
+        <h1 class="wizard-heading">How many collars do you need?</h1>
+        <p class="wizard-sub">For animal safety and to maintain the virtual boundaries, all adults in the herd must wear a collar.</p>
+        <div style="background:var(--green-25);border-radius:var(--radius-lg);padding:20px 24px;border:1px solid var(--green-100)">
+          <p style="font-size:14px;font-weight:600;color:var(--green-900);margin-bottom:6px">C2.5 Cattle Collars</p>
+          <p style="font-size:13px;color:var(--neutral-700);line-height:1.55;margin-bottom:10px">The solar-powered GPS collars enable the virtual fence and allow you to manage and monitor your herd.</p>
+          <p style="font-size:13px;color:var(--neutral-700);line-height:1.55"><strong>Includes:</strong> collar unit, replaceable battery, durable neckstrap, and a standard-length (20 inch) chain. Battery charger sold separately.</p>
+        </div>
         <div class="stepper-group">
           <label>Number of collars needed</label>
           <div class="stepper">
@@ -1146,7 +1191,7 @@
         </div>
         <div class="info-box">
           <div class="info-icon"></div>
-          <p>For animal safety, all adult animals in a herd must wear a collar at the same time.</p>
+          <p>For animal safety and to maintain the virtual boundaries, all adults in the herd must wear a collar. A minimum of 5 collars is required per herd.</p>
         </div>
         <div class="btn-row">
           <button class="btn btn-secondary" onclick="goTo('screen-q1')">← Back</button>
@@ -1164,17 +1209,17 @@
   <div class="wizard-layout">
     <aside class="wizard-left">
       <a class="brand" href="#">Nofence</a>
-      <div class="illus">⛰️</div>
-      <p class="caption">Rolling hills — Nofence works in diverse terrain</p>
+      <div class="illus">🐂</div>
+      <p class="caption">Getting the right fit matters for your herd's comfort</p>
       <div class="quote-card">
-        <p>"Our land is hilly and forested. Nofence's support team helped us optimise the antenna placement."</p>
-        <cite>— Katrin L., Goat farmer, Germany</cite>
+        <p>"We have a mix of Limousin and smaller breeds — the extra-long chains made a real difference for the bigger animals."</p>
+        <cite>— James R., Beef farmer, Ireland</cite>
       </div>
     </aside>
     <main class="wizard-right">
       <div class="wizard-topbar">
         <span class="step-label">Step 4 of 5</span>
-        <button class="skip-link" onclick="goTo('screen-purchase')">Skip, I know what I need →</button>
+        <button class="skip-link" onclick="goTo('screen-purchase')">If you're ready to buy and want to skip the set-up questions, click here.</button>
       </div>
       <div class="progress-dots">
         <div class="dot done" style="width:8px"></div>
@@ -1184,28 +1229,24 @@
         <div class="dot" style="width:8px"></div>
       </div>
       <div class="wizard-content">
-        <h1 class="wizard-heading">What does your land look like?</h1>
-        <p class="wizard-sub">Terrain affects signal strength and zone accuracy. This helps us pick the best antenna configuration.</p>
-        <div class="terrain-grid">
-          <div class="terrain-card selected" data-group="terrain" data-value="flat" onclick="selectTerrain(this)">
-            <div class="terrain-emoji">🌾</div>
-            <div class="terrain-title">Flat / Open fields</div>
-            <div class="terrain-sub">Minimal obstacles</div>
+        <h1 class="wizard-heading">What best describes your cattle?</h1>
+        <p class="wizard-sub">It's important that the chains on your cattle collars are not too tight. Bulls and larger cattle breeds (such as Limousin and Charolais) sometimes require extra-long (28 inch) chains instead of our standard 20 inch chains.</p>
+        <div class="option-list">
+          <div class="option-card selected" data-group="cattle-size" data-value="large" onclick="selectOption(this, 'cattle-size')">
+            <div class="option-icon">🐂</div>
+            <div class="option-text">
+              <div class="option-title">I have bulls and/or large cattle breeds</div>
+              <div class="option-desc">e.g. Limousin, Charolais, or bulls of any breed</div>
+            </div>
+            <div class="option-radio"></div>
           </div>
-          <div class="terrain-card" data-group="terrain" data-value="rolling" onclick="selectTerrain(this)">
-            <div class="terrain-emoji">🌄</div>
-            <div class="terrain-title">Rolling hills</div>
-            <div class="terrain-sub">Some elevation changes</div>
-          </div>
-          <div class="terrain-card" data-group="terrain" data-value="hilly" onclick="selectTerrain(this)">
-            <div class="terrain-emoji">⛰️</div>
-            <div class="terrain-title">Hilly terrain</div>
-            <div class="terrain-sub">Significant hills or forest</div>
-          </div>
-          <div class="terrain-card" data-group="terrain" data-value="mountain" onclick="selectTerrain(this)">
-            <div class="terrain-emoji">🏔️</div>
-            <div class="terrain-title">Mountain or fjord</div>
-            <div class="terrain-sub">Complex, rugged landscape</div>
+          <div class="option-card" data-group="cattle-size" data-value="standard" onclick="selectOption(this, 'cattle-size')">
+            <div class="option-icon">🐄</div>
+            <div class="option-text">
+              <div class="option-title">I do not have bulls or large cattle breeds</div>
+              <div class="option-desc">Standard 20 inch chains will fit your herd</div>
+            </div>
+            <div class="option-radio"></div>
           </div>
         </div>
         <div class="btn-row">
@@ -1262,7 +1303,7 @@
         <div>
           <p style="font-size:14px;font-weight:600;color:var(--neutral-900);margin-bottom:10px">What's included with every collar</p>
           <div class="includes-list">
-            <div class="includes-item"><div class="check">✓</div>Collar unit, battery, neck strap and 20" chain</div>
+            <div class="includes-item"><div class="check">✓</div>Collar unit, replaceable battery, durable neckstrap, and standard 20" chain</div>
             <div class="includes-item"><div class="check">✓</div>12-month subscription + Nofence app access</div>
             <div class="includes-item"><div class="check">✓</div>5-year warranty and free product updates</div>
           </div>
@@ -1321,7 +1362,7 @@
             </div>
           </div>
           <p class="product-description" id="purchase-product-desc">
-            Ready-to-use C2.5 collar set for cattle. Includes: collar unit, battery, neck strap, and 20" chain. Charger sold separately.
+            The solar-powered GPS collars enable the virtual fence and allow you to manage and monitor your herd. Includes: collar unit, replaceable battery, durable neckstrap, and a standard-length (20 inch) chain. Battery charger sold separately.
           </p>
           <div class="feature-tags">
             <div class="feature-tag">📅 12-month subscription*</div>
@@ -1352,8 +1393,8 @@
         <div class="accessory-card" data-acc-id="charger" data-price="89">
           <div class="accessory-img">🔌</div>
           <div class="accessory-info">
-            <div class="acc-name">Collar Charger</div>
-            <div class="acc-why">Charge up to 6 collars simultaneously. Needed before first use — don't skip this one.</div>
+            <div class="acc-name">Cattle Collar Battery Charger</div>
+            <div class="acc-why">Each battery takes ~14 hours to fully charge. Batteries ship at low charge — fully charge before the season. Plugs into a standard outlet. We recommend 1 charger per 10 collars.</div>
           </div>
           <div class="accessory-price-add">
             <span class="acc-price">$89.00</span>
@@ -1363,8 +1404,8 @@
         <div class="accessory-card" data-acc-id="battery" data-price="49">
           <div class="accessory-img">🔋</div>
           <div class="accessory-info">
-            <div class="acc-name">Spare Battery Pack</div>
-            <div class="acc-why">Keep animals protected while other collars are charging. Recommended for herds of 15+.</div>
+            <div class="acc-name">Additional Cattle Collar Battery</div>
+            <div class="acc-why">For smooth operation in areas with limited sun or intensive grazing. Allows charging while others are in use — we recommend 1 spare battery per 10 collars. Rechargeable lithium-ion, compatible with all Nofence cattle collar models.</div>
           </div>
           <div class="accessory-price-add">
             <span class="acc-price">$49.00</span>
@@ -1374,8 +1415,8 @@
         <div class="accessory-card" data-acc-id="chain40" data-price="12">
           <div class="accessory-img">⛓️</div>
           <div class="accessory-info">
-            <div class="acc-name">40" Chain (extended)</div>
-            <div class="acc-why">For large-breed cattle or bulls. Better fit for wider necks — easy to swap.</div>
+            <div class="acc-name">Extra-long chain pair, 70 cm (28″)</div>
+            <div class="acc-why">Steel chain pair. Connects to the collar with a hoop-link. Recommended for bulls and large breeds such as Limousin and Charolais. Compatible with Cattle 2.5 and updated 2.2 bracket collars. Standard 20″ chains are included with each collar.</div>
           </div>
           <div class="accessory-price-add">
             <span class="acc-price">$12.00</span>
@@ -1535,7 +1576,7 @@
     const names = { cattle: 'Cattle Collar C2.5', sheep: 'Sheep & Goat Collar S1', both: 'Build a Mixed Setup' };
     const emojis = { cattle: '🐄', sheep: '🐑', both: '🐄🐑' };
     const descs = {
-      cattle: 'Ready-to-use C2.5 collar set for cattle. Includes: collar unit, battery, neck strap, and 20" chain. Charger sold separately.',
+      cattle: 'The solar-powered GPS collars enable the virtual fence and allow you to manage and monitor your herd. Includes: collar unit, replaceable battery, durable neckstrap, and a standard-length (20 inch) chain. Battery charger sold separately.',
       sheep:  'Ready-to-use S1 collar set for sheep and goats. Lightweight and compact. Includes: collar unit, battery, strap. Charger sold separately.',
       both:   'Configure both cattle and sheep/goat collars below. Each type is billed at its own price tier based on quantity.'
     };
