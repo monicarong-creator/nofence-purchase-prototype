@@ -46,17 +46,16 @@
 
   /* ─── WIZARD LAYOUT ───────────────────────────────────────── */
   .wizard-layout {
-    display: flex;
+    display: grid;
+    grid-template-columns: 45% 55%;
     min-height: 100vh;
   }
 
   .wizard-left {
-    width: 380px;
-    min-width: 380px;
     background: var(--green-50);
     display: flex;
     flex-direction: column;
-    padding: 40px;
+    padding: 48px;
     position: relative;
     overflow: hidden;
   }
@@ -72,15 +71,16 @@
 
   .wizard-left .illus {
     width: 100%;
-    aspect-ratio: 4/3;
+    flex: 1;
     border-radius: var(--radius-xl);
     background: var(--green-100);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 64px;
+    font-size: 96px;
     margin-bottom: 24px;
     transition: background 0.4s;
+    min-height: 200px;
   }
 
   .wizard-left .caption {
@@ -111,11 +111,10 @@
   }
 
   .wizard-right {
-    flex: 1;
     background: var(--white);
     display: flex;
     flex-direction: column;
-    padding: 40px 80px;
+    padding: 48px 72px;
   }
 
   /* ─── WIZARD TOP BAR ──────────────────────────────────────── */
@@ -988,9 +987,12 @@
     border: 1px solid rgba(255,255,255,0.15);
   }
   #screen-welcome .wizard-left .brand { color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+  #screen-welcome .wizard-left .illus { display: none; }
+  #screen-welcome .wizard-left .caption { margin-top: auto; }
 
   /* ─── RESPONSIVE TWEAKS ───────────────────────────────────── */
   @media (max-width: 900px) {
+    .wizard-layout { grid-template-columns: 1fr; }
     .wizard-left { display: none; }
     .wizard-right { padding: 32px 24px; }
     .purchase-body { flex-direction: column; padding: 16px; }
