@@ -1062,6 +1062,88 @@
     font-weight: 300;
     letter-spacing: -0.03em;
   }
+
+  /* ─── FULL-BLEED LEFT PANEL PHOTOS ───────────────────────────
+     All wizard left panels: full-height photo, no internal boxes.
+     illus / caption / quote-card hidden globally.
+     Each screen gets its own photo and a dark gradient overlay.
+  ──────────────────────────────────────────────────────────── */
+  .wizard-left {
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* stack children above the ::before overlay */
+  .wizard-left > * { position: relative; z-index: 1; }
+
+  /* hide emoji illustrations and caption labels everywhere */
+  .wizard-left .illus,
+  .wizard-left .caption { display: none; }
+
+  /* dark gradient overlay for text readability on photo screens */
+  #screen-welcome .wizard-left::before,
+  #screen-email-confirm .wizard-left::before,
+  #screen-q1 .wizard-left::before,
+  #screen-q2 .wizard-left::before,
+  #screen-q3 .wizard-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      170deg,
+      rgba(10,45,22,0.55) 0%,
+      rgba(10,45,22,0.20) 50%,
+      rgba(10,45,22,0.60) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* brand logo: white on all photo screens */
+  #screen-welcome .wizard-left .brand,
+  #screen-email-confirm .wizard-left .brand,
+  #screen-q1 .wizard-left .brand,
+  #screen-q2 .wizard-left .brand,
+  #screen-q3 .wizard-left .brand {
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  }
+
+  /* brand dot: white on photo screens */
+  #screen-welcome .wizard-left .brand::before,
+  #screen-email-confirm .wizard-left .brand::before,
+  #screen-q1 .wizard-left .brand::before,
+  #screen-q2 .wizard-left .brand::before,
+  #screen-q3 .wizard-left .brand::before {
+    background: rgba(255,255,255,0.9);
+    animation: none;
+  }
+
+  /* keep the quote card only on the welcome screen */
+  .wizard-left .quote-card { display: none; }
+  #screen-welcome .wizard-left .quote-card {
+    display: block;
+    margin-top: auto;
+    background: rgba(10,45,22,0.5);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  #screen-welcome .wizard-left .quote-card p,
+  #screen-welcome .wizard-left .quote-card cite { color: rgba(255,255,255,0.92); }
+
+  /* per-screen photo assignments */
+  #screen-email-confirm .wizard-left {
+    background-image: url('https://identity.nofence.com/prototypes/images/collars-group.webp');
+  }
+  #screen-q1 .wizard-left {
+    background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg');
+  }
+  #screen-q2 .wizard-left {
+    background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg');
+  }
+  #screen-q3 .wizard-left {
+    background-image: url('https://identity.nofence.com/prototypes/images/setup-collar.jpg');
+  }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
