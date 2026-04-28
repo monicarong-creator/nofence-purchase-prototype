@@ -178,9 +178,11 @@
 
   .wizard-heading {
     font-size: 40px;
-    font-weight: 700;
+    font-weight: 300;
+    font-family: 'Host Grotesk', 'Inter', sans-serif;
     color: var(--green-900);
     line-height: 1.15;
+    letter-spacing: -0.04em;
   }
 
   .wizard-sub {
@@ -205,7 +207,7 @@
     background: var(--white);
   }
 
-  .option-card:hover { border-color: var(--green-300); background: var(--green-25); }
+  .option-card:hover { border-color: var(--green-300); background: var(--green-25); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   .option-card.selected {
     border-color: var(--green-500);
@@ -351,7 +353,7 @@
     background: white;
   }
 
-  .terrain-card:hover { border-color: var(--green-300); background: var(--green-25); }
+  .terrain-card:hover { border-color: var(--green-300); background: var(--green-25); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   .terrain-card.selected {
     border-color: var(--green-500);
@@ -387,7 +389,7 @@
   }
 
   .btn-primary { background: var(--green-500); color: white; flex: 1; }
-  .btn-primary:hover { background: #4C841E; }
+  .btn-primary:hover { background: #4C841E; transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgba(95,165,38,0.55); }
 
   .btn-secondary {
     background: transparent;
@@ -997,12 +999,75 @@
     .product-detail { flex-direction: column; }
     .product-image { width: 100%; }
   }
+
+  /* ─── SCROLL PROGRESS BAR ─────────────────────────────────── */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--green-500);
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ─── KEN BURNS HERO ──────────────────────────────────────── */
+  @keyframes kenBurns {
+    0%   { background-size: 110% auto; background-position: 50% 50%; }
+    100% { background-size: 122% auto; background-position: 53% 47%; }
+  }
+  #screen-welcome .wizard-left {
+    animation: kenBurns 10s ease-in-out infinite alternate;
+  }
+
+  /* ─── BRAND GREEN DOT ─────────────────────────────────────── */
+  .brand {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 7px;
+  }
+  .brand::before {
+    content: '';
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: var(--green-500);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: dotPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(95,165,38,0.5); }
+    50%       { box-shadow: 0 0 0 5px rgba(95,165,38,0); }
+  }
+  /* keep welcome brand white */
+  #screen-welcome .wizard-left .brand::before { background: rgba(255,255,255,0.85); animation: none; }
+
+  /* ─── SCROLL REVEAL ───────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s cubic-bezier(0.2,0.6,0.2,1), transform 0.65s cubic-bezier(0.2,0.6,0.2,1);
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* ─── HOST GROTESK ON PURCHASE PAGE TITLES ────────────────── */
+  .product-info .product-name,
+  .accessories-title,
+  .order-summary-panel h2,
+  .result-product-info .product-name {
+    font-family: 'Host Grotesk', 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+  }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Host+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress"></div>
 
 <!-- ═══════════════════════════════════════════════════════════
      SCREEN 1: WIZARD WELCOME / EMAIL
@@ -1688,6 +1753,35 @@
 
   // ─── Init ───────────────────────────────────────────────────
   updateSummary();
+
+  // ─── Scroll progress bar ────────────────────────────────────
+  const _sp = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const el = document.documentElement;
+    const pct = el.scrollTop / (el.scrollHeight - el.clientHeight) || 0;
+    if (_sp) _sp.style.width = (pct * 100) + '%';
+  }, { passive: true });
+
+  // ─── Scroll reveal (purchase page cards) ────────────────────
+  const _ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.accessory-card, .product-detail, .result-product-card').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i * 0.07) + 's';
+    _ro.observe(el);
+  });
+
+  // ─── Trigger reveals when switching to purchase screen ──────
+  const _origGoTo = window.goTo;
+  window.goTo = function(id) {
+    _origGoTo(id);
+    if (id === 'screen-purchase') {
+      setTimeout(() => {
+        document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view'));
+      }, 80);
+    }
+  };
 </script>
 </body>
 </html>
