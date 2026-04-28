@@ -519,41 +519,7 @@
     background: var(--neutral-100);
   }
 
-  .purchase-header {
-    background: white;
-    padding: 0 48px;
-    height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: var(--shadow-sm);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .purchase-header .brand {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--green-900);
-  }
-
-  .purchase-header nav a {
-    font-size: 15px;
-    color: var(--neutral-700);
-    text-decoration: none;
-    margin-left: 32px;
-  }
-
-  .purchase-header .header-cta {
-    font-size: 14px;
-    background: var(--green-500);
-    color: white;
-    padding: 8px 20px;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    font-weight: 600;
-  }
+  /* purchase-header removed — replaced by global site-nav */
 
   .purchase-body {
     display: flex;
@@ -790,8 +756,8 @@
     padding: 28px;
     box-shadow: var(--shadow-sm);
     position: sticky;
-    top: 88px;
-    max-height: calc(100vh - 120px);
+    top: 96px;
+    max-height: calc(100vh - 112px);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -1053,6 +1019,216 @@
   }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
+  /* ─── SITE NAV ───────────────────────────────────────────────
+     Persistent frosted-glass header, always on top.
+     Matches Nofence.com design: logo · nav links · actions.
+     During wizard: nav links swap for breadcrumbs.
+  ──────────────────────────────────────────────────────────── */
+  .site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid #e9eaeb;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .site-nav-inner {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0F4030;
+    text-decoration: none;
+    letter-spacing: -0.4px;
+    flex-shrink: 0;
+  }
+
+  .site-nav-links {
+    display: flex;
+    gap: 2px;
+    list-style: none;
+    flex: 1;
+    margin: 0; padding: 0;
+  }
+
+  .site-nav-links a {
+    padding: 6px 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #535862;
+    text-decoration: none;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .site-nav-links a:hover { background: #f5f5f5; color: #0F4030; }
+
+  /* Breadcrumb — shown during wizard screens */
+  .nav-breadcrumb {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #717680;
+    flex: 1;
+  }
+
+  .nav-breadcrumb a {
+    color: #717680;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-breadcrumb a:hover { color: #0F4030; }
+  .nav-crumb-sep { color: #c8cacc; font-size: 16px; }
+  .nav-crumb-current { color: #0F4030; font-weight: 600; }
+
+  .nav-step-pill {
+    margin-left: 4px;
+    font-size: 12px;
+    color: #717680;
+    background: #f0f5ee;
+    color: #396317;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* Nav right-side actions */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .nav-btn-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #535862;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .nav-btn-login {
+    height: 40px;
+    padding: 0 16px;
+    border: 1.5px solid #e9eaeb;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    font-weight: 600;
+    color: #414651;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.15s;
+  }
+
+  .nav-btn-login:hover { border-color: #c8cacc; }
+
+  .nav-btn-primary {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 6px;
+    background: var(--green-500);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border: none;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+
+  .nav-btn-primary:hover {
+    background: #4C841E;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -6px rgba(95,165,38,0.5);
+  }
+
+  /* body offset so content doesn't hide under fixed nav */
+  body { padding-top: 80px; }
+
+  /* wizard layout: account for nav height */
+  .wizard-layout { min-height: calc(100vh - 80px) !important; }
+
+  /* hide wizard-left brand (it's now in the global nav) */
+  .wizard-left .brand { display: none !important; }
+
+  /* ─── WIZARD PROMPT BANNER (on purchase page) ─────────────── */
+  .wizard-prompt-bar {
+    background: linear-gradient(135deg, #EBF3E8 0%, #F0F5EE 100%);
+    border-bottom: 1px solid #C5DEBC;
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .wizard-prompt-bar .prompt-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--green-500);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .wizard-prompt-bar .prompt-text { flex: 1; min-width: 200px; }
+  .wizard-prompt-bar .prompt-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0F4030;
+  }
+  .wizard-prompt-bar .prompt-text span {
+    font-size: 13px;
+    color: #396317;
+  }
+
+  .wizard-prompt-btn {
+    background: var(--green-900);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+  }
+  .wizard-prompt-btn:hover { background: #396317; transform: translateY(-1px); }
+
   /* ─── HOST GROTESK ON PURCHASE PAGE TITLES ────────────────── */
   .product-info .product-name,
   .accessories-title,
@@ -1152,6 +1328,49 @@
 </head>
 <body>
 <div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     GLOBAL SITE NAV
+════════════════════════════════════════════════════════════ -->
+<nav class="site-nav" id="siteNav">
+  <div class="site-nav-inner">
+    <!-- Logo — always links back to the marketing site -->
+    <a class="nav-logo" href="https://nofence.com" target="_blank">
+      <svg width="14" height="24" viewBox="0 0 45 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.64755 0L0 63.1462L1.30577 63.4618C1.36512 63.4768 8.08687 65.1449 15.9512 68.0302C23.8303 70.9155 31.0417 74.3719 31.1159 74.402L32.5552 75.0932L33.1784 73.5905C33.2081 73.5153 36.1758 66.3622 38.9654 60.5765C41.755 54.8209 44.411 50.3427 44.4407 50.2976L44.9897 49.3809L6.64755 0Z" fill="#0F4030"/>
+        <path d="M36.2329 59.2164C34.1703 63.4843 32.0188 68.4885 30.9949 70.923C28.4576 69.7508 22.9229 67.2712 17.0173 65.1073C11.4232 63.0485 6.4079 61.6058 3.85571 60.9145C5.85888 58.976 9.36072 55.6849 12.1206 53.3707C15.7263 50.3501 19.4062 47.9457 20.252 47.3896C21.3501 47.3896 26.4396 47.4197 30.9059 47.9757C34.3632 48.4115 38.7554 49.3132 41.174 49.8542C40.1798 51.5523 38.2657 55.0087 36.2329 59.2164Z" fill="#5FA526"/>
+      </svg>
+      Nofence
+    </a>
+
+    <!-- Main nav links — shown on purchase/skip page -->
+    <ul class="site-nav-links" id="navLinks">
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Resources</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+
+    <!-- Breadcrumb trail — shown on all wizard screens -->
+    <div class="nav-breadcrumb" id="navBreadcrumb">
+      <a href="https://nofence.com" target="_blank">nofence.com</a>
+      <span class="nav-crumb-sep">›</span>
+      <a href="#" onclick="goTo('screen-purchase'); return false;">Buy now</a>
+      <span class="nav-crumb-sep">›</span>
+      <span class="nav-crumb-current" id="breadcrumbCurrent">Get started</span>
+      <span class="nav-step-pill" id="navStepPill"></span>
+    </div>
+
+    <!-- Right-side actions -->
+    <div class="nav-actions" id="navActions">
+      <!-- Purchase page: full actions -->
+      <a href="#" class="nav-btn-text" id="navTalkSales">Talk to sales</a>
+      <a href="#" class="nav-btn-login" id="navLogin">Log in</a>
+      <!-- No "Buy Now" here — you're already in the buying flow -->
+    </div>
+  </div>
+</nav>
 
 <!-- ═══════════════════════════════════════════════════════════
      SCREEN 1: WIZARD WELCOME / EMAIL
@@ -1487,15 +1706,16 @@
      SCREEN 6: PURCHASE PAGE (SKIP WIZARD PATH)
 ════════════════════════════════════════════════════════════ -->
 <div id="screen-purchase" class="screen" style="background:var(--neutral-100)">
-  <header class="purchase-header">
-    <span class="purchase-header brand">Nofence</span>
-    <nav>
-      <a href="#">Products</a>
-      <a href="#">Pricing</a>
-      <a href="#">Support</a>
-    </nav>
-    <a href="#" class="header-cta">Already ordered?</a>
-  </header>
+
+  <!-- Wizard re-entry prompt — visible to customers who skipped the wizard -->
+  <div class="wizard-prompt-bar">
+    <div class="prompt-icon">🌿</div>
+    <div class="prompt-text">
+      <strong>Not sure which setup is right for your herd?</strong>
+      <span>Answer 4 quick questions and get a personalised collar recommendation in under 2 minutes.</span>
+    </div>
+    <button class="wizard-prompt-btn" onclick="goTo('screen-welcome')">Find my setup →</button>
+  </div>
 
   <div class="purchase-body">
     <!-- Left: Product config -->
@@ -1666,11 +1886,41 @@
 
   const tierLabels = ['5–24 collars', '25–99 collars', '100+ collars'];
 
+  // ─── Nav state per screen ───────────────────────────────────
+  const NAV_BREADCRUMBS = {
+    'screen-welcome':       ['Get started',           'Step 1 of 5'],
+    'screen-email-confirm': ['Confirm email',          'Step 1 of 5'],
+    'screen-q1':            ['Animal type',            'Step 2 of 5'],
+    'screen-q2':            ['Collar count',           'Step 3 of 5'],
+    'screen-q3':            ['Your herd',              'Step 4 of 5'],
+    'screen-result':        ['Your recommendation',    'Step 5 of 5'],
+  };
+
+  function updateNav(screenId) {
+    const isWizard = screenId in NAV_BREADCRUMBS;
+    document.getElementById('navLinks').style.display      = isWizard ? 'none' : 'flex';
+    document.getElementById('navBreadcrumb').style.display = isWizard ? 'flex' : 'none';
+    // always show Login; hide Talk to sales on wizard to keep it uncluttered
+    document.getElementById('navTalkSales').style.display  = isWizard ? 'none' : 'inline';
+    if (isWizard) {
+      const [label, step] = NAV_BREADCRUMBS[screenId];
+      document.getElementById('breadcrumbCurrent').textContent = label;
+      document.getElementById('navStepPill').textContent        = step;
+    }
+  }
+
   // ─── Navigation ────────────────────────────────────────────
   function goTo(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
     window.scrollTo(0, 0);
+    updateNav(screenId);
+    // trigger reveal animations when entering the purchase screen
+    if (screenId === 'screen-purchase') {
+      setTimeout(() => {
+        document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view'));
+      }, 80);
+    }
   }
 
   // ─── Option selection (radio-style) ────────────────────────
@@ -1837,6 +2087,8 @@
 
   // ─── Init ───────────────────────────────────────────────────
   updateSummary();
+  // Set nav to match the initial active screen (screen-welcome)
+  updateNav('screen-welcome');
 
   // ─── Scroll progress bar ────────────────────────────────────
   const _sp = document.getElementById('scroll-progress');
@@ -1855,17 +2107,6 @@
     el.style.transitionDelay = (i * 0.07) + 's';
     _ro.observe(el);
   });
-
-  // ─── Trigger reveals when switching to purchase screen ──────
-  const _origGoTo = window.goTo;
-  window.goTo = function(id) {
-    _origGoTo(id);
-    if (id === 'screen-purchase') {
-      setTimeout(() => {
-        document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view'));
-      }, 80);
-    }
-  };
 </script>
 </body>
 </html>
