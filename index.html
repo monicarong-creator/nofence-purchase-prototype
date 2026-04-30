@@ -320,6 +320,19 @@
   .qr-placeholder { width: 80px; height: 80px; background: var(--neutral-200); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--neutral-500); text-align: center; flex-shrink: 0; margin-top: 4px; }
   .success-actions { display: flex; flex-direction: column; gap: 10px; align-items: center; }
 
+  /* ─── COLLAR TYPE SELECTOR (welcome screen) ─────────────────── */
+  .collar-selector { display: flex; flex-direction: column; gap: 8px; }
+  .collar-selector-label { font-size: 13px; font-weight: 600; color: var(--neutral-700); text-transform: uppercase; letter-spacing: .5px; }
+  .collar-type-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .collar-type-card { border: 2px solid var(--neutral-200); border-radius: var(--radius-lg); padding: 16px 12px; cursor: pointer; transition: all .2s; background: white; text-align: center; position: relative; }
+  .collar-type-card:hover { border-color: var(--green-300); background: var(--green-25); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .collar-type-card.selected { border-color: var(--green-500); background: var(--green-25); }
+  .collar-type-card.selected::after { content: '✓'; position: absolute; top: 8px; right: 10px; font-size: 12px; font-weight: 700; color: var(--green-500); }
+  .collar-type-card .ct-emoji { font-size: 30px; margin-bottom: 8px; line-height: 1; }
+  .collar-type-card .ct-title { font-size: 13px; font-weight: 700; color: var(--neutral-900); margin-bottom: 3px; }
+  .collar-type-card .ct-collar { font-size: 11px; font-weight: 500; color: var(--neutral-500); background: var(--neutral-100); border-radius: 20px; padding: 2px 8px; display: inline-block; margin-top: 2px; }
+  .collar-type-card.selected .ct-collar { background: var(--green-100); color: var(--green-700); }
+
   /* ─── MODAL ────────────────────────────────────────────────── */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 90000; display: none; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
@@ -445,44 +458,66 @@
 <!-- ═══════════════ SCREEN: WELCOME (Email + Location) ═══════ -->
 <div id="screen-welcome" class="screen active">
   <div class="wizard-layout">
-    <aside class="wizard-left photo-overlay">
-      <div class="left-quote">
-        <p>"Virtual fencing has completely changed how we manage our land — no wires, no stress for the animals."</p>
-        <cite>— Lars H., Sheep farmer, Norway</cite>
+    <aside class="wizard-left photo-overlay" id="welcome-left" style="background-image:url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg')">
+      <div class="left-quote" id="welcome-quote">
+        <p id="welcome-quote-text">"Virtual fencing has completely changed how we manage our land — no wires, no stress for the animals."</p>
+        <cite id="welcome-quote-cite">— Lars H., Sheep farmer, Norway</cite>
       </div>
     </aside>
-    <main class="wizard-right">
+    <main class="wizard-right" style="padding:40px 56px;overflow-y:auto">
       <div class="wizard-topbar">
         <span class="step-label">Getting started</span>
         <button class="skip-link" onclick="goTo('screen-purchase')">Already know what you need? Skip →</button>
       </div>
-      <div class="wizard-content">
+      <div class="wizard-content" style="gap:16px">
         <div>
-          <h1 class="wizard-heading">Let's find the right setup for your herd</h1>
-          <p class="wizard-sub" style="margin-top:12px">We'll ask a few questions about your animals, land, and setup to recommend exactly the right collars and accessories. Takes about 4 minutes — and you'll get a personalised quote at the end.</p>
+          <h1 class="wizard-heading" style="font-size:32px">Let's find the right setup for your herd</h1>
+          <p class="wizard-sub" style="margin-top:8px;font-size:14px">We'll recommend exactly the right collars and accessories in about 4 minutes.</p>
         </div>
-        <div class="info-box green">
-          <div class="info-icon"></div>
-          <p>Your details are used to tailor your recommendation and send you a quote. We never share your data with third parties.</p>
+
+        <!-- ── Collar type selector ─────────────────────────── -->
+        <div class="collar-selector">
+          <span class="collar-selector-label">What animals do you manage?</span>
+          <div class="collar-type-cards">
+            <div class="collar-type-card" id="ct-cattle" onclick="selectCollarType('cattle')">
+              <div class="ct-emoji">🐄</div>
+              <div class="ct-title">Cattle</div>
+              <div class="ct-collar">Collar C2.5</div>
+            </div>
+            <div class="collar-type-card" id="ct-sheep" onclick="selectCollarType('sheep')">
+              <div class="ct-emoji">🐑</div>
+              <div class="ct-title">Sheep &amp; Goats</div>
+              <div class="ct-collar">Collar S1</div>
+            </div>
+            <div class="collar-type-card" id="ct-both" onclick="selectCollarType('both')">
+              <div class="ct-emoji">🐄🐑</div>
+              <div class="ct-title">Both</div>
+              <div class="ct-collar">C2.5 + S1</div>
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <label for="country-input">Country</label>
-          <input type="text" id="country-input" placeholder="e.g. United Kingdom" autocomplete="country-name">
-        </div>
-        <div class="input-group">
-          <label for="region-input">Region / County / State</label>
-          <input type="text" id="region-input" placeholder="e.g. Yorkshire" autocomplete="address-level1">
+
+        <!-- ── Location + email ────────────────────────────── -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="input-group">
+            <label for="country-input">Country</label>
+            <input type="text" id="country-input" placeholder="e.g. United Kingdom" autocomplete="country-name" style="height:44px;font-size:14px">
+          </div>
+          <div class="input-group">
+            <label for="region-input">Region / State</label>
+            <input type="text" id="region-input" placeholder="e.g. Yorkshire" autocomplete="address-level1" style="height:44px;font-size:14px">
+          </div>
         </div>
         <div class="input-group">
           <label for="email-input">Email address</label>
-          <input type="email" id="email-input" placeholder="you@farm.com" autocomplete="email">
+          <input type="email" id="email-input" placeholder="you@farm.com" autocomplete="email" style="height:44px;font-size:14px">
         </div>
         <div class="consent-row">
           <input type="checkbox" id="consent" checked>
-          <p>I'm happy to receive my personalised recommendation and occasional updates by email. Unsubscribe anytime.</p>
+          <p style="font-size:12px">I'm happy to receive my personalised recommendation and occasional updates by email. Unsubscribe anytime.</p>
         </div>
         <div class="btn-row" style="padding-top:0">
-          <button class="btn btn-primary" onclick="goTo('screen-email-confirm')">Continue &nbsp;→</button>
+          <button class="btn btn-primary" id="welcome-continue" disabled onclick="goTo('screen-email-confirm')">Continue &nbsp;→</button>
         </div>
         <div class="trust-row">
           <span class="trust-item">🔒 GDPR safe</span>
@@ -597,67 +632,45 @@
         <span class="progress-label">1 / 6</span>
       </div>
       <div class="wizard-content">
-        <div>
-          <h1 class="wizard-heading">What animals will you be managing?</h1>
-          <p class="wizard-sub" style="margin-top:10px">Each animal must wear a collar to stay safely within your virtual fence.</p>
+        <!-- Collar type confirmation chip -->
+        <div id="q1-animal-chip" style="display:inline-flex;align-items:center;gap:8px;background:var(--green-25);border:1px solid var(--green-100);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--green-700)">
+          <span id="q1-chip-emoji">🐄</span>
+          <span id="q1-chip-label">Cattle — Collar C2.5</span>
+          <span style="color:var(--neutral-300);margin:0 2px">·</span>
+          <button onclick="goTo('screen-welcome')" style="font-size:12px;color:var(--neutral-500);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0">Change</button>
         </div>
-        <div class="option-list" id="animal-options">
-          <div class="option-card" data-group="animal" data-value="cattle" onclick="selectAnimal(this,'cattle')">
-            <div class="option-icon">🐄</div>
-            <div class="option-text">
-              <div class="option-title">Cattle</div>
-              <div class="option-desc">Collar C2.5 — suitable for all cattle breeds</div>
-            </div>
-            <div class="option-radio"></div>
-          </div>
-          <div class="option-card" data-group="animal" data-value="sheep" onclick="selectAnimal(this,'sheep')">
-            <div class="option-icon">🐑</div>
-            <div class="option-text">
-              <div class="option-title">Sheep and Goats</div>
-              <div class="option-desc">Collar S1 — lightweight, designed for small livestock</div>
-            </div>
-            <div class="option-radio"></div>
-          </div>
-          <div class="option-card" data-group="animal" data-value="both" onclick="selectAnimal(this,'both')">
-            <div class="option-icon">🐄🐑</div>
-            <div class="option-text">
-              <div class="option-title">Both cattle and sheep / goats</div>
-              <div class="option-desc">We'll recommend the right split for your mixed operation</div>
-            </div>
-            <div class="option-radio"></div>
-          </div>
+        <div>
+          <h1 class="wizard-heading" id="q1-heading">How many cattle collars do you need?</h1>
+          <p class="wizard-sub" style="margin-top:10px">For animal safety and to maintain the virtual boundary, every adult animal in the herd must wear a collar.</p>
         </div>
 
-        <!-- Inline quantity reveal -->
-        <div class="inline-reveal" id="qty-reveal">
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div style="background:var(--green-25);border-radius:var(--radius-lg);padding:18px 22px;border:1px solid var(--green-100)">
-              <p style="font-size:14px;font-weight:600;color:var(--green-900);margin-bottom:6px" id="collar-type-label">C2.5 Cattle Collars</p>
-              <p style="font-size:13px;color:var(--neutral-700);line-height:1.5">Solar-powered GPS collars that enable the virtual fence. Includes collar unit, battery, neckstrap, and 20″ chain.</p>
-            </div>
-            <div class="stepper-group">
-              <label>How many collars do you need?</label>
-              <div class="stepper">
-                <button class="dec" onclick="adjustQty(-1)">−</button>
-                <input class="count" id="qty-input" type="number" min="5" max="999" value="20" readonly>
-                <button class="inc" onclick="adjustQty(1)">+</button>
-              </div>
-            </div>
-            <div class="tier-banner">
-              <div class="tier-label">Your pricing tier</div>
-              <div class="tier-price" id="tier-price">5–24 collars: $349 each</div>
-              <div class="tier-note" id="tier-note">Order 25+ collars to unlock $299/collar</div>
-            </div>
-            <div class="info-box">
-              <div class="info-icon"></div>
-              <p>All adult animals must wear a collar — minimum 5 per herd. Every animal inside the virtual fence needs one to stay safe.</p>
-            </div>
+        <!-- Collar info card -->
+        <div style="background:var(--green-25);border-radius:var(--radius-lg);padding:18px 22px;border:1px solid var(--green-100)">
+          <p style="font-size:14px;font-weight:600;color:var(--green-900);margin-bottom:6px" id="collar-type-label">C2.5 Cattle Collars</p>
+          <p style="font-size:13px;color:var(--neutral-700);line-height:1.5" id="collar-type-desc">Solar-powered GPS collar. Includes collar unit, replaceable battery, durable neckstrap, and 20″ chain. Subscription included.</p>
+        </div>
+
+        <div class="stepper-group">
+          <label id="qty-stepper-label">Number of cattle collars</label>
+          <div class="stepper">
+            <button class="dec" onclick="adjustQty(-1)">−</button>
+            <input class="count" id="qty-input" type="number" min="5" max="999" value="20" readonly>
+            <button class="inc" onclick="adjustQty(1)">+</button>
           </div>
+        </div>
+        <div class="tier-banner">
+          <div class="tier-label">Your pricing tier</div>
+          <div class="tier-price" id="tier-price">5–24 collars: $349 each</div>
+          <div class="tier-note" id="tier-note">Order 25+ collars to unlock $299/collar</div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon"></div>
+          <p>All adult animals must wear a collar — minimum 5 per herd. Every animal inside the virtual fence needs one to stay safe.</p>
         </div>
 
         <div class="btn-row">
           <button class="btn btn-secondary" onclick="goTo('screen-intro')">← Back</button>
-          <button class="btn btn-primary" id="q1-continue" disabled onclick="continueFromQ1()">Continue →</button>
+          <button class="btn btn-primary" onclick="continueFromQ1()">Continue →</button>
         </div>
       </div>
     </main>
@@ -1530,35 +1543,100 @@
   function closeQuitModal() { document.getElementById('quitModal').classList.remove('open'); }
   function skipToPurchase() { closeQuitModal(); goTo('screen-purchase'); }
 
-  // ─── Q1: Animal selection + quantity ─────────────────────────
-  function selectAnimal(el, val) {
-    document.querySelectorAll('[data-group="animal"]').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    state.animal = val;
-    const labels = { cattle: 'C2.5 Cattle Collars', sheep: 'S1 Sheep & Goat Collars', both: 'Cattle C2.5 + Sheep S1 Collars' };
-    document.getElementById('collar-type-label').textContent = labels[val];
-    document.getElementById('qty-reveal').classList.add('visible');
-    document.getElementById('all-collar-count').textContent = state.qty;
-    document.getElementById('q1-continue').disabled = false;
+  // ─── Welcome: collar type selector ───────────────────────────
+  const COLLAR_DATA = {
+    cattle: {
+      img:   'https://identity.nofence.com/prototypes/images/field-cattle.jpg',
+      quote: '"With the C2.5 collar, managing 60 head across three fields is easier than it\'s ever been."',
+      cite:  '— James R., Beef farmer, Ireland',
+      chipEmoji: '🐄',
+      chipLabel: 'Cattle — Collar C2.5',
+      heading: 'How many cattle collars do you need?',
+      collarLabel: 'C2.5 Cattle Collars',
+      collarDesc: 'Solar-powered GPS collar. Includes collar unit, replaceable battery, durable neckstrap, and 20″ chain. Subscription included.',
+      stepperLabel: 'Number of cattle collars',
+      tierPrices: [349, 299, 249],
+    },
+    sheep: {
+      img:   'https://identity.nofence.com/prototypes/images/collars-group.webp',
+      quote: '"The S1 is so lightweight — the sheep barely notice it\'s there, and we moved them to a new paddock in minutes."',
+      cite:  '— Lars H., Sheep farmer, Norway',
+      chipEmoji: '🐑',
+      chipLabel: 'Sheep & Goats — Collar S1',
+      heading: 'How many sheep & goat collars do you need?',
+      collarLabel: 'S1 Sheep & Goat Collars',
+      collarDesc: 'Lightweight solar-powered GPS collar designed for sheep and goats. Includes collar unit, battery, strap, and connecting hardware.',
+      stepperLabel: 'Number of S1 collars',
+      tierPrices: [299, 249, 199],
+    },
+    both: {
+      img:   'https://identity.nofence.com/prototypes/images/hero-landscape.jpg',
+      quote: '"We run both cattle and sheep on the same land — Nofence works perfectly for the whole mixed operation."',
+      cite:  '— Anna M., Mixed farm, Ireland',
+      chipEmoji: '🐄🐑',
+      chipLabel: 'Cattle + Sheep & Goats',
+      heading: 'How many collars do you need in total?',
+      collarLabel: 'C2.5 Cattle + S1 Sheep & Goat Collars',
+      collarDesc: 'We\'ll recommend the right split for your herd. The quiz will help us tailor quantities and accessories for both collar types.',
+      stepperLabel: 'Total number of collars',
+      tierPrices: [349, 299, 249],
+    }
+  };
+
+  function selectCollarType(type) {
+    // Highlight card
+    ['cattle','sheep','both'].forEach(t => document.getElementById('ct-'+t).classList.remove('selected'));
+    document.getElementById('ct-'+type).classList.add('selected');
+    state.animal = type;
+
+    // Swap left-panel image
+    const data = COLLAR_DATA[type];
+    document.getElementById('welcome-left').style.backgroundImage = `url('${data.img}')`;
+    document.getElementById('welcome-quote-text').textContent = data.quote;
+    document.getElementById('welcome-quote-cite').textContent = data.cite;
+
+    // Enable continue
+    document.getElementById('welcome-continue').disabled = false;
+
+    // Pre-configure Q1 content
+    document.getElementById('q1-chip-emoji').textContent  = data.chipEmoji;
+    document.getElementById('q1-chip-label').textContent  = data.chipLabel;
+    document.getElementById('q1-heading').textContent     = data.heading;
+    document.getElementById('collar-type-label').textContent = data.collarLabel;
+    document.getElementById('collar-type-desc').textContent  = data.collarDesc;
+    document.getElementById('qty-stepper-label').textContent = data.stepperLabel;
+    document.getElementById('all-collar-count').textContent  = state.qty;
+
+    // Swap left-panel image for Q1 too
+    const q1left = document.querySelector('#screen-q1 .wizard-left');
+    if (q1left) q1left.style.backgroundImage = `url('${data.img}')`;
+
+    // Hide Q2 entirely if sheep-only (no bulls/chains question)
+    updateTierBanner_forType(type);
   }
+
+  function updateTierBanner_forType(type) {
+    const p = COLLAR_DATA[type].tierPrices;
+    const q = state.qty;
+    const price = q < 25 ? p[0] : (q < 100 ? p[1] : p[2]);
+    const priceEl = document.getElementById('tier-price');
+    const noteEl  = document.getElementById('tier-note');
+    if (q < 25)       { priceEl.textContent = `5–24 collars: $${p[0]} each`;   noteEl.textContent = `Order 25+ to unlock $${p[1]}/collar`; }
+    else if (q < 100) { priceEl.textContent = `25–99 collars: $${p[1]} each`;  noteEl.textContent = `Order 100+ to unlock $${p[2]}/collar`; }
+    else              { priceEl.textContent = `100+ collars: $${p[2]} each`;    noteEl.textContent = '✓ Best volume pricing unlocked!'; }
+  }
+
+  // ─── Q1: quantity (animal already set on welcome screen) ─────
 
   function adjustQty(delta) {
     state.qty = Math.max(5, Math.min(999, state.qty + delta));
     document.getElementById('qty-input').value = state.qty;
     document.getElementById('all-collar-count').textContent = state.qty;
-    updateTierBanner();
-  }
-
-  function updateTierBanner() {
-    const q = state.qty;
-    const priceEl = document.getElementById('tier-price');
-    const noteEl = document.getElementById('tier-note');
-    if (q < 25) { priceEl.textContent = '5–24 collars: $349 each'; noteEl.textContent = 'Order 25+ to unlock $299/collar'; }
-    else if (q < 100) { priceEl.textContent = '25–99 collars: $299 each'; noteEl.textContent = 'Order 100+ to unlock $249/collar'; }
-    else { priceEl.textContent = '100+ collars: $249 each'; noteEl.textContent = '✓ Best volume pricing unlocked!'; }
+    updateTierBanner_forType(state.animal || 'cattle');
   }
 
   function continueFromQ1() {
+    // Skip Q2 (bull/chain question) if sheep-only
     if (state.animal === 'sheep') goTo('screen-q3');
     else goTo('screen-q2');
   }
@@ -1789,12 +1867,13 @@
 
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
-  updateNav_initial: {
-    const isWizard = 'screen-welcome' in NAV_MAP;
-    document.getElementById('navLinks').style.display      = isWizard ? 'none' : 'flex';
-    document.getElementById('navBreadcrumb').style.display = isWizard ? 'flex' : 'none';
-    document.getElementById('navTalkSales').style.display  = isWizard ? 'none' : '';
-  }
+  // Welcome screen: continue disabled until collar type selected
+  document.getElementById('welcome-continue').disabled = true;
+  // Nav: start in wizard mode (screen-welcome is in NAV_MAP)
+  document.getElementById('navLinks').style.display      = 'none';
+  document.getElementById('navBreadcrumb').style.display = 'flex';
+  document.getElementById('navTalkSales').style.display  = 'none';
+  document.getElementById('breadcrumbCurrent').textContent = 'Get started';
 
   // ─── Scroll progress ──────────────────────────────────────────
   const _sp = document.getElementById('scroll-progress');
