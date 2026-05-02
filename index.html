@@ -367,22 +367,34 @@
   .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--green-500); z-index: 99999; width: 0%; transition: width .1s linear; border-radius: 0 2px 2px 0; }
 
   /* ─── SITE NAV ─────────────────────────────────────────────── */
-  .site-nav { position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(255,255,255,.94); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid #e9eaeb; z-index: 10000; display: flex; align-items: center; padding: 0 32px; }
-  .site-nav-inner { max-width: 1280px; width: 100%; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(255,255,255,.96); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid #e9eaeb; z-index: 10000; overflow: visible; }
+  .site-nav-bar { height: 80px; display: flex; align-items: center; padding: 0 32px; }
   .nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #0F4030; text-decoration: none; letter-spacing: -0.4px; flex-shrink: 0; }
+
+  /* Full site nav (purchase page) */
+  #fullNav { display: flex; width: 100%; align-items: center; gap: 20px; max-width: 1280px; margin: 0 auto; }
   .site-nav-links { display: flex; gap: 2px; list-style: none; flex: 1; margin: 0; padding: 0; }
   .site-nav-links a { padding: 6px 8px; font-size: 15px; font-weight: 600; color: #535862; text-decoration: none; border-radius: 8px; white-space: nowrap; transition: background .15s, color .15s; }
   .site-nav-links a:hover { background: #f5f5f5; color: #0F4030; }
-  .nav-breadcrumb { display: none; align-items: center; gap: 6px; font-size: 14px; color: #717680; flex: 1; }
-  .nav-breadcrumb a { color: #717680; text-decoration: none; transition: color .15s; }
-  .nav-breadcrumb a:hover { color: #0F4030; }
-  .nav-crumb-sep { color: #c8cacc; font-size: 16px; }
-  .nav-crumb-current { color: #0F4030; font-weight: 600; }
-  .nav-step-pill { margin-left: 4px; font-size: 12px; background: #f0f5ee; color: #396317; padding: 2px 10px; border-radius: 20px; font-weight: 500; }
   .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .nav-btn-text { font-size: 14px; font-weight: 500; color: #535862; text-decoration: none; white-space: nowrap; cursor: pointer; background: none; border: none; font-family: inherit; }
   .nav-btn-login { height: 40px; padding: 0 16px; border: 1.5px solid #e9eaeb; border-radius: 6px; background: white; font-size: 14px; font-weight: 600; color: #414651; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: border-color .15s; font-family: inherit; }
   .nav-btn-login:hover { border-color: #c8cacc; }
+
+  /* Checkout shell nav (wizard + checkout + success) */
+  #checkoutNav { display: none; width: 100%; align-items: center; justify-content: space-between; position: relative; }
+  #checkoutNav.active { display: flex; }
+  .nav-back-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 500; color: #535862; background: none; border: none; cursor: pointer; font-family: inherit; padding: 8px 0; transition: color .15s; min-width: 140px; }
+  .nav-back-btn:hover { color: #0F4030; }
+  .nav-back-btn:hover .back-chevron { transform: translateX(-2px); }
+  .back-chevron { display: inline-block; transition: transform .15s; }
+  .checkout-nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #0F4030; text-decoration: none; letter-spacing: -0.4px; position: absolute; left: 50%; transform: translateX(-50%); }
+  .nav-secure-label { font-size: 13px; color: #9EA3A8; display: flex; align-items: center; gap: 5px; min-width: 140px; justify-content: flex-end; }
+
+  /* Progress strip — sits just below nav bar edge, no layout shift */
+  .nav-progress-strip { position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: var(--neutral-200); overflow: hidden; display: none; }
+  .nav-progress-strip.active { display: block; }
+  .nav-progress-fill { height: 100%; background: var(--green-500); transition: width 0.4s ease; }
 
   /* ─── BRAND DOT ────────────────────────────────────────────── */
   .brand { display: inline-flex !important; align-items: center; gap: 7px; }
@@ -420,26 +432,45 @@
 
 <!-- ═══════════════ GLOBAL NAV ═══════════════════════════════ -->
 <nav class="site-nav" id="siteNav">
-  <div class="site-nav-inner">
-    <a class="nav-logo" href="https://nofence.com" target="_blank">
-      <svg width="14" height="24" viewBox="0 0 45 76" fill="none"><path d="M6.64755 0L0 63.1462L1.30577 63.4618C1.36512 63.4768 8.08687 65.1449 15.9512 68.0302C23.8303 70.9155 31.0417 74.3719 31.1159 74.402L32.5552 75.0932L33.1784 73.5905C33.2081 73.5153 36.1758 66.3622 38.9654 60.5765C41.755 54.8209 44.411 50.3427 44.4407 50.2976L44.9897 49.3809L6.64755 0Z" fill="#0F4030"/><path d="M36.2329 59.2164C34.1703 63.4843 32.0188 68.4885 30.9949 70.923C28.4576 69.7508 22.9229 67.2712 17.0173 65.1073C11.4232 63.0485 6.4079 61.6058 3.85571 60.9145C5.85888 58.976 9.36072 55.6849 12.1206 53.3707C15.7263 50.3501 19.4062 47.9457 20.252 47.3896C21.3501 47.3896 26.4396 47.4197 30.9059 47.9757C34.3632 48.4115 38.7554 49.3132 41.174 49.8542C40.1798 51.5523 38.2657 55.0087 36.2329 59.2164Z" fill="#5FA526"/></svg>
-      Nofence
-    </a>
-    <ul class="site-nav-links" id="navLinks">
-      <li><a href="#">Products</a></li><li><a href="#">Services</a></li><li><a href="#">Pricing</a></li><li><a href="#">Resources</a></li><li><a href="#">About</a></li>
-    </ul>
-    <div class="nav-breadcrumb" id="navBreadcrumb">
-      <a href="https://nofence.com" target="_blank">nofence.com</a>
-      <span class="nav-crumb-sep">›</span>
-      <a href="#" onclick="goTo('screen-purchase');return false;">Buy now</a>
-      <span class="nav-crumb-sep">›</span>
-      <span class="nav-crumb-current" id="breadcrumbCurrent">Get started</span>
-      <span class="nav-step-pill" id="navStepPill"></span>
+  <div class="site-nav-bar">
+
+    <!-- Full site nav (purchase page) -->
+    <div id="fullNav">
+      <a class="nav-logo" href="https://nofence.com" target="_blank">
+        <svg width="14" height="24" viewBox="0 0 45 76" fill="none"><path d="M6.64755 0L0 63.1462L1.30577 63.4618C1.36512 63.4768 8.08687 65.1449 15.9512 68.0302C23.8303 70.9155 31.0417 74.3719 31.1159 74.402L32.5552 75.0932L33.1784 73.5905C33.2081 73.5153 36.1758 66.3622 38.9654 60.5765C41.755 54.8209 44.411 50.3427 44.4407 50.2976L44.9897 49.3809L6.64755 0Z" fill="#0F4030"/><path d="M36.2329 59.2164C34.1703 63.4843 32.0188 68.4885 30.9949 70.923C28.4576 69.7508 22.9229 67.2712 17.0173 65.1073C11.4232 63.0485 6.4079 61.6058 3.85571 60.9145C5.85888 58.976 9.36072 55.6849 12.1206 53.3707C15.7263 50.3501 19.4062 47.9457 20.252 47.3896C21.3501 47.3896 26.4396 47.4197 30.9059 47.9757C34.3632 48.4115 38.7554 49.3132 41.174 49.8542C40.1798 51.5523 38.2657 55.0087 36.2329 59.2164Z" fill="#5FA526"/></svg>
+        Nofence
+      </a>
+      <ul class="site-nav-links" id="navLinks">
+        <li><a href="#">Products</a></li><li><a href="#">Capabilities</a></li><li><a href="#">Knowledge hub</a></li><li><a href="#">Nofence community</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="nav-btn-text">Talk to sales</a>
+        <a href="#" class="nav-btn-text" style="height:40px;padding:0 16px;border:1.5px solid var(--green-500);border-radius:6px;background:var(--green-500);color:white;font-weight:600;display:flex;align-items:center;text-decoration:none;font-size:14px;font-family:inherit">Buy now</a>
+      </div>
     </div>
-    <div class="nav-actions">
-      <a href="#" class="nav-btn-text" id="navTalkSales">Talk to sales</a>
-      <button class="nav-btn-login">Log in</button>
+
+    <!-- Checkout shell nav (wizard + checkout + success) -->
+    <div id="checkoutNav">
+      <button class="nav-back-btn" id="navBackBtn" onclick="navGoBack()">
+        <span class="back-chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="#535862" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span id="navBackLabel">nofence.com</span>
+      </button>
+      <a class="checkout-nav-logo" href="https://nofence.com" target="_blank">
+        <svg width="14" height="24" viewBox="0 0 45 76" fill="none"><path d="M6.64755 0L0 63.1462L1.30577 63.4618C1.36512 63.4768 8.08687 65.1449 15.9512 68.0302C23.8303 70.9155 31.0417 74.3719 31.1159 74.402L32.5552 75.0932L33.1784 73.5905C33.2081 73.5153 36.1758 66.3622 38.9654 60.5765C41.755 54.8209 44.411 50.3427 44.4407 50.2976L44.9897 49.3809L6.64755 0Z" fill="#0F4030"/><path d="M36.2329 59.2164C34.1703 63.4843 32.0188 68.4885 30.9949 70.923C28.4576 69.7508 22.9229 67.2712 17.0173 65.1073C11.4232 63.0485 6.4079 61.6058 3.85571 60.9145C5.85888 58.976 9.36072 55.6849 12.1206 53.3707C15.7263 50.3501 19.4062 47.9457 20.252 47.3896C21.3501 47.3896 26.4396 47.4197 30.9059 47.9757C34.3632 48.4115 38.7554 49.3132 41.174 49.8542C40.1798 51.5523 38.2657 55.0087 36.2329 59.2164Z" fill="#5FA526"/></svg>
+        Nofence
+      </a>
+      <span class="nav-secure-label" id="navSecureLabel">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="#9EA3A8" stroke-width="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#9EA3A8" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Secure checkout
+      </span>
     </div>
+
+  </div>
+  <!-- Wizard progress strip -->
+  <div class="nav-progress-strip" id="navProgressStrip">
+    <div class="nav-progress-fill" id="navProgressFill" style="width:0%"></div>
   </div>
 </nav>
 
@@ -466,10 +497,6 @@
       </div>
     </aside>
     <main class="wizard-right" style="padding:40px 56px;overflow-y:auto">
-      <div class="wizard-topbar">
-        <span class="step-label">Getting started</span>
-        <button class="skip-link" onclick="goTo('screen-purchase')">Already know what you need? Skip →</button>
-      </div>
       <div class="wizard-content" style="gap:16px">
         <div>
           <h1 class="wizard-heading" style="font-size:32px">Let's get started!</h1>
@@ -531,6 +558,7 @@
           <span class="trust-item">⭐ 4.8/5 rating</span>
           <span class="trust-item">🌍 15+ countries</span>
         </div>
+        <p style="text-align:center;font-size:13px;color:var(--neutral-500);padding-bottom:4px">Already know what you need? <a href="#" onclick="goTo('screen-purchase');return false;" style="color:var(--green-700);text-decoration:underline;font-weight:500">Go straight to shop →</a></p>
       </div>
     </main>
   </div>
@@ -575,10 +603,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Before we start</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-content">
         <div>
           <h1 class="wizard-heading">How Nofence works</h1>
@@ -630,10 +654,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Question 1 of 6</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:16.6%"></div></div>
         <span class="progress-label">1 / 6</span>
@@ -694,10 +714,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Question 2 of 6</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:33.3%"></div></div>
         <span class="progress-label">2 / 6</span>
@@ -771,10 +787,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Question 3 of 6</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
         <span class="progress-label">3 / 6</span>
@@ -820,10 +832,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Question 4 of 6</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:66.6%"></div></div>
         <span class="progress-label">4 / 6</span>
@@ -878,10 +886,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Power recommendation</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:66.6%"></div></div>
         <span class="progress-label">After Q4</span>
@@ -949,10 +953,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Question 5 of 6</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:83.3%"></div></div>
         <span class="progress-label">5 / 6</span>
@@ -1020,10 +1020,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-topbar">
-        <span class="step-label">Question 6 of 6</span>
-        <button class="skip-link" onclick="showQuitModal()">Skip quiz</button>
-      </div>
       <div class="wizard-progress">
         <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
         <span class="progress-label">6 / 6</span>
@@ -1513,35 +1509,78 @@
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
 
-  const NAV_MAP = {
-    'screen-welcome':       ['Get started',          ''],
-    'screen-email-confirm': ['Confirm email',         ''],
-    'screen-intro':         ['About Nofence',         ''],
-    'screen-q1':            ['Animal type',           'Q1 of 6'],
-    'screen-q2':            ['Your cattle',           'Q2 of 6'],
-    'screen-q3':            ['Environment',           'Q3 of 6'],
-    'screen-q4':            ['Grazing practice',      'Q4 of 6'],
-    'screen-power':         ['Power recommendation',  ''],
-    'screen-q5':            ['Shelter',               'Q5 of 6'],
-    'screen-q6':            ['Neck straps',           'Q6 of 6'],
-    'screen-setup-summary': ['Your setup',            ''],
+  // ─── Navigation history stack (powers the Back button) ──────
+  const navStack = [];
+
+  // Progress % per wizard screen (0 = no bar shown)
+  const WIZARD_PROGRESS = {
+    'screen-welcome':       0,
+    'screen-email-confirm': 0,
+    'screen-intro':         0,
+    'screen-q1':            1/6,
+    'screen-q2':            2/6,
+    'screen-q3':            3/6,
+    'screen-q4':            4/6,
+    'screen-power':         4/6,
+    'screen-q5':            5/6,
+    'screen-q6':            6/6,
+    'screen-setup-summary': 6/6,
+    'screen-checkout':      0,
+    'screen-success':       0,
   };
 
-  function goTo(id) {
+  // Screens that use the checkout shell nav (everything except purchase page)
+  const CHECKOUT_SHELL_SCREENS = new Set([
+    'screen-welcome','screen-email-confirm','screen-intro',
+    'screen-q1','screen-q2','screen-q3','screen-q4','screen-power',
+    'screen-q5','screen-q6','screen-setup-summary',
+    'screen-checkout','screen-success'
+  ]);
+
+  function goTo(id, addToHistory = true) {
+    const current = document.querySelector('.screen.active')?.id;
+    if (addToHistory && current && current !== id) navStack.push(current);
+
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    window.scrollTo(0,0);
-    const isWizard = id in NAV_MAP;
-    document.getElementById('navLinks').style.display      = isWizard ? 'none' : 'flex';
-    document.getElementById('navBreadcrumb').style.display = isWizard ? 'flex' : 'none';
-    document.getElementById('navTalkSales').style.display  = isWizard ? 'none' : '';
-    if (isWizard) {
-      const [label, step] = NAV_MAP[id];
-      document.getElementById('breadcrumbCurrent').textContent = label;
-      document.getElementById('navStepPill').textContent       = step;
-    }
+    window.scrollTo(0, 0);
+    updateNav(id);
+
     if (id === 'screen-purchase') {
       setTimeout(() => document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view')), 80);
+    }
+  }
+
+  function updateNav(id) {
+    const useCheckoutShell = CHECKOUT_SHELL_SCREENS.has(id);
+
+    document.getElementById('fullNav').style.display      = useCheckoutShell ? 'none' : '';
+    document.getElementById('checkoutNav').classList.toggle('active', useCheckoutShell);
+
+    if (useCheckoutShell) {
+      // Back button label: "nofence.com" when at the start, otherwise "Back"
+      const prevScreen = navStack[navStack.length - 1];
+      const backLabel = !prevScreen ? 'nofence.com' : 'Back';
+      document.getElementById('navBackLabel').textContent = backLabel;
+      // Hide back button on success screen
+      document.getElementById('navBackBtn').style.visibility = id === 'screen-success' ? 'hidden' : 'visible';
+      // Secure label only visible during checkout
+      document.getElementById('navSecureLabel').style.visibility =
+        (id === 'screen-checkout' || id === 'screen-success') ? 'visible' : 'hidden';
+      // Progress bar
+      const progress = WIZARD_PROGRESS[id] ?? 0;
+      const strip = document.getElementById('navProgressStrip');
+      strip.classList.toggle('active', progress > 0);
+      document.getElementById('navProgressFill').style.width = (progress * 100) + '%';
+    }
+  }
+
+  function navGoBack() {
+    if (navStack.length > 0) {
+      const prev = navStack.pop();
+      goTo(prev, false);
+    } else {
+      window.location.href = 'https://nofence.com';
     }
   }
 
@@ -1874,13 +1913,9 @@
 
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
-  // Welcome screen: continue disabled until collar type selected
   document.getElementById('welcome-continue').disabled = true;
-  // Nav: start in wizard mode (screen-welcome is in NAV_MAP)
-  document.getElementById('navLinks').style.display      = 'none';
-  document.getElementById('navBreadcrumb').style.display = 'flex';
-  document.getElementById('navTalkSales').style.display  = 'none';
-  document.getElementById('breadcrumbCurrent').textContent = 'Get started';
+  // Set up nav for the initial screen (screen-welcome = checkout shell)
+  updateNav('screen-welcome');
 
   // ─── Scroll progress ──────────────────────────────────────────
   const _sp = document.getElementById('scroll-progress');
