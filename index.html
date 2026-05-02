@@ -377,7 +377,8 @@
   /* ─── SITE NAV ─────────────────────────────────────────────── */
   .site-nav { position: fixed; top: 0; left: 0; right: 0; height: 80px; background: rgba(255,255,255,.96); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid #e9eaeb; z-index: 10000; overflow: visible; }
   .site-nav-bar { height: 80px; display: flex; align-items: center; padding: 0 32px; }
-  .nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #0F4030; text-decoration: none; letter-spacing: -0.4px; flex-shrink: 0; }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .checkout-nav-logo { display: flex; align-items: center; text-decoration: none; }
 
   /* Full site nav (purchase page) */
   #fullNav { display: flex; width: 100%; align-items: center; gap: 20px; max-width: 1280px; margin: 0 auto; }
@@ -444,9 +445,9 @@
 
     <!-- Full site nav (purchase page) -->
     <div id="fullNav">
-      <a class="nav-logo" href="https://nofence.com" target="_blank">
-        <svg width="14" height="24" viewBox="0 0 45 76" fill="none"><path d="M6.64755 0L0 63.1462L1.30577 63.4618C1.36512 63.4768 8.08687 65.1449 15.9512 68.0302C23.8303 70.9155 31.0417 74.3719 31.1159 74.402L32.5552 75.0932L33.1784 73.5905C33.2081 73.5153 36.1758 66.3622 38.9654 60.5765C41.755 54.8209 44.411 50.3427 44.4407 50.2976L44.9897 49.3809L6.64755 0Z" fill="#0F4030"/><path d="M36.2329 59.2164C34.1703 63.4843 32.0188 68.4885 30.9949 70.923C28.4576 69.7508 22.9229 67.2712 17.0173 65.1073C11.4232 63.0485 6.4079 61.6058 3.85571 60.9145C5.85888 58.976 9.36072 55.6849 12.1206 53.3707C15.7263 50.3501 19.4062 47.9457 20.252 47.3896C21.3501 47.3896 26.4396 47.4197 30.9059 47.9757C34.3632 48.4115 38.7554 49.3132 41.174 49.8542C40.1798 51.5523 38.2657 55.0087 36.2329 59.2164Z" fill="#5FA526"/></svg>
-        Nofence
+      <a class="nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
+        <img src="https://www.nofence.com/static/img/logo.svg" height="24" alt="" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logoname.svg" height="20" alt="Nofence" style="display:block;flex-shrink:0">
       </a>
       <ul class="site-nav-links" id="navLinks">
         <li><a href="#">Products</a></li><li><a href="#">Capabilities</a></li><li><a href="#">Knowledge hub</a></li><li><a href="#">Nofence community</a></li>
@@ -465,9 +466,9 @@
         </span>
         <span id="navBackLabel">nofence.com</span>
       </button>
-      <a class="checkout-nav-logo" href="https://nofence.com" target="_blank">
-        <svg width="14" height="24" viewBox="0 0 45 76" fill="none"><path d="M6.64755 0L0 63.1462L1.30577 63.4618C1.36512 63.4768 8.08687 65.1449 15.9512 68.0302C23.8303 70.9155 31.0417 74.3719 31.1159 74.402L32.5552 75.0932L33.1784 73.5905C33.2081 73.5153 36.1758 66.3622 38.9654 60.5765C41.755 54.8209 44.411 50.3427 44.4407 50.2976L44.9897 49.3809L6.64755 0Z" fill="#0F4030"/><path d="M36.2329 59.2164C34.1703 63.4843 32.0188 68.4885 30.9949 70.923C28.4576 69.7508 22.9229 67.2712 17.0173 65.1073C11.4232 63.0485 6.4079 61.6058 3.85571 60.9145C5.85888 58.976 9.36072 55.6849 12.1206 53.3707C15.7263 50.3501 19.4062 47.9457 20.252 47.3896C21.3501 47.3896 26.4396 47.4197 30.9059 47.9757C34.3632 48.4115 38.7554 49.3132 41.174 49.8542C40.1798 51.5523 38.2657 55.0087 36.2329 59.2164Z" fill="#5FA526"/></svg>
-        Nofence
+      <a class="checkout-nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
+        <img src="https://www.nofence.com/static/img/logo.svg" height="24" alt="" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logoname.svg" height="20" alt="Nofence" style="display:block;flex-shrink:0">
       </a>
       <span class="nav-secure-label" id="navSecureLabel">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="#9EA3A8" stroke-width="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#9EA3A8" stroke-width="1.2" stroke-linecap="round"/></svg>
