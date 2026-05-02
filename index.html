@@ -420,9 +420,90 @@
   #screen-q5 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/setup-collar.jpg'); }
   #screen-q6 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/setup-collar.jpg'); }
 
+  /* ─── WIZARD LEFT — sticky, no height growth ─────────────── */
+  .wizard-left { position: sticky; top: 80px; height: calc(100vh - 80px); overflow: hidden; }
+
+  /* ─── INTRO COMPONENT CARDS ───────────────────────────────── */
+  .intro-comp-card { display:flex; align-items:flex-start; gap:16px; padding:18px 20px; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-lg); }
+  .intro-comp-num { font-size:11px; font-weight:700; color:var(--neutral-300); letter-spacing:1px; min-width:24px; padding-top:3px; flex-shrink:0; }
+  .intro-comp-icon { font-size:22px; flex-shrink:0; width:44px; height:44px; background:var(--green-50); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; }
+  .intro-comp-body { flex:1; }
+  .intro-comp-title { font-size:15px; font-weight:600; color:var(--neutral-900); margin-bottom:3px; }
+  .intro-comp-desc { font-size:13px; color:var(--neutral-500); line-height:1.5; }
+
+  /* ─── QUIZ VALUE BOX ──────────────────────────────────────── */
+  .quiz-value-box { background:var(--green-25); border:1px solid var(--green-100); border-radius:var(--radius-lg); padding:18px 22px; }
+  .quiz-value-title { font-size:14px; font-weight:700; color:var(--green-900); margin-bottom:10px; }
+  .quiz-benefits { display:flex; flex-direction:column; gap:6px; }
+  .quiz-benefit { font-size:13px; color:var(--green-700); line-height:1.4; }
+
+  /* ─── INTRO LEFT STATS ────────────────────────────────────── */
+  .intro-left-kicker { font-size:11px; font-weight:700; color:rgba(255,255,255,0.55); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; }
+  .intro-left-stat { display:flex; align-items:baseline; gap:8px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .intro-left-stat:last-child { border-bottom:none; }
+  .stat-num { font-size:18px; font-weight:700; color:white; }
+  .stat-label { font-size:13px; color:rgba(255,255,255,0.65); }
+
+  /* ─── INFO TOOLTIP ────────────────────────────────────────── */
+  .info-tip { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:var(--neutral-200); border-radius:50%; font-size:11px; font-weight:700; color:var(--neutral-600); cursor:help; vertical-align:middle; margin-left:4px; position:relative; }
+  .info-tip::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--neutral-900); color:white; font-size:12px; line-height:1.45; padding:8px 12px; border-radius:var(--radius-md); width:240px; text-align:left; white-space:normal; opacity:0; pointer-events:none; transition:opacity .2s; z-index:1000; font-weight:400; }
+  .info-tip:hover::after { opacity:1; }
+
+  /* ─── SETUP SUMMARY CART ──────────────────────────────────── */
+  .summary-cart-page { display:grid; grid-template-columns:1fr 360px; gap:32px; max-width:1080px; margin:0 auto; padding:48px; align-items:start; }
+  .summary-cart-col { display:flex; flex-direction:column; gap:24px; }
+  .summary-cart-header { }
+  .summary-cart-items { display:flex; flex-direction:column; }
+  .summary-line-item { display:flex; align-items:center; gap:14px; padding:16px 0; border-bottom:1px solid var(--neutral-200); }
+  .summary-line-item:first-child { border-top:1px solid var(--neutral-200); }
+  .sli-icon { width:48px; height:48px; background:var(--green-25); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+  .sli-info { flex:1; min-width:0; }
+  .sli-name { font-size:14px; font-weight:600; color:var(--neutral-900); }
+  .sli-meta { font-size:12px; color:var(--neutral-400); margin-top:2px; }
+  .sli-stepper { display:flex; align-items:center; border:1.5px solid var(--neutral-200); border-radius:var(--radius-sm); overflow:hidden; flex-shrink:0; }
+  .sli-stepper button { width:34px; height:34px; border:none; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; background:var(--neutral-50); color:var(--neutral-600); transition:background .15s; font-family:inherit; font-weight:700; }
+  .sli-stepper button:hover { background:var(--neutral-200); }
+  .sli-stepper input { width:46px; height:34px; text-align:center; font-size:14px; font-weight:600; border:none; border-left:1px solid var(--neutral-200); border-right:1px solid var(--neutral-200); background:white; color:var(--neutral-900); font-family:inherit; }
+  .sli-price { font-size:15px; font-weight:700; color:var(--neutral-900); min-width:64px; text-align:right; flex-shrink:0; }
+  .sli-remove { width:30px; height:30px; border:none; background:none; cursor:pointer; color:var(--neutral-300); font-size:14px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:all .15s; flex-shrink:0; }
+  .sli-remove:hover { background:var(--neutral-100); color:var(--neutral-700); }
+  .discount-row { display:flex; gap:8px; }
+  .discount-input { flex:1; height:44px; border:1.5px solid var(--neutral-200); border-radius:var(--radius-md); padding:0 14px; font-size:14px; font-family:inherit; outline:none; transition:border-color .2s; background:white; }
+  .discount-input:focus { border-color:var(--green-500); }
+  .discount-btn { height:44px; padding:0 20px; border:1.5px solid var(--neutral-200); border-radius:var(--radius-md); font-size:14px; font-weight:600; cursor:pointer; background:white; color:var(--neutral-700); font-family:inherit; transition:all .15s; white-space:nowrap; }
+  .discount-btn:hover { background:var(--neutral-50); border-color:var(--neutral-500); }
+  .specialist-row { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 20px; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-lg); flex-wrap:wrap; }
+  .summary-totals-col { }
+  .summary-totals-card { background:white; border-radius:var(--radius-xl); border:1px solid var(--neutral-200); padding:24px; position:sticky; top:100px; box-shadow:var(--shadow-sm); }
+  .summary-totals-title { font-size:16px; font-weight:700; color:var(--neutral-900); margin-bottom:16px; }
+  .summary-divider { border:none; border-top:1px solid var(--neutral-200); margin:14px 0; }
+  .summary-mini-items { display:flex; flex-direction:column; gap:6px; }
+  .summary-mini-item { display:flex; justify-content:space-between; font-size:13px; color:var(--neutral-600); gap:8px; }
+  .summary-mini-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .summary-mini-price { font-weight:600; flex-shrink:0; color:var(--neutral-900); }
+  .summary-breakdown { display:flex; flex-direction:column; gap:8px; }
+  .summary-b-row { display:flex; justify-content:space-between; font-size:13px; gap:8px; }
+  .summary-b-key { color:var(--neutral-500); }
+  .summary-b-val { color:var(--neutral-900); font-weight:500; text-align:right; }
+  .summary-grand-row { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .summary-grand-key { font-size:15px; font-weight:700; color:var(--neutral-900); }
+  .summary-grand-val { font-size:24px; font-weight:700; color:var(--green-900); }
+  .summary-proceed-btn { width:100%; height:54px; background:var(--green-500); color:white; border:none; border-radius:var(--radius-md); font-size:16px; font-weight:700; cursor:pointer; font-family:inherit; margin-top:16px; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .summary-proceed-btn:hover { background:#4C841E; transform:translateY(-1px); box-shadow:0 8px 20px -8px rgba(95,165,38,.55); }
+  .summary-trust-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+  .summary-trust-row span { font-size:11px; color:var(--neutral-400); }
+  .collar-info-card { display:flex; gap:16px; align-items:flex-start; background:var(--green-25); border-radius:var(--radius-lg); padding:16px 20px; border:1px solid var(--green-100); }
+  .collar-info-icon { font-size:28px; flex-shrink:0; }
+  .collar-info-body { flex:1; }
+  .collar-info-title { font-size:14px; font-weight:700; color:var(--green-900); margin-bottom:4px; }
+  .collar-info-desc { font-size:13px; color:var(--neutral-600); line-height:1.45; }
+  .collar-info-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .collar-info-tag { font-size:11px; font-weight:600; color:var(--green-700); background:white; border:1px solid var(--green-100); border-radius:10px; padding:2px 8px; }
+  .qty-hint { font-size:12px; color:var(--neutral-400); margin-top:3px; }
+
   @media (max-width: 900px) {
     .wizard-layout { grid-template-columns: 1fr; }
-    .wizard-left { display: none; }
+    .wizard-left { display: none; position: static; height: auto; }
     .wizard-right { padding: 32px 24px; }
     .purchase-body, .checkout-page { flex-direction: column; padding: 16px; }
     .order-summary-panel, .checkout-summary { width: 100%; min-width: unset; position: static; max-height: none; }
@@ -430,6 +511,8 @@
     .product-image { width: 100%; min-width: unset; }
     .payment-methods { grid-template-columns: repeat(2, 1fr); }
     .form-row { grid-template-columns: 1fr; }
+    .summary-cart-page { grid-template-columns: 1fr; padding: 24px 16px; }
+    .summary-totals-card { position: static; }
   }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -446,8 +529,8 @@
     <!-- Full site nav (purchase page) -->
     <div id="fullNav">
       <a class="nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
-        <img src="https://www.nofence.com/static/img/logo.svg" height="24" alt="" style="display:block;flex-shrink:0">
-        <img src="https://www.nofence.com/static/img/logoname.svg" height="20" alt="Nofence" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </a>
       <ul class="site-nav-links" id="navLinks">
         <li><a href="#">Products</a></li><li><a href="#">Capabilities</a></li><li><a href="#">Knowledge hub</a></li><li><a href="#">Nofence community</a></li>
@@ -467,8 +550,8 @@
         <span id="navBackLabel">nofence.com</span>
       </button>
       <a class="checkout-nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
-        <img src="https://www.nofence.com/static/img/logo.svg" height="24" alt="" style="display:block;flex-shrink:0">
-        <img src="https://www.nofence.com/static/img/logoname.svg" height="20" alt="Nofence" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </a>
       <span class="nav-secure-label" id="navSecureLabel">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="#9EA3A8" stroke-width="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#9EA3A8" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -628,17 +711,20 @@
       <div class="wizard-content" style="justify-content:center;align-items:center;text-align:center;max-width:480px;margin:0 auto">
         <div style="width:72px;height:72px;background:var(--green-50);border-radius:36px;display:flex;align-items:center;justify-content:center;font-size:32px">✉️</div>
         <div>
+          <p style="font-size:12px;font-weight:700;color:var(--neutral-400);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px">Existing customer</p>
           <h1 class="wizard-heading" style="font-size:32px">Check your email</h1>
-          <p class="wizard-sub" style="margin-top:8px;text-align:center">We sent a confirmation link to your email. Click it to continue building your setup.</p>
+          <p class="wizard-sub" style="margin-top:10px;text-align:center">We've sent a sign-in link to your email address.<br>Click it to access your account and continue.</p>
         </div>
         <div class="info-box" style="text-align:left;width:100%">
           <div class="info-icon"></div>
-          <p>Didn't arrive within 2 minutes? Check your spam folder or <span style="color:var(--green-700);cursor:pointer;text-decoration:underline" onclick="goTo('screen-welcome')">try a different email address</span>.</p>
+          <div>
+            <p style="font-size:13px;color:var(--neutral-700);line-height:1.5;margin-bottom:4px">Didn't arrive within 2 minutes? Check your spam folder.</p>
+            <p style="font-size:13px;color:var(--neutral-700);line-height:1.5"><span style="color:var(--green-700);cursor:pointer;text-decoration:underline" onclick="goTo('screen-welcome')">Try a different email address →</span></p>
+          </div>
         </div>
         <div class="btn-row" style="width:100%;padding-top:0">
           <button class="btn btn-primary" onclick="goTo('screen-intro')">I've confirmed my email &nbsp;→</button>
         </div>
-        <p class="text-small">Prefer to browse first? <a href="#" style="color:var(--green-700);text-decoration:underline" onclick="goTo('screen-purchase');return false;">View product page</a></p>
       </div>
     </main>
   </div>
@@ -647,48 +733,61 @@
 <!-- ═══════════════ SCREEN: INTRO (System + Quiz Gate) ════════ -->
 <div id="screen-intro" class="screen">
   <div class="wizard-layout">
-    <aside class="wizard-left photo-overlay">
-      <div style="margin-top:auto">
-        <div class="left-headline">Virtual fencing.<br>Real freedom.</div>
-        <p class="left-sub" style="margin-top:8px">No poles. No wires. No stress — for you or your animals.</p>
+    <aside class="wizard-left" style="background:linear-gradient(160deg,#0F4030 0%,#1a5a3e 45%,#2d7a4f 75%,#5FA526 100%);justify-content:flex-end;padding-bottom:52px">
+      <div>
+        <p class="intro-left-kicker">Built for working farmers</p>
+        <h2 style="font-size:34px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:white;line-height:1.15;letter-spacing:-0.03em;margin-bottom:16px">No poles.<br>No wires.<br>No stress.</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:24px">Nofence uses GPS and solar-powered collars to create an invisible boundary around your animals — no physical fence required.</p>
+        <div>
+          <div class="intro-left-stat"><span class="stat-num">40,000+</span><span class="stat-label">Animals managed globally</span></div>
+          <div class="intro-left-stat"><span class="stat-num">12 months</span><span class="stat-label">Subscription included with every collar</span></div>
+          <div class="intro-left-stat"><span class="stat-num">~3 min</span><span class="stat-label">To get a personalised recommendation</span></div>
+        </div>
       </div>
     </aside>
     <main class="wizard-right">
       <div class="wizard-content">
         <div>
-          <h1 class="wizard-heading">How Nofence works</h1>
-          <p class="wizard-sub" style="margin-top:10px">Before we ask about your herd, here's a quick overview of what a Nofence setup includes.</p>
+          <div class="all-set-badge" style="margin-bottom:12px">What's in a Nofence setup</div>
+          <h1 class="wizard-heading">Everything your farm needs</h1>
+          <p class="wizard-sub" style="margin-top:8px">Three parts to every setup. The quiz tailors each one to your operation.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="rec-card">
-            <div class="rec-card-icon">📡</div>
-            <div class="rec-card-body">
-              <div class="rec-card-title">GPS Virtual Fence</div>
-              <div class="rec-card-desc" style="margin-bottom:0">You draw the grazing zone on the Nofence app. The collar gently warns animals approaching the boundary with a sound — no physical fence needed.</div>
+          <div class="intro-comp-card">
+            <div class="intro-comp-num">01</div>
+            <div class="intro-comp-icon">🐄</div>
+            <div class="intro-comp-body">
+              <div class="intro-comp-title">GPS Collar — one per animal</div>
+              <div class="intro-comp-desc">Solar-powered. Tracks position and delivers a gentle audio cue at the virtual boundary. Every adult animal in the herd must wear one.</div>
             </div>
           </div>
-          <div class="rec-card">
-            <div class="rec-card-icon">📱</div>
-            <div class="rec-card-body">
-              <div class="rec-card-title">Nofence App</div>
-              <div class="rec-card-desc" style="margin-bottom:0">Monitor every animal's location in real time, set up alerts, move pasture zones, and manage your subscription — all from your phone.</div>
+          <div class="intro-comp-card">
+            <div class="intro-comp-num">02</div>
+            <div class="intro-comp-icon">📱</div>
+            <div class="intro-comp-body">
+              <div class="intro-comp-title">Nofence App</div>
+              <div class="intro-comp-desc">Draw your pasture zones on the map. Monitor every animal in real time, receive alerts, and move zones from your phone — free with your subscription.</div>
             </div>
           </div>
-          <div class="rec-card">
-            <div class="rec-card-icon">☀️</div>
-            <div class="rec-card-body">
-              <div class="rec-card-title">Solar-powered collars</div>
-              <div class="rec-card-desc" style="margin-bottom:0">Each collar charges itself in daylight. For shaded or heavily forested land, we'll recommend spare batteries to keep your setup running year-round.</div>
+          <div class="intro-comp-card">
+            <div class="intro-comp-num">03</div>
+            <div class="intro-comp-icon">🔋</div>
+            <div class="intro-comp-body">
+              <div class="intro-comp-title">Accessories (tailored to you)</div>
+              <div class="intro-comp-desc">Spare batteries, shelter beacons, extended chains — the quiz finds which extras apply. New customers often need things they didn't expect.</div>
             </div>
           </div>
         </div>
-        <div class="info-box green">
-          <div class="info-icon"></div>
-          <p>The next 6 questions help us recommend the exact collars and accessories for your operation. Takes about 4 minutes.</p>
+        <div class="quiz-value-box">
+          <div class="quiz-value-title">🎯 Why take the quiz?</div>
+          <div class="quiz-benefits">
+            <div class="quiz-benefit">✓ Get the right collar count — every animal needs one</div>
+            <div class="quiz-benefit">✓ Avoid missing accessories (costs more to add after delivery)</div>
+            <div class="quiz-benefit">✓ Unlock volume pricing on larger orders automatically</div>
+          </div>
         </div>
         <div class="btn-row" style="padding-top:0">
-          <button class="btn btn-primary" onclick="goTo('screen-q1')">Start quiz &nbsp;→</button>
-          <button class="btn btn-secondary" onclick="showQuitModal()">Skip to shop</button>
+          <button class="btn btn-primary" style="height:56px;font-size:16px" onclick="goTo('screen-q1')">Start quiz — 3 minutes &nbsp;→</button>
         </div>
       </div>
     </main>
@@ -723,27 +822,31 @@
         </div>
 
         <!-- Collar info card -->
-        <div style="background:var(--green-25);border-radius:var(--radius-lg);padding:18px 22px;border:1px solid var(--green-100)">
-          <p style="font-size:14px;font-weight:600;color:var(--green-900);margin-bottom:6px" id="collar-type-label">C2.5 Cattle Collars</p>
-          <p style="font-size:13px;color:var(--neutral-700);line-height:1.5" id="collar-type-desc">Solar-powered GPS collar. Includes collar unit, replaceable battery, durable neckstrap, and 20″ chain. Subscription included.</p>
+        <div class="collar-info-card">
+          <div class="collar-info-icon" id="collar-type-emoji">🐄</div>
+          <div class="collar-info-body">
+            <div class="collar-info-title" id="collar-type-label">C2.5 Cattle Collar</div>
+            <div class="collar-info-desc" id="collar-type-desc">Solar-powered GPS collar. Includes collar unit, replaceable battery, durable neckstrap, and 20″ chain. Subscription included.</div>
+            <div class="collar-info-tags">
+              <span class="collar-info-tag">☀️ Solar-powered</span>
+              <span class="collar-info-tag">📅 12-month sub included</span>
+              <span class="collar-info-tag">🛡️ 5-year warranty</span>
+            </div>
+          </div>
         </div>
 
         <div class="stepper-group">
           <label id="qty-stepper-label">Number of cattle collars</label>
           <div class="stepper">
             <button class="dec" onclick="adjustQty(-1)">−</button>
-            <input class="count" id="qty-input" type="number" min="5" max="999" value="20" readonly>
+            <input class="count" id="qty-input" type="number" min="5" max="999" value="20" oninput="onQtyInput(this.value)">
             <button class="inc" onclick="adjustQty(1)">+</button>
           </div>
-        </div>
-        <div class="tier-banner">
-          <div class="tier-label">Your pricing tier</div>
-          <div class="tier-price" id="tier-price">5–24 collars: $349 each</div>
-          <div class="tier-note" id="tier-note">Order 25+ collars to unlock $299/collar</div>
+          <p class="qty-hint">Minimum 5 · Every adult animal needs one · <span id="qty-100-note" style="color:var(--neutral-500)">Order 100+ collars? <a href="mailto:sales@nofence.com" style="color:var(--green-700);text-decoration:underline">Contact sales</a> for volume pricing.</span></p>
         </div>
         <div class="info-box">
           <div class="info-icon"></div>
-          <p>All adult animals must wear a collar — minimum 5 per herd. Every animal inside the virtual fence needs one to stay safe.</p>
+          <p>For the virtual fence to work safely, every adult animal in the herd must wear a collar. Animals without a collar can't receive boundary warnings.</p>
         </div>
 
         <div class="btn-row">
@@ -783,6 +886,31 @@
             </div>
             <div class="option-radio"></div>
           </div>
+          <!-- Inline chain qty reveal — appears only under the bull option -->
+          <div class="inline-reveal" id="chain-reveal" style="padding:0 4px">
+            <div style="display:flex;flex-direction:column;gap:12px;padding:14px 0 4px">
+              <div class="rec-card">
+                <div class="rec-card-icon">⛓️</div>
+                <div class="rec-card-body">
+                  <div class="rec-card-title">Extra-long chain pairs, 70 cm (28″)</div>
+                  <div class="rec-card-desc">Steel chain pairs. Replaces the standard 20″ chains included with each collar. Compatible with Cattle C2.5.</div>
+                  <div class="rec-card-row">
+                    <span class="rec-qty-label">How many pairs?</span>
+                    <div class="stepper-sm">
+                      <button class="dec" onclick="adjustChainQty(-1)">−</button>
+                      <input class="count" id="chain-qty-input" type="number" min="1" max="999" value="5">
+                      <button class="inc" onclick="adjustChainQty(1)">+</button>
+                    </div>
+                    <span class="rec-price">$12 / pair</span>
+                  </div>
+                </div>
+              </div>
+              <div class="info-box">
+                <div class="info-icon"></div>
+                <p>Tip: you don't need extra-long chains for every animal — only for bulls and your largest-framed cattle.</p>
+              </div>
+            </div>
+          </div>
           <div class="option-card" data-group="cattle-size" data-value="standard" onclick="selectCattleSize(this,'standard')">
             <div class="option-icon">🐄</div>
             <div class="option-text">
@@ -790,32 +918,6 @@
               <div class="option-desc">Smaller and mid-sized breeds, dairy cows, heifers</div>
             </div>
             <div class="option-radio"></div>
-          </div>
-        </div>
-
-        <!-- Inline chain qty reveal -->
-        <div class="inline-reveal" id="chain-reveal">
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div class="rec-card">
-              <div class="rec-card-icon">⛓️</div>
-              <div class="rec-card-body">
-                <div class="rec-card-title">Extra-long chain pairs, 70 cm (28″)</div>
-                <div class="rec-card-desc">Steel chain pairs. Replaces the standard 20″ chains included with each collar. Compatible with Cattle C2.5.</div>
-                <div class="rec-card-row">
-                  <span class="rec-qty-label">How many pairs?</span>
-                  <div class="stepper-sm">
-                    <button class="dec" onclick="adjustChainQty(-1)">−</button>
-                    <input class="count" id="chain-qty-input" type="number" min="1" max="999" value="5" readonly>
-                    <button class="inc" onclick="adjustChainQty(1)">+</button>
-                  </div>
-                  <span class="rec-price">$12 / pair</span>
-                </div>
-              </div>
-            </div>
-            <div class="info-box">
-              <div class="info-icon"></div>
-              <p>Tip: you don't need extra-long chains for every animal — only for your bulls and largest-framed cattle.</p>
-            </div>
           </div>
         </div>
 
@@ -847,21 +949,30 @@
           <h1 class="wizard-heading">What best describes your grazing land?</h1>
           <p class="wizard-sub" style="margin-top:10px">The collar's solar panel charges in daylight. Heavily shaded or forested land may need extra battery capacity to keep collars running.</p>
         </div>
-        <div class="option-grid">
-          <div class="option-grid-card" data-group="env" data-value="open" onclick="selectOption(this,'env')">
-            <div class="grid-emoji">☀️</div>
-            <div class="grid-title">Open pasture</div>
-            <div class="grid-sub">Mostly flat, open land with good sun exposure throughout the day</div>
+        <div class="option-list">
+          <div class="option-card" data-group="env" data-value="open" onclick="selectOption(this,'env')">
+            <div class="option-icon">☀️</div>
+            <div class="option-text">
+              <div class="option-title">Open pasture</div>
+              <div class="option-desc">Mostly flat, open land with good sun exposure throughout the day</div>
+            </div>
+            <div class="option-radio"></div>
           </div>
-          <div class="option-grid-card" data-group="env" data-value="mixed" onclick="selectOption(this,'env')">
-            <div class="grid-emoji">🌥️</div>
-            <div class="grid-title">Mixed terrain</div>
-            <div class="grid-sub">Some trees and shade, but open areas for grazing most of the day</div>
+          <div class="option-card" data-group="env" data-value="mixed" onclick="selectOption(this,'env')">
+            <div class="option-icon">🌥️</div>
+            <div class="option-text">
+              <div class="option-title">Mixed terrain</div>
+              <div class="option-desc">Some trees and shade, but open areas for grazing most of the day</div>
+            </div>
+            <div class="option-radio"></div>
           </div>
-          <div class="option-grid-card" data-group="env" data-value="forested" onclick="selectOption(this,'env')">
-            <div class="grid-emoji">🌲</div>
-            <div class="grid-title">Dense forest / shade</div>
-            <div class="grid-sub">Significant tree cover or shelter with limited direct sunlight</div>
+          <div class="option-card" data-group="env" data-value="forested" onclick="selectOption(this,'env')">
+            <div class="option-icon">🌲</div>
+            <div class="option-text">
+              <div class="option-title">Dense forest or heavy shade</div>
+              <div class="option-desc">Significant tree cover or shelter with limited direct sunlight</div>
+            </div>
+            <div class="option-radio"></div>
           </div>
         </div>
         <div class="btn-row">
@@ -1022,6 +1133,29 @@
             </div>
             <div class="option-radio"></div>
           </div>
+          <!-- Shelter beacon reveal — directly under the "yes" option -->
+          <div class="inline-reveal" id="shelter-reveal" style="padding:0 4px">
+            <div style="padding:14px 0 4px">
+              <div class="rec-card">
+                <div class="rec-card-icon">📶</div>
+                <div class="rec-card-body">
+                  <div class="rec-card-title">
+                    Shelter Beacon
+                    <span class="info-tip" data-tip="A small Bluetooth device mounted inside a building. When a collared animal enters, it communicates with the beacon instead of GPS — so the app always knows where your animals are.">i</span>
+                  </div>
+                  <div class="rec-card-desc">Mounted inside buildings. Lets the Nofence app track your animals when GPS is unavailable indoors. One beacon per building is usually sufficient.</div>
+                  <div class="rec-card-row">
+                    <span class="rec-qty-label">How many buildings?</span>
+                    <div class="stepper-sm">
+                      <button class="dec" onclick="adjustShelterQty(-1)">−</button>
+                      <input class="count" id="shelter-qty-input" type="number" min="1" max="99" value="1">
+                      <button class="inc" onclick="adjustShelterQty(1)">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="option-card" data-group="shelter" data-value="no" onclick="selectShelter(this,'no')">
             <div class="option-icon">🌾</div>
             <div class="option-text">
@@ -1029,26 +1163,6 @@
               <div class="option-desc">No indoor housing, all grazing is done in open fields</div>
             </div>
             <div class="option-radio"></div>
-          </div>
-        </div>
-
-        <!-- Shelter beacon reveal -->
-        <div class="inline-reveal" id="shelter-reveal">
-          <div class="rec-card">
-            <div class="rec-card-icon">📶</div>
-            <div class="rec-card-body">
-              <div class="rec-card-title">Shelter Beacons</div>
-              <div class="rec-card-desc">Mounted inside buildings. Allows the app to track animals when GPS is unavailable indoors. One beacon per building is typically sufficient.</div>
-              <div class="rec-card-row">
-                <span class="rec-qty-label">How many buildings?</span>
-                <div class="stepper-sm">
-                  <button class="dec" onclick="adjustShelterQty(-1)">−</button>
-                  <input class="count" id="shelter-qty-input" type="number" min="1" max="99" value="1" readonly>
-                  <button class="inc" onclick="adjustShelterQty(1)">+</button>
-                </div>
-                <span class="rec-price">$149 each</span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -1133,60 +1247,82 @@
 </div>
 
 <!-- ═══════════════ SCREEN: SETUP SUMMARY ════════════════════ -->
-<div id="screen-setup-summary" class="screen">
-  <div class="wizard-layout" style="grid-template-columns:38% 62%">
-    <aside style="background:var(--green-25);display:flex;flex-direction:column;padding:48px;gap:20px">
+<div id="screen-setup-summary" class="screen" style="background:var(--neutral-100)">
+  <div class="summary-cart-page">
+    <!-- Left: Cart items -->
+    <div class="summary-cart-col">
+      <div class="summary-cart-header">
+        <div class="all-set-badge" style="margin-bottom:12px">✓ Your personalised setup is ready</div>
+        <h1 class="wizard-heading" style="font-size:30px">Review your order</h1>
+        <p class="wizard-sub" style="margin-top:6px">Based on your answers — edit quantities or remove items below.</p>
+      </div>
+
+      <!-- Cart items — rendered by JS -->
+      <div id="summary-cart-items" class="summary-cart-items"></div>
+
+      <!-- Discount code -->
       <div>
-        <div class="all-set-badge">✓ Your personalised setup</div>
-        <h2 style="font-size:24px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:var(--green-900);margin-top:12px;letter-spacing:-0.03em">Everything you need, ready to order</h2>
-      </div>
-      <div id="summary-items-list" class="summary-items"></div>
-      <div class="summary-totals" id="summary-totals-box">
-        <div class="summary-total-row"><span class="k">Equipment</span><span id="sum-equipment-total">—</span></div>
-        <div class="summary-total-row"><span class="k">Subscription</span><span>12 months included</span></div>
-        <div class="summary-total-row"><span class="k">VAT</span><span>Calculated at checkout</span></div>
-        <div class="summary-grand"><span class="k">Estimated total</span><span class="v" id="sum-grand-total">—</span></div>
-        <p style="font-size:11px;color:var(--neutral-500);margin-top:8px">Excl. VAT · Subscription counted from delivery date</p>
-      </div>
-      <div class="grants-box" style="margin-top:auto">
-        <div class="grants-title">💶 Grants available for your region</div>
-        <div class="grants-desc">Many farmers in your area qualify for agricultural technology grants covering up to 40% of setup costs.</div>
-        <button class="grants-btn" onclick="alert('This would download the grants guide PDF.')">Download grants guide (PDF) ↓</button>
-      </div>
-    </aside>
-    <main class="wizard-right">
-      <div class="wizard-content">
-        <div>
-          <h1 class="wizard-heading">You're all set.</h1>
-          <p class="wizard-sub" style="margin-top:10px">Based on your answers, here's your complete Nofence setup. Review the items on the left, then add everything to your basket.</p>
+        <p style="font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:8px">Discount or promo code</p>
+        <div class="discount-row">
+          <input class="discount-input" id="discount-input" type="text" placeholder="Enter code">
+          <button class="discount-btn" onclick="applyDiscount()">Apply</button>
         </div>
-        <div style="background:var(--green-50);border-radius:var(--radius-lg);padding:20px 24px;border:1px solid var(--green-100)">
-          <p style="font-size:14px;font-weight:600;color:var(--green-900);margin-bottom:8px">What happens next?</p>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;gap:10px;align-items:flex-start">
-              <span style="font-size:18px">📦</span>
-              <p style="font-size:13px;color:var(--neutral-700);line-height:1.45"><strong>Add to basket</strong> and proceed to checkout. Free shipping on all orders over $500.</p>
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start">
-              <span style="font-size:18px">📱</span>
-              <p style="font-size:13px;color:var(--neutral-700);line-height:1.45"><strong>Download the Nofence app</strong> while you wait. Set up your account and draw your first pasture.</p>
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start">
-              <span style="font-size:18px">🚜</span>
-              <p style="font-size:13px;color:var(--neutral-700);line-height:1.45"><strong>Collar your herd</strong> when your order arrives. Our onboarding team is available to help.</p>
-            </div>
+      </div>
+
+      <!-- Specialist CTA -->
+      <div class="specialist-row">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--neutral-900)">Not sure about any item?</div>
+          <div style="font-size:13px;color:var(--neutral-500);margin-top:2px">Our specialists offer a free 20-minute setup call.</div>
+        </div>
+        <button class="btn-outline-green" style="height:40px;font-size:13px;padding:0 16px;flex-shrink:0" onclick="alert('This would connect you with a Nofence specialist.')">📞 Talk to a specialist</button>
+      </div>
+    </div>
+
+    <!-- Right: Order totals -->
+    <div class="summary-totals-col">
+      <div class="summary-totals-card">
+        <div class="summary-totals-title">Order summary</div>
+        <hr class="summary-divider">
+
+        <!-- Mini item list (rendered by JS) -->
+        <div id="summary-mini-items" class="summary-mini-items"></div>
+
+        <hr class="summary-divider">
+
+        <div class="summary-breakdown">
+          <div class="summary-b-row"><span class="summary-b-key">Subtotal</span><span class="summary-b-val" id="sum-subtotal">—</span></div>
+          <div class="summary-b-row"><span class="summary-b-key">Shipping</span><span class="summary-b-val" style="color:var(--green-700)">Free over $500</span></div>
+          <div class="summary-b-row"><span class="summary-b-key">12-month subscription</span><span class="summary-b-val">Included</span></div>
+          <div class="summary-b-row"><span class="summary-b-key">VAT</span><span class="summary-b-val">At checkout</span></div>
+        </div>
+
+        <hr class="summary-divider">
+
+        <div class="summary-grand-row">
+          <span class="summary-grand-key">Estimated total</span>
+          <span class="summary-grand-val" id="sum-grand-total">—</span>
+        </div>
+        <p style="font-size:11px;color:var(--neutral-400);margin-top:4px">Excl. VAT · Prices in USD</p>
+
+        <button class="summary-proceed-btn" onclick="buildCheckoutAndGo()">Proceed to payment &nbsp;→</button>
+
+        <div class="summary-trust-row">
+          <span>🔒 Secure checkout</span>
+          <span>↩️ 30-day returns</span>
+          <span>🛡️ 5-yr warranty</span>
+        </div>
+
+        <!-- Grants box -->
+        <div style="margin-top:16px;border-top:1px solid var(--neutral-200);padding-top:16px">
+          <div class="grants-box">
+            <div class="grants-title">💶 Grants may be available</div>
+            <div class="grants-desc">Many farmers qualify for agri-tech grants covering up to 40% of setup costs.</div>
+            <button class="grants-btn" onclick="alert('This would download the grants guide PDF.')">Download guide (PDF) ↓</button>
           </div>
         </div>
-        <div class="info-box green">
-          <div class="info-icon"></div>
-          <p>Not sure about any item? Our specialists are available for a free 20-minute call to walk through your setup.</p>
-        </div>
-        <div class="cta-stack">
-          <button class="btn-outline-neutral" onclick="alert('This would connect you with a Nofence specialist.')">📞 Talk to a specialist — free, no commitment</button>
-          <button class="btn btn-primary" style="height:56px;font-size:17px" onclick="goTo('screen-checkout')">Add to basket &nbsp;→</button>
-        </div>
       </div>
-    </main>
+    </div>
   </div>
 </div>
 
@@ -1555,7 +1691,8 @@
     extraBatteries: 2, chargers: 1,
     shelter: null, shelterQty: 1,
     leather: null, leatherQty: 5,
-    collarType: 'cattle', purchaseQty: 5, accessories: {}, currentTier: 0
+    collarType: 'cattle', purchaseQty: 5, accessories: {}, currentTier: 0,
+    summaryItems: []
   };
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
@@ -1729,6 +1866,7 @@
     document.getElementById('q1-chip-emoji').textContent  = data.chipEmoji;
     document.getElementById('q1-chip-label').textContent  = data.chipLabel;
     document.getElementById('q1-heading').textContent     = data.heading;
+    document.getElementById('collar-type-emoji').textContent = data.chipEmoji;
     document.getElementById('collar-type-label').textContent = data.collarLabel;
     document.getElementById('collar-type-desc').textContent  = data.collarDesc;
     document.getElementById('qty-stepper-label').textContent = data.stepperLabel;
@@ -1737,20 +1875,6 @@
     // Swap left-panel image for Q1 too
     const q1left = document.querySelector('#screen-q1 .wizard-left');
     if (q1left) q1left.style.backgroundImage = `url('${data.img}')`;
-
-    // Hide Q2 entirely if sheep-only (no bulls/chains question)
-    updateTierBanner_forType(type);
-  }
-
-  function updateTierBanner_forType(type) {
-    const p = COLLAR_DATA[type].tierPrices;
-    const q = state.qty;
-    const price = q < 25 ? p[0] : (q < 100 ? p[1] : p[2]);
-    const priceEl = document.getElementById('tier-price');
-    const noteEl  = document.getElementById('tier-note');
-    if (q < 25)       { priceEl.textContent = `5–24 collars: $${p[0]} each`;   noteEl.textContent = `Order 25+ to unlock $${p[1]}/collar`; }
-    else if (q < 100) { priceEl.textContent = `25–99 collars: $${p[1]} each`;  noteEl.textContent = `Order 100+ to unlock $${p[2]}/collar`; }
-    else              { priceEl.textContent = `100+ collars: $${p[2]} each`;    noteEl.textContent = '✓ Best volume pricing unlocked!'; }
   }
 
   // ─── Q1: quantity (animal already set on welcome screen) ─────
@@ -1759,7 +1883,13 @@
     state.qty = Math.max(5, Math.min(999, state.qty + delta));
     document.getElementById('qty-input').value = state.qty;
     document.getElementById('all-collar-count').textContent = state.qty;
-    updateTierBanner_forType(state.animal || 'cattle');
+  }
+
+  function onQtyInput(val) {
+    const n = parseInt(val, 10);
+    if (!isNaN(n) && n >= 5) { state.qty = Math.min(999, n); }
+    else if (!isNaN(n) && n < 5) { state.qty = 5; document.getElementById('qty-input').value = 5; }
+    document.getElementById('all-collar-count').textContent = state.qty;
   }
 
   function continueFromQ1() {
@@ -1779,7 +1909,8 @@
 
   function adjustChainQty(delta) {
     state.chainQty = Math.max(1, Math.min(999, state.chainQty + delta));
-    document.getElementById('chain-qty-input').value = state.chainQty;
+    const el = document.getElementById('chain-qty-input');
+    if (el) el.value = state.chainQty;
   }
 
   // ─── Q3: Environment ──────────────────────────────────────────
@@ -1818,7 +1949,8 @@
 
   function adjustShelterQty(delta) {
     state.shelterQty = Math.max(1, Math.min(99, state.shelterQty + delta));
-    document.getElementById('shelter-qty-input').value = state.shelterQty;
+    const el = document.getElementById('shelter-qty-input');
+    if (el) el.value = state.shelterQty;
   }
 
   function backFromQ5() {
@@ -1858,46 +1990,98 @@
   // ─── Setup summary builder ────────────────────────────────────
   function buildSetupSummary() {
     const pricePerCollar = state.qty < 25 ? 349 : (state.qty < 100 ? 299 : 249);
-    const collarTotal = state.qty * pricePerCollar;
-    const animalLabel = { cattle:'C2.5 Cattle Collar', sheep:'S1 Sheep & Goat Collar', both:'C2.5 Cattle + S1 Sheep Collar' }[state.animal] || 'Collar';
+    const animalLabel = { cattle:'C2.5 Cattle Collar', sheep:'S1 Sheep & Goat Collar', both:'Cattle + Sheep Collar' }[state.animal] || 'Collar';
     const animalEmoji = { cattle:'🐄', sheep:'🐑', both:'🐄🐑' }[state.animal] || '🐄';
-
-    const items = [
-      { icon: animalEmoji, name: `${animalLabel}`, meta: `${state.qty} × $${pricePerCollar}`, price: collarTotal },
+    // Build editable cart items array
+    state.summaryItems = [
+      { id:'collars', icon:animalEmoji, name:animalLabel, unitPrice:pricePerCollar, qty:state.qty, min:5, removable:false }
     ];
     if (state.cattleSize === 'large' && state.chainQty > 0)
-      items.push({ icon:'⛓️', name:'Extra-long Chain Pairs (28″)', meta:`${state.chainQty} × $12`, price: state.chainQty * 12 });
+      state.summaryItems.push({ id:'chains', icon:'⛓️', name:'Extra-long Chain Pairs (28″)', unitPrice:12, qty:state.chainQty, min:1, removable:true });
     if (state.extraBatteries > 0)
-      items.push({ icon:'🔋', name:'Spare Collar Batteries', meta:`${state.extraBatteries} × $49`, price: state.extraBatteries * 49 });
+      state.summaryItems.push({ id:'batteries', icon:'🔋', name:'Spare Collar Batteries', unitPrice:49, qty:state.extraBatteries, min:0, removable:true });
     if (state.chargers > 0)
-      items.push({ icon:'🔌', name:'Battery Chargers', meta:`${state.chargers} × $89`, price: state.chargers * 89 });
+      state.summaryItems.push({ id:'chargers', icon:'🔌', name:'Battery Charger', unitPrice:89, qty:state.chargers, min:0, removable:true });
     if (state.shelter === 'yes' && state.shelterQty > 0)
-      items.push({ icon:'📶', name:'Shelter Beacons', meta:`${state.shelterQty} × $149`, price: state.shelterQty * 149 });
+      state.summaryItems.push({ id:'beacons', icon:'📶', name:'Shelter Beacon', unitPrice:149, qty:state.shelterQty, min:1, removable:true });
     if (state.leather === 'yes' && state.leatherQty > 0)
-      items.push({ icon:'🟫', name:'Leather Neck Straps', meta:`${state.leatherQty} × $18`, price: state.leatherQty * 18 });
-
-    const grandTotal = items.reduce((s, i) => s + i.price, 0);
-    const list = document.getElementById('summary-items-list');
-    list.innerHTML = items.map(i => `
-      <div class="summary-item">
-        <div class="summary-item-icon">${i.icon}</div>
-        <div class="summary-item-info">
-          <div class="summary-item-name">${i.name}</div>
-          <div class="summary-item-meta">${i.meta}</div>
-        </div>
-        <div class="summary-item-price">$${i.price.toLocaleString()}</div>
-      </div>`).join('');
-    document.getElementById('sum-equipment-total').textContent = `$${grandTotal.toLocaleString()}`;
-    document.getElementById('sum-grand-total').textContent = `$${grandTotal.toLocaleString()}`;
-    document.getElementById('pay-btn-total').textContent = `$${grandTotal.toLocaleString()}`;
-    document.getElementById('co-grand-total').textContent = `$${(grandTotal * 1.2).toLocaleString(undefined,{maximumFractionDigits:0})}`;
-    document.getElementById('co-subtotal').textContent = `$${grandTotal.toLocaleString()}`;
-    document.getElementById('co-vat').textContent = `$${(grandTotal * 0.2).toLocaleString(undefined,{maximumFractionDigits:0})}`;
-    const t3 = Math.floor(grandTotal / 3);
-    document.getElementById('klarna-pay1').textContent = `$${t3.toLocaleString()}`;
-    document.getElementById('klarna-pay2').textContent = `$${t3.toLocaleString()}`;
-    document.getElementById('klarna-pay3').textContent = `$${(grandTotal - t3*2).toLocaleString()}`;
+      state.summaryItems.push({ id:'straps', icon:'🟫', name:'Leather Neck Strap', unitPrice:18, qty:state.leatherQty, min:1, removable:true });
+    renderSummaryCart();
   }
+
+  function renderSummaryCart() {
+    const items = state.summaryItems || [];
+    const grandTotal = items.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    // Cart line items
+    const cartList = document.getElementById('summary-cart-items');
+    if (cartList) {
+      cartList.innerHTML = items.map(item => `
+        <div class="summary-line-item" data-id="${item.id}">
+          <div class="sli-icon">${item.icon}</div>
+          <div class="sli-info">
+            <div class="sli-name">${item.name}</div>
+            <div class="sli-meta">$${item.unitPrice.toLocaleString()} each</div>
+          </div>
+          <div class="sli-stepper">
+            <button onclick="updateSummaryQty('${item.id}',-1)">−</button>
+            <input type="number" value="${item.qty}" min="${item.min}" oninput="updateSummaryQtyDirect('${item.id}',this.value)">
+            <button onclick="updateSummaryQty('${item.id}',1)">+</button>
+          </div>
+          <div class="sli-price">$${(item.unitPrice * item.qty).toLocaleString()}</div>
+          ${item.removable
+            ? `<button class="sli-remove" onclick="removeSummaryItem('${item.id}')" title="Remove">✕</button>`
+            : '<div style="width:30px"></div>'}
+        </div>`).join('');
+    }
+    // Mini summary (right panel)
+    const miniList = document.getElementById('summary-mini-items');
+    if (miniList) {
+      miniList.innerHTML = items.map(item => `
+        <div class="summary-mini-item">
+          <span class="summary-mini-name">${item.icon} ${item.qty}× ${item.name}</span>
+          <span class="summary-mini-price">$${(item.unitPrice * item.qty).toLocaleString()}</span>
+        </div>`).join('');
+    }
+    // Totals
+    const fmt = n => `$${n.toLocaleString()}`;
+    if (document.getElementById('sum-subtotal')) document.getElementById('sum-subtotal').textContent = fmt(grandTotal);
+    if (document.getElementById('sum-grand-total')) document.getElementById('sum-grand-total').textContent = fmt(grandTotal);
+    if (document.getElementById('pay-btn-total')) document.getElementById('pay-btn-total').textContent = fmt(grandTotal);
+    if (document.getElementById('co-grand-total')) document.getElementById('co-grand-total').textContent = fmt(Math.round(grandTotal * 1.2));
+    if (document.getElementById('co-subtotal')) document.getElementById('co-subtotal').textContent = fmt(grandTotal);
+    if (document.getElementById('co-vat')) document.getElementById('co-vat').textContent = fmt(Math.round(grandTotal * 0.2));
+    const t3 = Math.floor(grandTotal / 3);
+    if (document.getElementById('klarna-pay1')) document.getElementById('klarna-pay1').textContent = fmt(t3);
+    if (document.getElementById('klarna-pay2')) document.getElementById('klarna-pay2').textContent = fmt(t3);
+    if (document.getElementById('klarna-pay3')) document.getElementById('klarna-pay3').textContent = fmt(grandTotal - t3 * 2);
+  }
+
+  function updateSummaryQty(id, delta) {
+    const item = (state.summaryItems || []).find(i => i.id === id);
+    if (!item) return;
+    item.qty = Math.max(item.min, item.qty + delta);
+    renderSummaryCart();
+  }
+
+  function updateSummaryQtyDirect(id, val) {
+    const item = (state.summaryItems || []).find(i => i.id === id);
+    if (!item) return;
+    const n = parseInt(val, 10);
+    if (!isNaN(n) && n >= item.min) { item.qty = n; renderSummaryCart(); }
+  }
+
+  function removeSummaryItem(id) {
+    state.summaryItems = (state.summaryItems || []).filter(i => i.id !== id);
+    renderSummaryCart();
+  }
+
+  function applyDiscount() {
+    const code = document.getElementById('discount-input')?.value?.trim();
+    if (!code) return;
+    alert(`Discount code "${code}" — this would be validated at checkout.`);
+  }
+
+  function buildCheckoutAndGo() { goTo('screen-checkout'); }
 
   // ─── Purchase page ────────────────────────────────────────────
   function switchCollar(type, btn) {
