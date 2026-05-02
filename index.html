@@ -355,6 +355,14 @@
   .input-group label { font-size: 14px; font-weight: 500; color: var(--neutral-900); }
   .input-group input { width: 100%; height: 52px; border: 1.5px solid var(--neutral-200); border-radius: var(--radius-md); padding: 0 16px; font-size: 15px; color: var(--neutral-900); outline: none; transition: border-color .2s; font-family: inherit; }
   .input-group input:focus { border-color: var(--green-500); }
+
+  /* ─── STYLED SELECT ────────────────────────────────────────── */
+  .select-wrap { position: relative; display: flex; align-items: center; }
+  .select-wrap .sel-icon { position: absolute; left: 12px; pointer-events: none; color: var(--neutral-500); display: flex; align-items: center; flex-shrink: 0; }
+  .select-wrap select { width: 100%; height: 44px; border: 1.5px solid var(--neutral-200); border-radius: var(--radius-md); padding: 0 36px 0 36px; font-size: 14px; color: var(--neutral-900); outline: none; font-family: inherit; background: white; cursor: pointer; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23717680' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; transition: border-color .2s; }
+  .select-wrap select:focus { border-color: var(--green-500); outline: none; }
+  .select-wrap select.placeholder-shown, .select-wrap select option[value=""] { color: var(--neutral-500); }
+  .select-wrap select option { color: var(--neutral-900); }
   .consent-row { display: flex; gap: 12px; align-items: flex-start; }
   .consent-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green-500); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
   .consent-row p { font-size: 13px; color: var(--neutral-700); line-height: 1.5; }
@@ -534,12 +542,55 @@
         <!-- ── Location + email ────────────────────────────── -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
           <div class="input-group">
-            <label for="country-input">Country</label>
-            <input type="text" id="country-input" placeholder="e.g. United Kingdom" autocomplete="country-name" style="height:44px;font-size:14px">
+            <label for="country-input">Country <span style="color:#C2C4C8;font-weight:400">*</span></label>
+            <div class="select-wrap">
+              <span class="sel-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#717680" stroke-width="1.2"/><ellipse cx="8" cy="8" rx="2.5" ry="6.5" stroke="#717680" stroke-width="1.2"/><path d="M1.5 8h13M1.5 5.5h13M1.5 10.5h13" stroke="#717680" stroke-width="1.2" stroke-linecap="round"/></svg>
+              </span>
+              <select id="country-input" onchange="updateRegionDropdown(this.value)">
+                <option value="">Select country</option>
+                <optgroup label="Main markets">
+                  <option value="NO">Norway</option>
+                  <option value="IE">Ireland</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="SE">Sweden</option>
+                  <option value="ES">Spain</option>
+                  <option value="US">United States</option>
+                  <option value="AU">Australia</option>
+                  <option value="NZ">New Zealand</option>
+                </optgroup>
+                <optgroup label="Europe">
+                  <option value="AT">Austria</option>
+                  <option value="BE">Belgium</option>
+                  <option value="DK">Denmark</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="IS">Iceland</option>
+                  <option value="IT">Italy</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="PL">Poland</option>
+                  <option value="PT">Portugal</option>
+                  <option value="CH">Switzerland</option>
+                </optgroup>
+                <optgroup label="Other">
+                  <option value="CA">Canada</option>
+                  <option value="ZA">South Africa</option>
+                  <option value="other">Other</option>
+                </optgroup>
+              </select>
+            </div>
           </div>
           <div class="input-group">
-            <label for="region-input">Region / State</label>
-            <input type="text" id="region-input" placeholder="e.g. Yorkshire" autocomplete="address-level1" style="height:44px;font-size:14px">
+            <label for="region-input" id="region-label">State / Region <span style="color:#C2C4C8;font-weight:400">*</span></label>
+            <div class="select-wrap" id="region-wrap-select" style="display:flex">
+              <span class="sel-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.51 1.5 3.5 3.51 3.5 6c0 3.5 4.5 8.5 4.5 8.5s4.5-5 4.5-8.5c0-2.49-2.01-4.5-4.5-4.5z" stroke="#717680" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="6" r="1.5" stroke="#717680" stroke-width="1.2"/></svg>
+              </span>
+              <select id="region-input">
+                <option value="">Select state / region</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="input-group">
@@ -558,7 +609,6 @@
           <span class="trust-item">⭐ 4.8/5 rating</span>
           <span class="trust-item">🌍 15+ countries</span>
         </div>
-        <p style="text-align:center;font-size:13px;color:var(--neutral-500);padding-bottom:4px">Already know what you need? <a href="#" onclick="goTo('screen-purchase');return false;" style="color:var(--green-700);text-decoration:underline;font-weight:500">Go straight to shop →</a></p>
       </div>
     </main>
   </div>
@@ -1509,6 +1559,36 @@
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
 
+  // ─── Country → Region dropdown data ─────────────────────────
+  const REGIONS = {
+    US: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
+    GB: ['England','Scotland','Wales','Northern Ireland'],
+    AU: ['New South Wales','Victoria','Queensland','South Australia','Western Australia','Tasmania','Australian Capital Territory','Northern Territory'],
+    IE: ['Connacht','Leinster','Munster','Ulster'],
+    NO: ['Agder','Innlandet','Møre og Romsdal','Nordland','Oslo','Rogaland','Troms og Finnmark','Trøndelag','Vestfold og Telemark','Vestland','Viken'],
+    SE: ['Blekinge','Dalarna','Gävleborg','Gotland','Halland','Jämtland','Jönköping','Kalmar','Kronoberg','Norrbotten','Örebro','Östergötland','Skåne','Södermanland','Stockholm','Uppsala','Värmland','Västerbotten','Västernorrland','Västmanland','Västra Götaland'],
+    NZ: ['Auckland','Bay of Plenty','Canterbury','Gisborne','Hawke\'s Bay','Manawatū-Whanganui','Marlborough','Nelson','Northland','Otago','Southland','Taranaki','Tasman','Waikato','Wellington','West Coast'],
+  };
+
+  function updateRegionDropdown(countryCode) {
+    const sel = document.getElementById('region-input');
+    const label = document.getElementById('region-label');
+    sel.innerHTML = '';
+    const regions = REGIONS[countryCode];
+    if (regions) {
+      const placeholder = document.createElement('option');
+      placeholder.value = ''; placeholder.textContent = 'Select ' + (countryCode === 'US' ? 'state' : 'region');
+      sel.appendChild(placeholder);
+      regions.forEach(r => { const o = document.createElement('option'); o.value = r; o.textContent = r; sel.appendChild(o); });
+      label.innerHTML = (countryCode === 'US' ? 'State' : 'Region') + ' <span style="color:#C2C4C8;font-weight:400">*</span>';
+    } else {
+      const placeholder = document.createElement('option');
+      placeholder.value = ''; placeholder.textContent = 'Select region (optional)';
+      sel.appendChild(placeholder);
+      label.innerHTML = 'Region <span style="color:#C2C4C8;font-weight:400">*</span>';
+    }
+  }
+
   // ─── Navigation history stack (powers the Back button) ──────
   const navStack = [];
 
@@ -1641,8 +1721,8 @@
     document.getElementById('welcome-quote-text').textContent = data.quote;
     document.getElementById('welcome-quote-cite').textContent = data.cite;
 
-    // Enable continue
-    document.getElementById('welcome-continue').disabled = false;
+    // Enable continue (requires email too)
+    checkWelcomeReady();
 
     // Pre-configure Q1 content
     document.getElementById('q1-chip-emoji').textContent  = data.chipEmoji;
@@ -1914,6 +1994,13 @@
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
   document.getElementById('welcome-continue').disabled = true;
+  document.getElementById('email-input').addEventListener('input', checkWelcomeReady);
+
+  function checkWelcomeReady() {
+    const hasAnimal = state.animal !== null;
+    const hasEmail  = document.getElementById('email-input').value.includes('@');
+    document.getElementById('welcome-continue').disabled = !(hasAnimal && hasEmail);
+  }
   // Set up nav for the initial screen (screen-welcome = checkout shell)
   updateNav('screen-welcome');
 
