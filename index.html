@@ -410,7 +410,7 @@
   .brand::before { content: ''; display: inline-block; width: 9px; height: 9px; background: var(--green-500); border-radius: 50%; flex-shrink: 0; }
 
   /* ─── PHOTO SCREENS ────────────────────────────────────────── */
-  #screen-welcome .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); /* overridden by JS on collar type selection */ }
+  /* welcome screen left panel is now a carousel — no background-image needed here */
   #screen-email-confirm .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/collars-group.webp'); }
   #screen-intro .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
   #screen-q1 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
@@ -422,6 +422,16 @@
 
   /* ─── WIZARD LEFT — sticky, no height growth ─────────────── */
   .wizard-left { position: sticky; top: 80px; height: calc(100vh - 80px); overflow: hidden; }
+
+  /* ─── WELCOME CAROUSEL ────────────────────────────────────── */
+  #welcome-left { padding: 0 !important; }
+  .carousel-track { display: flex; width: 500%; height: 100%; transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
+  .carousel-slide { flex: 0 0 20%; min-width: 0; height: 100%; background-size: cover; background-position: center; background-repeat: no-repeat; display: flex; flex-direction: column; padding: 48px; position: relative; box-sizing: border-box; }
+  .carousel-slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(170deg,rgba(10,45,22,.6) 0%,rgba(10,45,22,.18) 52%,rgba(10,45,22,.65) 100%); pointer-events: none; z-index: 0; }
+  .carousel-slide > * { position: relative; z-index: 1; }
+  .carousel-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.35s ease; border: none; padding: 0; flex-shrink: 0; outline: none; }
+  .carousel-dot.active { background: rgba(255,255,255,0.95); width: 26px; }
 
   /* ─── INTRO COMPONENT CARDS ───────────────────────────────── */
   .intro-comp-card { display:flex; align-items:flex-start; gap:16px; padding:18px 20px; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-lg); }
@@ -566,7 +576,7 @@
   </div>
 </nav>
 
-<!-- ═══════════════ QUIT MODAL ════════════════════════════════ -->
+<!-- ═══════════════ QUIT MODAL (skip to shop link) ═══════════ -->
 <div class="modal-overlay" id="quitModal">
   <div class="modal-card">
     <div class="modal-icon">🚪</div>
@@ -579,13 +589,69 @@
   </div>
 </div>
 
+<!-- ═══════════════ ABANDON MODAL (nav back during quiz) ════ -->
+<div class="modal-overlay" id="abandonModal">
+  <div class="modal-card">
+    <div class="modal-icon" style="font-size:36px">⚠️</div>
+    <div class="modal-title">Abandon your setup?</div>
+    <p class="modal-desc">You're partway through building your personalised Nofence setup. Going back will lose your quiz answers and recommendations.</p>
+    <div class="modal-btns">
+      <button class="modal-continue" onclick="closeAbandonModal()">Keep going</button>
+      <button class="modal-skip" onclick="window.location.href='https://nofence.com'">Leave to nofence.com</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════ SCREEN: WELCOME (Email + Location) ═══════ -->
 <div id="screen-welcome" class="screen active">
   <div class="wizard-layout">
-    <aside class="wizard-left photo-overlay" id="welcome-left" style="background-image:url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg')">
-      <div class="left-quote" id="welcome-quote">
-        <p id="welcome-quote-text">"Virtual fencing has completely changed how we manage our land — no wires, no stress for the animals."</p>
-        <cite id="welcome-quote-cite">— Lars H., Sheep farmer, Norway</cite>
+    <aside class="wizard-left" id="welcome-left" style="position:relative">
+      <!-- Carousel track — 5 slides -->
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg')">
+          <div class="left-quote" style="margin-top:auto">
+            <p>"Virtual fencing has completely changed how we manage our land — no wires, no stress for the animals."</p>
+            <cite>— Lars H., Sheep farmer, Norway</cite>
+          </div>
+        </div>
+
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/field-cattle.jpg')">
+          <div class="left-quote" style="margin-top:auto">
+            <p>"The cattle adapted within days. Now they know their boundaries better than we ever could with wire."</p>
+            <cite>— Peter H., Beef farmer, Scotland</cite>
+          </div>
+        </div>
+
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/collars-group.webp')">
+          <div class="left-quote" style="margin-top:auto">
+            <p>"We set up our first virtual paddock in under an hour. The Nofence app is incredibly intuitive."</p>
+            <cite>— Sarah B., Beef farmer, Ireland</cite>
+          </div>
+        </div>
+
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/setup-collar.jpg')">
+          <div class="left-quote" style="margin-top:auto">
+            <p>"We saved thousands on fencing costs and gained real flexibility in how we rotate our pastures."</p>
+            <cite>— Aoife M., Sheep farmer, Ireland</cite>
+          </div>
+        </div>
+
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg');background-position:30% center">
+          <div class="left-quote" style="margin-top:auto">
+            <p>"The support team helped us optimise for our hilly terrain. Outstanding service from day one."</p>
+            <cite>— Magnus O., Goat farmer, Norway</cite>
+          </div>
+        </div>
+
+      </div>
+      <!-- Dot indicators -->
+      <div class="carousel-dots" id="carouselDots">
+        <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+        <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+        <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
+        <button class="carousel-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
+        <button class="carousel-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
       </div>
     </aside>
     <main class="wizard-right" style="padding:40px 56px;overflow-y:auto">
@@ -789,6 +855,7 @@
         <div class="btn-row" style="padding-top:0">
           <button class="btn btn-primary" style="height:56px;font-size:16px" onclick="goTo('screen-q1')">Start quiz — 3 minutes &nbsp;→</button>
         </div>
+        <p style="text-align:center;margin-top:-4px"><button onclick="showQuitModal()" style="background:none;border:none;font-size:13px;color:var(--neutral-400);cursor:pointer;text-decoration:underline;font-family:inherit;padding:0">Skip quiz — go straight to the shop</button></p>
       </div>
     </main>
   </div>
@@ -1793,7 +1860,18 @@
     }
   }
 
+  // Screens where the back button should show the abandon-quiz warning
+  const QUIZ_IN_PROGRESS = new Set([
+    'screen-q1','screen-q2','screen-q3','screen-q4',
+    'screen-power','screen-q5','screen-q6','screen-setup-summary'
+  ]);
+
   function navGoBack() {
+    const current = document.querySelector('.screen.active')?.id;
+    if (QUIZ_IN_PROGRESS.has(current)) {
+      document.getElementById('abandonModal').classList.add('open');
+      return;
+    }
     if (navStack.length > 0) {
       const prev = navStack.pop();
       goTo(prev, false);
@@ -1802,10 +1880,13 @@
     }
   }
 
-  // ─── Quit modal ──────────────────────────────────────────────
+  // ─── Quit modal (skip to shop) ───────────────────────────────
   function showQuitModal() { document.getElementById('quitModal').classList.add('open'); }
   function closeQuitModal() { document.getElementById('quitModal').classList.remove('open'); }
   function skipToPurchase() { closeQuitModal(); goTo('screen-purchase'); }
+
+  // ─── Abandon modal (nav back during quiz) ────────────────────
+  function closeAbandonModal() { document.getElementById('abandonModal').classList.remove('open'); }
 
   // ─── Welcome: collar type selector ───────────────────────────
   const COLLAR_DATA = {
@@ -1853,11 +1934,7 @@
     document.getElementById('ct-'+type).classList.add('selected');
     state.animal = type;
 
-    // Swap left-panel image
     const data = COLLAR_DATA[type];
-    document.getElementById('welcome-left').style.backgroundImage = `url('${data.img}')`;
-    document.getElementById('welcome-quote-text').textContent = data.quote;
-    document.getElementById('welcome-quote-cite').textContent = data.cite;
 
     // Enable continue (requires email too)
     checkWelcomeReady();
@@ -2176,10 +2253,29 @@
     document.getElementById('shipping-address').style.display = cb.checked ? 'none' : 'block';
   }
 
+  // ─── Carousel (welcome screen left panel) ────────────────────
+  let carouselIdx = 0;
+  let carouselTimer = null;
+  const CAROUSEL_COUNT = 5;
+
+  function goToSlide(idx) {
+    carouselIdx = ((idx % CAROUSEL_COUNT) + CAROUSEL_COUNT) % CAROUSEL_COUNT;
+    const track = document.getElementById('carouselTrack');
+    if (track) track.style.transform = `translateX(-${carouselIdx * 20}%)`;
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
+    // Reset auto-advance timer on manual navigation
+    if (carouselTimer) { clearInterval(carouselTimer); startCarousel(); }
+  }
+
+  function startCarousel() {
+    carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), 5000);
+  }
+
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
   document.getElementById('welcome-continue').disabled = true;
   document.getElementById('email-input').addEventListener('input', checkWelcomeReady);
+  startCarousel();
 
   function checkWelcomeReady() {
     const hasAnimal = state.animal !== null;
