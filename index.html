@@ -531,6 +531,60 @@
   .collar-info-tag { font-size:11px; font-weight:600; color:var(--green-700); background:white; border:1px solid var(--green-100); border-radius:10px; padding:2px 8px; }
   .qty-hint { font-size:12px; color:var(--neutral-400); margin-top:3px; }
 
+  /* ─── STEP INDICATOR (all quiz screens) ──────────────────── */
+  .step-indicator { display:flex; align-items:flex-start; margin-bottom:28px; }
+  .si-step { display:flex; flex-direction:column; align-items:center; gap:5px; flex-shrink:0; }
+  .si-circle { width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; background:white; border:2px solid var(--neutral-200); color:var(--neutral-400); transition:all .25s; font-family:inherit; }
+  .si-step.done .si-circle { background:var(--green-500); border-color:var(--green-500); color:white; font-size:0; }
+  .si-step.done .si-circle::after { content:'✓'; font-size:12px; }
+  .si-step.active .si-circle { background:var(--green-500); border-color:var(--green-500); color:white; box-shadow:0 0 0 4px rgba(95,165,38,.14); }
+  .si-label { font-size:11px; font-weight:500; color:var(--neutral-400); white-space:nowrap; }
+  .si-step.active .si-label { color:var(--green-700); font-weight:600; }
+  .si-step.done .si-label { color:var(--green-500); }
+  .si-line { flex:1; height:2px; background:var(--neutral-200); margin-top:13px; min-width:16px; }
+  .si-line.done { background:var(--green-500); }
+
+  /* ─── Q1 REDESIGN ─────────────────────────────────────────── */
+  /* Diagonal cut — white triangle overlay on right edge */
+  #screen-q1 .wizard-left::after { content:''; position:absolute; top:0; right:0; width:72px; height:100%; background:white; clip-path:polygon(100% 0, 100% 100%, 0 100%); z-index:2; pointer-events:none; }
+  /* Animal chip */
+  .q1-animal-chip { display:inline-flex; align-items:center; gap:8px; background:var(--green-25); border:1px solid var(--green-100); border-radius:20px; padding:5px 12px; font-size:13px; font-weight:600; color:var(--green-700); margin-bottom:10px; }
+  .q1-chip-sep { color:var(--neutral-300); }
+  .q1-chip-change { font-size:12px; color:var(--neutral-500); background:none; border:none; cursor:pointer; font-family:inherit; text-decoration:underline; padding:0; }
+  .q1-chip-change:hover { color:var(--neutral-900); }
+  /* Product showcase pair */
+  .q1-showcase-pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .q1-showcase-card { background:white; border:1.5px solid var(--neutral-200); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm); transition:box-shadow .2s; }
+  .q1-showcase-card:hover { box-shadow:var(--shadow-md); }
+  .q1-showcase-img { height:155px; background-size:cover; background-position:center; background-color:var(--green-50); position:relative; }
+  .q1-showcase-badge { position:absolute; top:10px; left:10px; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-radius:10px; padding:3px 10px; font-size:11px; font-weight:700; color:var(--neutral-900); }
+  .q1-showcase-badge.green-badge { background:rgba(95,165,38,.92); color:white; }
+  .q1-showcase-info { padding:12px 14px; }
+  .q1-showcase-name { font-size:14px; font-weight:700; color:var(--neutral-900); margin-bottom:3px; }
+  .q1-showcase-sub { font-size:12px; color:var(--neutral-500); line-height:1.4; }
+  /* What's included */
+  .q1-included { background:var(--green-25); border:1px solid var(--green-100); border-radius:var(--radius-lg); padding:16px 20px; }
+  .q1-included-title { font-size:13px; font-weight:700; color:var(--green-900); margin-bottom:10px; text-transform:uppercase; letter-spacing:.4px; }
+  .q1-included-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; }
+  .q1-included-item { font-size:13px; color:var(--neutral-700); display:flex; align-items:center; gap:7px; }
+  .q1-check { color:var(--green-500); font-weight:700; flex-shrink:0; font-size:13px; }
+  /* Quantity section */
+  .q1-quantity-section { display:flex; flex-direction:column; gap:8px; }
+  .q1-qty-label { font-size:14px; font-weight:600; color:var(--neutral-900); }
+  .qty-error { display:none; align-items:center; gap:6px; font-size:13px; color:#D92D20; font-weight:500; padding:4px 0; }
+  .qty-error.visible { display:flex; }
+  /* Price preview */
+  .q1-price-preview { display:flex; align-items:center; gap:10px; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-md); padding:11px 16px; flex-wrap:wrap; }
+  .q1-price-qty { font-size:14px; font-weight:700; color:var(--neutral-900); }
+  .q1-price-per { font-size:14px; color:var(--neutral-500); }
+  .q1-price-total { font-size:16px; font-weight:700; color:var(--green-700); margin-left:auto; }
+  .q1-right { padding:40px 56px; }
+  @media (max-width:900px) {
+    .q1-showcase-pair { grid-template-columns:1fr; }
+    .q1-included-grid { grid-template-columns:1fr; }
+    .q1-right { padding:32px 24px; }
+  }
+
   @media (max-width: 900px) {
     .wizard-layout { grid-template-columns: 1fr; }
     .wizard-left { display: none; position: static; height: auto; }
@@ -896,56 +950,113 @@
 <div id="screen-q1" class="screen">
   <div class="wizard-layout">
     <aside class="wizard-left photo-overlay">
+      <!-- Diagonal cut applied via CSS ::after on #screen-q1 .wizard-left -->
       <div class="left-quote">
-        <p>"We run both cattle and sheep — Nofence works perfectly for our mixed operation."</p>
+        <p>"We run both cattle and sheep — Nofence works seamlessly for a mixed operation."</p>
         <cite>— Anna M., Mixed farm, Ireland</cite>
       </div>
     </aside>
-    <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:16.6%"></div></div>
-        <span class="progress-label">1 / 6</span>
-      </div>
-      <div class="wizard-content">
-        <!-- Collar type confirmation chip -->
-        <div id="q1-animal-chip" style="display:inline-flex;align-items:center;gap:8px;background:var(--green-25);border:1px solid var(--green-100);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--green-700)">
-          <span id="q1-chip-emoji">🐄</span>
-          <span id="q1-chip-label">Cattle — Collar C2.5</span>
-          <span style="color:var(--neutral-300);margin:0 2px">·</span>
-          <button onclick="goTo('screen-welcome')" style="font-size:12px;color:var(--neutral-500);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0">Change</button>
+    <main class="wizard-right q1-right">
+
+      <!-- ── Step indicator ── -->
+      <div class="step-indicator">
+        <div class="si-step active">
+          <div class="si-circle">1</div>
+          <div class="si-label">Collars</div>
         </div>
+        <div class="si-line"></div>
+        <div class="si-step">
+          <div class="si-circle">2</div>
+          <div class="si-label">Herd</div>
+        </div>
+        <div class="si-line"></div>
+        <div class="si-step">
+          <div class="si-circle">3</div>
+          <div class="si-label">Land</div>
+        </div>
+        <div class="si-line"></div>
+        <div class="si-step">
+          <div class="si-circle">4</div>
+          <div class="si-label">Setup</div>
+        </div>
+        <div class="si-line"></div>
+        <div class="si-step">
+          <div class="si-circle">5</div>
+          <div class="si-label">Summary</div>
+        </div>
+      </div>
+
+      <div class="wizard-content">
+
+        <!-- Collar type chip + heading -->
         <div>
+          <div class="q1-animal-chip" id="q1-animal-chip">
+            <span id="q1-chip-emoji">🐄</span>
+            <span id="q1-chip-label">Cattle — C2.5 Collar</span>
+            <span class="q1-chip-sep">·</span>
+            <button onclick="goTo('screen-welcome')" class="q1-chip-change">Change</button>
+          </div>
           <h1 class="wizard-heading" id="q1-heading">How many cattle collars do you need?</h1>
-          <p class="wizard-sub" style="margin-top:10px">For animal safety and to maintain the virtual boundary, every adult animal in the herd must wear a collar.</p>
+          <p class="wizard-sub" style="margin-top:8px">Every adult animal in your herd needs a collar for the virtual fence to work safely and reliably.</p>
         </div>
 
-        <!-- Collar info card -->
-        <div class="collar-info-card">
-          <div class="collar-info-icon" id="collar-type-emoji">🐄</div>
-          <div class="collar-info-body">
-            <div class="collar-info-title" id="collar-type-label">C2.5 Cattle Collar</div>
-            <div class="collar-info-desc" id="collar-type-desc">Solar-powered GPS collar. Includes collar unit, replaceable battery, durable neckstrap, and 20″ chain. Subscription included.</div>
-            <div class="collar-info-tags">
-              <span class="collar-info-tag">☀️ Solar-powered</span>
-              <span class="collar-info-tag">📅 12-month sub included</span>
-              <span class="collar-info-tag">🛡️ 5-year warranty</span>
+        <!-- Product showcase — collar + app -->
+        <div class="q1-showcase-pair">
+          <div class="q1-showcase-card">
+            <div class="q1-showcase-img" id="q1-collar-img" style="background-image:url('collar-product.jpg');background-position:center 30%">
+              <div class="q1-showcase-badge">C2.5 Series</div>
+            </div>
+            <div class="q1-showcase-info">
+              <div class="q1-showcase-name" id="collar-type-label">C2.5 GPS Cattle Collar</div>
+              <div class="q1-showcase-sub" id="collar-type-desc">Solar-powered · 20″ chain · Long battery life</div>
+            </div>
+          </div>
+          <div class="q1-showcase-card">
+            <div class="q1-showcase-img" style="background-image:url('app-phone.jpg');background-position:center top">
+              <div class="q1-showcase-badge green-badge">Free</div>
+            </div>
+            <div class="q1-showcase-info">
+              <div class="q1-showcase-name">Nofence App</div>
+              <div class="q1-showcase-sub">Included with every order · iOS & Android</div>
             </div>
           </div>
         </div>
 
-        <div class="stepper-group">
-          <label id="qty-stepper-label">Number of cattle collars</label>
+        <!-- What's included -->
+        <div class="q1-included">
+          <div class="q1-included-title">Everything included per collar</div>
+          <div class="q1-included-grid">
+            <div class="q1-included-item"><span class="q1-check">✓</span> GPS collar unit</div>
+            <div class="q1-included-item"><span class="q1-check">✓</span> 12-month subscription</div>
+            <div class="q1-included-item"><span class="q1-check">✓</span> Nofence App (iOS & Android)</div>
+            <div class="q1-included-item"><span class="q1-check">✓</span> 5-year warranty</div>
+            <div class="q1-included-item"><span class="q1-check">✓</span> Replaceable battery</div>
+            <div class="q1-included-item"><span class="q1-check">✓</span> Standard 20″ chain</div>
+          </div>
+        </div>
+
+        <!-- Quantity + error + price -->
+        <div class="q1-quantity-section">
+          <label class="q1-qty-label" id="qty-stepper-label">Number of collars</label>
           <div class="stepper">
             <button class="dec" onclick="adjustQty(-1)">−</button>
-            <input class="count" id="qty-input" type="number" min="5" max="999" value="20" oninput="onQtyInput(this.value)">
+            <input class="count" id="qty-input" type="text" inputmode="numeric" value="20" oninput="onQtyInput(this.value)" onblur="onQtyBlur(this.value)">
             <button class="inc" onclick="adjustQty(1)">+</button>
           </div>
-          <p class="qty-hint">Minimum 5 · Every adult animal needs one · <span id="qty-100-note" style="color:var(--neutral-500)">Order 100+ collars? <a href="mailto:sales@nofence.com" style="color:var(--green-700);text-decoration:underline">Contact sales</a> for volume pricing.</span></p>
+          <div class="qty-error" id="qty-error">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" stroke="#D92D20" stroke-width="1.5"/><path d="M10 6v5" stroke="#D92D20" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r=".75" fill="#D92D20"/></svg>
+            Please enter a whole number (minimum 5)
+          </div>
+          <p class="qty-hint">Minimum 5 · Every adult animal needs one · <span id="qty-100-note">Order 100+? <a href="mailto:sales@nofence.com" style="color:var(--green-700);text-decoration:none;font-weight:500">Contact sales</a> for volume pricing.</span></p>
+          <div class="q1-price-preview" id="q1-price-preview">
+            <span class="q1-price-qty" id="q1-price-qty">20 collars</span>
+            <span class="q1-price-per" id="q1-price-per">× $349 each</span>
+            <span class="q1-price-total" id="q1-price-total">= $6,980</span>
+          </div>
         </div>
-        <div class="info-box">
-          <div class="info-icon"></div>
-          <p>For the virtual fence to work safely, every adult animal in the herd must wear a collar. Animals without a collar can't receive boundary warnings.</p>
-        </div>
+
+        <!-- hidden span so existing JS setting collar-type-emoji doesn't throw -->
+        <span id="collar-type-emoji" style="display:none"></span>
 
         <div class="btn-row">
           <button class="btn btn-secondary" onclick="goTo('screen-intro')">← Back</button>
@@ -966,9 +1077,16 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:33.3%"></div></div>
-        <span class="progress-label">2 / 6</span>
+      <div class="step-indicator">
+        <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1038,9 +1156,16 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
-        <span class="progress-label">3 / 6</span>
+      <div class="step-indicator">
+        <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1092,9 +1217,16 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:66.6%"></div></div>
-        <span class="progress-label">4 / 6</span>
+      <div class="step-indicator">
+        <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1146,9 +1278,16 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:66.6%"></div></div>
-        <span class="progress-label">After Q4</span>
+      <div class="step-indicator">
+        <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1213,9 +1352,16 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:83.3%"></div></div>
-        <span class="progress-label">5 / 6</span>
+      <div class="step-indicator">
+        <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1283,9 +1429,16 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="wizard-progress">
-        <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
-        <span class="progress-label">6 / 6</span>
+      <div class="step-indicator">
+        <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step done"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1974,11 +2127,15 @@
     document.getElementById('q1-chip-emoji').textContent  = data.chipEmoji;
     document.getElementById('q1-chip-label').textContent  = data.chipLabel;
     document.getElementById('q1-heading').textContent     = data.heading;
-    document.getElementById('collar-type-emoji').textContent = data.chipEmoji;
+    const emojiEl = document.getElementById('collar-type-emoji');
+    if (emojiEl) emojiEl.textContent = data.chipEmoji;
     document.getElementById('collar-type-label').textContent = data.collarLabel;
     document.getElementById('collar-type-desc').textContent  = data.collarDesc;
     document.getElementById('qty-stepper-label').textContent = data.stepperLabel;
-    document.getElementById('all-collar-count').textContent  = state.qty;
+    const countEl = document.getElementById('all-collar-count');
+    if (countEl) countEl.textContent = state.qty;
+    // Update price preview for new collar type
+    q1UpdatePricePreview();
 
     // Swap left-panel image for Q1 too
     const q1left = document.querySelector('#screen-q1 .wizard-left');
@@ -1987,20 +2144,69 @@
 
   // ─── Q1: quantity (animal already set on welcome screen) ─────
 
+  function q1UpdatePricePreview() {
+    const data = COLLAR_DATA[state.animal] || COLLAR_DATA.cattle;
+    const tiers = data.tierPrices; // [<25, <100, 100+]
+    const price = state.qty < 25 ? tiers[0] : (state.qty < 100 ? tiers[1] : tiers[2]);
+    const total = (price * state.qty).toLocaleString();
+    const qtyEl   = document.getElementById('q1-price-qty');
+    const perEl   = document.getElementById('q1-price-per');
+    const totEl   = document.getElementById('q1-price-total');
+    if (qtyEl) qtyEl.textContent = `${state.qty} collar${state.qty !== 1 ? 's' : ''}`;
+    if (perEl) perEl.textContent = `× $${price} each`;
+    if (totEl) totEl.textContent = `= $${total}`;
+  }
+
   function adjustQty(delta) {
     state.qty = Math.max(5, Math.min(999, state.qty + delta));
     document.getElementById('qty-input').value = state.qty;
-    document.getElementById('all-collar-count').textContent = state.qty;
+    const countEl = document.getElementById('all-collar-count');
+    if (countEl) countEl.textContent = state.qty;
+    q1UpdatePricePreview();
   }
 
   function onQtyInput(val) {
+    const errEl = document.getElementById('qty-error');
+    // Check for non-numeric characters
+    if (/[^0-9]/.test(val.trim()) && val.trim() !== '') {
+      if (errEl) errEl.classList.add('visible');
+      return; // Don't update state with invalid input
+    }
+    if (errEl) errEl.classList.remove('visible');
     const n = parseInt(val, 10);
     if (!isNaN(n) && n >= 5) { state.qty = Math.min(999, n); }
-    else if (!isNaN(n) && n < 5) { state.qty = 5; document.getElementById('qty-input').value = 5; }
-    document.getElementById('all-collar-count').textContent = state.qty;
+    else if (!isNaN(n) && n > 0 && n < 5) { /* let user keep typing — don't snap yet */ }
+    const countEl = document.getElementById('all-collar-count');
+    if (countEl) countEl.textContent = state.qty;
+    q1UpdatePricePreview();
+  }
+
+  function onQtyBlur(val) {
+    const errEl = document.getElementById('qty-error');
+    const n = parseInt(val, 10);
+    if (isNaN(n) || /[^0-9]/.test(val.trim())) {
+      if (errEl) errEl.classList.add('visible');
+      return;
+    }
+    if (errEl) errEl.classList.remove('visible');
+    if (n < 5) { state.qty = 5; document.getElementById('qty-input').value = 5; }
+    else { state.qty = Math.min(999, n); document.getElementById('qty-input').value = state.qty; }
+    const countEl = document.getElementById('all-collar-count');
+    if (countEl) countEl.textContent = state.qty;
+    q1UpdatePricePreview();
   }
 
   function continueFromQ1() {
+    // Validate before continuing
+    const val = document.getElementById('qty-input').value;
+    const errEl = document.getElementById('qty-error');
+    const n = parseInt(val, 10);
+    if (isNaN(n) || /[^0-9]/.test(val.trim())) {
+      if (errEl) errEl.classList.add('visible');
+      document.getElementById('qty-input').focus();
+      return;
+    }
+    if (errEl) errEl.classList.remove('visible');
     // Skip Q2 (bull/chain question) if sheep-only
     if (state.animal === 'sheep') goTo('screen-q3');
     else goTo('screen-q2');
