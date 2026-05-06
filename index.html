@@ -412,7 +412,7 @@
   /* ─── PHOTO SCREENS ────────────────────────────────────────── */
   /* welcome screen left panel is now a carousel — no background-image needed here */
   #screen-email-confirm .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/collars-group.webp'); }
-  #screen-intro .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
+  /* screen-intro is now full-width — no split wizard left panel */
   #screen-q1 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
   #screen-q2 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
   #screen-q3 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
@@ -435,26 +435,47 @@
   .carousel-dot { width: 8px; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.35s ease; border: none; padding: 0; flex-shrink: 0; outline: none; }
   .carousel-dot.active { background: rgba(255,255,255,0.95); width: 26px; }
 
-  /* ─── INTRO COMPONENT CARDS ───────────────────────────────── */
-  .intro-comp-card { display:flex; align-items:flex-start; gap:16px; padding:18px 20px; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-lg); }
-  .intro-comp-num { font-size:11px; font-weight:700; color:var(--neutral-300); letter-spacing:1px; min-width:24px; padding-top:3px; flex-shrink:0; }
-  .intro-comp-icon { font-size:22px; flex-shrink:0; width:44px; height:44px; background:var(--green-50); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; }
-  .intro-comp-body { flex:1; }
-  .intro-comp-title { font-size:15px; font-weight:600; color:var(--neutral-900); margin-bottom:3px; }
-  .intro-comp-desc { font-size:13px; color:var(--neutral-500); line-height:1.5; }
+  /* ─── INTRO SCREEN — full-width hero layout ──────────────── */
+  #screen-intro.active { display:flex; flex-direction:column; min-height:calc(100vh - 80px); }
 
-  /* ─── QUIZ VALUE BOX ──────────────────────────────────────── */
-  .quiz-value-box { background:var(--green-25); border:1px solid var(--green-100); border-radius:var(--radius-lg); padding:18px 22px; }
-  .quiz-value-title { font-size:14px; font-weight:700; color:var(--green-900); margin-bottom:10px; }
-  .quiz-benefits { display:flex; flex-direction:column; gap:6px; }
-  .quiz-benefit { font-size:13px; color:var(--green-700); line-height:1.4; }
+  /* Hero */
+  .intro-hero { position:relative; overflow:hidden; background:linear-gradient(150deg,#0d3828 0%,#1a5a3e 50%,#2a7048 100%); padding:100px 80px 96px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .intro-hero-bg { position:absolute; inset:0; background:url('https://identity.nofence.com/prototypes/images/field-cattle.jpg') center 40%/cover; opacity:.1; pointer-events:none; }
+  .intro-hero > * { position:relative; z-index:1; }
+  .intro-hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(95,165,38,.18); border:1px solid rgba(95,165,38,.4); border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); letter-spacing:.5px; text-transform:uppercase; margin-bottom:32px; }
+  .intro-hero-badge::before { content:''; width:6px; height:6px; background:#5FA526; border-radius:50%; flex-shrink:0; }
+  .intro-hero-h1 { font-size:54px; font-weight:300; font-family:'Host Grotesk','Inter',sans-serif; color:#fff; line-height:1.08; letter-spacing:-.04em; margin-bottom:22px; max-width:760px; }
+  .intro-hero-h1 em { font-style:normal; color:#91B88A; }
+  .intro-hero-sub { font-size:18px; color:rgba(255,255,255,.68); line-height:1.65; max-width:540px; margin-bottom:48px; }
+  .intro-hero-ctas { display:flex; align-items:center; gap:16px; }
+  .intro-hero-btn { height:54px; font-size:16px; padding:0 32px; border-radius:var(--radius-lg); }
+  .intro-hero-skip { background:none; border:1px solid rgba(255,255,255,.22); border-radius:var(--radius-lg); height:54px; padding:0 24px; font-size:15px; color:rgba(255,255,255,.7); cursor:pointer; font-family:inherit; transition:all .2s; }
+  .intro-hero-skip:hover { border-color:rgba(255,255,255,.5); color:#fff; }
 
-  /* ─── INTRO LEFT STATS ────────────────────────────────────── */
-  .intro-left-kicker { font-size:11px; font-weight:700; color:rgba(255,255,255,0.55); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; }
-  .intro-left-stat { display:flex; align-items:baseline; gap:8px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
-  .intro-left-stat:last-child { border-bottom:none; }
-  .stat-num { font-size:18px; font-weight:700; color:white; }
-  .stat-label { font-size:13px; color:rgba(255,255,255,0.65); }
+  /* Stats strip */
+  .intro-stats-strip { display:grid; grid-template-columns:repeat(3,1fr); background:#fff; border-bottom:1px solid var(--neutral-200); }
+  .intro-stat-cell { display:flex; flex-direction:column; align-items:center; text-align:center; padding:44px 32px; border-right:1px solid var(--neutral-200); }
+  .intro-stat-cell:last-child { border-right:none; }
+  .intro-stat-icon-wrap { width:52px; height:52px; border-radius:var(--radius-lg); background:var(--green-50); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .intro-stat-num { font-size:38px; font-weight:700; font-family:'Host Grotesk','Inter',sans-serif; color:var(--green-700); letter-spacing:-.03em; line-height:1; margin-bottom:8px; }
+  .intro-stat-label { font-size:14px; color:var(--neutral-500); line-height:1.45; max-width:180px; }
+
+  /* Why quiz section */
+  .intro-why { background:var(--green-900); padding:88px 80px; }
+  .intro-why-header { text-align:center; margin-bottom:60px; }
+  .intro-why-eyebrow { font-size:11px; font-weight:700; color:rgba(255,255,255,.4); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+  .intro-why-h2 { font-size:40px; font-weight:300; font-family:'Host Grotesk','Inter',sans-serif; color:#fff; line-height:1.12; letter-spacing:-.035em; margin-bottom:18px; }
+  .intro-why-sub { font-size:16px; color:rgba(255,255,255,.6); line-height:1.65; max-width:580px; margin:0 auto; }
+  .intro-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto; }
+  .intro-why-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius-xl); padding:36px 32px; transition:background .2s; }
+  .intro-why-card:hover { background:rgba(255,255,255,.09); }
+  .intro-why-card-icon { width:48px; height:48px; border-radius:var(--radius-md); background:rgba(95,165,38,.25); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
+  .intro-why-card-title { font-size:17px; font-weight:600; color:#fff; margin-bottom:10px; line-height:1.3; }
+  .intro-why-card-desc { font-size:14px; color:rgba(255,255,255,.62); line-height:1.6; }
+
+  /* Bottom CTA band */
+  .intro-cta-band { background:#fff; padding:64px 80px; display:flex; flex-direction:column; align-items:center; gap:14px; border-top:1px solid var(--neutral-200); }
+  .intro-cta-band-label { font-size:13px; color:var(--neutral-400); }
 
   /* ─── INFO TOOLTIP ────────────────────────────────────────── */
   .info-tip { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:var(--neutral-200); border-radius:50%; font-size:11px; font-weight:700; color:var(--neutral-600); cursor:help; vertical-align:middle; margin-left:4px; position:relative; }
@@ -801,67 +822,82 @@
 
 <!-- ═══════════════ SCREEN: INTRO (System + Quiz Gate) ════════ -->
 <div id="screen-intro" class="screen">
-  <div class="wizard-layout">
-    <aside class="wizard-left" style="background:linear-gradient(160deg,#0F4030 0%,#1a5a3e 45%,#2d7a4f 75%,#5FA526 100%);justify-content:flex-end;padding-bottom:52px">
-      <div>
-        <p class="intro-left-kicker">Built for working farmers</p>
-        <h2 style="font-size:34px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:white;line-height:1.15;letter-spacing:-0.03em;margin-bottom:16px">No poles.<br>No wires.<br>No stress.</h2>
-        <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:24px">Nofence uses GPS and solar-powered collars to create an invisible boundary around your animals — no physical fence required.</p>
-        <div>
-          <div class="intro-left-stat"><span class="stat-num">40,000+</span><span class="stat-label">Animals managed globally</span></div>
-          <div class="intro-left-stat"><span class="stat-num">12 months</span><span class="stat-label">Subscription included with every collar</span></div>
-          <div class="intro-left-stat"><span class="stat-num">~3 min</span><span class="stat-label">To get a personalised recommendation</span></div>
-        </div>
-      </div>
-    </aside>
-    <main class="wizard-right">
-      <div class="wizard-content">
-        <div>
-          <div class="all-set-badge" style="margin-bottom:12px">What's in a Nofence setup</div>
-          <h1 class="wizard-heading">Everything your farm needs</h1>
-          <p class="wizard-sub" style="margin-top:8px">Three parts to every setup. The quiz tailors each one to your operation.</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="intro-comp-card">
-            <div class="intro-comp-num">01</div>
-            <div class="intro-comp-icon">🐄</div>
-            <div class="intro-comp-body">
-              <div class="intro-comp-title">GPS Collar — one per animal</div>
-              <div class="intro-comp-desc">Solar-powered. Tracks position and delivers a gentle audio cue at the virtual boundary. Every adult animal in the herd must wear one.</div>
-            </div>
-          </div>
-          <div class="intro-comp-card">
-            <div class="intro-comp-num">02</div>
-            <div class="intro-comp-icon">📱</div>
-            <div class="intro-comp-body">
-              <div class="intro-comp-title">Nofence App</div>
-              <div class="intro-comp-desc">Draw your pasture zones on the map. Monitor every animal in real time, receive alerts, and move zones from your phone — free with your subscription.</div>
-            </div>
-          </div>
-          <div class="intro-comp-card">
-            <div class="intro-comp-num">03</div>
-            <div class="intro-comp-icon">🔋</div>
-            <div class="intro-comp-body">
-              <div class="intro-comp-title">Accessories (tailored to you)</div>
-              <div class="intro-comp-desc">Spare batteries, shelter beacons, extended chains — the quiz finds which extras apply. New customers often need things they didn't expect.</div>
-            </div>
-          </div>
-        </div>
-        <div class="quiz-value-box">
-          <div class="quiz-value-title">🎯 Why take the quiz?</div>
-          <div class="quiz-benefits">
-            <div class="quiz-benefit">✓ Get the right collar count — every animal needs one</div>
-            <div class="quiz-benefit">✓ Avoid missing accessories (costs more to add after delivery)</div>
-            <div class="quiz-benefit">✓ Unlock volume pricing on larger orders automatically</div>
-          </div>
-        </div>
-        <div class="btn-row" style="padding-top:0">
-          <button class="btn btn-primary" style="height:56px;font-size:16px" onclick="goTo('screen-q1')">Start quiz — 3 minutes &nbsp;→</button>
-        </div>
-        <p style="text-align:center;margin-top:-4px"><button onclick="showQuitModal()" style="background:none;border:none;font-size:13px;color:var(--neutral-400);cursor:pointer;text-decoration:underline;font-family:inherit;padding:0">Skip quiz — go straight to the shop</button></p>
-      </div>
-    </main>
+
+  <!-- ── HERO ──────────────────────────────────────────────────── -->
+  <div class="intro-hero">
+    <div class="intro-hero-bg"></div>
+    <div class="intro-hero-badge">Built for working farmers</div>
+    <h1 class="intro-hero-h1">The right Nofence setup,<br><em>built around your farm</em></h1>
+    <p class="intro-hero-sub">No guesswork. Answer 6 quick questions and we'll calculate the exact collar count, accessories, and pricing for your herd and land.</p>
+    <div class="intro-hero-ctas">
+      <button class="btn btn-primary intro-hero-btn" onclick="goTo('screen-q1')">Start the quiz — 3 min &nbsp;→</button>
+      <button class="intro-hero-skip" onclick="showQuitModal()">Skip to shop</button>
+    </div>
   </div>
+
+  <!-- ── STATS STRIP ───────────────────────────────────────────── -->
+  <div class="intro-stats-strip">
+    <div class="intro-stat-cell">
+      <div class="intro-stat-icon-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5FA526" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="intro-stat-num">40,000+</div>
+      <div class="intro-stat-label">Animals managed globally</div>
+    </div>
+    <div class="intro-stat-cell">
+      <div class="intro-stat-icon-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5FA526" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+      </div>
+      <div class="intro-stat-num">12 months</div>
+      <div class="intro-stat-label">App subscription included with every collar</div>
+    </div>
+    <div class="intro-stat-cell">
+      <div class="intro-stat-icon-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5FA526" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="intro-stat-num">~3 min</div>
+      <div class="intro-stat-label">To get a personalised recommendation</div>
+    </div>
+  </div>
+
+  <!-- ── WHY THE QUIZ ──────────────────────────────────────────── -->
+  <div class="intro-why">
+    <div class="intro-why-header">
+      <p class="intro-why-eyebrow">Why take the quiz?</p>
+      <h2 class="intro-why-h2">Everything your farm needs.<br>Nothing you don't.</h2>
+      <p class="intro-why-sub">The quiz looks at your herd size, land type, shade, and grazing intensity to build a setup that actually works — not a generic starter pack.</p>
+    </div>
+    <div class="intro-why-grid">
+      <div class="intro-why-card">
+        <div class="intro-why-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="intro-why-card-title">Correct collar count, guaranteed</div>
+        <div class="intro-why-card-desc">Every adult animal in the herd needs a collar — no exceptions. We calculate the exact quantity for your herd size, whether that's cattle, sheep, or a mixed operation.</div>
+      </div>
+      <div class="intro-why-card">
+        <div class="intro-why-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="intro-why-card-title">No costly gaps after delivery</div>
+        <div class="intro-why-card-desc">Spare batteries, shelter beacons, extended chains — easy to miss until day one. The quiz flags every accessory your specific land and setup actually requires.</div>
+      </div>
+      <div class="intro-why-card">
+        <div class="intro-why-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="intro-why-card-title">Best price, applied automatically</div>
+        <div class="intro-why-card-desc">Volume pricing unlocks at certain quantities. We apply the best available tier to your order — no negotiating, no hunting for discount codes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOTTOM CTA ────────────────────────────────────────────── -->
+  <div class="intro-cta-band">
+    <button class="btn btn-primary intro-hero-btn" onclick="goTo('screen-q1')">Start the quiz — 3 min &nbsp;→</button>
+    <span class="intro-cta-band-label">Takes about 3 minutes &nbsp;·&nbsp; No account needed to start</span>
+  </div>
+
 </div>
 
 <!-- ═══════════════ SCREEN: Q1 — Animal type + quantity ═══════ -->
