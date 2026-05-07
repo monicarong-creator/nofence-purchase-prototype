@@ -295,24 +295,54 @@
   .tc-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--green-500); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
   .tc-row p { font-size: 13px; color: var(--neutral-700); line-height: 1.5; }
   .tc-row a { color: var(--green-700); text-decoration: underline; }
-  .pay-btn { width: 100%; height: 56px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: inherit; transition: all .2s; }
-  .pay-btn:hover { background: #4C841E; transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(95,165,38,.5); }
+  .pay-btn { width: 100%; height: 56px; background: var(--neutral-300); color: white; border: none; border-radius: var(--radius-md); font-size: 18px; font-weight: 700; cursor: not-allowed; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: inherit; transition: all .3s; opacity:.7; }
+  .pay-btn.ready { background: var(--green-500); opacity:1; cursor: pointer; }
+  .pay-btn.ready:hover { background: #4C841E; transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(95,165,38,.5); }
   .checkout-summary { width: 360px; min-width: 360px; }
   .checkout-summary-card { background: white; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); position: sticky; top: 96px; }
 
+  /* ─── LEATHER STRAP VALIDATION ────────────────────────────── */
+  .leather-qty-warning { display:none; align-items:center; gap:6px; font-size:12px; color:#B45309; font-weight:500; margin-top:6px; }
+  .leather-qty-warning.visible { display:flex; }
+  .leather-qty-error { display:none; align-items:center; gap:6px; font-size:12px; color:#D92D20; font-weight:500; margin-top:6px; }
+  .leather-qty-error.visible { display:flex; }
+  .leather-apply-btn { margin-top:10px; background:none; border:1.5px solid var(--green-300); border-radius:var(--radius-md); font-family:inherit; font-size:13px; font-weight:600; color:var(--green-700); cursor:pointer; padding:8px 16px; width:100%; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .leather-apply-btn:hover { background:var(--green-25); border-color:var(--green-500); }
+
+  /* ─── SUMMARY MINI ITEMS (no icons) ──────────────────────── */
+  .summary-mini-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; gap:12px; }
+  .summary-mini-name { font-size:13px; color:var(--neutral-700); flex:1; }
+  .summary-mini-price { font-weight:600; flex-shrink:0; color:var(--neutral-900); font-size:13px; }
+
+  /* ─── CHECKOUT INCLUDED BOX ───────────────────────────────── */
+  .co-included-list { display:flex; flex-direction:column; gap:6px; margin:12px 0; }
+  .co-included-item { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--neutral-700); }
+  .co-check { color:var(--green-500); font-weight:700; flex-shrink:0; font-size:13px; }
+
   /* ─── SUCCESS ─────────────────────────────────────────────── */
-  #screen-success { background: white; min-height: calc(100vh - 80px); align-items: center; justify-content: center; }
-  .success-page { max-width: 680px; margin: 0 auto; padding: 60px 40px; text-align: center; }
-  .success-icon { width: 80px; height: 80px; background: var(--green-500); border-radius: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; animation: popIn .4s cubic-bezier(0.175,0.885,0.32,1.275); }
+  #screen-success { background: var(--neutral-50); min-height: calc(100vh - 80px); }
+  .success-page { max-width: 720px; margin: 0 auto; padding: 48px 32px 64px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:0; }
+  /* Hero section */
+  .success-hero { position:relative; width:100%; border-radius:var(--radius-xl); overflow:hidden; background:linear-gradient(150deg,#0d3828 0%,#1a5a3e 50%,#2a7048 100%); padding:56px 48px 52px; display:flex; flex-direction:column; align-items:center; margin-bottom:32px; }
+  .success-hero-bg { position:absolute; inset:0; background:url('https://identity.nofence.com/prototypes/images/field-cattle.jpg') center/cover; opacity:.12; animation:slowZoom 18s ease-in-out infinite alternate; pointer-events:none; }
+  @keyframes slowZoom { from { transform:scale(1); } to { transform:scale(1.1); } }
+  .success-hero > * { position:relative; z-index:1; }
+  .success-check-wrap { width:72px; height:72px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; animation: popIn .5s cubic-bezier(0.175,0.885,0.32,1.275); box-shadow:0 4px 20px rgba(0,0,0,.2); }
   @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .success-heading { font-size: 40px; font-weight: 300; font-family: 'Host Grotesk','Inter',sans-serif; color: var(--green-900); letter-spacing: -0.04em; margin-bottom: 8px; }
-  .success-order { font-size: 13px; color: var(--neutral-500); margin-bottom: 24px; }
-  .success-message { font-size: 16px; color: var(--neutral-700); line-height: 1.6; margin-bottom: 8px; }
-  .sustainability-note { background: var(--green-25); border-radius: var(--radius-lg); padding: 20px 24px; margin: 20px 0 32px; }
-  .sustainability-note p { font-size: 14px; color: var(--green-900); line-height: 1.55; }
+  .success-check-wrap svg { color:var(--green-500); }
+  .success-thankyou { font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:rgba(255,255,255,.6); margin-bottom:12px; }
+  .success-heading { font-size:38px; font-weight:300; font-family:'Host Grotesk','Inter',sans-serif; color:white; letter-spacing:-0.04em; margin-bottom:12px; line-height:1.1; }
+  .success-heading em { font-style:normal; color:#91B88A; }
+  .success-hero-sub { font-size:15px; color:rgba(255,255,255,.75); margin-bottom:20px; line-height:1.5; }
+  .success-order-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); }
+  /* Sustainability */
+  .sustainability-note { background: var(--green-25); border-radius: var(--radius-lg); padding: 20px 24px; margin: 0 0 28px; text-align:left; width:100%; }
+  .sustainability-note p { font-size: 14px; color: var(--green-900); line-height: 1.6; }
+  .sustainability-note p + p { margin-top: 8px; }
   .sustainability-note p strong { color: var(--green-700); }
-  .next-steps { display: flex; flex-direction: column; gap: 14px; text-align: left; margin-bottom: 36px; }
-  .next-step { display: flex; gap: 16px; align-items: flex-start; background: var(--neutral-50); border-radius: var(--radius-lg); padding: 18px 20px; }
+  /* Next steps */
+  .next-steps { display: flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 28px; width:100%; }
+  .next-step { display: flex; gap: 16px; align-items: flex-start; background: white; border-radius: var(--radius-lg); padding: 18px 20px; border:1px solid var(--neutral-200); box-shadow:var(--shadow-sm); }
   .next-step-num { width: 32px; height: 32px; background: var(--green-500); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; flex-shrink: 0; }
   .next-step-body { flex: 1; }
   .next-step-title { font-size: 14px; font-weight: 600; color: var(--neutral-900); margin-bottom: 3px; }
@@ -1471,18 +1501,29 @@
               <div class="rec-card-icon">🟫</div>
               <div class="rec-card-body">
                 <div class="rec-card-title">Leather Neck Straps</div>
-                <div class="rec-card-desc">Natural leather, compatible with all Nofence collar models. Replaces the nylon strap included with the collar.</div>
-                <div class="rec-card-row" style="flex-wrap:wrap;gap:10px">
-                  <div style="display:flex;gap:10px;align-items:center;flex:1">
-                    <div class="stepper-sm">
-                      <button class="dec" onclick="adjustLeatherQty(-1)">−</button>
-                      <input class="count" id="leather-qty-input" type="number" min="1" max="999" value="5" readonly>
-                      <button class="inc" onclick="adjustLeatherQty(1)">+</button>
-                    </div>
-                    <span class="rec-price">$18 each</span>
+                <div class="rec-card-desc">Natural leather, compatible with all Nofence collar models. Replaces the nylon strap included with the collar. <strong>$18 each.</strong></div>
+                <!-- Quantity row — stepper + direct input + price -->
+                <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+                  <div class="stepper-sm">
+                    <button class="dec" onclick="adjustLeatherQty(-1)">−</button>
+                    <input class="count" id="leather-qty-input" type="text" inputmode="numeric" min="1" max="999" value="5" oninput="onLeatherQtyInput(this.value)" onblur="onLeatherQtyBlur(this.value)">
+                    <button class="inc" onclick="adjustLeatherQty(1)">+</button>
                   </div>
-                  <button class="btn-outline-green" style="height:38px;font-size:12px;padding:0 12px" onclick="applyLeatherToAll()">Apply to all <span id="all-collar-count">20</span> collars</button>
+                  <span class="rec-price" id="leather-total-price">$90</span>
                 </div>
+                <!-- Inline error / warning messages -->
+                <div class="leather-qty-error" id="leather-qty-error">
+                  <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#D92D20" stroke-width="1.5"/><path d="M10 6v5" stroke="#D92D20" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r=".75" fill="#D92D20"/></svg>
+                  Please enter a whole number
+                </div>
+                <div class="leather-qty-warning" id="leather-qty-warning">
+                  <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M10 3L18 17H2L10 3Z" stroke="#B45309" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 9v4" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r=".75" fill="#B45309"/></svg>
+                  <span id="leather-qty-warning-text">That's more than your <span id="all-collar-count">20</span> collars — are you sure?</span>
+                </div>
+                <!-- Apply to all — below the stepper, full-width, secondary -->
+                <button class="leather-apply-btn" onclick="applyLeatherToAll()">
+                  Apply to all <strong id="leather-all-label">20</strong> collars →
+                </button>
               </div>
             </div>
           </div>
@@ -1746,9 +1787,9 @@
       <div class="form-section">
         <div class="form-section-title">Contact information</div>
         <div class="form-row">
-          <div class="form-group"><label>First name</label><input class="form-input" type="text" placeholder="Anna" autocomplete="given-name"></div>
-          <div class="form-group"><label>Last name</label><input class="form-input" type="text" placeholder="Hansen" autocomplete="family-name"></div>
-          <div class="form-group full"><label>Email address</label><input class="form-input" type="email" placeholder="anna@farm.com" autocomplete="email"></div>
+          <div class="form-group"><label>First name *</label><input class="form-input" type="text" placeholder="Anna" autocomplete="given-name" oninput="checkPayReady()"></div>
+          <div class="form-group"><label>Last name *</label><input class="form-input" type="text" placeholder="Hansen" autocomplete="family-name" oninput="checkPayReady()"></div>
+          <div class="form-group full"><label>Email address *</label><input class="form-input" type="email" placeholder="anna@farm.com" autocomplete="email" oninput="checkPayReady()"></div>
           <div class="form-group full"><label>Phone number</label><input class="form-input" type="tel" placeholder="+44 7700 900000" autocomplete="tel"></div>
         </div>
       </div>
@@ -1762,7 +1803,7 @@
               <option>United Kingdom</option><option>Norway</option><option>Sweden</option><option>Denmark</option><option>Finland</option><option>Ireland</option><option>France</option><option>Germany</option><option>Australia</option><option>New Zealand</option><option>United States</option><option>Canada</option>
             </select>
           </div>
-          <div class="form-group full"><label>Address line 1</label><input class="form-input" type="text" placeholder="Farm lane, countryside" autocomplete="address-line1"></div>
+          <div class="form-group full"><label>Address line 1 *</label><input class="form-input" type="text" placeholder="Farm lane, countryside" autocomplete="address-line1" oninput="checkPayReady()"></div>
           <div class="form-group full"><label>Address line 2 (optional)</label><input class="form-input" type="text" placeholder="Building / unit" autocomplete="address-line2"></div>
           <div class="form-group"><label>City / Town</label><input class="form-input" type="text" placeholder="York" autocomplete="address-level2"></div>
           <div class="form-group"><label>Postcode / ZIP</label><input class="form-input" type="text" placeholder="YO1 9XX" autocomplete="postal-code"></div>
@@ -1838,44 +1879,44 @@
       <!-- T&C + Pay -->
       <div class="form-section">
         <div class="tc-row" style="margin-bottom:20px">
-          <input type="checkbox" id="tc-agree">
+          <input type="checkbox" id="tc-agree" onchange="checkPayReady()">
           <p>I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>. I understand this is a legally binding purchase agreement.</p>
         </div>
-        <button class="pay-btn" onclick="goTo('screen-success')">
-          🔒 &nbsp;Pay now — <span id="pay-btn-total">$1,745</span>
+        <button class="pay-btn" id="pay-now-btn" onclick="if(this.classList.contains('ready')) goTo('screen-success')">
+          🔒 &nbsp;Pay now
         </button>
-        <p style="font-size:12px;color:var(--neutral-500);text-align:center;margin-top:12px">Your payment is secured with 256-bit SSL encryption</p>
+        <p style="font-size:12px;color:var(--neutral-400);text-align:center;margin-top:10px">Fill in your details above and agree to the terms to enable payment</p>
+        <p style="font-size:12px;color:var(--neutral-500);text-align:center;margin-top:4px">Your payment is secured with 256-bit SSL encryption</p>
       </div>
     </div>
     <!-- Checkout summary -->
     <div class="checkout-summary">
       <div class="checkout-summary-card">
-        <h2 style="font-size:18px;font-weight:700;color:var(--neutral-900);margin-bottom:16px">Order summary</h2>
-        <hr class="divider" style="margin-bottom:16px">
-        <div id="checkout-items-list">
-          <div class="order-item">
-            <div class="order-item-img">🐄</div>
-            <div class="order-item-info">
-              <div class="item-name" id="co-product-name">Cattle Collar C2.5</div>
-              <div class="item-meta" id="co-product-meta">Qty: 5 · $349 each</div>
-            </div>
-            <span class="order-item-price" id="co-product-total">$1,745</span>
+        <h2 style="font-size:17px;font-weight:700;color:var(--neutral-900);margin-bottom:14px;font-family:'Host Grotesk','Inter',sans-serif;letter-spacing:-.02em">Order summary</h2>
+        <hr class="divider" style="margin-bottom:14px">
+        <!-- Items — no icons, text-only rows populated by JS -->
+        <div id="checkout-items-list" style="display:flex;flex-direction:column;gap:2px"></div>
+        <hr class="divider" style="margin:14px 0">
+        <!-- What's included -->
+        <div class="subscription-box" style="margin-bottom:14px">
+          <div class="sub-title">Included with every collar</div>
+          <div class="co-included-list">
+            <div class="co-included-item"><span class="co-check">✓</span> 12-month subscription</div>
+            <div class="co-included-item"><span class="co-check">✓</span> Nofence App (iOS & Android)</div>
+            <div class="co-included-item"><span class="co-check">✓</span> 5-year warranty</div>
+            <div class="co-included-item"><span class="co-check">✓</span> Pasture tools & live alerts</div>
           </div>
         </div>
-        <hr class="divider" style="margin:16px 0">
-        <div class="subscription-box" style="margin-bottom:16px">
-          <div class="sub-title">12-month subscription included</div>
-          <div class="sub-desc">App access, alerts, pasture tools, and support.</div>
-        </div>
         <div class="totals-section" style="margin-bottom:12px">
-          <div class="total-row"><span class="total-key">Subtotal</span><span id="co-subtotal">$1,745</span></div>
-          <div class="total-row"><span class="total-key">VAT (20%)</span><span id="co-vat">$349</span></div>
-          <div class="total-row"><span class="total-key">Shipping</span><span>Free</span></div>
+          <div class="total-row"><span class="total-key">Subtotal</span><span id="co-subtotal">—</span></div>
+          <div class="total-row"><span class="total-key">VAT</span><span id="co-vat">At checkout</span></div>
+          <div class="total-row"><span class="total-key">Shipping</span><span style="color:var(--green-700)">Free</span></div>
         </div>
         <div class="grand-total-row">
-          <span class="grand-key">Total (incl. VAT)</span>
-          <span class="grand-val" id="co-grand-total">$2,094</span>
+          <span class="grand-key">Estimated total</span>
+          <span class="grand-val" id="co-grand-total">—</span>
         </div>
+        <p style="font-size:11px;color:var(--neutral-400);margin-top:4px">Excl. VAT · Prices in USD</p>
         <div class="trust-badges" style="margin-top:16px">
           <div class="trust-badge">🔒 Secure</div>
           <div class="trust-badge">↩️ 30-day returns</div>
@@ -1887,50 +1928,70 @@
 </div>
 
 <!-- ═══════════════ SCREEN: SUCCESS ══════════════════════════ -->
-<div id="screen-success" class="screen" style="background:white">
+<div id="screen-success" class="screen">
   <div class="success-page">
-    <div class="success-icon">✓</div>
-    <h1 class="success-heading">Order confirmed!</h1>
-    <p class="success-order">Order #NF-2024-38471 · Confirmation sent to your email</p>
-    <p class="success-message">Welcome to the Nofence family. Your setup is on its way.</p>
-    <div class="sustainability-note">
-      <p>🌿 <strong>Every Nofence setup makes a difference.</strong> Virtual fencing eliminates the need for hundreds of metres of physical wire fence — less steel, less labour, and healthier soil for your animals to graze on.</p>
+
+    <!-- Hero with slow-zoom background -->
+    <div class="success-hero">
+      <div class="success-hero-bg"></div>
+      <!-- White checkmark circle -->
+      <div class="success-check-wrap">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 18.5L14.5 25L28 11" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="success-thankyou">Thank you!</div>
+      <h1 class="success-heading">Your order is <em>confirmed</em></h1>
+      <p class="success-hero-sub">Welcome to the Nofence family. Your setup is on its way — we're excited to have you on board.</p>
+      <div class="success-order-badge">Order #NF-2024-38471 &nbsp;·&nbsp; Confirmation sent to your email</div>
     </div>
+
+    <!-- Sustainability note (split into 2 paragraphs) -->
+    <div class="sustainability-note">
+      <p>🌿 <strong>Every Nofence setup makes a difference.</strong><br>Virtual fencing eliminates hundreds of metres of physical wire fence — less steel and less labour.</p>
+      <p>Healthier soil, better grazing patterns, and a lighter footprint for your land and your animals.</p>
+    </div>
+
+    <!-- Next steps -->
     <div class="next-steps">
       <div class="next-step">
         <div class="next-step-num">1</div>
         <div class="next-step-body">
-          <div class="next-step-title">Check your email</div>
+          <div class="next-step-title">Check your inbox</div>
           <div class="next-step-desc">Your order confirmation and VAT invoice have been sent. Estimated delivery: 5–7 business days.</div>
         </div>
       </div>
       <div class="next-step">
         <div class="next-step-num">2</div>
         <div class="next-step-body">
-          <div class="next-step-title">Download the Nofence app</div>
-          <div class="next-step-desc">Get the app ready before your collars arrive. Scan the QR code or search "Nofence" on the App Store or Google Play.</div>
+          <div class="next-step-title">Download the Nofence app — it's free</div>
+          <div class="next-step-desc">Get the app ready before your collars arrive. Search "Nofence" on the App Store or Google Play, or scan the QR code.</div>
         </div>
-        <div class="qr-placeholder">QR<br>code</div>
+        <div class="qr-placeholder" style="width:72px;height:72px;font-size:9px;color:var(--neutral-400);text-align:center;background:var(--neutral-100);border-radius:8px;border:1px solid var(--neutral-200);display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1.3">QR<br>code</div>
       </div>
       <div class="next-step">
         <div class="next-step-num">3</div>
         <div class="next-step-body">
-          <div class="next-step-title">Log in and set up your first pasture</div>
-          <div class="next-step-desc">Draw your grazing area on the map and activate your collars when they arrive. Our onboarding guide walks you through every step.</div>
+          <div class="next-step-title">Set up your first pasture</div>
+          <div class="next-step-desc">Draw your grazing area on the map and activate your collars when they arrive. Our step-by-step guide is inside the app.</div>
         </div>
       </div>
-      <div class="next-step">
+      <div class="next-step" style="border-color:var(--green-100);background:var(--green-25)">
         <div class="next-step-num">4</div>
         <div class="next-step-body">
-          <div class="next-step-title">Need help? We're here.</div>
-          <div class="next-step-desc">Our support team is available 24/7. You can also book a free onboarding call with a Nofence specialist.</div>
+          <div class="next-step-title">Questions? We're here 24/7</div>
+          <div class="next-step-desc" style="margin-bottom:10px">Our support team is always available. You can also book a free onboarding call with a Nofence specialist — no extra charge.</div>
+          <button class="btn-outline-green" style="height:36px;font-size:13px;padding:0 14px" onclick="alert('This would open the contact form.')">Contact support →</button>
         </div>
       </div>
     </div>
-    <div class="success-actions">
-      <button class="btn btn-primary" style="width:280px" onclick="alert('This would open your Nofence account.')">Go to my account &nbsp;→</button>
-      <button class="btn-ghost" onclick="alert('This would open the onboarding guide.')">View setup guide</button>
+
+    <!-- Actions -->
+    <div class="success-actions" style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%">
+      <a href="https://app.nofence.com" class="btn btn-primary" style="width:100%;max-width:320px;text-decoration:none" onclick="event.preventDefault();alert('This would open your Nofence account.')">Go to my Nofence account →</a>
+      <button class="btn btn-secondary" style="width:100%;max-width:320px" onclick="alert('This would open the getting started guide.')">Download getting started guide</button>
     </div>
+
   </div>
 </div>
 
@@ -2279,17 +2340,78 @@
     state.leather = val;
     document.getElementById('leather-reveal').classList.toggle('visible', val === 'yes');
     document.getElementById('q6-continue').disabled = false;
-    if (val === 'yes') { state.leatherQty = 5; document.getElementById('leather-qty-input').value = 5; }
+    if (val === 'yes') {
+      state.leatherQty = Math.min(5, state.qty);
+      document.getElementById('leather-qty-input').value = state.leatherQty;
+      updateLeatherPrice();
+    }
+  }
+
+  function updateLeatherPrice() {
+    const totalEl = document.getElementById('leather-total-price');
+    if (totalEl) totalEl.textContent = `$${(state.leatherQty * 18).toLocaleString()}`;
+    const allLabelEl = document.getElementById('leather-all-label');
+    if (allLabelEl) allLabelEl.textContent = state.qty;
+    // Sync all-collar-count spans (plural uses)
+    document.querySelectorAll('#all-collar-count').forEach(el => el.textContent = state.qty);
   }
 
   function adjustLeatherQty(delta) {
+    const errEl = document.getElementById('leather-qty-error');
+    if (errEl) errEl.classList.remove('visible');
     state.leatherQty = Math.max(1, Math.min(999, state.leatherQty + delta));
     document.getElementById('leather-qty-input').value = state.leatherQty;
+    updateLeatherPrice();
+    checkLeatherWarning();
+  }
+
+  function onLeatherQtyInput(val) {
+    const errEl = document.getElementById('leather-qty-error');
+    if (/[^0-9]/.test(val.trim()) && val.trim() !== '') {
+      if (errEl) errEl.classList.add('visible');
+      return;
+    }
+    if (errEl) errEl.classList.remove('visible');
+    const n = parseInt(val, 10);
+    if (!isNaN(n) && n >= 1) {
+      state.leatherQty = Math.min(999, n);
+      updateLeatherPrice();
+      checkLeatherWarning();
+    }
+  }
+
+  function onLeatherQtyBlur(val) {
+    const errEl = document.getElementById('leather-qty-error');
+    const n = parseInt(val, 10);
+    if (isNaN(n) || /[^0-9]/.test(val.trim())) {
+      if (errEl) errEl.classList.add('visible');
+      return;
+    }
+    if (errEl) errEl.classList.remove('visible');
+    state.leatherQty = Math.max(1, Math.min(999, n));
+    document.getElementById('leather-qty-input').value = state.leatherQty;
+    updateLeatherPrice();
+    checkLeatherWarning();
+  }
+
+  function checkLeatherWarning() {
+    const warnEl = document.getElementById('leather-qty-warning');
+    if (!warnEl) return;
+    if (state.leatherQty > state.qty) {
+      warnEl.classList.add('visible');
+    } else {
+      warnEl.classList.remove('visible');
+    }
   }
 
   function applyLeatherToAll() {
+    const errEl = document.getElementById('leather-qty-error');
+    const warnEl = document.getElementById('leather-qty-warning');
+    if (errEl) errEl.classList.remove('visible');
+    if (warnEl) warnEl.classList.remove('visible');
     state.leatherQty = state.qty;
     document.getElementById('leather-qty-input').value = state.qty;
+    updateLeatherPrice();
   }
 
   // ─── Generic option select (Q3, Q4) ──────────────────────────
@@ -2347,12 +2469,12 @@
             : '<div style="width:30px"></div>'}
         </div>`).join('');
     }
-    // Mini summary (right panel)
+    // Mini summary (right panel — no icons, clean text only)
     const miniList = document.getElementById('summary-mini-items');
     if (miniList) {
       miniList.innerHTML = items.map(item => `
         <div class="summary-mini-item">
-          <span class="summary-mini-name">${item.icon} ${item.qty}× ${item.name}</span>
+          <span class="summary-mini-name">${item.qty}× ${item.name}</span>
           <span class="summary-mini-price">$${(item.unitPrice * item.qty).toLocaleString()}</span>
         </div>`).join('');
     }
@@ -2395,7 +2517,39 @@
     alert(`Discount code "${code}" — this would be validated at checkout.`);
   }
 
-  function buildCheckoutAndGo() { goTo('screen-checkout'); }
+  function buildCheckoutAndGo() {
+    // Pre-fill email from welcome screen
+    const emailEl = document.querySelector('#screen-checkout input[type="email"]');
+    if (emailEl && state.email) emailEl.value = state.email;
+    // Render checkout order summary (no icons)
+    const items = state.summaryItems || [];
+    const coList = document.getElementById('checkout-items-list');
+    if (coList && items.length > 0) {
+      coList.innerHTML = items.map(item => `
+        <div class="summary-mini-item" style="padding:7px 0">
+          <span class="summary-mini-name">${item.qty}× ${item.name}</span>
+          <span class="summary-mini-price">$${(item.unitPrice * item.qty).toLocaleString()}</span>
+        </div>`).join('');
+    }
+    checkPayReady();
+    goTo('screen-checkout');
+  }
+
+  function checkPayReady() {
+    const btn = document.querySelector('.pay-btn');
+    if (!btn) return;
+    const tc = document.getElementById('tc-agree');
+    // Check required fields: first name, last name, email, address line 1, city
+    const fields = [
+      document.querySelector('#screen-checkout input[autocomplete="given-name"]'),
+      document.querySelector('#screen-checkout input[autocomplete="family-name"]'),
+      document.querySelector('#screen-checkout input[type="email"]'),
+      document.querySelector('#screen-checkout input[autocomplete="address-line1"]'),
+    ];
+    const allFilled = fields.every(f => f && f.value.trim().length > 0);
+    const tcChecked = tc && tc.checked;
+    btn.classList.toggle('ready', allFilled && tcChecked);
+  }
 
   // ─── Purchase page ────────────────────────────────────────────
   function switchCollar(type, btn) {
