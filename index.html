@@ -189,7 +189,10 @@
   /* ─── PURCHASE PAGE ───────────────────────────────────────── */
   #screen-purchase { flex-direction: column; background: var(--neutral-100); }
   .wizard-prompt-bar { background: linear-gradient(135deg,#EBF3E8 0%,#F0F5EE 100%); border-bottom: 1px solid #C5DEBC; padding: 14px 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; position: sticky; top: 80px; z-index: 999; }
-  .wizard-prompt-bar .prompt-icon { width: 36px; height: 36px; background: var(--green-500); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .wizard-prompt-bar .prompt-icon { width: 20px; height: 20px; position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wizard-prompt-bar .prompt-icon .dot { width: 10px; height: 10px; background: var(--green-500); border-radius: 50%; position: relative; z-index: 1; }
+  .wizard-prompt-bar .prompt-icon .dot-ring { position: absolute; inset: 0; border-radius: 50%; background: var(--green-400); opacity: 0; animation: dot-pulse 2s ease-out infinite; }
+  @keyframes dot-pulse { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.8); opacity: 0; } }
   .wizard-prompt-bar .prompt-text { flex: 1; min-width: 200px; }
   .wizard-prompt-bar .prompt-text strong { display: block; font-size: 14px; font-weight: 700; color: #0F4030; }
   .wizard-prompt-bar .prompt-text span { font-size: 13px; color: #396317; }
@@ -2037,10 +2040,10 @@
 <!-- ═══════════════ SCREEN: PURCHASE PAGE ════════════════════ -->
 <div id="screen-purchase" class="screen" style="background:var(--neutral-100)">
   <div class="wizard-prompt-bar">
-    <div class="prompt-icon">🌿</div>
+    <div class="prompt-icon"><div class="dot-ring"></div><div class="dot"></div></div>
     <div class="prompt-text">
       <strong>Not sure which setup is right for your herd?</strong>
-      <span>Answer 6 quick questions and get a personalised recommendation in under 5 minutes.</span>
+      <span>Tell us about your farm and we'll recommend the exact collars and quantities you need.</span>
     </div>
     <button class="wizard-prompt-btn" onclick="goTo('screen-q1')">Find my setup →</button>
   </div>
