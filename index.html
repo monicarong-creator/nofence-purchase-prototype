@@ -527,8 +527,9 @@
   #screen-intro.active { display:flex; flex-direction:column; min-height:calc(100vh - 80px); }
 
   /* Hero — merged with why-cards into one green section */
-  .intro-hero { position:relative; overflow:hidden; background:linear-gradient(150deg,#0d3828 0%,#1a5a3e 50%,#2a7048 100%); padding:100px 80px 88px; display:flex; flex-direction:column; align-items:center; text-align:center; }
-  .intro-hero-bg { position:absolute; inset:0; background:url('https://identity.nofence.com/prototypes/images/field-cattle.jpg') center 40%/cover; opacity:.1; pointer-events:none; }
+  .intro-hero { position:relative; overflow:hidden; background:#0d1f10; padding:100px 80px 88px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .intro-hero-bg { position:absolute; inset:-20px; background:url('solar-bg.jpg') center/cover no-repeat; filter:blur(10px); transform:scale(1.08); pointer-events:none; z-index:0; }
+  .intro-hero-overlay { position:absolute; inset:0; background:linear-gradient(170deg,rgba(8,28,14,.72) 0%,rgba(8,28,14,.48) 50%,rgba(8,28,14,.75) 100%); pointer-events:none; z-index:0; }
   .intro-hero > * { position:relative; z-index:1; }
   .intro-hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(95,165,38,.18); border:1px solid rgba(95,165,38,.4); border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); letter-spacing:.5px; text-transform:uppercase; margin-bottom:32px; }
   .intro-hero-badge::before { content:''; width:6px; height:6px; background:#5FA526; border-radius:50%; flex-shrink:0; }
@@ -1046,11 +1047,12 @@
   <!-- ── HERO ──────────────────────────────────────────────────── -->
   <div class="intro-hero">
     <div class="intro-hero-bg"></div>
+    <div class="intro-hero-overlay"></div>
     <div class="intro-hero-badge">Built for working farmers</div>
     <h1 class="intro-hero-h1">The right Nofence setup,<br><em>built around your farm</em></h1>
     <p class="intro-hero-sub">No guesswork. Answer 6 quick questions and we'll calculate the exact collar count, accessories, and pricing for your herd and land.</p>
     <div class="intro-hero-ctas">
-      <button class="btn btn-primary intro-hero-btn" onclick="goTo('screen-q1')">Start the quiz — 3 min &nbsp;→</button>
+      <button class="btn btn-primary intro-hero-btn" onclick="goTo('screen-q1')">Start the quiz &nbsp;→</button>
       <button class="intro-hero-skip" onclick="showQuitModal()">Skip to shop</button>
     </div>
 
@@ -2380,7 +2382,7 @@
 
   // Screens that use the checkout shell nav (everything except purchase page)
   const CHECKOUT_SHELL_SCREENS = new Set([
-    'screen-welcome','screen-email-confirm','screen-intro',
+    'screen-welcome','screen-email-confirm',
     'screen-q1','screen-q2','screen-q3','screen-q4','screen-power',
     'screen-q5','screen-q6','screen-setup-summary',
     'screen-checkout','screen-success'
