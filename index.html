@@ -424,9 +424,15 @@
   .collar-type-card.selected .ct-collar { background: var(--green-100); color: var(--green-700); }
 
   /* ─── MODAL ────────────────────────────────────────────────── */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 90000; display: none; align-items: center; justify-content: center; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 90000; display: none; align-items: center; justify-content: center; padding: 16px; }
   .modal-overlay.open { display: flex; }
   .modal-card { background: white; border-radius: var(--radius-xl); padding: 36px; max-width: 480px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+  /* Grants modal — taller, scrollable, wider */
+  .grants-modal-card { max-width: 560px; width: 100%; max-height: 92vh; overflow-y: auto; padding: 36px; position: relative; }
+  .grants-modal-close { position: absolute; top: 18px; right: 18px; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--neutral-200); background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--neutral-500); transition: all .15s; }
+  .grants-modal-close:hover { border-color: var(--neutral-400); color: var(--neutral-900); }
+  .grants-modal-form-body .form-input { background: var(--neutral-50); }
+  .grants-modal-form-body .form-input:focus { background: white; }
   .modal-icon { font-size: 40px; margin-bottom: 16px; }
   .modal-title { font-size: 22px; font-weight: 700; color: var(--neutral-900); margin-bottom: 10px; }
   .modal-desc { font-size: 15px; color: var(--neutral-700); line-height: 1.55; margin-bottom: 28px; }
@@ -905,6 +911,79 @@
       <button class="modal-continue" onclick="closeLeaveCheckoutModal()">Stay in checkout</button>
       <button class="modal-skip" onclick="closeLeaveCheckoutModal();goTo('screen-purchase')">Back to shop</button>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODAL: GRANTS GUIDE ═════════════════════ -->
+<div class="modal-overlay" id="grantsModal" onclick="if(event.target===this)closeGrantsModal()">
+  <div class="modal-card grants-modal-card">
+
+    <!-- Close button -->
+    <button class="grants-modal-close" onclick="closeGrantsModal()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <!-- FORM VIEW -->
+    <div id="grants-modal-form">
+      <div style="font-size:28px;margin-bottom:12px">💶</div>
+      <div class="modal-title" style="font-size:20px;margin-bottom:6px">Get your personalised grants guide</div>
+      <p style="font-size:14px;color:var(--neutral-500);line-height:1.55;margin-bottom:24px">Many farmers cover 20–40% of their Nofence setup through agri-tech grants. Fill in a few details and we'll send the schemes most relevant to your country and farm type — straight to your inbox.</p>
+
+      <div class="grants-modal-form-body">
+        <div class="form-row" style="margin-bottom:14px">
+          <div class="form-group">
+            <label>First name</label>
+            <input class="form-input" id="gm-first" type="text" placeholder="Anna">
+          </div>
+          <div class="form-group">
+            <label>Last name</label>
+            <input class="form-input" id="gm-last" type="text" placeholder="Hansen">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px">
+          <label>Email address</label>
+          <input class="form-input" id="gm-email" type="email" placeholder="anna@farm.no">
+        </div>
+        <div class="form-row" style="margin-bottom:14px">
+          <div class="form-group">
+            <label>Country</label>
+            <select class="form-input" id="gm-country">
+              <option value="">Select country…</option>
+              <option>Norway</option><option>United Kingdom</option><option>Ireland</option>
+              <option>Australia</option><option>United States</option><option>New Zealand</option>
+              <option>Sweden</option><option>Denmark</option><option>Finland</option>
+              <option>France</option><option>Germany</option><option>Netherlands</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Farm type</label>
+            <select class="form-input" id="gm-farmtype">
+              <option value="">Select type…</option>
+              <option>Beef cattle</option><option>Dairy cattle</option>
+              <option>Sheep</option><option>Goats</option>
+              <option>Mixed livestock</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:22px">
+          <label>Anything else we should know? <span style="font-weight:400;color:var(--neutral-400)">(optional)</span></label>
+          <textarea class="form-input" id="gm-note" rows="2" placeholder="e.g. expanding an existing setup, applying for a specific scheme…" style="height:auto;padding-top:12px;padding-bottom:12px;resize:none"></textarea>
+        </div>
+        <div id="gm-error" style="display:none;color:#D92D20;font-size:13px;margin-bottom:12px">Please fill in your email address to continue.</div>
+        <button onclick="submitGrantsModal()" style="width:100%;height:50px;background:var(--green-500);color:white;border:none;border-radius:var(--radius-md);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s" onmouseover="this.style.background='#4C841E'" onmouseout="this.style.background='var(--green-500)'">Send me the grants guide →</button>
+        <p style="font-size:12px;color:var(--neutral-400);text-align:center;margin-top:10px">We'll only use your details to send you relevant grant info. No spam, ever.</p>
+      </div>
+    </div>
+
+    <!-- SUCCESS VIEW -->
+    <div id="grants-modal-success" style="display:none;text-align:center;padding:20px 0">
+      <div style="width:56px;height:56px;background:var(--green-25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px">✅</div>
+      <div style="font-size:20px;font-weight:700;color:var(--neutral-900);margin-bottom:8px">Guide on its way!</div>
+      <p style="font-size:14px;color:var(--neutral-500);line-height:1.6;margin-bottom:24px">We've sent your personalised grants guide to <strong id="gm-email-display" style="color:var(--neutral-900)"></strong>. It includes the agri-tech schemes most relevant to your country and farm type.</p>
+      <button onclick="closeGrantsModal()" style="height:44px;padding:0 28px;background:var(--green-500);color:white;border:none;border-radius:var(--radius-md);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Done</button>
+    </div>
+
   </div>
 </div>
 
@@ -1879,7 +1958,7 @@
           <div class="grants-box">
             <div class="grants-title">💶 Grants may be available</div>
             <div class="grants-desc">Many farmers qualify for agri-tech grants covering up to 40% of setup costs.</div>
-            <button class="grants-btn" onclick="goTo('screen-grants')">Download guide (PDF) ↓</button>
+            <button class="grants-btn" onclick="showGrantsModal()">Get grants guide ↓</button>
           </div>
         </div>
       </div>
@@ -2165,7 +2244,7 @@
       <div class="grants-box">
         <div class="grants-title">💶 Grants may be available</div>
         <div class="grants-desc">Check if you qualify for agricultural technology funding in your region.</div>
-        <button class="grants-btn" onclick="goTo('screen-grants')">Download grants guide ↓</button>
+        <button class="grants-btn" onclick="showGrantsModal()">Get grants guide ↓</button>
       </div>
       <hr class="divider">
       <div class="totals-section">
@@ -2759,6 +2838,33 @@
   // ─── Leave checkout modal ────────────────────────────────────
   function showLeaveCheckoutModal() { document.getElementById('leaveCheckoutModal').classList.add('open'); }
   function closeLeaveCheckoutModal() { document.getElementById('leaveCheckoutModal').classList.remove('open'); }
+
+  // ─── Grants modal ─────────────────────────────────────────────
+  function showGrantsModal() {
+    // Pre-fill email from quiz if available
+    const wizEmail = document.getElementById('email-input');
+    const gmEmail = document.getElementById('gm-email');
+    if (wizEmail && gmEmail && wizEmail.value) gmEmail.value = wizEmail.value;
+    // Reset to form view
+    document.getElementById('grants-modal-form').style.display = '';
+    document.getElementById('grants-modal-success').style.display = 'none';
+    document.getElementById('gm-error').style.display = 'none';
+    document.getElementById('grantsModal').classList.add('open');
+  }
+  function closeGrantsModal() {
+    document.getElementById('grantsModal').classList.remove('open');
+  }
+  function submitGrantsModal() {
+    const email = document.getElementById('gm-email').value.trim();
+    const err = document.getElementById('gm-error');
+    if (!email) { err.style.display = 'block'; document.getElementById('gm-email').focus(); return; }
+    err.style.display = 'none';
+    document.getElementById('gm-email-display').textContent = email;
+    document.getElementById('grants-modal-form').style.display = 'none';
+    document.getElementById('grants-modal-success').style.display = '';
+    // Auto-close after 4 seconds
+    setTimeout(closeGrantsModal, 4000);
+  }
 
   // ─── Grants form ─────────────────────────────────────────────
   function submitGrantsForm() {
