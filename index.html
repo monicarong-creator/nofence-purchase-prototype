@@ -568,6 +568,10 @@
   .info-tip svg { display:block; }
   .info-tip::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); background:var(--neutral-900); color:white; font-size:12px; line-height:1.5; padding:10px 14px; border-radius:var(--radius-md); width:260px; text-align:left; white-space:normal; opacity:0; pointer-events:none; transition:opacity .18s; z-index:1000; font-weight:400; box-shadow:0 4px 12px rgba(0,0,0,.25); }
   .info-tip:hover::after { opacity:1; }
+  /* Filled circle variant for in-card i-icons */
+  .info-tip.solid { background:var(--green-50); border-color:var(--green-300); color:var(--green-700); width:18px; height:18px; }
+  .info-tip.solid:hover { background:var(--green-100); border-color:var(--green-500); }
+  .info-tip.solid::after { width:280px; }
 
   /* ─── QUIZ SCREEN TOPBAR (skip link row) ─────────────────── */
   .quiz-topbar { display:flex; justify-content:flex-end; align-items:center; margin-bottom:4px; margin-top:-8px; }
@@ -1431,16 +1435,20 @@
       </div>
       <div class="wizard-content">
         <div>
-          <div class="all-set-badge" style="margin-bottom:10px">⚡ Power recommendation</div>
-          <h1 class="wizard-heading">Your setup may need extra power capacity</h1>
-          <p class="wizard-sub" style="margin-top:10px">Based on your land type and grazing area, we recommend spare batteries and a charger to keep your collars running reliably year-round.</p>
+          <h1 class="wizard-heading">Recommended power management for your operation.</h1>
+          <p class="wizard-sub" style="margin-top:10px">Based on your answers, we've put together a power setup that keeps your collars running reliably — even through overcast periods or high-intensity rotational grazing.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px">
+
+          <!-- Battery card -->
           <div class="rec-card">
             <div class="rec-card-icon">🔋</div>
             <div class="rec-card-body">
-              <div class="rec-card-title">Spare Collar Batteries</div>
-              <div class="rec-card-desc">Allows charging one battery while the other is in use — essential for low-sun conditions. Rechargeable lithium-ion, compatible with all Nofence collar models.</div>
+              <div class="rec-card-title">
+                Additional cattle collar batteries
+                <span class="info-tip solid" data-tip="Rechargeable lithium-ion battery. Compatible with all Nofence cattle collar models. Batteries can be charged via the solar panel or with the Nofence battery charger."><svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></span>
+              </div>
+              <div class="rec-card-desc">For a smooth operation in areas without consistent sun exposure and/or with intensive grazing set-ups, we recommend one additional battery for every 10 collars. Spare batteries allow you to charge some collars while others are in use, helping to avoid any interruptions to your operation.</div>
               <div class="rec-card-row">
                 <span class="rec-qty-label">Quantity</span>
                 <div class="stepper-sm">
@@ -1452,11 +1460,16 @@
               </div>
             </div>
           </div>
+
+          <!-- Charger card -->
           <div class="rec-card">
             <div class="rec-card-icon">🔌</div>
             <div class="rec-card-body">
-              <div class="rec-card-title">Collar Battery Charger</div>
-              <div class="rec-card-desc">Each charge takes ~14 hours on a standard outlet. We recommend 1 charger per 10 collars for smooth rotation during the charging season.</div>
+              <div class="rec-card-title">
+                Cattle collar battery chargers
+                <span class="info-tip solid" data-tip="Each cattle collar battery takes around 14 hours to fully charge. Batteries are shipped at a low charge level. Plugs into a standard outlet. We recommend fully charging your batteries before the start of the season."><svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></span>
+              </div>
+              <div class="rec-card-desc">For a smooth operation in areas without consistent sun exposure and/or with intensive grazing set-ups, we recommend one battery charger for every 10 collars. Having a charger on hand means you're always ready for the next rotation.</div>
               <div class="rec-card-row">
                 <span class="rec-qty-label">Quantity</span>
                 <div class="stepper-sm">
@@ -1468,6 +1481,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <div class="info-box green">
           <div class="info-icon"><svg width="8" height="11" viewBox="0 0 8 11" fill="white"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></div>
@@ -1505,8 +1519,8 @@
       </div>
       <div class="wizard-content">
         <div>
-          <h1 class="wizard-heading">Do your animals use buildings or sheltered areas?</h1>
-          <p class="wizard-sub" style="margin-top:10px">GPS signals are blocked inside buildings. A Shelter Beacon inside the building lets the Nofence app track your animals when they're indoors.</p>
+          <h1 class="wizard-heading">Let's see if you need shelter beacons with your set-up.</h1>
+          <p class="wizard-sub" style="margin-top:10px">Barns and other buildings can interfere with GPS signals. When signals bounce off a roof or walls, a collar may log an inaccurate position. Shelter beacons help stabilise the GPS signal inside or near shelters.</p>
         </div>
         <div class="option-list">
           <div class="option-card" data-group="shelter" data-value="yes" onclick="selectShelter(this,'yes')">
@@ -1517,6 +1531,7 @@
             </div>
             <div class="option-radio"></div>
           </div>
+
           <!-- Shelter beacon reveal — directly under the "yes" option -->
           <div class="inline-reveal" id="shelter-reveal" style="padding:0 4px">
             <div style="padding:14px 0 4px">
@@ -1525,9 +1540,10 @@
                 <div class="rec-card-body">
                   <div class="rec-card-title">
                     Shelter Beacon
-                    <span class="info-tip" data-tip="A small Bluetooth device mounted inside a building. When a collared animal enters, it communicates with the beacon instead of GPS — so the app always knows where your animals are."><svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></span>
+                    <span class="info-tip solid" data-tip="The shelter beacon device comes with two AA batteries and has a very long battery life. You can install the beacon using double-sided adhesive tape and/or screws. No tools or technical setup required."><svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></span>
                   </div>
-                  <div class="rec-card-desc">Mounted inside buildings. Lets the Nofence app track your animals when GPS is unavailable indoors. One beacon per building is usually sufficient.</div>
+                  <div style="font-size:12px;font-weight:600;color:var(--green-700);margin:4px 0 6px">To ensure the system works properly, you will need to install a few shelter beacons.</div>
+                  <div class="rec-card-desc">The shelter beacon range is about 16 feet (5 m). In larger rooms or open barns, we recommend using at least two shelter beacons for full coverage. One beacon per standard-sized building is usually sufficient.</div>
                   <div class="rec-card-row">
                     <span class="rec-qty-label">How many buildings?</span>
                     <div class="stepper-sm">
@@ -1540,6 +1556,7 @@
               </div>
             </div>
           </div>
+
           <div class="option-card" data-group="shelter" data-value="no" onclick="selectShelter(this,'no')">
             <div class="option-icon">🌾</div>
             <div class="option-text">
@@ -2383,6 +2400,7 @@
     }
     if (id === 'screen-welcome') {
       checkWelcomeReady();
+      requestAnimationFrame(() => requestAnimationFrame(startCarousel)); // restart carousel
     }
   }
 
@@ -3035,8 +3053,11 @@
     const bar = document.getElementById('carouselProgressBar');
     if (!bar) return;
     bar.style.animation = 'none';
-    void bar.offsetWidth; // force reflow so animation restarts from 0
-    bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
+    bar.style.width = '0%';
+    void bar.getBoundingClientRect(); // force reflow
+    requestAnimationFrame(() => {
+      bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
+    });
   }
 
   function goToSlide(idx) {
@@ -3063,7 +3084,8 @@
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
   document.getElementById('welcome-continue').disabled = true;
-  startCarousel();
+  // Start carousel after first paint (double rAF ensures browser has rendered)
+  requestAnimationFrame(() => requestAnimationFrame(startCarousel));
 
   function checkWelcomeReady() {
     const hasAnimal = state.animal !== null;
