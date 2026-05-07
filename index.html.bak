@@ -49,7 +49,7 @@
   .wizard-left .illus, .wizard-left .caption { display: none; }
   .wizard-left .quote-card { display: none; }
   .wizard-left .brand { display: none !important; }
-  .wizard-right { background: var(--white); display: flex; flex-direction: column; padding: 48px 64px; overflow-y: auto; scrollbar-gutter: stable; }
+  .wizard-right { background: var(--white); display: flex; flex-direction: column; padding: 48px 64px; overflow-y: auto; }
 
   /* photo overlays */
   .photo-overlay::before { content: ''; position: absolute; inset: 0; background: linear-gradient(170deg,rgba(10,45,22,.55) 0%,rgba(10,45,22,.20) 50%,rgba(10,45,22,.60) 100%); pointer-events: none; z-index: 0; }
@@ -383,7 +383,7 @@
   .success-page { max-width: 720px; margin: 0 auto; padding: 48px 32px 64px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:0; }
   /* Hero section */
   .success-hero { position:relative; width:100%; border-radius:var(--radius-xl); overflow:hidden; background:linear-gradient(150deg,#0d3828 0%,#1a5a3e 50%,#2a7048 100%); padding:56px 48px 52px; display:flex; flex-direction:column; align-items:center; margin-bottom:32px; }
-  .success-hero-bg { position:absolute; inset:0; background:url('images/field-cattle.jpg') center/cover; opacity:.12; animation:slowZoom 18s ease-in-out infinite alternate; pointer-events:none; }
+  .success-hero-bg { position:absolute; inset:0; background:url('https://identity.nofence.com/prototypes/images/field-cattle.jpg') center/cover; opacity:.12; animation:slowZoom 18s ease-in-out infinite alternate; pointer-events:none; }
   @keyframes slowZoom { from { transform:scale(1); } to { transform:scale(1.1); } }
   .success-hero > * { position:relative; z-index:1; }
   .success-check-wrap { width:72px; height:72px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; animation: popIn .5s cubic-bezier(0.175,0.885,0.32,1.275); box-shadow:0 4px 20px rgba(0,0,0,.2); }
@@ -424,30 +424,9 @@
   .collar-type-card.selected .ct-collar { background: var(--green-100); color: var(--green-700); }
 
   /* ─── MODAL ────────────────────────────────────────────────── */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 90000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 90000; display: none; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
   .modal-card { background: white; border-radius: var(--radius-xl); padding: 36px; max-width: 480px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
-  /* Grants modal — taller, scrollable, wider */
-  .grants-modal-card { max-width: 560px; width: 100%; max-height: 92vh; overflow-y: auto; padding: 36px; position: relative; }
-  .grants-modal-close { position: absolute; top: 18px; right: 18px; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--neutral-200); background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--neutral-500); transition: all .15s; }
-  .grants-modal-close:hover { border-color: var(--neutral-400); color: var(--neutral-900); }
-  .grants-modal-form-body .form-input { background: var(--neutral-50); }
-  .grants-modal-form-body .form-input:focus { background: white; }
-  /* Grants modal — tabs */
-  .gm-tabs { display: flex; gap: 0; border: 1.5px solid var(--neutral-200); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 20px; }
-  .gm-tab { flex: 1; padding: 10px 14px; font-size: 13px; font-weight: 500; font-family: inherit; background: white; border: none; cursor: pointer; color: var(--neutral-600); transition: all .15s; border-right: 1.5px solid var(--neutral-200); }
-  .gm-tab:last-child { border-right: none; }
-  .gm-tab.active { background: var(--green-500); color: white; font-weight: 600; }
-  .gm-tab:not(.active):hover { background: var(--neutral-50); }
-  /* Grants modal — form helpers */
-  .gm-row { margin-bottom: 14px; }
-  .gm-row label { display: block; font-size: 13px; font-weight: 500; color: var(--neutral-700); margin-bottom: 4px; }
-  .gm-row .form-input, .gm-row select.form-input { background: var(--neutral-50); }
-  .gm-row .form-input:focus { background: white; outline: 2px solid var(--green-300); outline-offset: 0; border-color: var(--green-400); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .req { color: var(--green-500); font-weight: 700; }
-  .gm-submit-btn { width: 100%; height: 48px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 6px; transition: background .15s; }
-  .gm-submit-btn:hover { background: var(--green-600); }
   .modal-icon { font-size: 40px; margin-bottom: 16px; }
   .modal-title { font-size: 22px; font-weight: 700; color: var(--neutral-900); margin-bottom: 10px; }
   .modal-desc { font-size: 15px; color: var(--neutral-700); line-height: 1.55; margin-bottom: 28px; }
@@ -530,12 +509,12 @@
   /* welcome screen left panel is now a carousel — no background-image needed here */
   /* screen-email-confirm — full-page centered layout, no left panel */
   /* screen-intro is now full-width — no split wizard left panel */
-  #screen-q1 .wizard-left { background-image: url('images/collar-product.jpg'); background-position:center 30%; }
-  #screen-q2 .wizard-left { background-image: url('images/field-cattle.jpg'); }
-  #screen-q3 .wizard-left { background-image: url('images/hero-landscape.jpg'); }
-  #screen-q4 .wizard-left { background-image: url('images/hero-landscape.jpg'); }
-  #screen-q5 .wizard-left { background-image: url('images/setup-collar.jpg'); }
-  #screen-q6 .wizard-left { background-image: url('images/leather-strap.jpg'); background-position: center center; }
+  #screen-q1 .wizard-left { background-image: url('collar-product.jpg'); background-position:center 30%; }
+  #screen-q2 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
+  #screen-q3 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
+  #screen-q4 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
+  #screen-q5 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/setup-collar.jpg'); }
+  #screen-q6 .wizard-left { background-image: url('leather-strap.jpg'); background-position: center center; }
 
   /* ─── WIZARD LEFT — sticky, no height growth ─────────────── */
   .wizard-left { position: sticky; top: 80px; height: calc(100vh - 80px); overflow: hidden; }
@@ -642,8 +621,6 @@
   .field-error-msg.visible { display:block; }
 
   /* ─── SETUP SUMMARY CART ──────────────────────────────────── */
-  .summary-step-bar { background:white; border-bottom:1px solid var(--neutral-200); padding:28px 48px 0; }
-  .summary-step-bar .step-indicator { max-width:1080px; margin:0 auto 28px; }
   .summary-cart-page { display:grid; grid-template-columns:1fr 360px; gap:32px; max-width:1080px; margin:0 auto; padding:48px; align-items:start; }
   .summary-cart-col { display:flex; flex-direction:column; gap:24px; }
   .summary-cart-header { }
@@ -708,22 +685,6 @@
   .si-step.done .si-label { color:var(--green-500); }
   .si-line { flex:1; height:2px; background:var(--neutral-200); margin-top:13px; min-width:16px; }
   .si-line.done { background:var(--green-500); }
-  /* Done steps (past) — solid green ✓, clickable back */
-  .si-step.done { cursor:pointer; }
-  .si-step.done:hover .si-circle { transform:scale(1.18); box-shadow:0 0 0 5px rgba(95,165,38,.22); }
-  .si-step.done:hover .si-label { color:var(--green-700); font-weight:600; }
-  /* Answered steps (ahead, already visited) — outline green ✓, clickable forward */
-  .si-step.answered { cursor:pointer; }
-  .si-step.answered .si-circle { background:white; border-color:var(--green-500); color:var(--green-500); font-size:0; }
-  .si-step.answered .si-circle::after { content:'✓'; font-size:12px; color:var(--green-500); }
-  .si-step.answered .si-label { color:var(--green-500); }
-  .si-step.answered:hover .si-circle { background:var(--green-25); transform:scale(1.18); box-shadow:0 0 0 5px rgba(95,165,38,.15); }
-  .si-step.answered:hover .si-label { color:var(--green-700); font-weight:600; }
-  /* Connector line — lighter green for answered-ahead segments */
-  .si-line.answered { background:var(--green-300); }
-  /* Active and future steps are not interactive */
-  .si-step.active { cursor:default; }
-  .si-step:not(.done):not(.active):not(.answered) { cursor:default; opacity:0.55; }
 
   /* ─── Q1 REDESIGN ─────────────────────────────────────────── */
   /* Diagonal cut — white triangle overlay on right edge */
@@ -769,9 +730,11 @@
   .q1-bottom-links { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:12px; }
   .q1-bottom-links .quiz-skip-link { font-size:13px; }
   .q1-link-sep { color:var(--neutral-300); font-size:13px; }
+  .q1-right { padding:40px 56px; }
   @media (max-width:900px) {
     .q1-showcase-pair { grid-template-columns:1fr; }
     .q1-included-grid { grid-template-columns:1fr; }
+    .q1-right { padding:32px 24px; }
   }
 
   @media (max-width: 900px) {
@@ -784,7 +747,6 @@
     .product-image { width: 100%; min-width: unset; }
     .payment-methods { grid-template-columns: repeat(2, 1fr); }
     .form-row { grid-template-columns: 1fr; }
-    .summary-step-bar { padding: 20px 24px 0; }
     .summary-cart-page { grid-template-columns: 1fr; padding: 24px 16px; }
     .summary-totals-card { position: static; }
   }
@@ -796,26 +758,19 @@
   .q1-app-float-tag { background:rgba(95,165,38,.94); backdrop-filter:blur(6px); padding:6px 10px; font-size:11px; font-weight:700; color:white; text-align:center; letter-spacing:.2px; }
 
   /* ─── SUGGESTED ADDONS (setup summary left col) ───────────── */
-  /* ─── Upsell cards on summary page ───────────────────────── */
-  .upsell-section-title { font-size:15px; font-weight:700; color:var(--neutral-900); margin-bottom:4px; }
-  .upsell-section-sub { font-size:13px; color:var(--neutral-500); margin-bottom:14px; }
-  .upsell-cards { display:flex; flex-direction:column; gap:10px; }
-  .upsell-card { background:white; border:1.5px solid var(--neutral-200); border-radius:var(--radius-lg); padding:16px 18px; display:flex; gap:14px; align-items:flex-start; transition:border-color .2s,background .2s; }
-  .upsell-card:hover { border-color:var(--green-300); background:var(--green-25); }
-  .upsell-card-icon { font-size:24px; width:44px; height:44px; background:var(--neutral-100); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .upsell-card-body { flex:1; min-width:0; }
-  .upsell-card-top { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
-  .upsell-card-name { font-size:14px; font-weight:600; color:var(--neutral-900); }
-  .upsell-info-btn { width:17px; height:17px; border-radius:50%; border:1.5px solid var(--neutral-300); background:none; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:var(--neutral-500); font-size:10px; font-weight:700; font-style:italic; transition:all .15s; font-family:Georgia,serif; flex-shrink:0; line-height:1; padding:0; }
-  .upsell-info-btn:hover { border-color:var(--neutral-600); color:var(--neutral-900); }
-  .upsell-card-desc { font-size:12px; color:var(--neutral-500); line-height:1.45; }
-  .upsell-card-extra { font-size:12px; color:var(--neutral-700); line-height:1.5; background:var(--neutral-50); border-radius:var(--radius-sm); padding:8px 10px; margin-top:8px; border-left:2px solid var(--neutral-300); display:none; }
-  .upsell-card-extra.open { display:block; }
-  .upsell-card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:12px; }
-  .upsell-card-price { font-size:15px; font-weight:700; color:var(--neutral-900); }
-  .upsell-add-btn { background:var(--green-500); color:white; border:1.5px solid transparent; border-radius:var(--radius-sm); padding:7px 14px; font-size:13px; font-weight:600; cursor:pointer; transition:background .15s; font-family:inherit; white-space:nowrap; }
+  .upsell-section { background:white; border-radius:var(--radius-xl); border:1px solid var(--neutral-200); overflow:hidden; box-shadow:var(--shadow-sm); }
+  .upsell-section-header { padding:16px 20px 12px; border-bottom:1px solid var(--neutral-100); }
+  .upsell-section-title { font-size:14px; font-weight:700; color:var(--neutral-900); }
+  .upsell-section-sub { font-size:12px; color:var(--neutral-500); margin-top:2px; }
+  .upsell-item { display:flex; align-items:center; gap:14px; padding:14px 20px; border-top:1px solid var(--neutral-100); }
+  .upsell-item:first-child { border-top:none; }
+  .upsell-item-icon { font-size:20px; flex-shrink:0; width:36px; text-align:center; }
+  .upsell-item-info { flex:1; }
+  .upsell-item-name { font-size:13px; font-weight:600; color:var(--neutral-900); }
+  .upsell-item-desc { font-size:12px; color:var(--neutral-500); margin-top:1px; line-height:1.35; }
+  .upsell-item-price { font-size:13px; font-weight:700; color:var(--neutral-900); flex-shrink:0; margin-right:10px; }
+  .upsell-add-btn { height:32px; padding:0 12px; background:var(--green-500); color:white; border:none; border-radius:var(--radius-sm); font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .15s; white-space:nowrap; flex-shrink:0; }
   .upsell-add-btn:hover { background:#4C841E; }
-  .upsell-add-btn.added { background:white; color:var(--green-700); border-color:var(--green-400); cursor:default; }
 
   /* ─── SUMMARY NAV LINKS (below proceed btn) ───────────────── */
   .summary-alt-actions { display:flex; flex-direction:column; gap:6px; margin-top:12px; padding-top:12px; border-top:1px solid var(--neutral-200); }
@@ -836,8 +791,8 @@
     <!-- Full site nav (purchase page) -->
     <div id="fullNav">
       <a class="nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
-        <img src="icons/nofence-logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
-        <img src="icons/nofence-logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </a>
       <ul class="site-nav-links" id="navLinks">
         <li><a href="#">Products</a></li><li><a href="#">Capabilities</a></li><li><a href="#">Knowledge hub</a></li><li><a href="#">Nofence community</a></li>
@@ -861,8 +816,8 @@
         <span id="navBackLabel">nofence.com</span>
       </button>
       <button class="checkout-nav-logo" onclick="showLeaveCheckoutModal()" style="gap:8px;background:none;border:none;cursor:pointer;padding:0">
-        <img src="icons/nofence-logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
-        <img src="icons/nofence-logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
+        <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </button>
       <div style="min-width:140px;display:flex;justify-content:flex-end">
         <button class="nav-skip-quiz-btn" id="navSkipQuizBtn" onclick="showQuitModal()" style="display:none">Skip quiz <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -929,106 +884,6 @@
   </div>
 </div>
 
-<!-- ═══════════════ MODAL: GRANTS / COST ESTIMATE ════════════ -->
-<div class="modal-overlay" id="grantsModal" onclick="if(event.target===this)closeGrantsModal()">
-  <div class="modal-card grants-modal-card">
-
-    <button class="grants-modal-close" onclick="closeGrantsModal()" aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-    </button>
-
-    <!-- FORM VIEW -->
-    <div id="grants-modal-form">
-      <div class="modal-title" style="font-size:20px;margin-bottom:4px">Generate a cost estimation document</div>
-      <p style="font-size:13px;color:var(--neutral-500);margin-bottom:20px">We'll send a cost estimation to your email — ready to attach to a grant application or share with your accountant.</p>
-
-      <!-- Tabs -->
-      <div class="gm-tabs">
-        <button class="gm-tab active" id="gm-tab-grants" onclick="setGrantsTab('grants')">💶 Applying for grants</button>
-        <button class="gm-tab" id="gm-tab-simple" onclick="setGrantsTab('simple')">📄 Simple cost estimate</button>
-      </div>
-
-      <!-- GRANTS TAB -->
-      <div id="gm-panel-grants">
-        <p style="font-size:12px;color:var(--neutral-500);margin-bottom:16px;line-height:1.5">Includes company details and registration number — required for most grant applications.</p>
-        <div class="form-row gm-row">
-          <div class="form-group"><label>First name <span class="req">*</span></label><input class="form-input" id="gm-g-first" type="text" placeholder="Anna"></div>
-          <div class="form-group"><label>Last name <span class="req">*</span></label><input class="form-input" id="gm-g-last" type="text" placeholder="Hansen"></div>
-        </div>
-        <div class="form-row gm-row">
-          <div class="form-group"><label>Email address <span class="req">*</span></label><input class="form-input" id="gm-email" type="email" placeholder="anna@farm.no"></div>
-          <div class="form-group"><label>Phone number <span class="req">*</span></label><input class="form-input" id="gm-g-phone" type="tel" placeholder="+47 900 00 000"></div>
-        </div>
-        <div class="form-group gm-row">
-          <label>Company / farm name <span class="req">*</span></label>
-          <input class="form-input" id="gm-g-company" type="text" placeholder="Hansen Gård AS">
-        </div>
-        <div class="form-group gm-row">
-          <label>Company registration number <span style="font-weight:400;color:var(--neutral-400)">(optional)</span></label>
-          <input class="form-input" id="gm-g-regno" type="text" placeholder="e.g. 123 456 789">
-        </div>
-        <div class="form-group gm-row">
-          <label>Street address <span class="req">*</span></label>
-          <input class="form-input" id="gm-g-street" type="text" placeholder="Farmvegen 12">
-        </div>
-        <div class="form-row gm-row">
-          <div class="form-group"><label>Zip / postal code <span class="req">*</span></label><input class="form-input" id="gm-g-zip" type="text" placeholder="1234"></div>
-          <div class="form-group"><label>City <span class="req">*</span></label><input class="form-input" id="gm-g-city" type="text" placeholder="Oslo"></div>
-        </div>
-        <div class="form-group gm-row">
-          <label>Country <span class="req">*</span></label>
-          <select class="form-input" id="gm-g-country">
-            <option value="">Select country…</option>
-            <option>🇳🇴 Norway</option><option>🇬🇧 United Kingdom</option><option>🇮🇪 Ireland</option>
-            <option>🇦🇺 Australia</option><option>🇺🇸 United States</option><option>🇳🇿 New Zealand</option>
-            <option>🇸🇪 Sweden</option><option>🇩🇰 Denmark</option><option>🇫🇮 Finland</option>
-            <option>🇫🇷 France</option><option>🇩🇪 Germany</option><option>🇳🇱 Netherlands</option>
-            <option>🌍 Other</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- SIMPLE TAB -->
-      <div id="gm-panel-simple" style="display:none">
-        <p style="font-size:12px;color:var(--neutral-500);margin-bottom:16px;line-height:1.5">A straightforward cost breakdown — good for internal budgeting or sharing with your bank.</p>
-        <div class="form-row gm-row">
-          <div class="form-group"><label>First name <span class="req">*</span></label><input class="form-input" id="gm-s-first" type="text" placeholder="Anna"></div>
-          <div class="form-group"><label>Last name <span class="req">*</span></label><input class="form-input" id="gm-s-last" type="text" placeholder="Hansen"></div>
-        </div>
-        <div class="form-row gm-row">
-          <div class="form-group"><label>Email address <span class="req">*</span></label><input class="form-input" id="gm-s-email" type="email" placeholder="anna@farm.no"></div>
-          <div class="form-group"><label>Phone number</label><input class="form-input" id="gm-s-phone" type="tel" placeholder="+47 900 00 000"></div>
-        </div>
-        <div class="form-group gm-row">
-          <label>Country <span class="req">*</span></label>
-          <select class="form-input" id="gm-s-country">
-            <option value="">Select country…</option>
-            <option>🇳🇴 Norway</option><option>🇬🇧 United Kingdom</option><option>🇮🇪 Ireland</option>
-            <option>🇦🇺 Australia</option><option>🇺🇸 United States</option><option>🇳🇿 New Zealand</option>
-            <option>🇸🇪 Sweden</option><option>🇩🇰 Denmark</option><option>🇫🇮 Finland</option>
-            <option>🇫🇷 France</option><option>🇩🇪 Germany</option><option>🇳🇱 Netherlands</option>
-            <option>🌍 Other</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="gm-error" style="display:none;color:#D92D20;font-size:13px;margin-bottom:10px">Please fill in all required fields (*) to continue.</div>
-      <button onclick="submitGrantsModal()" class="gm-submit-btn">Generate cost estimate</button>
-      <p style="font-size:12px;color:var(--neutral-400);text-align:center;margin-top:10px">We'll only use your details to send the document. No spam, ever.</p>
-    </div>
-
-    <!-- SUCCESS VIEW -->
-    <div id="grants-modal-success" style="display:none;text-align:center;padding:20px 0">
-      <div style="width:56px;height:56px;background:var(--green-25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px">✅</div>
-      <div style="font-size:20px;font-weight:700;color:var(--neutral-900);margin-bottom:8px">Document on its way!</div>
-      <p style="font-size:14px;color:var(--neutral-500);line-height:1.6;margin-bottom:8px">Your cost estimation has been sent to <strong id="gm-email-display" style="color:var(--neutral-900)"></strong>.</p>
-      <p style="font-size:13px;color:var(--neutral-500);line-height:1.55;margin-bottom:28px">It's ready to attach to a grant application or share with your bank or accountant.</p>
-      <button onclick="closeGrantsModal()" style="height:44px;padding:0 28px;background:var(--green-500);color:white;border:none;border-radius:var(--radius-md);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Done</button>
-    </div>
-
-  </div>
-</div>
-
 <!-- ═══════════════ SCREEN: WELCOME (Email + Location) ═══════ -->
 <div id="screen-welcome" class="screen active">
   <div class="wizard-layout">
@@ -1036,35 +891,35 @@
       <!-- Carousel track — 5 slides -->
       <div class="carousel-track" id="carouselTrack">
 
-        <div class="carousel-slide" style="background-image:url('images/hero-landscape.jpg')">
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg')">
           <div class="left-quote" style="margin-top:auto">
             <p>"Virtual fencing has completely changed how we manage our land — no wires, no stress for the animals."</p>
             <cite>— Lars H., Sheep farmer, Norway</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('images/sheep-aerial.jpg');background-position:center 30%">
+        <div class="carousel-slide" style="background-image:url('sheep-aerial.jpg');background-position:center 30%">
           <div class="left-quote" style="margin-top:auto">
             <p>"The cattle adapted within days. Now they know their boundaries better than we ever could with wire."</p>
             <cite>— Peter H., Beef farmer, Scotland</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('images/collars-group.webp')">
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/collars-group.webp')">
           <div class="left-quote" style="margin-top:auto">
             <p>"We set up our first virtual paddock in under an hour. The Nofence app is incredibly intuitive."</p>
             <cite>— Sarah B., Beef farmer, Ireland</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('images/setup-collar.jpg')">
+        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/setup-collar.jpg')">
           <div class="left-quote" style="margin-top:auto">
             <p>"We saved thousands on fencing costs and gained real flexibility in how we rotate our pastures."</p>
             <cite>— Aoife M., Sheep farmer, Ireland</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('images/farmer-bull.jpg');background-position:center center">
+        <div class="carousel-slide" style="background-image:url('farmer-bull.jpg');background-position:center center">
           <div class="left-quote" style="margin-top:auto">
             <p>"The support team helped us optimise for our hilly terrain. Outstanding service from day one."</p>
             <cite>— Magnus O., Goat farmer, Norway</cite>
@@ -1260,7 +1115,7 @@
 
   <!-- ── HERO ──────────────────────────────────────────────────── -->
   <div class="intro-hero">
-    <img src="images/solar-bg.jpg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:blur(5px);transform:scale(1.08);opacity:0.38;pointer-events:none;z-index:0;display:block;">
+    <img src="solar-bg.jpg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:blur(5px);transform:scale(1.08);opacity:0.38;pointer-events:none;z-index:0;display:block;">
     <div class="intro-hero-overlay"></div>
     <div class="intro-hero-badge">Built for working farmers</div>
     <h1 class="intro-hero-h1">The right Nofence setup,<br><em>built around your farm</em></h1>
@@ -1825,9 +1680,9 @@
         <div class="si-line done"></div>
         <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
         <div class="si-line done"></div>
-        <div class="si-step active"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
-        <div class="si-line"></div>
-        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
+        <div class="si-step done"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line done"></div>
+        <div class="si-step active"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1859,8 +1714,8 @@
             <div class="rec-card">
               <div class="rec-card-icon">🟫</div>
               <div class="rec-card-body">
-                <div class="rec-card-title">Leather Neck Straps — 55 cm (21.5″)</div>
-                <div class="rec-card-desc">Natural chrome-free leather. Replaces the nylon strap included with each collar. Compatible with C2.5 and S1. <strong>$18 each.</strong></div>
+                <div class="rec-card-title">Leather Neck Straps</div>
+                <div class="rec-card-desc">Natural leather, compatible with all Nofence collar models. Replaces the nylon strap included with the collar. <strong>$18 each.</strong></div>
                 <!-- Quantity row — stepper + direct input + price -->
                 <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
                   <div class="stepper-sm">
@@ -1899,20 +1754,6 @@
 
 <!-- ═══════════════ SCREEN: SETUP SUMMARY ════════════════════ -->
 <div id="screen-setup-summary" class="screen" style="background:var(--neutral-100)">
-  <!-- Step indicator bar — spans full width above the cart grid -->
-  <div class="summary-step-bar">
-    <div class="step-indicator">
-      <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
-      <div class="si-line done"></div>
-      <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
-      <div class="si-line done"></div>
-      <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
-      <div class="si-line done"></div>
-      <div class="si-step done"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
-      <div class="si-line done"></div>
-      <div class="si-step active"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
-    </div>
-  </div>
   <div class="summary-cart-page">
     <!-- Left: Cart items -->
     <div class="summary-cart-col">
@@ -1995,12 +1836,17 @@
           <span>🛡️ 5-yr warranty</span>
         </div>
 
+        <!-- Retake quiz link — placed below checkout actions -->
+        <div style="margin-top:10px;text-align:center">
+          <button style="font-size:12px;color:var(--neutral-400);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:4px 8px;transition:color .15s" onmouseover="this.style.color='var(--neutral-700)'" onmouseout="this.style.color='var(--neutral-400)'" onclick="goTo('screen-q1')">↩ Retake quiz</button>
+        </div>
+
         <!-- Grants box -->
         <div style="margin-top:16px;border-top:1px solid var(--neutral-200);padding-top:16px">
           <div class="grants-box">
             <div class="grants-title">💶 Grants may be available</div>
             <div class="grants-desc">Many farmers qualify for agri-tech grants covering up to 40% of setup costs.</div>
-            <button class="grants-btn" onclick="showGrantsModal()">Get grants guide ↓</button>
+            <button class="grants-btn" onclick="goTo('screen-grants')">Download guide (PDF) ↓</button>
           </div>
         </div>
       </div>
@@ -2042,9 +1888,9 @@
         <!-- LEFT: image gallery -->
         <div class="product-gallery">
           <div class="gallery-main" id="galleryMain">
-            <img id="gallery-img-0" src="images/collar-c25.jpg" alt="Nofence Cattle Collar C2.5">
-            <img id="gallery-img-1" src="images/cow-portrait.jpg" alt="Collar worn by cow in field" class="g-hidden">
-            <img id="gallery-img-2" src="images/field-cattle.jpg" alt="Herd of cattle with collars" class="g-hidden">
+            <img id="gallery-img-0" src="collar-c25.jpg" alt="Nofence Cattle Collar C2.5">
+            <img id="gallery-img-1" src="cow-portrait.jpg" alt="Collar worn by cow in field" class="g-hidden">
+            <img id="gallery-img-2" src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="Herd of cattle with collars" class="g-hidden">
           </div>
           <!-- Dot navigation -->
           <div class="gallery-dots">
@@ -2116,7 +1962,7 @@
           <!-- Cattle panel -->
           <div class="mixed-panel">
             <div class="mixed-panel-img">
-              <img src="images/collars-group.webp" alt="Cattle Collar C2.5">
+              <img src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="Cattle Collar C2.5">
             </div>
             <div class="mixed-panel-body">
               <div class="mixed-panel-name">Cattle Collar C2.5</div>
@@ -2132,7 +1978,7 @@
           <!-- Sheep panel -->
           <div class="mixed-panel">
             <div class="mixed-panel-img">
-              <img src="images/sheep-lambs.jpg" alt="Sheep & Goat Collar S1">
+              <img src="sheep-lambs.jpg" alt="Sheep & Goat Collar S1">
             </div>
             <div class="mixed-panel-body">
               <div class="mixed-panel-name">Sheep &amp; Goat Collar S1</div>
@@ -2259,7 +2105,7 @@
         <div class="accessory-card">
           <div class="accessory-img">🟫</div>
           <div class="accessory-info">
-            <div class="acc-name">Leather Neck Strap — 55 cm (21.5″)</div>
+            <div class="acc-name">Leather Neck Strap</div>
             <div class="acc-why">Softer natural leather alternative to the standard nylon strap. Ideal for animals with sensitive skin.</div>
           </div>
           <div class="accessory-price-add">
@@ -2286,7 +2132,7 @@
       <div class="grants-box">
         <div class="grants-title">💶 Grants may be available</div>
         <div class="grants-desc">Check if you qualify for agricultural technology funding in your region.</div>
-        <button class="grants-btn" onclick="showGrantsModal()">Get grants guide ↓</button>
+        <button class="grants-btn" onclick="goTo('screen-grants')">Download grants guide ↓</button>
       </div>
       <hr class="divider">
       <div class="totals-section">
@@ -2659,8 +2505,7 @@
     leather: null, leatherQty: 5,
     collarType: 'cattle', purchaseQty: 5, accessories: {}, currentTier: 0,
     summaryItems: [], cartAdded: false,
-    grantsReturnScreen: 'screen-purchase',
-    maxStepReached: 0
+    grantsReturnScreen: 'screen-purchase'
   };
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
@@ -2722,66 +2567,6 @@
     'screen-grants','screen-checkout','screen-success'
   ]);
 
-  // Step indicator mappings
-  const STEP_SCREENS = { 1:'screen-q1', 2:'screen-q2', 3:'screen-q3', 4:'screen-power', 5:'screen-setup-summary' };
-  const STEP_LABELS  = { 1:'Collars', 2:'Herd', 3:'Land', 4:'Setup', 5:'Summary' };
-  const SCREEN_STEP  = {
-    'screen-q1':1, 'screen-q2':2,
-    'screen-q3':3, 'screen-q4':3,
-    'screen-power':4, 'screen-q5':4, 'screen-q6':4,
-    'screen-setup-summary':5
-  };
-
-  function setupStepNav() {
-    const screen = document.querySelector('.screen.active');
-    if (!screen) return;
-    const indicator = screen.querySelector('.step-indicator');
-    if (!indicator) return;
-
-    const currentStep = SCREEN_STEP[screen.id] || 0;
-    if (!currentStep) return;
-
-    // Track the furthest step the user has ever reached
-    if (currentStep > state.maxStepReached) state.maxStepReached = currentStep;
-    const maxStep = state.maxStepReached;
-
-    // ── Update step circles ──────────────────────────────────────
-    const stepEls = indicator.querySelectorAll('.si-step');
-    stepEls.forEach((el, idx) => {
-      const n = idx + 1;
-      el.classList.remove('done', 'active', 'answered');
-      el.onclick = null;
-      el.title = '';
-
-      if (n < currentStep) {
-        // Past step — solid green ✓, clickable back
-        el.classList.add('done');
-        el.onclick = () => goTo(STEP_SCREENS[n]);
-        el.title = `Back to ${STEP_LABELS[n]}`;
-      } else if (n === currentStep) {
-        // Current step — pulsing, not interactive
-        el.classList.add('active');
-      } else if (n <= maxStep) {
-        // Already answered but ahead — outline ✓, clickable forward
-        el.classList.add('answered');
-        el.onclick = () => goTo(STEP_SCREENS[n]);
-        el.title = `Continue to ${STEP_LABELS[n]}`;
-      }
-      // else: not yet reached — grey, no class
-    });
-
-    // ── Update connector lines ───────────────────────────────────
-    const lineEls = indicator.querySelectorAll('.si-line');
-    lineEls.forEach((line, idx) => {
-      const before = idx + 1; // step to the left of this line
-      const after  = idx + 2; // step to the right
-      line.classList.remove('done', 'answered');
-      if (before < currentStep)              line.classList.add('done');     // solid green
-      else if (after <= maxStep)             line.classList.add('answered'); // lighter green
-      // else: grey (not yet reached)
-    });
-  }
-
   function goTo(id, addToHistory = true) {
     const current = document.querySelector('.screen.active')?.id;
     if (addToHistory && current && current !== id) navStack.push(current);
@@ -2790,7 +2575,6 @@
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
     updateNav(id);
-    setupStepNav();
 
     if (id === 'screen-purchase') {
       setTimeout(() => document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view')), 80);
@@ -2881,50 +2665,6 @@
   function showLeaveCheckoutModal() { document.getElementById('leaveCheckoutModal').classList.add('open'); }
   function closeLeaveCheckoutModal() { document.getElementById('leaveCheckoutModal').classList.remove('open'); }
 
-  // ─── Grants modal ─────────────────────────────────────────────
-  function showGrantsModal() {
-    // Pre-fill email from quiz if available
-    const wizEmail = document.getElementById('email-input');
-    const gmEmail = document.getElementById('gm-email');
-    if (wizEmail && gmEmail && wizEmail.value) gmEmail.value = wizEmail.value;
-    // Reset to form view, grants tab active
-    document.getElementById('grants-modal-form').style.display = '';
-    document.getElementById('grants-modal-success').style.display = 'none';
-    document.getElementById('gm-error').style.display = 'none';
-    setGrantsTab('grants');
-    document.getElementById('grantsModal').classList.add('open');
-  }
-  function closeGrantsModal() {
-    document.getElementById('grantsModal').classList.remove('open');
-  }
-  function setGrantsTab(tab) {
-    const isGrants = tab === 'grants';
-    document.getElementById('gm-tab-grants').classList.toggle('active', isGrants);
-    document.getElementById('gm-tab-simple').classList.toggle('active', !isGrants);
-    document.getElementById('gm-panel-grants').style.display = isGrants ? '' : 'none';
-    document.getElementById('gm-panel-simple').style.display = isGrants ? 'none' : '';
-    document.getElementById('gm-error').style.display = 'none';
-  }
-  function submitGrantsModal() {
-    const err = document.getElementById('gm-error');
-    const grantsActive = document.getElementById('gm-tab-grants').classList.contains('active');
-    const emailId = grantsActive ? 'gm-email' : 'gm-s-email';
-    const firstId = grantsActive ? 'gm-g-first' : 'gm-s-first';
-    const email = document.getElementById(emailId).value.trim();
-    const first = document.getElementById(firstId).value.trim();
-    if (!email || !first) {
-      err.style.display = 'block';
-      document.getElementById(email ? firstId : emailId).focus();
-      return;
-    }
-    err.style.display = 'none';
-    document.getElementById('gm-email-display').textContent = email;
-    document.getElementById('grants-modal-form').style.display = 'none';
-    document.getElementById('grants-modal-success').style.display = '';
-    // Auto-close after 4 seconds
-    setTimeout(closeGrantsModal, 4000);
-  }
-
   // ─── Grants form ─────────────────────────────────────────────
   function submitGrantsForm() {
     const email = document.getElementById('grants-email').value.trim();
@@ -2938,7 +2678,7 @@
   // ─── Welcome: collar type selector ───────────────────────────
   const COLLAR_DATA = {
     cattle: {
-      img:   'images/collars-group.webp',
+      img:   'https://identity.nofence.com/prototypes/images/collars-group.webp',
       quote: '"With the C2.5 collar, managing 60 head across three fields is easier than it\'s ever been."',
       cite:  '— James R., Beef farmer, Ireland',
       chipEmoji: '🐄',
@@ -2950,7 +2690,7 @@
       tierPrices: [349, 299, 249],
     },
     sheep: {
-      img:   'images/sheep-lambs.jpg',
+      img:   'sheep-lambs.jpg',
       quote: '"The S1 is so lightweight — the sheep barely notice it\'s there, and we moved them to a new paddock in minutes."',
       cite:  '— Lars H., Sheep farmer, Norway',
       chipEmoji: '🐑',
@@ -2962,7 +2702,7 @@
       tierPrices: [299, 249, 199],
     },
     both: {
-      img:   'images/hero-landscape.jpg',
+      img:   'https://identity.nofence.com/prototypes/images/hero-landscape.jpg',
       quote: '"We run both cattle and sheep on the same land — Nofence works perfectly for the whole mixed operation."',
       cite:  '— Anna M., Mixed farm, Ireland',
       chipEmoji: '🐄🐑',
@@ -3265,83 +3005,40 @@
     buildSuggestedAddons();
   }
 
-  // Full definitions for each optional accessory
-  const UPSELL_DEFS = {
-    chains:    { id:'chains',    icon:'⛓️', name:'Extra-long Chain Pairs (28″)', unitPrice:12,  defaultQty:5,  min:1, removable:true,
-                 price:'$12 / pair',
-                 desc:'For bulls and large breeds — replaces the standard 20″ chains included with each collar.',
-                 info:'Each pair is 70 cm (28 inches). Compatible with Cattle C2.5 only. Order one pair per large-breed animal.' },
-    batteries: { id:'batteries', icon:'🔋', name:'Spare Collar Batteries',       unitPrice:49,  defaultQty:2,  min:1, removable:true,
-                 price:'$49 each',
-                 desc:'Keep collars running during low-sun periods by swapping in a fresh battery.',
-                 info:'One spare battery per collar is recommended for heavily shaded land or winter use. Batteries take ~14 hours to fully charge.' },
-    chargers:  { id:'chargers',  icon:'🔌', name:'Battery Charger',               unitPrice:89,  defaultQty:1,  min:1, removable:true,
-                 price:'$89 each',
-                 desc:'Required to recharge spare batteries. One charger handles up to 4 batteries at a time.',
-                 info:'Without a charger, spare batteries cannot be recharged. If you order spare batteries, you need at least one charger.' },
-    beacons:   { id:'beacons',   icon:'📡', name:'Shelter Beacon',                unitPrice:149, defaultQty:1,  min:1, removable:true,
-                 price:'$149 each',
-                 desc:'Tracks animals indoors where GPS signal is unavailable — barns, sheds, stables.',
-                 info:'Place one beacon per shelter or enclosed structure. The beacon communicates with collars via Bluetooth and reports location to the app.' },
-    straps:    { id:'straps',    icon:'🟫', name:'Leather Neck Straps',           unitPrice:18,  defaultQty:5,  min:1, removable:true,
-                 price:'$18 each',
-                 desc:'Soft natural leather strap, 55 cm (21.5″) — a gentler alternative to the standard nylon strap for animals with sensitive skin.',
-                 info:'Compatible with all Nofence collar models (C2.5 and S1). Replaces the nylon strap included with each collar. The leather is chrome-free and weather-resistant. Order one per affected animal.' },
-  };
-
   function buildSuggestedAddons() {
     const section = document.getElementById('summary-upsell-section');
     if (!section) return;
     const itemIds = (state.summaryItems || []).map(i => i.id);
+    // Potential upsell items not in the cart
     const suggestions = [];
-    if (!itemIds.includes('chains') && state.animal === 'cattle') suggestions.push(UPSELL_DEFS.chains);
-    if (!itemIds.includes('batteries'))  suggestions.push(UPSELL_DEFS.batteries);
-    if (!itemIds.includes('chargers'))   suggestions.push(UPSELL_DEFS.chargers);
-    if (!itemIds.includes('beacons'))    suggestions.push(UPSELL_DEFS.beacons);
-    if (!itemIds.includes('straps'))     suggestions.push(UPSELL_DEFS.straps);
+    if (!itemIds.includes('chains') && state.animal === 'cattle')
+      suggestions.push({ icon:'⛓️', name:'Extra-long Chain Pairs', price:'$12 / pair', desc:'For bulls and large breeds — replaces the standard 20″ chains.' });
+    if (!itemIds.includes('batteries'))
+      suggestions.push({ icon:'🔋', name:'Spare Collar Batteries', price:'$49 each', desc:'Keep collars running during low-sun periods by rotating batteries.' });
+    if (!itemIds.includes('chargers'))
+      suggestions.push({ icon:'🔌', name:'Battery Charger', price:'$89', desc:'Required to recharge spare batteries (~14 hrs per charge).' });
+    if (!itemIds.includes('beacons'))
+      suggestions.push({ icon:'📶', name:'Shelter Beacon', price:'$149 each', desc:'Tracks animals indoors where GPS is unavailable.' });
+    if (!itemIds.includes('straps'))
+      suggestions.push({ icon:'🟫', name:'Leather Neck Straps', price:'$18 each', desc:'Softer alternative for animals with sensitive skin.' });
     if (suggestions.length === 0) { section.innerHTML = ''; return; }
     section.innerHTML = `
-      <div class="upsell-section-title">Other items you may need</div>
-      <div class="upsell-section-sub">Not included in your recommendation — add any that apply to your setup.</div>
-      <div class="upsell-cards">
+      <div class="upsell-section">
+        <div class="upsell-section-header">
+          <div class="upsell-section-title">Other items you may need</div>
+          <div class="upsell-section-sub">Browse the full range on the product page, or add directly here.</div>
+        </div>
         ${suggestions.map(s => `
-          <div class="upsell-card" id="upsell-card-${s.id}">
-            <div class="upsell-card-icon">${s.icon}</div>
-            <div class="upsell-card-body">
-              <div class="upsell-card-top">
-                <div class="upsell-card-name">${s.name}</div>
-                <button class="upsell-info-btn" onclick="toggleUpsellInfo('${s.id}')" title="More info">i</button>
-              </div>
-              <div class="upsell-card-desc">${s.desc}</div>
-              <div class="upsell-card-extra" id="upsell-extra-${s.id}">${s.info}</div>
-              <div class="upsell-card-footer">
-                <div class="upsell-card-price">${s.price}</div>
-                <button class="upsell-add-btn" id="upsell-btn-${s.id}" onclick="addUpsellToCart('${s.id}')">+ Add to cart</button>
-              </div>
+          <div class="upsell-item">
+            <div class="upsell-item-icon">${s.icon}</div>
+            <div class="upsell-item-info">
+              <div class="upsell-item-name">${s.name}</div>
+              <div class="upsell-item-desc">${s.desc}</div>
             </div>
+            <div class="upsell-item-price">${s.price}</div>
+            <button class="upsell-add-btn" onclick="skipToPurchase()">View →</button>
           </div>`).join('')}
       </div>`;
-  }
-
-  function toggleUpsellInfo(id) {
-    const el = document.getElementById(`upsell-extra-${id}`);
-    if (el) el.classList.toggle('open');
-  }
-
-  function addUpsellToCart(id) {
-    const def = UPSELL_DEFS[id];
-    if (!def) return;
-    // Show added state on button briefly
-    const btn = document.getElementById(`upsell-btn-${id}`);
-    if (btn) { btn.textContent = '✓ Added'; btn.classList.add('added'); btn.disabled = true; }
-    // Add to cart after short delay so user sees feedback, then rebuild
-    setTimeout(() => {
-      if (!state.summaryItems.find(i => i.id === id)) {
-        state.summaryItems.push({ id:def.id, icon:def.icon, name:def.name, unitPrice:def.unitPrice, qty:def.defaultQty, min:def.min, removable:def.removable });
-      }
-      renderSummaryCart();
-      buildSuggestedAddons();
-    }, 600);
   }
 
   function renderSummaryCart() {
@@ -3461,14 +3158,14 @@
   // Gallery images per collar type
   const GALLERY_IMGS = {
     cattle: [
-      'images/collar-c25.jpg',
-      'images/cow-portrait.jpg',
-      'images/field-cattle.jpg'
+      'collar-c25.jpg',
+      'cow-portrait.jpg',
+      'https://identity.nofence.com/prototypes/images/field-cattle.jpg'
     ],
     sheep: [
-      'images/collar-sg25.jpg',
-      'images/sheep-collar-closeup.jpg',
-      'images/sheep-herd-aerial.jpg'
+      'collar-sg25.jpg',
+      'sheep-collar-closeup.jpg',
+      'sheep-herd-aerial.jpg'
     ]
   };
 
