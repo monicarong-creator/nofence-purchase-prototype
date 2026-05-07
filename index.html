@@ -202,8 +202,10 @@
   .product-area { flex: 1; background: white; border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); }
   /* ─── PURCHASE PRODUCT HERO ─────────────────────────────── */
   .animal-tabs { background: var(--neutral-100); border-radius: 14px; padding: 5px; display: flex; gap: 3px; margin-bottom: 20px; align-self: flex-start; }
-  .animal-tab { padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--neutral-500); cursor: pointer; border: none; background: transparent; transition: all .2s; display: flex; align-items: center; gap: 9px; font-family: inherit; white-space: nowrap; }
-  .animal-tab .tab-icon { flex-shrink: 0; opacity: .45; transition: opacity .2s; }
+  .animal-tab { padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--neutral-600); cursor: pointer; border: none; background: transparent; transition: all .2s; display: flex; align-items: center; gap: 9px; font-family: inherit; white-space: nowrap; }
+  .animal-tab .tab-icon { flex-shrink: 0; opacity: .65; transition: opacity .2s; }
+  .animal-tab:hover { background: var(--neutral-200); color: var(--neutral-800); }
+  .animal-tab:hover .tab-icon { opacity: .85; }
   .animal-tab.active { background: white; color: var(--green-900); font-weight: 600; box-shadow: var(--shadow-sm); }
   .animal-tab.active .tab-icon { opacity: 1; }
   /* Hero two-col layout */
