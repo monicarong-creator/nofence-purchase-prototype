@@ -2572,7 +2572,7 @@
     }
     if (id === 'screen-welcome') {
       checkWelcomeReady();
-      requestAnimationFrame(() => requestAnimationFrame(startCarousel)); // restart carousel
+      setTimeout(startCarousel, 120); // restart carousel
     }
     if (id === 'screen-grants') {
       // Pre-fill email from wizard state if available
@@ -3283,17 +3283,15 @@
   let carouselIdx = 0;
   let carouselTimer = null;
   const CAROUSEL_COUNT = 5;
-  const CAROUSEL_INTERVAL = 7000; // ms between slides
+  const CAROUSEL_INTERVAL = 5500; // ms between slides
 
   function resetProgressBar() {
     const bar = document.getElementById('carouselProgressBar');
     if (!bar) return;
     bar.style.animation = 'none';
     bar.style.width = '0%';
-    void bar.getBoundingClientRect(); // force reflow
-    requestAnimationFrame(() => {
-      bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
-    });
+    void bar.offsetWidth; // force reflow
+    bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
   }
 
   function goToSlide(idx) {
@@ -3305,7 +3303,6 @@
   }
 
   function goToSlideManual(idx) {
-    // On manual dot click: reset the auto-advance timer so it doesn't fire immediately after
     if (carouselTimer) clearInterval(carouselTimer);
     goToSlide(idx);
     carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
@@ -3313,15 +3310,16 @@
 
   function startCarousel() {
     if (carouselTimer) clearInterval(carouselTimer);
-    resetProgressBar(); // kick off the bar immediately on page load
+    carouselIdx = 0;
+    goToSlide(0); // show slide 0 and kick off progress bar immediately
     carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
   }
 
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
   document.getElementById('welcome-continue').disabled = true;
-  // Start carousel after first paint (double rAF ensures browser has rendered)
-  requestAnimationFrame(() => requestAnimationFrame(startCarousel));
+  // Use setTimeout so the browser has painted before we start animating
+  setTimeout(startCarousel, 120);
 
   function checkWelcomeReady() {
     const hasAnimal = state.animal !== null;
