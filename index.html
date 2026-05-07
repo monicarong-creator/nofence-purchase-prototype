@@ -685,13 +685,22 @@
   .si-step.done .si-label { color:var(--green-500); }
   .si-line { flex:1; height:2px; background:var(--neutral-200); margin-top:13px; min-width:16px; }
   .si-line.done { background:var(--green-500); }
-  /* Done steps are clickable — hover ring + scale */
+  /* Done steps (past) — solid green ✓, clickable back */
   .si-step.done { cursor:pointer; }
   .si-step.done:hover .si-circle { transform:scale(1.18); box-shadow:0 0 0 5px rgba(95,165,38,.22); }
   .si-step.done:hover .si-label { color:var(--green-700); font-weight:600; }
+  /* Answered steps (ahead, already visited) — outline green ✓, clickable forward */
+  .si-step.answered { cursor:pointer; }
+  .si-step.answered .si-circle { background:white; border-color:var(--green-500); color:var(--green-500); font-size:0; }
+  .si-step.answered .si-circle::after { content:'✓'; font-size:12px; color:var(--green-500); }
+  .si-step.answered .si-label { color:var(--green-500); }
+  .si-step.answered:hover .si-circle { background:var(--green-25); transform:scale(1.18); box-shadow:0 0 0 5px rgba(95,165,38,.15); }
+  .si-step.answered:hover .si-label { color:var(--green-700); font-weight:600; }
+  /* Connector line — lighter green for answered-ahead segments */
+  .si-line.answered { background:var(--green-300); }
   /* Active and future steps are not interactive */
   .si-step.active { cursor:default; }
-  .si-step:not(.done):not(.active) { cursor:default; opacity:0.55; }
+  .si-step:not(.done):not(.active):not(.answered) { cursor:default; opacity:0.55; }
 
   /* ─── Q1 REDESIGN ─────────────────────────────────────────── */
   /* Diagonal cut — white triangle overlay on right edge */
@@ -2510,7 +2519,8 @@
     leather: null, leatherQty: 5,
     collarType: 'cattle', purchaseQty: 5, accessories: {}, currentTier: 0,
     summaryItems: [], cartAdded: false,
-    grantsReturnScreen: 'screen-purchase'
+    grantsReturnScreen: 'screen-purchase',
+    maxStepReached: 0
   };
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
@@ -2572,26 +2582,63 @@
     'screen-grants','screen-checkout','screen-success'
   ]);
 
-  // Step indicator → screen mapping (first screen that shows each step as active)
+  // Step indicator mappings
   const STEP_SCREENS = { 1:'screen-q1', 2:'screen-q2', 3:'screen-q3', 4:'screen-power', 5:'screen-q6' };
-  const STEP_LABELS  = { 1:'Collars',   2:'Herd',      3:'Land',      4:'Setup',        5:'Summary'    };
+  const STEP_LABELS  = { 1:'Collars', 2:'Herd', 3:'Land', 4:'Setup', 5:'Summary' };
+  const SCREEN_STEP  = {
+    'screen-q1':1, 'screen-q2':2,
+    'screen-q3':3, 'screen-q4':3,
+    'screen-power':4, 'screen-q5':4,
+    'screen-q6':5, 'screen-setup-summary':5
+  };
 
   function setupStepNav() {
     const screen = document.querySelector('.screen.active');
     if (!screen) return;
-    // Wire up done steps
-    screen.querySelectorAll('.si-step.done').forEach(step => {
-      const num = parseInt(step.querySelector('.si-circle')?.textContent || '0');
-      const target = STEP_SCREENS[num];
-      if (target) {
-        step.onclick = () => goTo(target);
-        step.title = `Back to ${STEP_LABELS[num]}`;
+    const indicator = screen.querySelector('.step-indicator');
+    if (!indicator) return;
+
+    const currentStep = SCREEN_STEP[screen.id] || 0;
+    if (!currentStep) return;
+
+    // Track the furthest step the user has ever reached
+    if (currentStep > state.maxStepReached) state.maxStepReached = currentStep;
+    const maxStep = state.maxStepReached;
+
+    // ── Update step circles ──────────────────────────────────────
+    const stepEls = indicator.querySelectorAll('.si-step');
+    stepEls.forEach((el, idx) => {
+      const n = idx + 1;
+      el.classList.remove('done', 'active', 'answered');
+      el.onclick = null;
+      el.title = '';
+
+      if (n < currentStep) {
+        // Past step — solid green ✓, clickable back
+        el.classList.add('done');
+        el.onclick = () => goTo(STEP_SCREENS[n]);
+        el.title = `Back to ${STEP_LABELS[n]}`;
+      } else if (n === currentStep) {
+        // Current step — pulsing, not interactive
+        el.classList.add('active');
+      } else if (n <= maxStep) {
+        // Already answered but ahead — outline ✓, clickable forward
+        el.classList.add('answered');
+        el.onclick = () => goTo(STEP_SCREENS[n]);
+        el.title = `Continue to ${STEP_LABELS[n]}`;
       }
+      // else: not yet reached — grey, no class
     });
-    // Clear click on active + future steps
-    screen.querySelectorAll('.si-step.active, .si-step:not(.done):not(.active)').forEach(step => {
-      step.onclick = null;
-      step.title = '';
+
+    // ── Update connector lines ───────────────────────────────────
+    const lineEls = indicator.querySelectorAll('.si-line');
+    lineEls.forEach((line, idx) => {
+      const before = idx + 1; // step to the left of this line
+      const after  = idx + 2; // step to the right
+      line.classList.remove('done', 'answered');
+      if (before < currentStep)              line.classList.add('done');     // solid green
+      else if (after <= maxStep)             line.classList.add('answered'); // lighter green
+      // else: grey (not yet reached)
     });
   }
 
