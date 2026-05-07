@@ -823,6 +823,11 @@
   .feb-body { flex:1; }
   .feb-title { font-size:15px; font-weight:700; color:var(--green-900,#1a4a06); margin-bottom:3px; }
   .feb-sub { font-size:13px; color:var(--green-700,#3a7a12); line-height:1.45; }
+  /* Optional extras — softer treatment below the banner */
+  .optional-extras-section { margin-top:20px; }
+  .optional-extras-label { font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--neutral-400); margin-bottom:10px; }
+  .upsell-card.optional { border-color:var(--neutral-150,#eee); background:var(--neutral-50); }
+  .upsell-card.optional:hover { border-color:var(--neutral-300); background:white; }
 
   /* ─── SUMMARY NAV LINKS (below proceed btn) ───────────────── */
   .summary-alt-actions { display:flex; flex-direction:column; gap:6px; margin-top:12px; padding-top:12px; border-top:1px solid var(--neutral-200); }
@@ -3300,44 +3305,65 @@
     const section = document.getElementById('summary-upsell-section');
     if (!section) return;
     const itemIds = (state.summaryItems || []).map(i => i.id);
-    const suggestions = [];
-    if (!itemIds.includes('chains') && state.animal === 'cattle') suggestions.push(UPSELL_DEFS.chains);
-    if (!itemIds.includes('batteries'))  suggestions.push(UPSELL_DEFS.batteries);
-    if (!itemIds.includes('chargers'))   suggestions.push(UPSELL_DEFS.chargers);
-    if (!itemIds.includes('beacons'))    suggestions.push(UPSELL_DEFS.beacons);
-    if (!itemIds.includes('straps'))     suggestions.push(UPSELL_DEFS.straps);
-    if (suggestions.length === 0) {
+
+    // Tier 1 — essentials: drive the "fully equipped" banner
+    const essentials = [];
+    if (!itemIds.includes('chains') && state.animal === 'cattle') essentials.push(UPSELL_DEFS.chains);
+    if (!itemIds.includes('batteries')) essentials.push(UPSELL_DEFS.batteries);
+    if (!itemIds.includes('chargers'))  essentials.push(UPSELL_DEFS.chargers);
+    if (!itemIds.includes('beacons'))   essentials.push(UPSELL_DEFS.beacons);
+
+    // Tier 2 — optional/niche: shown below regardless of banner state
+    const optionals = [];
+    if (!itemIds.includes('straps')) optionals.push(UPSELL_DEFS.straps);
+
+    const upsellCard = (s, isOptional = false) => `
+      <div class="upsell-card${isOptional ? ' optional' : ''}" id="upsell-card-${s.id}">
+        <div class="upsell-card-icon">${s.icon}</div>
+        <div class="upsell-card-body">
+          <div class="upsell-card-top">
+            <div class="upsell-card-name">${s.name}</div>
+            <button class="upsell-info-btn" onclick="toggleUpsellInfo('${s.id}')" title="More info">i</button>
+          </div>
+          <div class="upsell-card-desc">${s.desc}</div>
+          <div class="upsell-card-extra" id="upsell-extra-${s.id}">${s.info}</div>
+          <div class="upsell-card-footer">
+            <div class="upsell-card-price">${s.price}</div>
+            <button class="upsell-add-btn" id="upsell-btn-${s.id}" onclick="addUpsellToCart('${s.id}')">+ Add to cart</button>
+          </div>
+        </div>
+      </div>`;
+
+    const optionalSection = optionals.length > 0 ? `
+      <div class="optional-extras-section">
+        <div class="optional-extras-label">Optional extra</div>
+        <div class="upsell-cards">
+          ${optionals.map(s => upsellCard(s, true)).join('')}
+        </div>
+      </div>` : '';
+
+    if (essentials.length === 0) {
+      // All essentials covered → show banner, straps optional below
       section.innerHTML = `
         <div class="fully-equipped-banner">
           <div class="feb-icon">✓</div>
           <div class="feb-body">
-            <div class="feb-title">You're fully equipped</div>
-            <div class="feb-sub">Every accessory we offer is included in your setup — you're good to go whenever you're ready.</div>
+            <div class="feb-title">You're set to start</div>
+            <div class="feb-sub">All the essentials are in your setup — collars, power, and connectivity. You're good to go.</div>
           </div>
-        </div>`;
+        </div>
+        ${optionalSection}`;
       return;
     }
+
+    // Some essentials still missing → show them with normal heading
     section.innerHTML = `
       <div class="upsell-section-title">Other items you may need</div>
       <div class="upsell-section-sub">Not included in your recommendation — add any that apply to your setup.</div>
       <div class="upsell-cards">
-        ${suggestions.map(s => `
-          <div class="upsell-card" id="upsell-card-${s.id}">
-            <div class="upsell-card-icon">${s.icon}</div>
-            <div class="upsell-card-body">
-              <div class="upsell-card-top">
-                <div class="upsell-card-name">${s.name}</div>
-                <button class="upsell-info-btn" onclick="toggleUpsellInfo('${s.id}')" title="More info">i</button>
-              </div>
-              <div class="upsell-card-desc">${s.desc}</div>
-              <div class="upsell-card-extra" id="upsell-extra-${s.id}">${s.info}</div>
-              <div class="upsell-card-footer">
-                <div class="upsell-card-price">${s.price}</div>
-                <button class="upsell-add-btn" id="upsell-btn-${s.id}" onclick="addUpsellToCart('${s.id}')">+ Add to cart</button>
-              </div>
-            </div>
-          </div>`).join('')}
-      </div>`;
+        ${essentials.map(s => upsellCard(s)).join('')}
+      </div>
+      ${optionalSection}`;
   }
 
   function toggleUpsellInfo(id) {
