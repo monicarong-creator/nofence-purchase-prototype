@@ -813,11 +813,11 @@
       </div>
       <!-- Dot indicators -->
       <div class="carousel-dots" id="carouselDots">
-        <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
-        <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
-        <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
-        <button class="carousel-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
-        <button class="carousel-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
+        <button class="carousel-dot active" onclick="goToSlideManual(0)" aria-label="Slide 1"></button>
+        <button class="carousel-dot" onclick="goToSlideManual(1)" aria-label="Slide 2"></button>
+        <button class="carousel-dot" onclick="goToSlideManual(2)" aria-label="Slide 3"></button>
+        <button class="carousel-dot" onclick="goToSlideManual(3)" aria-label="Slide 4"></button>
+        <button class="carousel-dot" onclick="goToSlideManual(4)" aria-label="Slide 5"></button>
       </div>
     </aside>
     <main class="wizard-right" style="padding:40px 56px;overflow-y:auto">
@@ -2777,18 +2777,25 @@
   let carouselIdx = 0;
   let carouselTimer = null;
   const CAROUSEL_COUNT = 5;
+  const CAROUSEL_INTERVAL = 7000; // ms between slides
 
   function goToSlide(idx) {
     carouselIdx = ((idx % CAROUSEL_COUNT) + CAROUSEL_COUNT) % CAROUSEL_COUNT;
     const track = document.getElementById('carouselTrack');
     if (track) track.style.transform = `translateX(-${carouselIdx * 100}%)`;
     document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
-    // Reset auto-advance timer on manual navigation
-    if (carouselTimer) { clearInterval(carouselTimer); startCarousel(); }
+  }
+
+  function goToSlideManual(idx) {
+    // On manual dot click: reset the auto-advance timer so it doesn't fire immediately after
+    if (carouselTimer) clearInterval(carouselTimer);
+    goToSlide(idx);
+    carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
   }
 
   function startCarousel() {
-    carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), 5000);
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
   }
 
   // ─── Init ─────────────────────────────────────────────────────
