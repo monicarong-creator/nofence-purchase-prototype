@@ -1310,7 +1310,7 @@
                     <span class="rec-qty-label">How many pairs?</span>
                     <div class="stepper-sm">
                       <button class="dec" onclick="adjustChainQty(-1)">−</button>
-                      <input class="count" id="chain-qty-input" type="number" min="1" max="999" value="5">
+                      <input class="count" id="chain-qty-input" type="text" inputmode="numeric" min="1" max="999" value="5" oninput="numOnly(this)" onblur="if(!this.value||+this.value<1)this.value=1;adjustChainQty(0)">
                       <button class="inc" onclick="adjustChainQty(1)">+</button>
                     </div>
                     <span class="rec-price">$12 / pair</span>
@@ -1600,7 +1600,7 @@
                     <span class="rec-qty-label">How many buildings?</span>
                     <div class="stepper-sm">
                       <button class="dec" onclick="adjustShelterQty(-1)">−</button>
-                      <input class="count" id="shelter-qty-input" type="number" min="1" max="99" value="1">
+                      <input class="count" id="shelter-qty-input" type="text" inputmode="numeric" min="1" max="99" value="1" oninput="numOnly(this)" onblur="if(!this.value||+this.value<1)this.value=1;adjustShelterQty(0)">
                       <button class="inc" onclick="adjustShelterQty(1)">+</button>
                     </div>
                   </div>
@@ -2446,6 +2446,18 @@
 
 <!-- ═══════════════ JAVASCRIPT ════════════════════════════════ -->
 <script>
+  // ─── Numeric-only input guard ──────────────────────────────────
+  // Call on any quantity input to strip non-digit characters immediately.
+  function numOnly(el) {
+    const cursor = el.selectionStart;
+    const cleaned = el.value.replace(/[^0-9]/g, '');
+    if (el.value !== cleaned) {
+      el.value = cleaned;
+      // Restore caret position after stripping
+      try { el.setSelectionRange(cursor - 1, cursor - 1); } catch(e) {}
+    }
+  }
+
   const state = {
     animal: null, qty: 20, cattleSize: null, chainQty: 5,
     env: null, grazing: null,
@@ -2709,12 +2721,10 @@
   }
 
   function onQtyInput(val) {
+    const el = document.getElementById('qty-input');
+    if (el) numOnly(el);
+    val = el ? el.value : val.replace(/[^0-9]/g, '');
     const errEl = document.getElementById('qty-error');
-    // Check for non-numeric characters
-    if (/[^0-9]/.test(val.trim()) && val.trim() !== '') {
-      if (errEl) errEl.classList.add('visible');
-      return; // Don't update state with invalid input
-    }
     if (errEl) errEl.classList.remove('visible');
     const n = parseInt(val, 10);
     if (!isNaN(n) && n >= 5) { state.qty = Math.min(999, n); }
@@ -2848,11 +2858,10 @@
   }
 
   function onLeatherQtyInput(val) {
+    const el = document.getElementById('leather-qty-input');
+    if (el) numOnly(el);
+    val = el ? el.value : val.replace(/[^0-9]/g, '');
     const errEl = document.getElementById('leather-qty-error');
-    if (/[^0-9]/.test(val.trim()) && val.trim() !== '') {
-      if (errEl) errEl.classList.add('visible');
-      return;
-    }
     if (errEl) errEl.classList.remove('visible');
     const n = parseInt(val, 10);
     if (!isNaN(n) && n >= 1) {
@@ -2979,7 +2988,7 @@
           </div>
           <div class="sli-stepper">
             <button onclick="updateSummaryQty('${item.id}',-1)">−</button>
-            <input type="number" value="${item.qty}" min="${item.min}" oninput="updateSummaryQtyDirect('${item.id}',this.value)">
+            <input type="text" inputmode="numeric" value="${item.qty}" min="${item.min}" oninput="numOnly(this);updateSummaryQtyDirect('${item.id}',this.value)" onblur="if(!this.value||+this.value<${item.min})this.value=${item.min};updateSummaryQtyDirect('${item.id}',this.value)">
             <button onclick="updateSummaryQty('${item.id}',1)">+</button>
           </div>
           <div class="sli-price">$${(item.unitPrice * item.qty).toLocaleString()}</div>
@@ -3021,7 +3030,8 @@
   function updateSummaryQtyDirect(id, val) {
     const item = (state.summaryItems || []).find(i => i.id === id);
     if (!item) return;
-    const n = parseInt(val, 10);
+    const cleaned = String(val).replace(/[^0-9]/g, '');
+    const n = parseInt(cleaned, 10);
     if (!isNaN(n) && n >= item.min) { item.qty = n; renderSummaryCart(); }
   }
 
