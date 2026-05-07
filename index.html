@@ -475,6 +475,9 @@
   .site-nav-links a { padding: 6px 8px; font-size: 15px; font-weight: 600; color: #535862; text-decoration: none; border-radius: 8px; white-space: nowrap; transition: background .15s, color .15s; }
   .site-nav-links a:hover { background: #f5f5f5; color: #0F4030; }
   .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .nav-cart-btn { position: relative; width: 40px; height: 40px; border: 1.5px solid var(--neutral-200); border-radius: 8px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .15s; }
+  .nav-cart-btn:hover { border-color: var(--neutral-300); background: var(--neutral-50); }
+  .nav-cart-badge { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; background: var(--green-500); color: white; font-size: 11px; font-weight: 700; border-radius: 9px; display: flex; align-items: center; justify-content: center; padding: 0 4px; border: 2px solid white; font-family: inherit; }
   .nav-btn-text { font-size: 14px; font-weight: 500; color: #535862; text-decoration: none; white-space: nowrap; cursor: pointer; background: none; border: none; font-family: inherit; }
   .nav-btn-login { height: 40px; padding: 0 16px; border: 1.5px solid #e9eaeb; border-radius: 6px; background: white; font-size: 14px; font-weight: 600; color: #414651; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: border-color .15s; font-family: inherit; }
   .nav-btn-login:hover { border-color: #c8cacc; }
@@ -794,6 +797,11 @@
       </ul>
       <div class="nav-actions">
         <a href="#" class="nav-btn-outline">Talk to sales</a>
+        <!-- Cart icon — hidden until items added -->
+        <button class="nav-cart-btn" id="navCartBtn" onclick="goTo('screen-purchase')" style="display:none" aria-label="View cart">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M1 1h2.5l1.6 8M5.1 9h11.4l-1.5 6H6.6L5.1 9z" stroke="#344054" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17" r="1" fill="#344054"/><circle cx="14" cy="17" r="1" fill="#344054"/></svg>
+          <span class="nav-cart-badge" id="navCartBadge">0</span>
+        </button>
       </div>
     </div>
 
@@ -805,10 +813,10 @@
         </span>
         <span id="navBackLabel">nofence.com</span>
       </button>
-      <a class="checkout-nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
+      <button class="checkout-nav-logo" onclick="showLeaveCheckoutModal()" style="gap:8px;background:none;border:none;cursor:pointer;padding:0">
         <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
         <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
-      </a>
+      </button>
       <span class="nav-secure-label" id="navSecureLabel">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="#9EA3A8" stroke-width="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#9EA3A8" stroke-width="1.2" stroke-linecap="round"/></svg>
         Secure checkout
@@ -844,6 +852,18 @@
     <div class="modal-btns">
       <button class="modal-continue" onclick="closeAbandonModal()">Keep going</button>
       <button class="modal-skip" onclick="window.location.href='https://nofence.com'">Leave to nofence.com</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ LEAVE CHECKOUT MODAL ════════════════════ -->
+<div class="modal-overlay" id="leaveCheckoutModal">
+  <div class="modal-card">
+    <div class="modal-title" style="font-size:20px;margin-bottom:10px">Leave checkout?</div>
+    <p class="modal-desc" style="margin-bottom:24px">Your cart is saved — you can pick up exactly where you left off. Come back any time and your items will still be here.</p>
+    <div class="modal-btns">
+      <button class="modal-continue" onclick="closeLeaveCheckoutModal()">Stay in checkout</button>
+      <button class="modal-skip" onclick="closeLeaveCheckoutModal();goTo('screen-purchase')">Back to shop</button>
     </div>
   </div>
 </div>
@@ -1764,7 +1784,7 @@
           <div class="grants-box">
             <div class="grants-title">💶 Grants may be available</div>
             <div class="grants-desc">Many farmers qualify for agri-tech grants covering up to 40% of setup costs.</div>
-            <button class="grants-btn" onclick="alert('This would download the grants guide PDF.')">Download guide (PDF) ↓</button>
+            <button class="grants-btn" onclick="goTo('screen-grants')">Download guide (PDF) ↓</button>
           </div>
         </div>
       </div>
@@ -1780,7 +1800,7 @@
       <strong>Not sure which setup is right for your herd?</strong>
       <span>Answer 6 quick questions and get a personalised recommendation in under 5 minutes.</span>
     </div>
-    <button class="wizard-prompt-btn" onclick="goTo('screen-welcome')">Find my setup →</button>
+    <button class="wizard-prompt-btn" onclick="goTo('screen-q1')">Find my setup →</button>
   </div>
   <div class="purchase-body">
     <div class="product-area">
@@ -2050,7 +2070,7 @@
       <div class="grants-box">
         <div class="grants-title">💶 Grants may be available</div>
         <div class="grants-desc">Check if you qualify for agricultural technology funding in your region.</div>
-        <button class="grants-btn" onclick="alert('This would download the grants guide PDF.')">Download grants guide ↓</button>
+        <button class="grants-btn" onclick="goTo('screen-grants')">Download grants guide ↓</button>
       </div>
       <hr class="divider">
       <div class="totals-section">
@@ -2073,13 +2093,99 @@
   </div>
 </div>
 
+<!-- ═══════════════ SCREEN: GRANTS ══════════════════════════ -->
+<div id="screen-grants" class="screen" style="background:var(--neutral-100)">
+  <div style="max-width:720px;margin:0 auto;padding:48px 32px">
+
+    <!-- Intro state -->
+    <div id="grants-form-view">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;color:#1D4ED8;letter-spacing:.4px;text-transform:uppercase;margin-bottom:24px">
+        💶 Agricultural grants
+      </div>
+      <h1 style="font-size:36px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:var(--green-900);letter-spacing:-0.03em;line-height:1.1;margin-bottom:12px">Check if you qualify for funding</h1>
+      <p style="font-size:16px;color:var(--neutral-500);line-height:1.65;margin-bottom:36px;max-width:540px">Many farmers cover 20–40% of their Nofence setup through agri-tech grants. Fill in a few details and we'll send a personalised guide to your inbox — including the schemes most relevant to your country and farm type.</p>
+
+      <div style="background:white;border-radius:16px;border:1px solid var(--neutral-200);padding:36px;box-shadow:var(--shadow-sm)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">First name *</label>
+            <input class="form-input" id="grants-first" type="text" placeholder="Anna" style="width:100%">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Last name *</label>
+            <input class="form-input" id="grants-last" type="text" placeholder="Hansen" style="width:100%">
+          </div>
+          <div style="grid-column:1/-1">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Email address *</label>
+            <input class="form-input" id="grants-email" type="email" placeholder="anna@farm.no" style="width:100%">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Country</label>
+            <select class="form-input" id="grants-country" style="width:100%">
+              <option value="">Select your country</option>
+              <option>Norway</option><option>United Kingdom</option><option>Ireland</option><option>Australia</option><option>United States</option><option>New Zealand</option><option>France</option><option>Germany</option><option>Netherlands</option><option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Farm type</label>
+            <select class="form-input" id="grants-farmtype" style="width:100%">
+              <option value="">Select type</option>
+              <option>Cattle farming</option><option>Sheep farming</option><option>Goat farming</option><option>Mixed livestock</option><option>Dairy</option><option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Estimated herd size</label>
+            <select class="form-input" id="grants-herd" style="width:100%">
+              <option value="">Select range</option>
+              <option>Under 20 animals</option><option>20–50 animals</option><option>50–100 animals</option><option>100–250 animals</option><option>250+ animals</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Estimated collar count</label>
+            <select class="form-input" id="grants-collars" style="width:100%">
+              <option value="">Select range</option>
+              <option>5–24 collars</option><option>25–99 collars</option><option>100+ collars</option>
+            </select>
+          </div>
+          <div style="grid-column:1/-1">
+            <label style="display:block;font-size:13px;font-weight:600;color:var(--neutral-700);margin-bottom:6px">Anything you'd like to add? <span style="font-weight:400;color:var(--neutral-400)">(optional)</span></label>
+            <textarea class="form-input" id="grants-note" rows="3" placeholder="e.g. I'm expanding an existing setup, or applying for a specific scheme..." style="width:100%;resize:vertical;min-height:80px"></textarea>
+          </div>
+        </div>
+
+        <button onclick="submitGrantsForm()" style="height:52px;width:100%;background:var(--green-500);color:white;border:none;border-radius:var(--radius-lg);font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s" onmouseover="this.style.background='#4C841E'" onmouseout="this.style.background='#5FA526'">
+          Send me the grants guide →
+        </button>
+        <p style="font-size:12px;color:var(--neutral-400);text-align:center;margin-top:12px">We'll only use your details to send you relevant grant information. No spam, ever.</p>
+      </div>
+    </div>
+
+    <!-- Success state (hidden until form submitted) -->
+    <div id="grants-success-view" style="display:none;text-align:center;padding:48px 0">
+      <div style="width:64px;height:64px;background:var(--green-50);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 14l7 7L23 7" stroke="#5FA526" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 style="font-size:28px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:var(--green-900);letter-spacing:-0.02em;margin-bottom:10px">On its way to your inbox</h2>
+      <p style="font-size:16px;color:var(--neutral-500);line-height:1.6;max-width:420px;margin:0 auto 36px">Your personalised grants guide is heading to <strong id="grants-email-display"></strong>. It usually arrives within a few minutes — check your spam folder if you don't see it.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button onclick="goTo('screen-purchase')" style="height:52px;padding:0 28px;background:var(--green-500);color:white;border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s" onmouseover="this.style.background='#4C841E'" onmouseout="this.style.background='#5FA526'">
+          Back to purchase →
+        </button>
+        <button onclick="alert('Our sales team will be in touch shortly.')" style="height:52px;padding:0 28px;background:white;color:var(--neutral-700);border:1.5px solid var(--neutral-200);border-radius:var(--radius-lg);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s">
+          Talk to sales
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ═══════════════ SCREEN: CHECKOUT ════════════════════════ -->
 <div id="screen-checkout" class="screen" style="background:var(--neutral-100)">
   <div class="checkout-page">
     <div class="checkout-form">
-      <div style="margin-bottom:4px">
-        <button class="back-btn" onclick="history.back()">← Back</button>
-        <h1 style="font-size:28px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:var(--green-900);letter-spacing:-0.03em;margin-top:8px">Checkout</h1>
+      <div style="margin-bottom:20px">
+        <h1 style="font-size:28px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:var(--green-900);letter-spacing:-0.03em">Checkout</h1>
       </div>
       <!-- Contact -->
       <div class="form-section">
@@ -2324,7 +2430,7 @@
     shelter: null, shelterQty: 1,
     leather: null, leatherQty: 5,
     collarType: 'cattle', purchaseQty: 5, accessories: {}, currentTier: 0,
-    summaryItems: []
+    summaryItems: [], cartAdded: false
   };
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
@@ -2384,7 +2490,7 @@
     'screen-welcome','screen-email-confirm',
     'screen-q1','screen-q2','screen-q3','screen-q4','screen-power',
     'screen-q5','screen-q6','screen-setup-summary',
-    'screen-checkout','screen-success'
+    'screen-grants','screen-checkout','screen-success'
   ]);
 
   function goTo(id, addToHistory = true) {
@@ -2398,10 +2504,20 @@
 
     if (id === 'screen-purchase') {
       setTimeout(() => document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view')), 80);
+      setTimeout(() => updateSummary(), 50); // ensure summary reflects current state
     }
     if (id === 'screen-welcome') {
       checkWelcomeReady();
       requestAnimationFrame(() => requestAnimationFrame(startCarousel)); // restart carousel
+    }
+    if (id === 'screen-grants') {
+      // Pre-fill email from wizard state if available
+      const wizEmail = document.getElementById('email-input');
+      const grantsEmail = document.getElementById('grants-email');
+      if (wizEmail && grantsEmail && wizEmail.value) grantsEmail.value = wizEmail.value;
+      // Reset form/success view
+      document.getElementById('grants-form-view').style.display = '';
+      document.getElementById('grants-success-view').style.display = 'none';
     }
   }
 
@@ -2456,6 +2572,20 @@
 
   // ─── Abandon modal (nav back during quiz) ────────────────────
   function closeAbandonModal() { document.getElementById('abandonModal').classList.remove('open'); }
+
+  // ─── Leave checkout modal ────────────────────────────────────
+  function showLeaveCheckoutModal() { document.getElementById('leaveCheckoutModal').classList.add('open'); }
+  function closeLeaveCheckoutModal() { document.getElementById('leaveCheckoutModal').classList.remove('open'); }
+
+  // ─── Grants form ─────────────────────────────────────────────
+  function submitGrantsForm() {
+    const email = document.getElementById('grants-email').value.trim();
+    if (!email) { document.getElementById('grants-email').focus(); return; }
+    document.getElementById('grants-email-display').textContent = email;
+    document.getElementById('grants-form-view').style.display = 'none';
+    document.getElementById('grants-success-view').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
 
   // ─── Welcome: collar type selector ───────────────────────────
   const COLLAR_DATA = {
@@ -2987,9 +3117,18 @@
     updateSummary();
   }
 
-  function addMixedToCart() { updateSummary(); }
+  function addMixedToCart() { state.cartAdded = true; updateSummary(); updateCartBadge(); }
 
-  function addToCart() { updateSummary(); }
+  function addToCart() { state.cartAdded = true; updateSummary(); updateCartBadge(); }
+
+  function updateCartBadge() {
+    const count = (state.cartAdded ? 1 : 0) + Object.keys(state.accessories).length;
+    const btn = document.getElementById('navCartBtn');
+    const badge = document.getElementById('navCartBadge');
+    if (!btn || !badge) return;
+    btn.style.display = count > 0 ? '' : 'none';
+    badge.textContent = count;
+  }
 
   function addAccessory(id, price, name, btn) {
     const isAdding = !state.accessories[id];
@@ -3000,6 +3139,7 @@
       b.textContent = isAdding ? '✓ Added' : (b.classList.contains('req-feature-cta') ? 'Add to order →' : '+ Add');
     });
     updateSummary();
+    updateCartBadge();
   }
 
   function updateSummary() {
