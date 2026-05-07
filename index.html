@@ -685,6 +685,13 @@
   .si-step.done .si-label { color:var(--green-500); }
   .si-line { flex:1; height:2px; background:var(--neutral-200); margin-top:13px; min-width:16px; }
   .si-line.done { background:var(--green-500); }
+  /* Done steps are clickable — hover ring + scale */
+  .si-step.done { cursor:pointer; }
+  .si-step.done:hover .si-circle { transform:scale(1.18); box-shadow:0 0 0 5px rgba(95,165,38,.22); }
+  .si-step.done:hover .si-label { color:var(--green-700); font-weight:600; }
+  /* Active and future steps are not interactive */
+  .si-step.active { cursor:default; }
+  .si-step:not(.done):not(.active) { cursor:default; opacity:0.55; }
 
   /* ─── Q1 REDESIGN ─────────────────────────────────────────── */
   /* Diagonal cut — white triangle overlay on right edge */
@@ -2565,6 +2572,29 @@
     'screen-grants','screen-checkout','screen-success'
   ]);
 
+  // Step indicator → screen mapping (first screen that shows each step as active)
+  const STEP_SCREENS = { 1:'screen-q1', 2:'screen-q2', 3:'screen-q3', 4:'screen-power', 5:'screen-q6' };
+  const STEP_LABELS  = { 1:'Collars',   2:'Herd',      3:'Land',      4:'Setup',        5:'Summary'    };
+
+  function setupStepNav() {
+    const screen = document.querySelector('.screen.active');
+    if (!screen) return;
+    // Wire up done steps
+    screen.querySelectorAll('.si-step.done').forEach(step => {
+      const num = parseInt(step.querySelector('.si-circle')?.textContent || '0');
+      const target = STEP_SCREENS[num];
+      if (target) {
+        step.onclick = () => goTo(target);
+        step.title = `Back to ${STEP_LABELS[num]}`;
+      }
+    });
+    // Clear click on active + future steps
+    screen.querySelectorAll('.si-step.active, .si-step:not(.done):not(.active)').forEach(step => {
+      step.onclick = null;
+      step.title = '';
+    });
+  }
+
   function goTo(id, addToHistory = true) {
     const current = document.querySelector('.screen.active')?.id;
     if (addToHistory && current && current !== id) navStack.push(current);
@@ -2573,6 +2603,7 @@
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
     updateNav(id);
+    setupStepNav();
 
     if (id === 'screen-purchase') {
       setTimeout(() => document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view')), 80);
