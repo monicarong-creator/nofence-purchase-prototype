@@ -621,6 +621,8 @@
   .field-error-msg.visible { display:block; }
 
   /* ─── SETUP SUMMARY CART ──────────────────────────────────── */
+  .summary-step-bar { background:white; border-bottom:1px solid var(--neutral-200); padding:28px 48px 0; }
+  .summary-step-bar .step-indicator { max-width:1080px; margin:0 auto 28px; }
   .summary-cart-page { display:grid; grid-template-columns:1fr 360px; gap:32px; max-width:1080px; margin:0 auto; padding:48px; align-items:start; }
   .summary-cart-col { display:flex; flex-direction:column; gap:24px; }
   .summary-cart-header { }
@@ -761,6 +763,7 @@
     .product-image { width: 100%; min-width: unset; }
     .payment-methods { grid-template-columns: repeat(2, 1fr); }
     .form-row { grid-template-columns: 1fr; }
+    .summary-step-bar { padding: 20px 24px 0; }
     .summary-cart-page { grid-template-columns: 1fr; padding: 24px 16px; }
     .summary-totals-card { position: static; }
   }
@@ -1694,9 +1697,9 @@
         <div class="si-line done"></div>
         <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
         <div class="si-line done"></div>
-        <div class="si-step done"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
-        <div class="si-line done"></div>
-        <div class="si-step active"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
+        <div class="si-step active"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+        <div class="si-line"></div>
+        <div class="si-step"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
       </div>
       <div class="wizard-content">
         <div>
@@ -1768,6 +1771,20 @@
 
 <!-- ═══════════════ SCREEN: SETUP SUMMARY ════════════════════ -->
 <div id="screen-setup-summary" class="screen" style="background:var(--neutral-100)">
+  <!-- Step indicator bar — spans full width above the cart grid -->
+  <div class="summary-step-bar">
+    <div class="step-indicator">
+      <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
+      <div class="si-line done"></div>
+      <div class="si-step done"><div class="si-circle">2</div><div class="si-label">Herd</div></div>
+      <div class="si-line done"></div>
+      <div class="si-step done"><div class="si-circle">3</div><div class="si-label">Land</div></div>
+      <div class="si-line done"></div>
+      <div class="si-step done"><div class="si-circle">4</div><div class="si-label">Setup</div></div>
+      <div class="si-line done"></div>
+      <div class="si-step active"><div class="si-circle">5</div><div class="si-label">Summary</div></div>
+    </div>
+  </div>
   <div class="summary-cart-page">
     <!-- Left: Cart items -->
     <div class="summary-cart-col">
@@ -2583,13 +2600,13 @@
   ]);
 
   // Step indicator mappings
-  const STEP_SCREENS = { 1:'screen-q1', 2:'screen-q2', 3:'screen-q3', 4:'screen-power', 5:'screen-q6' };
+  const STEP_SCREENS = { 1:'screen-q1', 2:'screen-q2', 3:'screen-q3', 4:'screen-power', 5:'screen-setup-summary' };
   const STEP_LABELS  = { 1:'Collars', 2:'Herd', 3:'Land', 4:'Setup', 5:'Summary' };
   const SCREEN_STEP  = {
     'screen-q1':1, 'screen-q2':2,
     'screen-q3':3, 'screen-q4':3,
-    'screen-power':4, 'screen-q5':4,
-    'screen-q6':5, 'screen-setup-summary':5
+    'screen-power':4, 'screen-q5':4, 'screen-q6':4,
+    'screen-setup-summary':5
   };
 
   function setupStepNav() {
