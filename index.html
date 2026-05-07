@@ -2551,7 +2551,6 @@
 
   // Screens that use the checkout shell nav (everything except purchase page)
   const CHECKOUT_SHELL_SCREENS = new Set([
-    'screen-welcome',
     'screen-q1','screen-q2','screen-q3','screen-q4','screen-power',
     'screen-q5','screen-q6','screen-setup-summary',
     'screen-grants','screen-checkout','screen-success'
@@ -3337,7 +3336,7 @@
     document.getElementById('welcome-continue').disabled = !(hasAnimal && hasEmail);
   }
   // Set up nav for the initial screen (screen-welcome = checkout shell)
-  updateNav('screen-welcome');
+  updateNav(document.querySelector('.screen.active')?.id || 'screen-welcome');
 
   // ─── Scroll progress ──────────────────────────────────────────
   const _sp = document.getElementById('scroll-progress');
