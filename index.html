@@ -218,6 +218,26 @@
   .add-btn:hover { background: #4C841E; }
   .accessories-title { font-size: 18px; font-weight: 700; color: var(--neutral-900); margin-bottom: 6px; font-family: 'Host Grotesk','Inter',sans-serif; font-weight: 300; letter-spacing: -0.02em; }
   .accessories-subtitle { font-size: 13px; color: var(--neutral-500); margin-bottom: 16px; }
+  /* ─── REQUIRED ITEMS CARD GRID ────────────────────────────── */
+  .req-section { margin: 32px 0 8px; }
+  .req-section-info-bar { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: #93370D; background: #FFF6ED; border: 1px solid #FDDCAB; border-radius: 8px; padding: 7px 14px; margin-bottom: 18px; }
+  .req-section-title { font-size: 28px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 6px; }
+  .req-section-sub { font-size: 14px; color: var(--neutral-600); line-height: 1.55; margin-bottom: 20px; }
+  .req-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .req-card { background: white; border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .req-card-img { aspect-ratio: 4/3; background: var(--neutral-100); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 56px; }
+  .req-card-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .req-card-body { padding: 16px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+  .req-card-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
+  .req-card-tag.always { color: #B54708; }
+  .req-card-tag.conditional { color: #026AA2; }
+  .req-card-tag.annual { color: #5925DC; }
+  .req-card-name { font-size: 15px; font-weight: 700; color: var(--neutral-900); margin-bottom: 6px; }
+  .req-card-desc { font-size: 13px; color: var(--neutral-600); line-height: 1.6; flex: 1; margin-bottom: 14px; }
+  .req-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--neutral-100); }
+  .req-card-price { font-size: 15px; font-weight: 700; color: var(--neutral-900); }
+  .req-card-cta { font-size: 13px; font-weight: 600; color: var(--green-700); background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; transition: color .15s; }
+  .req-card-cta:hover { color: var(--green-900); text-decoration: underline; }
   .accessories-list { display: flex; flex-direction: column; gap: 10px; }
   .accessory-card { display: flex; gap: 16px; align-items: center; background: var(--neutral-50); border-radius: var(--radius-lg); padding: 16px 20px; border: 1.5px solid var(--neutral-200); transition: all .2s; }
   .accessory-card:hover { background: var(--green-25); border-color: var(--green-100); }
@@ -419,6 +439,8 @@
   .nav-btn-text { font-size: 14px; font-weight: 500; color: #535862; text-decoration: none; white-space: nowrap; cursor: pointer; background: none; border: none; font-family: inherit; }
   .nav-btn-login { height: 40px; padding: 0 16px; border: 1.5px solid #e9eaeb; border-radius: 6px; background: white; font-size: 14px; font-weight: 600; color: #414651; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: border-color .15s; font-family: inherit; }
   .nav-btn-login:hover { border-color: #c8cacc; }
+  .nav-btn-outline { height: 40px; padding: 0 18px; border: 1.5px solid #D0D5DD; border-radius: 8px; background: white; font-size: 14px; font-weight: 600; color: #344054; cursor: pointer; text-decoration: none; display: flex; align-items: center; white-space: nowrap; font-family: inherit; transition: border-color .15s, background .15s; }
+  .nav-btn-outline:hover { border-color: #98A2B3; background: #F9FAFB; }
 
   /* Checkout shell nav (wizard + checkout + success) */
   #checkoutNav { display: none; width: 100%; align-items: center; justify-content: space-between; position: relative; }
@@ -716,7 +738,7 @@
         <li><a href="#">Products</a></li><li><a href="#">Capabilities</a></li><li><a href="#">Knowledge hub</a></li><li><a href="#">Nofence community</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="#" class="nav-btn-text">Talk to sales</a>
+        <a href="#" class="nav-btn-outline">Talk to sales</a>
         <a href="#" class="nav-btn-text" style="height:40px;padding:0 16px;border:1.5px solid var(--green-500);border-radius:6px;background:var(--green-500);color:white;font-weight:600;display:flex;align-items:center;text-decoration:none;font-size:14px;font-family:inherit">Buy now</a>
       </div>
     </div>
@@ -1735,9 +1757,70 @@
         </div>
         <button class="add-btn" onclick="addToCart()">Add to setup &nbsp;→</button>
       </div>
-      <!-- Accessories -->
-      <div class="accessories-title">Everything your setup needs</div>
-      <p class="accessories-subtitle">These accessories are recommended for a complete, reliable Nofence setup. Add what applies to your farm.</p>
+      <!-- ── Required items ───────────────────────────────── -->
+      <div class="req-section">
+        <div class="req-section-info-bar">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#93370D"/><rect x="6.25" y="3.5" width="1.5" height="4.5" rx=".75" fill="#93370D"/><circle cx="7" cy="10" r=".75" fill="#93370D"/></svg>
+          Not included in collar price — needed to get started
+        </div>
+        <h2 class="req-section-title">You'll need these too</h2>
+        <p class="req-section-sub">Your collars don't come with everything you need on day one. These items are essential to charge, activate, and track your herd from the moment they arrive.</p>
+        <div class="req-grid">
+
+          <!-- Card 1: Battery Charger -->
+          <div class="req-card">
+            <div class="req-card-img" style="background:#F0F4EE">
+              🔌
+            </div>
+            <div class="req-card-body">
+              <div class="req-card-tag always">⚡ Always required</div>
+              <div class="req-card-name">Collar Battery Charger</div>
+              <div class="req-card-desc">Batteries are shipped depleted and must be fully charged before your collars will work — a process that takes around 14 hours. Recommend 1 charger per 10 collars to rotate efficiently.</div>
+              <div class="req-card-footer">
+                <span class="req-card-price">$89</span>
+                <button class="req-card-cta" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Shelter Beacon -->
+          <div class="req-card">
+            <div class="req-card-img" style="background:#EFF8FF">
+              📶
+            </div>
+            <div class="req-card-body">
+              <div class="req-card-tag conditional">🏠 Required if animals go indoors</div>
+              <div class="req-card-name">Shelter Beacon</div>
+              <div class="req-card-desc">GPS signals cannot penetrate buildings. If your animals use barns, stables, or covered shelters, a beacon mounted inside is essential to maintain accurate tracking. One per building.</div>
+              <div class="req-card-footer">
+                <span class="req-card-price">$149</span>
+                <button class="req-card-cta" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Annual Subscription -->
+          <div class="req-card">
+            <div class="req-card-img" style="background:#F4F3FF">
+              📱
+            </div>
+            <div class="req-card-body">
+              <div class="req-card-tag annual">📅 Required from year 2</div>
+              <div class="req-card-name">Annual Subscription</div>
+              <div class="req-card-desc">Your first 12 months are included with your collar purchase. From year 2 onwards, an active subscription is required to use the Nofence app, virtual fencing, and real-time tracking.</div>
+              <div class="req-card-footer">
+                <span class="req-card-price" style="font-size:13px;color:var(--neutral-500)">Billed annually</span>
+                <button class="req-card-cta" onclick="alert('Contact our team for subscription renewal pricing.')">Get pricing →</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Optional accessories ─────────────────────────── -->
+      <div class="accessories-title" style="margin-top:32px">While you're at it</div>
+      <p class="accessories-subtitle">These extras aren't essential, but many farmers find them useful. Add what suits your operation.</p>
       <div class="accessories-list">
         <div class="accessory-card">
           <div class="accessory-img">🔌</div>
