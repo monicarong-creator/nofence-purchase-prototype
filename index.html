@@ -197,25 +197,57 @@
   .wizard-prompt-btn:hover { background: #396317; transform: translateY(-1px); }
   .purchase-body { display: flex; gap: 24px; padding: 32px 48px; max-width: 1400px; margin: 0 auto; width: 100%; }
   .product-area { flex: 1; background: white; border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); }
-  .animal-tabs { background: var(--neutral-100); border-radius: var(--radius-md); padding: 4px; display: inline-flex; gap: 2px; margin-bottom: 28px; }
-  .animal-tab { padding: 10px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--neutral-500); cursor: pointer; border: none; background: transparent; transition: all .2s; white-space: nowrap; font-family: inherit; }
+  /* ─── PURCHASE PRODUCT HERO ─────────────────────────────── */
+  .animal-tabs { background: var(--neutral-100); border-radius: 14px; padding: 5px; display: flex; gap: 3px; margin-bottom: 20px; align-self: flex-start; }
+  .animal-tab { padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--neutral-500); cursor: pointer; border: none; background: transparent; transition: all .2s; display: flex; align-items: center; gap: 9px; font-family: inherit; white-space: nowrap; }
+  .animal-tab .tab-icon { flex-shrink: 0; opacity: .45; transition: opacity .2s; }
   .animal-tab.active { background: white; color: var(--green-900); font-weight: 600; box-shadow: var(--shadow-sm); }
-  .product-detail { display: flex; gap: 32px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--neutral-200); }
-  .product-image { width: 260px; min-width: 260px; aspect-ratio: 1; background: var(--green-50); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 80px; }
-  .product-info { flex: 1; }
-  .product-info .product-name { font-size: 26px; font-weight: 300; font-family: 'Host Grotesk','Inter',sans-serif; color: var(--neutral-900); letter-spacing: -0.03em; }
-  .product-info .product-price { font-size: 30px; font-weight: 700; color: var(--neutral-900); margin-top: 6px; }
-  .product-info .product-price-note { font-size: 13px; color: var(--neutral-500); }
-  .pricing-tiers { display: flex; background: var(--neutral-100); border-radius: var(--radius-md); overflow: hidden; margin: 14px 0; }
-  .pricing-tier { flex: 1; padding: 10px 12px; font-size: 13px; font-weight: 500; color: var(--neutral-500); text-align: center; cursor: pointer; border: 2px solid transparent; transition: all .2s; font-family: inherit; }
-  .pricing-tier.active { background: white; color: var(--neutral-900); font-weight: 600; border-color: var(--neutral-200); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); }
-  .product-description { font-size: 14px; color: var(--neutral-700); line-height: 1.55; margin: 10px 0; }
-  .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .feature-tag { display: flex; align-items: center; gap: 6px; background: var(--green-25); border: 1px solid var(--green-100); border-radius: var(--radius-sm); padding: 5px 10px; font-size: 12px; font-weight: 500; color: var(--green-700); }
-  .add-to-cart-row { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--neutral-200); }
-  .qty-label { font-size: 13px; color: var(--neutral-500); margin-bottom: 8px; }
+  .animal-tab.active .tab-icon { opacity: 1; }
+  /* Hero two-col layout */
+  .product-hero { display: grid; grid-template-columns: 1.1fr 1fr; border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; margin-bottom: 32px; background: white; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  /* Gallery */
+  .product-gallery { display: flex; flex-direction: column; background: var(--neutral-100); }
+  .gallery-main { position: relative; overflow: hidden; flex: 1; min-height: 340px; }
+  .gallery-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .4s; }
+  .gallery-main img.g-hidden { opacity: 0; pointer-events: none; }
+  .gallery-thumbs { display: flex; gap: 8px; padding: 10px 12px; background: rgba(255,255,255,.6); border-top: 1px solid var(--neutral-200); }
+  .gallery-thumb { flex: 1; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; padding: 0; background: var(--neutral-200); transition: border-color .2s; }
+  .gallery-thumb.active { border-color: var(--green-500); }
+  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Info panel */
+  .product-info-panel { padding: 28px 28px 24px; display: flex; flex-direction: column; border-left: 1px solid var(--neutral-100); }
+  .product-type-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--neutral-400); margin-bottom: 6px; }
+  .product-hero-name { font-size: 22px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; }
+  /* Tier buttons */
+  .tier-row { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+  .tier-btn { height: 34px; padding: 0 13px; border: 1.5px solid var(--neutral-200); border-radius: 8px; background: white; font-size: 12px; font-weight: 600; color: var(--neutral-500); cursor: pointer; font-family: inherit; transition: all .18s; }
+  .tier-btn.active { border-color: var(--green-500); background: var(--green-25); color: var(--green-700); }
+  /* Price */
+  .hero-price { font-size: 48px; font-weight: 900; color: var(--neutral-900); line-height: 1; font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.04em; }
+  .hero-price-note { font-size: 13px; color: var(--neutral-500); margin-top: 4px; margin-bottom: 14px; }
+  /* Sub badge */
+  .sub-free-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-500); color: white; font-size: 12px; font-weight: 700; border-radius: 20px; padding: 7px 14px; margin-bottom: 18px; width: fit-content; }
+  /* Includes list */
+  .includes-list { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .includes-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--neutral-700); line-height: 1.45; }
+  .inc-check { flex-shrink: 0; width: 17px; height: 17px; background: var(--green-25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  /* Qty + add */
+  .qty-add-wrap { display: flex; gap: 12px; align-items: center; border-top: 1px solid var(--neutral-100); padding-top: 18px; margin-top: auto; }
+  .qty-group-sm { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
+  .qty-label-sm { font-size: 11px; color: var(--neutral-500); font-weight: 500; }
   .add-btn { flex: 1; height: 52px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
   .add-btn:hover { background: #4C841E; }
+  /* Mixed setup view */
+  .product-hero-mixed { border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; margin-bottom: 32px; background: white; box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 28px 28px 24px; }
+  .mixed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+  .mixed-panel { border: 1.5px solid var(--neutral-200); border-radius: 14px; overflow: hidden; }
+  .mixed-panel-img { aspect-ratio: 16/9; overflow: hidden; background: var(--neutral-100); }
+  .mixed-panel-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mixed-panel-body { padding: 16px 18px 18px; }
+  .mixed-panel-name { font-size: 14px; font-weight: 700; color: var(--neutral-900); margin-bottom: 4px; }
+  .mixed-panel-price { font-size: 26px; font-weight: 900; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .mixed-panel-price span { font-size: 13px; color: var(--neutral-500); font-weight: 400; font-family: inherit; }
+  .mixed-qty-label { font-size: 12px; color: var(--neutral-500); margin-bottom: 7px; }
   .accessories-title { font-size: 18px; font-weight: 700; color: var(--neutral-900); margin-bottom: 6px; font-family: 'Host Grotesk','Inter',sans-serif; font-weight: 300; letter-spacing: -0.02em; }
   .accessories-subtitle { font-size: 13px; color: var(--neutral-500); margin-bottom: 16px; }
   /* ─── REQUIRED ITEMS CARD GRID ────────────────────────────── */
@@ -1720,42 +1752,132 @@
   </div>
   <div class="purchase-body">
     <div class="product-area">
+      <!-- ── Animal type tabs with outline SVG icons ──────────── -->
       <div class="animal-tabs">
-        <button class="animal-tab active" onclick="switchCollar('cattle',this)">🐄 Cattle Collar C2.5</button>
-        <button class="animal-tab" onclick="switchCollar('sheep',this)">🐑 Sheep &amp; Goat Collar S1</button>
-        <button class="animal-tab" onclick="switchCollar('both',this)">🐄🐑 Mixed setup</button>
+        <button class="animal-tab active" onclick="switchCollar('cattle',this)">
+          <svg class="tab-icon" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#ptc)"><path d="M32 0.7C49.3 0.7 63.3 14.7 63.3 32C63.3 49.3 49.3 63.3 32 63.3C14.7 63.3 0.7 49.3 0.7 32C0.7 14.7 14.7 0.7 32 0.7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M-3 24L13.8 20.5C17.3 19.8 19.5 19.1 21.8 18.5C24.1 17.8 25.7 16.9 25.7 16.9C25.7 16.9 26.3 17.8 26.8 18.3C27.3 18.7 28.1 19.1 28.1 19.1C28.1 19.1 26 18.4 25.3 15.7C24.6 12.9 23.8 8 25.3 7.3C26.1 6.9 29.6 10.7 30.3 12.2C33.2 11.4 38.7 13.4 41 14.9C43.4 16.5 44.5 19.2 46.1 21.9C47.6 24.7 47.1 25.1 48.9 28.9C50.7 32.7 58.5 38 56.1 40.8C53.6 43.6 51.7 46.5 45.2 43.4C40.6 41.1 34.6 42.1 28.9 35.9L31.7 38.4 34.6 40.1 27.4 45 16.1 62.4" stroke="currentColor" stroke-width="1.5"/></g><defs><clipPath id="ptc"><path d="M0 32C0 14.3 14.3 0 32 0C49.7 0 64 14.3 64 32C64 49.7 49.7 64 32 64C14.3 64 0 49.7 0 32Z" fill="white"/></clipPath></defs></svg>
+          Cattle C2.5
+        </button>
+        <button class="animal-tab" onclick="switchCollar('sheep',this)">
+          <svg class="tab-icon" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#pts)"><path d="M32 0.7C49.3 0.7 63.3 14.7 63.3 32C63.3 49.3 49.3 63.3 32 63.3C14.7 63.3 0.7 49.3 0.7 32C0.7 14.7 14.7 0.7 32 0.7Z" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 42C2.5 41.3 3 40.3 4.3 39.7C5.6 39 4.4 36.9 5.5 36.2C6.6 35.4 7.8 36.2 9 35C10.1 33.9 8.6 32.9 10.2 31.5C10.6 31.1 13.3 31.6 13.8 31.1C14.4 30.5 13.4 29 13.8 28.6C14.2 28.1 16 27.9 16.4 27.4C17 26.7 15.9 26 16.4 25.2C16.7 24.6 18.4 24.8 18.8 24.3C19.6 23.4 18.9 22.6 19.6 21.8C20.5 20.9 21.4 21.7 22.1 20.9C22.9 20.1 22.2 19.1 23.2 18.3C23.9 17.7 24.7 18.1 25.4 17.5C26.2 17 26.2 16.3 26.9 15.8C28.1 15.1 29.2 16.2 30.3 15.5C30.9 15.1 31 14.5 31.6 14.2C32.8 13.5 33.8 15 34.6 15C35.5 15 36.3 14.1 37.1 14.2C38.3 14.2 38.7 15.1 39.9 15.5C40.8 15.7 41.6 15.2 42.1 15.8C42.9 16.7 42.6 16.7 42.9 17.5C43.1 18.2 44 18.3 45 19.1C46.2 20.1 44.7 22 45.4 23.5C46.1 24.9 47.9 26.7 48.7 27.7C49.6 28.7 51.2 31.2 52 32.8C52.9 34.4 53.4 35.4 52.9 36.9C52.6 37.7 49.2 40.3 47.9 40.3C46.5 40.3 45.3 39.6 43.7 39.4C42.2 39.2 39.6 39.6 39.6 39.6C39.6 39.6 37.7 40 37.1 41.3C36.6 42.3 37.9 43 37.1 44.6C36.6 45.7 35 45.5 34.6 46.3C34.2 47.3 35.2 48.1 34.6 48.9C34.2 49.5 32.9 49.7 32.9 50.6C32.9 51 33.1 52 33.1 52.6C33 52.97 32.8 53.2 32.6 53.5L31.8 54.2C31.4 54.6 31.2 55.2 31.2 55.8V56.2C31.2 56.8 30.8 57.3 30.3 57.6L30 57.8C29.4 58.1 29.1 58.9 29.4 59.5C29.7 60.1 29.5 60.9 28.8 61.3L28 61.7C27.8 61.8 27.6 61.9 27.4 62L26.9 62.5" stroke="currentColor" stroke-width="1.5"/></g><defs><clipPath id="pts"><path d="M0 32C0 14.3 14.3 0 32 0C49.7 0 64 14.3 64 32C64 49.7 49.7 64 32 64C14.3 64 0 49.7 0 32Z" fill="white"/></clipPath></defs></svg>
+          Sheep &amp; Goat S1
+        </button>
+        <button class="animal-tab" onclick="switchCollar('both',this)">
+          <svg class="tab-icon" width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#ptb)"><path d="M32 0.7C49.3 0.7 63.3 14.7 63.3 32C63.3 49.3 49.3 63.3 32 63.3C14.7 63.3 0.7 49.3 0.7 32C0.7 14.7 14.7 0.7 32 0.7Z" stroke="currentColor" stroke-width="1.5"/><g transform="translate(4,17) scale(0.42)"><path d="M-3 24L13.8 20.5C17.3 19.8 19.5 19.1 21.8 18.5C24.1 17.8 25.7 16.9 25.7 16.9C25.7 16.9 26.3 17.8 26.8 18.3C27.3 18.7 28.1 19.1 28.1 19.1C28.1 19.1 26 18.4 25.3 15.7C24.6 12.9 23.8 8 25.3 7.3C26.1 6.9 29.6 10.7 30.3 12.2C33.2 11.4 38.7 13.4 41 14.9C43.4 16.5 44.5 19.2 46.1 21.9C47.6 24.7 47.1 25.1 48.9 28.9C50.7 32.7 58.5 38 56.1 40.8C53.6 43.6 51.7 46.5 45.2 43.4C40.6 41.1 34.6 42.1 28.9 35.9L31.7 38.4 34.6 40.1 27.4 45 16.1 62.4" stroke="currentColor" stroke-width="1.8"/></g><g transform="translate(36,16) scale(0.42)"><path d="M2.5 42C2.5 41.3 3 40.3 4.3 39.7C5.6 39 4.4 36.9 5.5 36.2C6.6 35.4 7.8 36.2 9 35C10.1 33.9 8.6 32.9 10.2 31.5C13.3 31.6 13.8 31.1C14.4 30.5 13.4 29 13.8 28.6C14.2 28.1 16 27.9 16.4 27.4C17 26.7 15.9 26 16.4 25.2C16.7 24.6 18.4 24.8 18.8 24.3C19.6 23.4 18.9 22.6 19.6 21.8C20.5 20.9 21.4 21.7 22.1 20.9C22.9 20.1 22.2 19.1 23.2 18.3C23.9 17.7 24.7 18.1 25.4 17.5C26.2 17 26.2 16.3 26.9 15.8C28.1 15.1 29.2 16.2 30.3 15.5C31.6 14.2C32.8 13.5 33.8 15 34.6 15C35.5 15 36.3 14.1 37.1 14.2C38.3 14.2 38.7 15.1 39.9 15.5C42.9 17.5C43.1 18.2 44 18.3 45 19.1C46.2 20.1 44.7 22 45.4 23.5C46.1 24.9 47.9 26.7 48.7 27.7C52 32.8C52.9 34.4 53.4 35.4 52.9 36.9C52.6 37.7 49.2 40.3 47.9 40.3C46.5 40.3 45.3 39.6 43.7 39.4C39.6 39.6C39.6 39.6 37.7 40 37.1 41.3C36.6 42.3 37.9 43 37.1 44.6C36.6 45.7 35 45.5 34.6 46.3C34.2 47.3 35.2 48.1 34.6 48.9C34.2 49.5 32.9 49.7 32.9 50.6L26.9 62.5" stroke="currentColor" stroke-width="1.8"/></g></g><defs><clipPath id="ptb"><path d="M0 32C0 14.3 14.3 0 32 0C49.7 0 64 14.3 64 32C64 49.7 49.7 64 32 64C14.3 64 0 49.7 0 32Z" fill="white"/></clipPath></defs></svg>
+          Mixed setup
+        </button>
       </div>
-      <div class="product-detail">
-        <div class="product-image" id="purchase-product-img">🐄</div>
-        <div class="product-info">
-          <div class="product-name" id="purchase-product-name">Cattle Collar C2.5</div>
-          <div class="product-price" id="purchase-product-price">$349.00</div>
-          <div class="product-price-note">Per collar · Excl. VAT</div>
-          <div class="pricing-tiers">
-            <div class="pricing-tier active" onclick="selectTier(0,this)">5–24 collars<br><small style="font-size:11px;color:var(--neutral-500)">$349 each</small></div>
-            <div class="pricing-tier" onclick="selectTier(1,this)">25–99 collars<br><small style="font-size:11px;color:var(--neutral-500)">$299 each</small></div>
-            <div class="pricing-tier" onclick="selectTier(2,this)">100+ collars<br><small style="font-size:11px;color:var(--neutral-500)">$249 each</small></div>
+
+      <!-- ── Single collar hero: gallery + info ─────────────────── -->
+      <div class="product-hero" id="product-hero-single">
+
+        <!-- LEFT: image gallery -->
+        <div class="product-gallery">
+          <div class="gallery-main" id="galleryMain">
+            <img id="gallery-img-0" src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="Nofence Collar — product view">
+            <img id="gallery-img-1" src="https://identity.nofence.com/prototypes/images/setup-collar.jpg" alt="Collar being fitted" class="g-hidden">
+            <img id="gallery-img-2" src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="Collar on animal" class="g-hidden">
           </div>
-          <p class="product-description" id="purchase-product-desc">Solar-powered GPS collars that enable the virtual fence. Includes: collar unit, replaceable battery, durable neckstrap, and a standard 20″ chain. Battery charger sold separately.</p>
-          <div class="feature-tags">
-            <div class="feature-tag">📅 12-month subscription*</div>
-            <div class="feature-tag">🛡️ 5-year warranty</div>
-            <div class="feature-tag">📱 Nofence app</div>
-            <div class="feature-tag">🔔 Product updates</div>
+          <div class="gallery-thumbs">
+            <button class="gallery-thumb active" onclick="switchGalleryImg(0)" aria-label="Product view">
+              <img src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="">
+            </button>
+            <button class="gallery-thumb" onclick="switchGalleryImg(1)" aria-label="In use">
+              <img src="https://identity.nofence.com/prototypes/images/setup-collar.jpg" alt="">
+            </button>
+            <button class="gallery-thumb" onclick="switchGalleryImg(2)" aria-label="On animal">
+              <img src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="">
+            </button>
           </div>
-          <p style="font-size:11px;color:var(--neutral-500);margin-top:8px">*Counted from delivery date</p>
+        </div>
+
+        <!-- RIGHT: product info panel -->
+        <div class="product-info-panel">
+          <div class="product-type-label">One-time purchase</div>
+          <h2 class="product-hero-name" id="purchase-product-name">Cattle Collar C2.5</h2>
+
+          <!-- Volume tier selector -->
+          <div class="tier-row">
+            <button class="tier-btn active" onclick="selectTier(0,this)">5–24</button>
+            <button class="tier-btn" onclick="selectTier(1,this)">25–99</button>
+            <button class="tier-btn" onclick="selectTier(2,this)">100+</button>
+            <span style="font-size:13px;color:var(--neutral-400);margin-left:2px">collars</span>
+          </div>
+
+          <!-- Price -->
+          <div class="hero-price" id="purchase-product-price">$349</div>
+          <div class="hero-price-note">per collar · excl. VAT</div>
+
+          <!-- First year sub badge -->
+          <div class="sub-free-badge">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5L5.5 9.5L10.5 3.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            First year subscription — free
+          </div>
+
+          <!-- What's included checklist -->
+          <ul class="includes-list">
+            <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Newest model — C2.5 with Switchgrass technology</li>
+            <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>GPS unit + integrated solar charging panel</li>
+            <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Battery, chain &amp; adjustable neck strap</li>
+            <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Nofence app access + 12-month subscription free*</li>
+            <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>5-year hardware warranty</li>
+            <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free software updates for the lifetime of the collar</li>
+          </ul>
+          <p style="font-size:11px;color:var(--neutral-400);margin-bottom:0">*Counted from delivery date</p>
+
+          <!-- Qty + add -->
+          <div class="qty-add-wrap">
+            <div class="qty-group-sm">
+              <div class="qty-label-sm">Qty <span style="color:var(--neutral-300)">(min 5)</span></div>
+              <div class="stepper">
+                <button class="dec" onclick="adjustPurchaseQty(-1)">−</button>
+                <input class="count" id="purchase-qty" type="number" min="5" value="5" readonly>
+                <button class="inc" onclick="adjustPurchaseQty(1)">+</button>
+              </div>
+            </div>
+            <button class="add-btn" onclick="addToCart()">Add to setup →</button>
+          </div>
         </div>
       </div>
-      <div class="add-to-cart-row">
-        <div>
-          <div class="qty-label">Quantity (minimum 5)</div>
-          <div class="stepper">
-            <button class="dec" onclick="adjustPurchaseQty(-1)">−</button>
-            <input class="count" id="purchase-qty" type="number" min="5" value="5" readonly>
-            <button class="inc" onclick="adjustPurchaseQty(1)">+</button>
+
+      <!-- ── Mixed setup view ───────────────────────────────────── -->
+      <div class="product-hero-mixed" id="product-hero-mixed" style="display:none">
+        <p style="font-size:14px;color:var(--neutral-500);margin-bottom:20px">Choose quantities for each collar type. Each is priced at its own volume tier.</p>
+        <div class="mixed-grid">
+          <!-- Cattle panel -->
+          <div class="mixed-panel">
+            <div class="mixed-panel-img">
+              <img src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="Cattle Collar C2.5">
+            </div>
+            <div class="mixed-panel-body">
+              <div class="mixed-panel-name">Cattle Collar C2.5</div>
+              <div class="mixed-panel-price">$349 <span>/ collar</span></div>
+              <div class="mixed-qty-label">How many cattle collars? <span style="color:var(--neutral-400)">(min 5)</span></div>
+              <div class="stepper">
+                <button class="dec" onclick="adjustMixedQty('cattle',-1)">−</button>
+                <input class="count" id="mixed-qty-cattle" type="number" min="5" value="5" readonly>
+                <button class="inc" onclick="adjustMixedQty('cattle',1)">+</button>
+              </div>
+            </div>
+          </div>
+          <!-- Sheep panel -->
+          <div class="mixed-panel">
+            <div class="mixed-panel-img">
+              <img src="https://identity.nofence.com/prototypes/images/setup-collar.jpg" alt="Sheep & Goat Collar S1">
+            </div>
+            <div class="mixed-panel-body">
+              <div class="mixed-panel-name">Sheep &amp; Goat Collar S1</div>
+              <div class="mixed-panel-price">$299 <span>/ collar</span></div>
+              <div class="mixed-qty-label">How many sheep/goat collars? <span style="color:var(--neutral-400)">(min 5)</span></div>
+              <div class="stepper">
+                <button class="dec" onclick="adjustMixedQty('sheep',-1)">−</button>
+                <input class="count" id="mixed-qty-sheep" type="number" min="5" value="5" readonly>
+                <button class="inc" onclick="adjustMixedQty('sheep',1)">+</button>
+              </div>
+            </div>
           </div>
         </div>
-        <button class="add-btn" onclick="addToCart()">Add to setup &nbsp;→</button>
+        <button class="add-btn" style="width:100%" onclick="addMixedToCart()">Add both to setup →</button>
       </div>
       <!-- ── Required items ───────────────────────────────── -->
       <div class="req-section">
@@ -2772,25 +2894,48 @@
   }
 
   // ─── Purchase page ────────────────────────────────────────────
+  // Gallery images per collar type
+  const GALLERY_IMGS = {
+    cattle: [
+      'https://identity.nofence.com/prototypes/images/collars-group.webp',
+      'https://identity.nofence.com/prototypes/images/setup-collar.jpg',
+      'https://identity.nofence.com/prototypes/images/field-cattle.jpg'
+    ],
+    sheep: [
+      'https://identity.nofence.com/prototypes/images/collars-group.webp',
+      'https://identity.nofence.com/prototypes/images/setup-collar.jpg',
+      'https://identity.nofence.com/prototypes/images/field-cattle.jpg'
+    ]
+  };
+
+  function switchGalleryImg(idx) {
+    document.querySelectorAll('#galleryMain img').forEach((img, i) => img.classList.toggle('g-hidden', i !== idx));
+    document.querySelectorAll('.gallery-thumb').forEach((th, i) => th.classList.toggle('active', i === idx));
+  }
+
   function switchCollar(type, btn) {
     document.querySelectorAll('.animal-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     state.collarType = type;
-    const names  = { cattle:'Cattle Collar C2.5', sheep:'Sheep & Goat Collar S1', both:'Mixed Setup' };
-    const emojis = { cattle:'🐄', sheep:'🐑', both:'🐄🐑' };
-    const descs  = {
-      cattle: 'Solar-powered GPS collars for cattle. Includes collar unit, battery, neckstrap, and 20″ chain. Battery charger sold separately.',
-      sheep:  'Lightweight S1 collars for sheep and goats. Includes collar unit, battery, and strap. Charger sold separately.',
-      both:   'Configure cattle and sheep/goat collars separately. Each type is priced at its own volume tier.'
-    };
-    document.getElementById('purchase-product-img').textContent = emojis[type];
-    document.getElementById('purchase-product-name').textContent = names[type];
-    document.getElementById('purchase-product-desc').textContent = descs[type];
-    updatePurchasePrice();
+    const isMixed = type === 'both';
+    document.getElementById('product-hero-single').style.display = isMixed ? 'none' : 'grid';
+    document.getElementById('product-hero-mixed').style.display  = isMixed ? 'block' : 'none';
+    if (!isMixed) {
+      const names = { cattle: 'Cattle Collar C2.5', sheep: 'Sheep & Goat Collar S1' };
+      document.getElementById('purchase-product-name').textContent = names[type];
+      const imgs = GALLERY_IMGS[type];
+      ['gallery-img-0','gallery-img-1','gallery-img-2'].forEach((id, i) => {
+        const img = document.getElementById(id);
+        if (img) img.src = imgs[i];
+      });
+      document.querySelectorAll('.gallery-thumb img').forEach((img, i) => { img.src = imgs[i]; });
+      switchGalleryImg(0);
+      updatePurchasePrice();
+    }
   }
 
   function selectTier(idx, btn) {
-    document.querySelectorAll('.pricing-tier').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tier-btn').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     state.currentTier = idx;
     updatePurchasePrice();
@@ -2798,7 +2943,7 @@
 
   function updatePurchasePrice() {
     const type = state.collarType === 'both' ? 'cattle' : state.collarType;
-    document.getElementById('purchase-product-price').textContent = `$${prices[type][state.currentTier]}.00`;
+    document.getElementById('purchase-product-price').textContent = `$${prices[type][state.currentTier]}`;
     updateSummary();
   }
 
@@ -2807,6 +2952,15 @@
     document.getElementById('purchase-qty').value = state.purchaseQty;
     updateSummary();
   }
+
+  let mixedQtys = { cattle: 5, sheep: 5 };
+  function adjustMixedQty(type, delta) {
+    mixedQtys[type] = Math.max(5, Math.min(999, mixedQtys[type] + delta));
+    document.getElementById('mixed-qty-' + type).value = mixedQtys[type];
+    updateSummary();
+  }
+
+  function addMixedToCart() { updateSummary(); }
 
   function addToCart() { updateSummary(); }
 
