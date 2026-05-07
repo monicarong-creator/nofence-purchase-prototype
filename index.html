@@ -673,7 +673,7 @@
   .qty-hint { font-size:12px; color:var(--neutral-400); margin-top:3px; }
 
   /* ─── STEP INDICATOR (all quiz screens) ──────────────────── */
-  .step-indicator { display:flex; align-items:flex-start; margin-bottom:28px; position:sticky; top:48px; background:white; z-index:2; margin-left:-64px; margin-right:-64px; padding-left:64px; padding-right:64px; }
+  .step-indicator { display:flex; align-items:flex-start; margin-bottom:28px; }
   .si-step { display:flex; flex-direction:column; align-items:center; gap:5px; flex-shrink:0; }
   .si-circle { width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; background:white; border:2px solid var(--neutral-200); color:var(--neutral-400); transition:all .25s; font-family:inherit; }
   .si-step.done .si-circle { background:var(--green-500); border-color:var(--green-500); color:white; font-size:0; }
@@ -739,7 +739,6 @@
     .wizard-layout { grid-template-columns: 1fr; }
     .wizard-left { display: none; position: static; height: auto; }
     .wizard-right { padding: 32px 24px; }
-    .step-indicator { top:32px; margin-left:-24px; margin-right:-24px; padding-left:24px; padding-right:24px; }
     .purchase-body, .checkout-page { flex-direction: column; padding: 16px; }
     .order-summary-panel, .checkout-summary { width: 100%; min-width: unset; position: static; max-height: none; }
     .product-detail { flex-direction: column; }
