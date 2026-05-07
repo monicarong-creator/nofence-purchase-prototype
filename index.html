@@ -816,6 +816,13 @@
   .upsell-add-btn { background:var(--green-500); color:white; border:1.5px solid transparent; border-radius:var(--radius-sm); padding:7px 14px; font-size:13px; font-weight:600; cursor:pointer; transition:background .15s; font-family:inherit; white-space:nowrap; }
   .upsell-add-btn:hover { background:#4C841E; }
   .upsell-add-btn.added { background:white; color:var(--green-700); border-color:var(--green-400); cursor:default; }
+  /* Fully-equipped banner */
+  .fully-equipped-banner { background:var(--green-25); border:1.5px solid var(--green-200); border-radius:var(--radius-lg); padding:20px 24px; display:flex; align-items:center; gap:16px; animation:fadeInBanner .35s ease; }
+  @keyframes fadeInBanner { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .feb-icon { width:44px; height:44px; background:var(--green-500); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:20px; }
+  .feb-body { flex:1; }
+  .feb-title { font-size:15px; font-weight:700; color:var(--green-900,#1a4a06); margin-bottom:3px; }
+  .feb-sub { font-size:13px; color:var(--green-700,#3a7a12); line-height:1.45; }
 
   /* ─── SUMMARY NAV LINKS (below proceed btn) ───────────────── */
   .summary-alt-actions { display:flex; flex-direction:column; gap:6px; margin-top:12px; padding-top:12px; border-top:1px solid var(--neutral-200); }
@@ -3299,7 +3306,17 @@
     if (!itemIds.includes('chargers'))   suggestions.push(UPSELL_DEFS.chargers);
     if (!itemIds.includes('beacons'))    suggestions.push(UPSELL_DEFS.beacons);
     if (!itemIds.includes('straps'))     suggestions.push(UPSELL_DEFS.straps);
-    if (suggestions.length === 0) { section.innerHTML = ''; return; }
+    if (suggestions.length === 0) {
+      section.innerHTML = `
+        <div class="fully-equipped-banner">
+          <div class="feb-icon">✓</div>
+          <div class="feb-body">
+            <div class="feb-title">You're fully equipped</div>
+            <div class="feb-sub">Every accessory we offer is included in your setup — you're good to go whenever you're ready.</div>
+          </div>
+        </div>`;
+      return;
+    }
     section.innerHTML = `
       <div class="upsell-section-title">Other items you may need</div>
       <div class="upsell-section-sub">Not included in your recommendation — add any that apply to your setup.</div>
