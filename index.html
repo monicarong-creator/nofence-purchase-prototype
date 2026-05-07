@@ -119,7 +119,7 @@
 
   /* ─── INFO BOX ────────────────────────────────────────────── */
   .info-box { display: flex; gap: 12px; align-items: flex-start; background: var(--yellow-50); border-radius: var(--radius-lg); padding: 14px 18px; }
-  .info-box .info-icon { width: 18px; height: 18px; border-radius: 9px; background: var(--yellow-300); flex-shrink: 0; margin-top: 2px; }
+  .info-box .info-icon { width: 20px; height: 20px; border-radius: 10px; background: var(--yellow-300); flex-shrink: 0; margin-top: 1px; display:flex; align-items:center; justify-content:center; }
   .info-box p { font-size: 13px; color: var(--neutral-700); line-height: 1.5; }
   .info-box.green { background: var(--green-50); }
   .info-box.green .info-icon { background: var(--green-500); }
@@ -443,7 +443,7 @@
   /* welcome screen left panel is now a carousel — no background-image needed here */
   #screen-email-confirm .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/collars-group.webp'); }
   /* screen-intro is now full-width — no split wizard left panel */
-  #screen-q1 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
+  #screen-q1 .wizard-left { background-image: url('collar-product.jpg'); background-position:center 30%; }
   #screen-q2 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
   #screen-q3 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
   #screen-q4 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
@@ -505,9 +505,45 @@
   .intro-cta-band-label { font-size:13px; color:var(--neutral-400); }
 
   /* ─── INFO TOOLTIP ────────────────────────────────────────── */
-  .info-tip { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:var(--neutral-200); border-radius:50%; font-size:11px; font-weight:700; color:var(--neutral-600); cursor:help; vertical-align:middle; margin-left:4px; position:relative; }
-  .info-tip::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--neutral-900); color:white; font-size:12px; line-height:1.45; padding:8px 12px; border-radius:var(--radius-md); width:240px; text-align:left; white-space:normal; opacity:0; pointer-events:none; transition:opacity .2s; z-index:1000; font-weight:400; }
+  .info-tip { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border:1.5px solid var(--neutral-400); border-radius:50%; color:var(--neutral-500); cursor:help; vertical-align:middle; margin-left:5px; position:relative; flex-shrink:0; transition:border-color .15s, color .15s; }
+  .info-tip:hover { border-color:var(--neutral-700); color:var(--neutral-700); }
+  .info-tip svg { display:block; }
+  .info-tip::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); background:var(--neutral-900); color:white; font-size:12px; line-height:1.5; padding:10px 14px; border-radius:var(--radius-md); width:260px; text-align:left; white-space:normal; opacity:0; pointer-events:none; transition:opacity .18s; z-index:1000; font-weight:400; box-shadow:0 4px 12px rgba(0,0,0,.25); }
   .info-tip:hover::after { opacity:1; }
+
+  /* ─── QUIZ SCREEN TOPBAR (skip link row) ─────────────────── */
+  .quiz-topbar { display:flex; justify-content:flex-end; align-items:center; margin-bottom:4px; margin-top:-8px; }
+  .quiz-skip-link { font-size:13px; font-weight:500; color:var(--neutral-400); background:none; border:none; cursor:pointer; font-family:inherit; padding:4px 0; transition:color .15s; }
+  .quiz-skip-link:hover { color:var(--neutral-700); }
+
+  /* ─── Q1 COMPACT QUANTITY ROW ─────────────────────────────── */
+  .q1-qty-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .q1-qty-price-row { display:flex; align-items:center; gap:8px; font-size:14px; color:var(--neutral-500); padding:8px 14px; background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:var(--radius-md); flex-wrap:wrap; }
+  .q1-qty-price-sep { color:var(--neutral-300); }
+  .q1-qty-each { color:var(--neutral-500); font-size:13px; }
+  .q1-qty-total { font-weight:700; color:var(--green-700); font-size:15px; }
+
+  /* ─── SUMMARY SUGGESTED ADDONS ────────────────────────────── */
+  .suggested-addons { background:white; border-radius:var(--radius-xl); border:1px solid var(--neutral-200); overflow:hidden; }
+  .suggested-addons-header { padding:16px 20px 0; }
+  .suggested-addons-title { font-size:14px; font-weight:700; color:var(--neutral-900); }
+  .suggested-addons-sub { font-size:12px; color:var(--neutral-500); margin-top:2px; }
+  .suggested-addon-item { display:flex; align-items:center; gap:14px; padding:14px 20px; border-top:1px solid var(--neutral-100); }
+  .suggested-addon-icon { font-size:20px; flex-shrink:0; width:36px; text-align:center; }
+  .suggested-addon-info { flex:1; }
+  .suggested-addon-name { font-size:13px; font-weight:600; color:var(--neutral-900); }
+  .suggested-addon-desc { font-size:12px; color:var(--neutral-500); margin-top:1px; line-height:1.35; }
+  .suggested-addon-price { font-size:13px; font-weight:700; color:var(--neutral-900); flex-shrink:0; }
+
+  /* ─── SUMMARY NAV ACTIONS ─────────────────────────────────── */
+  .summary-nav-actions { display:flex; flex-direction:column; gap:8px; padding-top:8px; border-top:1px solid var(--neutral-200); margin-top:4px; }
+  .summary-nav-link { font-size:13px; color:var(--neutral-500); background:none; border:none; cursor:pointer; font-family:inherit; text-align:center; text-decoration:underline; padding:4px; transition:color .15s; }
+  .summary-nav-link:hover { color:var(--neutral-900); }
+
+  /* ─── CHECKOUT FIELD ERRORS ───────────────────────────────── */
+  .form-input.field-error { border-color:#D92D20; background:rgba(217,45,32,.03); }
+  .field-error-msg { font-size:12px; color:#D92D20; margin-top:4px; display:none; }
+  .field-error-msg.visible { display:block; }
 
   /* ─── SETUP SUMMARY CART ──────────────────────────────────── */
   .summary-cart-page { display:grid; grid-template-columns:1fr 360px; gap:32px; max-width:1080px; margin:0 auto; padding:48px; align-items:start; }
@@ -628,6 +664,32 @@
     .summary-cart-page { grid-template-columns: 1fr; padding: 24px 16px; }
     .summary-totals-card { position: static; }
   }
+
+  /* ─── Q1 LEFT: Floating app card overlay ─────────────────── */
+  .q1-app-float { position:absolute; bottom:56px; left:36px; z-index:1; display:flex; flex-direction:column; width:110px; border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 12px 28px rgba(0,0,0,.35); transform:rotate(-2deg); transition:transform .25s; cursor:default; }
+  .q1-app-float:hover { transform:rotate(0deg) scale(1.03); }
+  .q1-app-float img { width:100%; height:132px; object-fit:cover; display:block; object-position:center top; }
+  .q1-app-float-tag { background:rgba(95,165,38,.94); backdrop-filter:blur(6px); padding:6px 10px; font-size:11px; font-weight:700; color:white; text-align:center; letter-spacing:.2px; }
+
+  /* ─── SUGGESTED ADDONS (setup summary left col) ───────────── */
+  .upsell-section { background:white; border-radius:var(--radius-xl); border:1px solid var(--neutral-200); overflow:hidden; box-shadow:var(--shadow-sm); }
+  .upsell-section-header { padding:16px 20px 12px; border-bottom:1px solid var(--neutral-100); }
+  .upsell-section-title { font-size:14px; font-weight:700; color:var(--neutral-900); }
+  .upsell-section-sub { font-size:12px; color:var(--neutral-500); margin-top:2px; }
+  .upsell-item { display:flex; align-items:center; gap:14px; padding:14px 20px; border-top:1px solid var(--neutral-100); }
+  .upsell-item:first-child { border-top:none; }
+  .upsell-item-icon { font-size:20px; flex-shrink:0; width:36px; text-align:center; }
+  .upsell-item-info { flex:1; }
+  .upsell-item-name { font-size:13px; font-weight:600; color:var(--neutral-900); }
+  .upsell-item-desc { font-size:12px; color:var(--neutral-500); margin-top:1px; line-height:1.35; }
+  .upsell-item-price { font-size:13px; font-weight:700; color:var(--neutral-900); flex-shrink:0; margin-right:10px; }
+  .upsell-add-btn { height:32px; padding:0 12px; background:var(--green-500); color:white; border:none; border-radius:var(--radius-sm); font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .15s; white-space:nowrap; flex-shrink:0; }
+  .upsell-add-btn:hover { background:#4C841E; }
+
+  /* ─── SUMMARY NAV LINKS (below proceed btn) ───────────────── */
+  .summary-alt-actions { display:flex; flex-direction:column; gap:6px; margin-top:12px; padding-top:12px; border-top:1px solid var(--neutral-200); }
+  .summary-alt-link { font-size:12px; color:var(--neutral-400); background:none; border:none; cursor:pointer; font-family:inherit; text-align:center; text-decoration:underline; padding:3px; transition:color .15s; }
+  .summary-alt-link:hover { color:var(--neutral-700); }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -921,23 +983,14 @@
     <!-- why-cards sit inside the same green section -->
     <div class="intro-why-grid">
       <div class="intro-why-card">
-        <div class="intro-why-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
         <div class="intro-why-card-title">Correct collar count, guaranteed</div>
         <div class="intro-why-card-desc">Every adult animal in the herd needs a collar — no exceptions. We calculate the exact quantity for your herd size, whether that's cattle, sheep, or a mixed operation.</div>
       </div>
       <div class="intro-why-card">
-        <div class="intro-why-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
         <div class="intro-why-card-title">No costly gaps after delivery</div>
         <div class="intro-why-card-desc">Spare batteries, shelter beacons, extended chains — easy to miss until day one. The quiz flags every accessory your specific land and setup actually requires.</div>
       </div>
       <div class="intro-why-card">
-        <div class="intro-why-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
         <div class="intro-why-card-title">Best price, applied automatically</div>
         <div class="intro-why-card-desc">Volume pricing unlocks at certain quantities. We apply the best available tier to your order — no negotiating, no hunting for discount codes.</div>
       </div>
@@ -970,9 +1023,6 @@
   </div>
 
   <!-- ── BOTTOM LABEL ──────────────────────────────────────────── -->
-  <div class="intro-cta-band">
-    <span class="intro-cta-band-label">Takes about 3 minutes &nbsp;·&nbsp; No account needed to start</span>
-  </div>
 
 </div>
 
@@ -981,12 +1031,22 @@
   <div class="wizard-layout">
     <aside class="wizard-left photo-overlay">
       <!-- Diagonal cut applied via CSS ::after on #screen-q1 .wizard-left -->
+      <!-- Floating app phone card -->
+      <div class="q1-app-float">
+        <img src="app-phone.jpg" alt="Nofence App">
+        <div class="q1-app-float-tag">Free App Included</div>
+      </div>
       <div class="left-quote">
         <p>"We run both cattle and sheep — Nofence works seamlessly for a mixed operation."</p>
         <cite>— Anna M., Mixed farm, Ireland</cite>
       </div>
     </aside>
     <main class="wizard-right q1-right">
+
+      <!-- ── Skip link ── -->
+      <div class="quiz-topbar">
+        <button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button>
+      </div>
 
       <!-- ── Step indicator ── -->
       <div class="step-indicator">
@@ -1030,29 +1090,7 @@
           <p class="wizard-sub" style="margin-top:8px">Every adult animal in your herd needs a collar for the virtual fence to work safely and reliably.</p>
         </div>
 
-        <!-- Product showcase — collar + app -->
-        <div class="q1-showcase-pair">
-          <div class="q1-showcase-card">
-            <div class="q1-showcase-img" id="q1-collar-img" style="background-image:url('collar-product.jpg');background-position:center 30%">
-              <div class="q1-showcase-badge">C2.5 Series</div>
-            </div>
-            <div class="q1-showcase-info">
-              <div class="q1-showcase-name" id="collar-type-label">C2.5 GPS Cattle Collar</div>
-              <div class="q1-showcase-sub" id="collar-type-desc">Solar-powered · 20″ chain · Long battery life</div>
-            </div>
-          </div>
-          <div class="q1-showcase-card">
-            <div class="q1-showcase-img" style="background-image:url('app-phone.jpg');background-position:center top">
-              <div class="q1-showcase-badge green-badge">Free</div>
-            </div>
-            <div class="q1-showcase-info">
-              <div class="q1-showcase-name">Nofence App</div>
-              <div class="q1-showcase-sub">Included with every order · iOS & Android</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- What's included -->
+        <!-- What's included per collar -->
         <div class="q1-included">
           <div class="q1-included-title">Everything included per collar</div>
           <div class="q1-included-grid">
@@ -1065,31 +1103,33 @@
           </div>
         </div>
 
-        <!-- Quantity + error + price -->
+        <!-- Quantity + compact price row -->
         <div class="q1-quantity-section">
           <label class="q1-qty-label" id="qty-stepper-label">Number of collars</label>
-          <div class="stepper">
-            <button class="dec" onclick="adjustQty(-1)">−</button>
-            <input class="count" id="qty-input" type="text" inputmode="numeric" value="20" oninput="onQtyInput(this.value)" onblur="onQtyBlur(this.value)">
-            <button class="inc" onclick="adjustQty(1)">+</button>
+          <div class="q1-qty-row">
+            <div class="stepper" style="flex-shrink:0">
+              <button class="dec" onclick="adjustQty(-1)">−</button>
+              <input class="count" id="qty-input" type="text" inputmode="numeric" value="20" oninput="onQtyInput(this.value)" onblur="onQtyBlur(this.value)">
+              <button class="inc" onclick="adjustQty(1)">+</button>
+            </div>
+            <div class="q1-qty-price-row">
+              <span id="q1-price-per" style="color:var(--neutral-500);font-size:13px">× $349 each</span>
+              <span class="q1-qty-price-sep">=</span>
+              <span class="q1-qty-total" id="q1-price-total">$6,980</span>
+            </div>
           </div>
           <div class="qty-error" id="qty-error">
-            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" stroke="#D92D20" stroke-width="1.5"/><path d="M10 6v5" stroke="#D92D20" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r=".75" fill="#D92D20"/></svg>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#D92D20" stroke-width="1.5"/><path d="M10 6v5" stroke="#D92D20" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r=".75" fill="#D92D20"/></svg>
             Please enter a whole number (minimum 5)
           </div>
-          <p class="qty-hint">Minimum 5 · Every adult animal needs one · <span id="qty-100-note">Order 100+? <a href="mailto:sales@nofence.com" style="color:var(--green-700);text-decoration:none;font-weight:500">Contact sales</a> for volume pricing.</span></p>
-          <div class="q1-price-preview" id="q1-price-preview">
-            <span class="q1-price-qty" id="q1-price-qty">20 collars</span>
-            <span class="q1-price-per" id="q1-price-per">× $349 each</span>
-            <span class="q1-price-total" id="q1-price-total">= $6,980</span>
-          </div>
+          <p class="qty-hint">Minimum 5 collars · Every adult animal needs one · <span id="qty-100-note">100+? <a href="mailto:sales@nofence.com" style="color:var(--green-700);text-decoration:none;font-weight:500">Contact sales</a> for pricing.</span></p>
         </div>
 
-        <!-- hidden span so existing JS setting collar-type-emoji doesn't throw -->
+        <!-- hidden elements so existing JS doesn't throw -->
         <span id="collar-type-emoji" style="display:none"></span>
+        <span id="q1-price-qty" style="display:none">20 collars</span>
 
-        <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goTo('screen-intro')">← Back</button>
+        <div class="btn-row" style="padding-top:12px">
           <button class="btn btn-primary" onclick="continueFromQ1()">Continue →</button>
         </div>
       </div>
@@ -1107,6 +1147,7 @@
       </div>
     </aside>
     <main class="wizard-right">
+      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1152,7 +1193,7 @@
                 </div>
               </div>
               <div class="info-box">
-                <div class="info-icon"></div>
+                <div class="info-icon"><svg width="8" height="11" viewBox="0 0 8 11" fill="white"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></div>
                 <p>Tip: you don't need extra-long chains for every animal — only for bulls and your largest-framed cattle.</p>
               </div>
             </div>
@@ -1168,7 +1209,6 @@
         </div>
 
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goTo('screen-q1')">← Back</button>
           <button class="btn btn-primary" id="q2-continue" disabled onclick="goTo('screen-q3')">Continue →</button>
         </div>
       </div>
@@ -1186,6 +1226,7 @@
       </div>
     </aside>
     <main class="wizard-right">
+      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1229,7 +1270,6 @@
           </div>
         </div>
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="backFromQ3()">← Back</button>
           <button class="btn btn-primary" id="q3-continue" disabled onclick="goTo('screen-q4')">Continue →</button>
         </div>
       </div>
@@ -1247,6 +1287,7 @@
       </div>
     </aside>
     <main class="wizard-right">
+      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1290,7 +1331,6 @@
           </div>
         </div>
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goTo('screen-q3')">← Back</button>
           <button class="btn btn-primary" id="q4-continue" disabled onclick="continueFromQ4()">Continue →</button>
         </div>
       </div>
@@ -1308,6 +1348,7 @@
       </div>
     </aside>
     <main class="wizard-right">
+      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1360,11 +1401,10 @@
           </div>
         </div>
         <div class="info-box green">
-          <div class="info-icon"></div>
+          <div class="info-icon"><svg width="8" height="11" viewBox="0 0 8 11" fill="white"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></div>
           <p>These are recommendations based on your answers. You can adjust quantities now or add more from your account later.</p>
         </div>
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goTo('screen-q4')">← Back</button>
           <button class="btn btn-primary" onclick="goTo('screen-q5')">Continue →</button>
         </div>
       </div>
@@ -1382,6 +1422,7 @@
       </div>
     </aside>
     <main class="wizard-right">
+      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1415,7 +1456,7 @@
                 <div class="rec-card-body">
                   <div class="rec-card-title">
                     Shelter Beacon
-                    <span class="info-tip" data-tip="A small Bluetooth device mounted inside a building. When a collared animal enters, it communicates with the beacon instead of GPS — so the app always knows where your animals are.">i</span>
+                    <span class="info-tip" data-tip="A small Bluetooth device mounted inside a building. When a collared animal enters, it communicates with the beacon instead of GPS — so the app always knows where your animals are."><svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></span>
                   </div>
                   <div class="rec-card-desc">Mounted inside buildings. Lets the Nofence app track your animals when GPS is unavailable indoors. One beacon per building is usually sufficient.</div>
                   <div class="rec-card-row">
@@ -1441,7 +1482,6 @@
         </div>
 
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="backFromQ5()">← Back</button>
           <button class="btn btn-primary" id="q5-continue" disabled onclick="goTo('screen-q6')">Continue →</button>
         </div>
       </div>
@@ -1459,6 +1499,7 @@
       </div>
     </aside>
     <main class="wizard-right">
+      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1522,7 +1563,7 @@
                 </div>
                 <!-- Apply to all — below the stepper, full-width, secondary -->
                 <button class="leather-apply-btn" onclick="applyLeatherToAll()">
-                  Apply to all <strong id="leather-all-label">20</strong> collars →
+                  Apply to all <strong id="leather-all-label">20</strong> collars
                 </button>
               </div>
             </div>
@@ -1530,7 +1571,6 @@
         </div>
 
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goTo('screen-q5')">← Back</button>
           <button class="btn btn-primary" id="q6-continue" disabled onclick="buildSetupSummary();goTo('screen-setup-summary')">See my setup →</button>
         </div>
       </div>
@@ -1551,6 +1591,9 @@
 
       <!-- Cart items — rendered by JS -->
       <div id="summary-cart-items" class="summary-cart-items"></div>
+
+      <!-- Suggested items not yet added — rendered by JS -->
+      <div id="summary-upsell-section"></div>
 
       <!-- Discount code -->
       <div>
@@ -1582,6 +1625,17 @@
 
         <hr class="summary-divider">
 
+        <!-- What's included per collar -->
+        <div class="subscription-box" style="margin-bottom:12px">
+          <div class="sub-title">Included with every collar</div>
+          <div class="co-included-list" style="margin-top:8px">
+            <div class="co-included-item"><span class="co-check">✓</span> 12-month subscription</div>
+            <div class="co-included-item"><span class="co-check">✓</span> Nofence App (iOS & Android)</div>
+            <div class="co-included-item"><span class="co-check">✓</span> 5-year warranty</div>
+            <div class="co-included-item"><span class="co-check">✓</span> Pasture tools & live alerts</div>
+          </div>
+        </div>
+
         <div class="summary-breakdown">
           <div class="summary-b-row"><span class="summary-b-key">Subtotal</span><span class="summary-b-val" id="sum-subtotal">—</span></div>
           <div class="summary-b-row"><span class="summary-b-key">Shipping</span><span class="summary-b-val" style="color:var(--green-700)">Free over $500</span></div>
@@ -1603,6 +1657,12 @@
           <span>🔒 Secure checkout</span>
           <span>↩️ 30-day returns</span>
           <span>🛡️ 5-yr warranty</span>
+        </div>
+
+        <!-- Alt navigation links -->
+        <div class="summary-alt-actions">
+          <button class="summary-alt-link" onclick="skipToPurchase()">Browse product page instead</button>
+          <button class="summary-alt-link" onclick="goTo('screen-welcome')">Restart quiz from the beginning</button>
         </div>
 
         <!-- Grants box -->
@@ -1787,10 +1847,25 @@
       <div class="form-section">
         <div class="form-section-title">Contact information</div>
         <div class="form-row">
-          <div class="form-group"><label>First name *</label><input class="form-input" type="text" placeholder="Anna" autocomplete="given-name" oninput="checkPayReady()"></div>
-          <div class="form-group"><label>Last name *</label><input class="form-input" type="text" placeholder="Hansen" autocomplete="family-name" oninput="checkPayReady()"></div>
-          <div class="form-group full"><label>Email address *</label><input class="form-input" type="email" placeholder="anna@farm.com" autocomplete="email" oninput="checkPayReady()"></div>
-          <div class="form-group full"><label>Phone number</label><input class="form-input" type="tel" placeholder="+44 7700 900000" autocomplete="tel"></div>
+          <div class="form-group">
+            <label>First name *</label>
+            <input id="co-first" class="form-input" type="text" placeholder="Anna" autocomplete="given-name" oninput="checkPayReady()" onblur="validateField(this,'Please enter your first name')">
+            <div class="field-error-msg" id="err-first">Please enter your first name</div>
+          </div>
+          <div class="form-group">
+            <label>Last name *</label>
+            <input id="co-last" class="form-input" type="text" placeholder="Hansen" autocomplete="family-name" oninput="checkPayReady()" onblur="validateField(this,'Please enter your last name')">
+            <div class="field-error-msg" id="err-last">Please enter your last name</div>
+          </div>
+          <div class="form-group full">
+            <label>Email address *</label>
+            <input id="co-email" class="form-input" type="email" placeholder="anna@farm.com" autocomplete="email" oninput="checkPayReady()" onblur="validateField(this,'Please enter a valid email address')">
+            <div class="field-error-msg" id="err-email">Please enter a valid email address</div>
+          </div>
+          <div class="form-group full">
+            <label>Phone number <span style="color:var(--neutral-400);font-weight:400">(optional)</span></label>
+            <input class="form-input" type="tel" placeholder="+44 7700 900000" autocomplete="tel">
+          </div>
         </div>
       </div>
       <!-- Billing address -->
@@ -1803,20 +1878,28 @@
               <option>United Kingdom</option><option>Norway</option><option>Sweden</option><option>Denmark</option><option>Finland</option><option>Ireland</option><option>France</option><option>Germany</option><option>Australia</option><option>New Zealand</option><option>United States</option><option>Canada</option>
             </select>
           </div>
-          <div class="form-group full"><label>Address line 1 *</label><input class="form-input" type="text" placeholder="Farm lane, countryside" autocomplete="address-line1" oninput="checkPayReady()"></div>
-          <div class="form-group full"><label>Address line 2 (optional)</label><input class="form-input" type="text" placeholder="Building / unit" autocomplete="address-line2"></div>
+          <div class="form-group full">
+            <label>Address line 1 *</label>
+            <input id="co-address1" class="form-input" type="text" placeholder="Farm lane, countryside" autocomplete="address-line1" oninput="checkPayReady()" onblur="validateField(this,'Please enter your address')">
+            <div class="field-error-msg" id="err-address1">Please enter your address</div>
+          </div>
+          <div class="form-group full"><label>Address line 2 <span style="color:var(--neutral-400);font-weight:400">(optional)</span></label><input class="form-input" type="text" placeholder="Building / unit" autocomplete="address-line2"></div>
           <div class="form-group"><label>City / Town</label><input class="form-input" type="text" placeholder="York" autocomplete="address-level2"></div>
           <div class="form-group"><label>Postcode / ZIP</label><input class="form-input" type="text" placeholder="YO1 9XX" autocomplete="postal-code"></div>
         </div>
-        <div class="same-address-row">
+        <!-- Shipping address -->
+        <div class="same-address-row" style="margin-top:8px">
           <input type="checkbox" id="same-shipping" checked onchange="toggleShipping(this)">
           <label for="same-shipping">Shipping address is the same as billing</label>
         </div>
         <div id="shipping-address" style="display:none">
-          <div class="form-row" style="margin-top:16px">
-            <div class="form-group full"><label>Shipping address line 1</label><input class="form-input" type="text" placeholder="Farm lane, countryside"></div>
-            <div class="form-group"><label>City</label><input class="form-input" type="text" placeholder="York"></div>
-            <div class="form-group"><label>Postcode</label><input class="form-input" type="text" placeholder="YO1 9XX"></div>
+          <hr style="border:none;border-top:1px solid var(--neutral-200);margin:16px 0 16px">
+          <div style="font-size:14px;font-weight:600;color:var(--neutral-700);margin-bottom:12px">Shipping address</div>
+          <div class="form-row">
+            <div class="form-group full"><label>Address line 1</label><input class="form-input" type="text" placeholder="Farm lane, countryside" autocomplete="shipping address-line1"></div>
+            <div class="form-group full"><label>Address line 2 <span style="color:var(--neutral-400);font-weight:400">(optional)</span></label><input class="form-input" type="text" placeholder="Building / unit"></div>
+            <div class="form-group"><label>City / Town</label><input class="form-input" type="text" placeholder="York" autocomplete="shipping address-level2"></div>
+            <div class="form-group"><label>Postcode / ZIP</label><input class="form-input" type="text" placeholder="YO1 9XX" autocomplete="shipping postal-code"></div>
           </div>
         </div>
       </div>
@@ -1883,10 +1966,9 @@
           <p>I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>. I understand this is a legally binding purchase agreement.</p>
         </div>
         <button class="pay-btn" id="pay-now-btn" onclick="if(this.classList.contains('ready')) goTo('screen-success')">
-          🔒 &nbsp;Pay now
+          Pay now
         </button>
-        <p style="font-size:12px;color:var(--neutral-400);text-align:center;margin-top:10px">Fill in your details above and agree to the terms to enable payment</p>
-        <p style="font-size:12px;color:var(--neutral-500);text-align:center;margin-top:4px">Your payment is secured with 256-bit SSL encryption</p>
+        <p style="font-size:12px;color:var(--neutral-500);text-align:center;margin-top:10px">🔒 Your payment is secured with 256-bit SSL encryption</p>
       </div>
     </div>
     <!-- Checkout summary -->
@@ -1988,8 +2070,8 @@
 
     <!-- Actions -->
     <div class="success-actions" style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%">
-      <a href="https://app.nofence.com" class="btn btn-primary" style="width:100%;max-width:320px;text-decoration:none" onclick="event.preventDefault();alert('This would open your Nofence account.')">Go to my Nofence account →</a>
-      <button class="btn btn-secondary" style="width:100%;max-width:320px" onclick="alert('This would open the getting started guide.')">Download getting started guide</button>
+      <a href="https://app.nofence.com" class="btn btn-primary" style="width:100%;max-width:320px;height:52px;text-decoration:none;display:flex;align-items:center;justify-content:center" onclick="event.preventDefault();alert('This would open your Nofence account.')">Go to my Nofence account →</a>
+      <a href="https://www.nofence.com/knowledge-hub/setting-up-nofence/" target="_blank" style="font-size:14px;color:var(--green-700);text-decoration:underline;text-align:center;padding:6px 0">Read the getting started guide →</a>
     </div>
 
   </div>
@@ -2215,7 +2297,7 @@
     const totEl   = document.getElementById('q1-price-total');
     if (qtyEl) qtyEl.textContent = `${state.qty} collar${state.qty !== 1 ? 's' : ''}`;
     if (perEl) perEl.textContent = `× $${price} each`;
-    if (totEl) totEl.textContent = `= $${total}`;
+    if (totEl) totEl.textContent = `$${total}`;
   }
 
   function adjustQty(delta) {
@@ -2443,6 +2525,43 @@
     if (state.leather === 'yes' && state.leatherQty > 0)
       state.summaryItems.push({ id:'straps', icon:'🟫', name:'Leather Neck Strap', unitPrice:18, qty:state.leatherQty, min:1, removable:true });
     renderSummaryCart();
+    buildSuggestedAddons();
+  }
+
+  function buildSuggestedAddons() {
+    const section = document.getElementById('summary-upsell-section');
+    if (!section) return;
+    const itemIds = (state.summaryItems || []).map(i => i.id);
+    // Potential upsell items not in the cart
+    const suggestions = [];
+    if (!itemIds.includes('chains') && state.animal === 'cattle')
+      suggestions.push({ icon:'⛓️', name:'Extra-long Chain Pairs', price:'$12 / pair', desc:'For bulls and large breeds — replaces the standard 20″ chains.' });
+    if (!itemIds.includes('batteries'))
+      suggestions.push({ icon:'🔋', name:'Spare Collar Batteries', price:'$49 each', desc:'Keep collars running during low-sun periods by rotating batteries.' });
+    if (!itemIds.includes('chargers'))
+      suggestions.push({ icon:'🔌', name:'Battery Charger', price:'$89', desc:'Required to recharge spare batteries (~14 hrs per charge).' });
+    if (!itemIds.includes('beacons'))
+      suggestions.push({ icon:'📶', name:'Shelter Beacon', price:'$149 each', desc:'Tracks animals indoors where GPS is unavailable.' });
+    if (!itemIds.includes('straps'))
+      suggestions.push({ icon:'🟫', name:'Leather Neck Straps', price:'$18 each', desc:'Softer alternative for animals with sensitive skin.' });
+    if (suggestions.length === 0) { section.innerHTML = ''; return; }
+    section.innerHTML = `
+      <div class="upsell-section">
+        <div class="upsell-section-header">
+          <div class="upsell-section-title">Other items you may need</div>
+          <div class="upsell-section-sub">Browse the full range on the product page, or add directly here.</div>
+        </div>
+        ${suggestions.map(s => `
+          <div class="upsell-item">
+            <div class="upsell-item-icon">${s.icon}</div>
+            <div class="upsell-item-info">
+              <div class="upsell-item-name">${s.name}</div>
+              <div class="upsell-item-desc">${s.desc}</div>
+            </div>
+            <div class="upsell-item-price">${s.price}</div>
+            <button class="upsell-add-btn" onclick="skipToPurchase()">View →</button>
+          </div>`).join('')}
+      </div>`;
   }
 
   function renderSummaryCart() {
@@ -2519,7 +2638,7 @@
 
   function buildCheckoutAndGo() {
     // Pre-fill email from welcome screen
-    const emailEl = document.querySelector('#screen-checkout input[type="email"]');
+    const emailEl = document.getElementById('co-email');
     if (emailEl && state.email) emailEl.value = state.email;
     // Render checkout order summary (no icons)
     const items = state.summaryItems || [];
@@ -2539,16 +2658,22 @@
     const btn = document.querySelector('.pay-btn');
     if (!btn) return;
     const tc = document.getElementById('tc-agree');
-    // Check required fields: first name, last name, email, address line 1, city
-    const fields = [
-      document.querySelector('#screen-checkout input[autocomplete="given-name"]'),
-      document.querySelector('#screen-checkout input[autocomplete="family-name"]'),
-      document.querySelector('#screen-checkout input[type="email"]'),
-      document.querySelector('#screen-checkout input[autocomplete="address-line1"]'),
-    ];
-    const allFilled = fields.every(f => f && f.value.trim().length > 0);
+    const ids = ['co-first','co-last','co-email','co-address1'];
+    const allFilled = ids.every(id => {
+      const el = document.getElementById(id);
+      return el && el.value.trim().length > 0;
+    });
     const tcChecked = tc && tc.checked;
     btn.classList.toggle('ready', allFilled && tcChecked);
+  }
+
+  function validateField(input, msg) {
+    const empty = !input.value.trim();
+    input.classList.toggle('field-error', empty);
+    // Find sibling error msg (next element)
+    const errId = 'err-' + input.id.replace('co-','');
+    const errEl = document.getElementById(errId);
+    if (errEl) errEl.classList.toggle('visible', empty);
   }
 
   // ─── Purchase page ────────────────────────────────────────────
