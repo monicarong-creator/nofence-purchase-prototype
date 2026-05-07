@@ -1080,9 +1080,12 @@
       </button>
     </div>
 
-    <!-- Back button -->
-    <div style="text-align:center">
-      <button onclick="goTo('screen-welcome')" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 28px;background:var(--neutral-200);color:var(--neutral-700);border:none;border-radius:var(--radius-lg);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s" onmouseover="this.style.background='var(--neutral-300)'" onmouseout="this.style.background='var(--neutral-200)'">
+    <!-- CTA buttons -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <button onclick="goTo('screen-intro')" class="btn btn-primary" style="height:52px;padding:0 36px;font-size:16px;width:100%;max-width:360px">
+        Continue to quiz &nbsp;→
+      </button>
+      <button onclick="goTo('screen-welcome')" style="display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 24px;background:none;color:var(--neutral-500);border:none;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;transition:color .2s" onmouseover="this.style.color='var(--neutral-900)'" onmouseout="this.style.color='var(--neutral-500)'">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>
         Back to homepage
       </button>
