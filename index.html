@@ -847,6 +847,18 @@
   </div>
 </div>
 
+<!-- ═══════════════ CONTACT SALES MODAL ════════════════════ -->
+<div class="modal-overlay" id="contactSalesModal">
+  <div class="modal-card">
+    <div class="modal-title">Talk to our sales team?</div>
+    <p class="modal-desc">We'll take you to our sales contact form. You'll lose your quiz progress — but our team can build a custom quote for large orders.</p>
+    <div class="modal-btns">
+      <button class="modal-skip" onclick="closeContactSalesModal()">Stay in quiz</button>
+      <button class="modal-continue" onclick="window.open('https://nofence.com/contact','_blank');closeContactSalesModal()">Go to contact form</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════ ABANDON MODAL (nav back during quiz) ════ -->
 <div class="modal-overlay" id="abandonModal">
   <div class="modal-card">
@@ -1245,7 +1257,7 @@
               <strong>Ordering 100 or more collars?</strong>
               Volume pricing is available. Get in touch and we'll build a custom quote for your operation.
             </div>
-            <button class="qty-100-btn" onclick="alert('This would open the sales contact form.')">Contact sales</button>
+            <button class="qty-100-btn" onclick="showContactSalesModal()">Contact sales</button>
           </div>
         </div>
 
@@ -1903,7 +1915,7 @@
           <!-- 100+ callout -->
           <div class="tier-100-callout" id="tier100Callout">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="7.5" stroke="#396317"/><rect x="7.25" y="4" width="1.5" height="5" rx=".75" fill="#396317"/><circle cx="8" cy="11.5" r=".75" fill="#396317"/></svg>
-            <span><strong>Ordering 100+ collars?</strong> Volume pricing is available — <button class="tier-100-link" onclick="alert('This would open the sales contact form.')">contact our sales team</button> for a custom quote.</span>
+            <span><strong>Ordering 100+ collars?</strong> Volume pricing is available — <button class="tier-100-link" onclick="showContactSalesModal()">contact our sales team</button> for a custom quote.</span>
           </div>
 
           <!-- Price -->
@@ -2641,6 +2653,10 @@
   function showQuitModal() { document.getElementById('quitModal').classList.add('open'); }
   function closeQuitModal() { document.getElementById('quitModal').classList.remove('open'); }
   function skipToPurchase() { closeQuitModal(); goTo('screen-purchase'); }
+
+  // ─── Contact sales modal ──────────────────────────────────────
+  function showContactSalesModal() { document.getElementById('contactSalesModal').classList.add('open'); }
+  function closeContactSalesModal() { document.getElementById('contactSalesModal').classList.remove('open'); }
 
   // ─── Abandon modal (nav back during quiz) ────────────────────
   function closeAbandonModal() { document.getElementById('abandonModal').classList.remove('open'); }
