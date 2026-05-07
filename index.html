@@ -2572,7 +2572,7 @@
     }
     if (id === 'screen-welcome') {
       checkWelcomeReady();
-      setTimeout(startCarousel, 120); // restart carousel
+      startCarousel();
     }
     if (id === 'screen-grants') {
       // Pre-fill email from wizard state if available
@@ -3291,7 +3291,9 @@
     bar.style.animation = 'none';
     bar.style.width = '0%';
     void bar.offsetWidth; // force reflow
-    bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
+    requestAnimationFrame(() => {
+      bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
+    });
   }
 
   function goToSlide(idx) {
@@ -3303,23 +3305,30 @@
   }
 
   function goToSlideManual(idx) {
-    if (carouselTimer) clearInterval(carouselTimer);
+    if (carouselTimer) clearInterval(carouselIdx);
+    clearInterval(carouselTimer);
+    carouselTimer = null;
     goToSlide(idx);
     carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
   }
 
   function startCarousel() {
-    if (carouselTimer) clearInterval(carouselTimer);
+    clearInterval(carouselTimer);
+    carouselTimer = null;
     carouselIdx = 0;
-    goToSlide(0); // show slide 0 and kick off progress bar immediately
+    goToSlide(0);
     carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
   }
 
   // ─── Init ─────────────────────────────────────────────────────
   updateSummary();
   document.getElementById('welcome-continue').disabled = true;
-  // Use setTimeout so the browser has painted before we start animating
-  setTimeout(startCarousel, 120);
+  // Script is at bottom of <body> — DOM is ready, start carousel immediately
+  startCarousel();
+  // Also restart after all images are loaded in case of timing issues
+  window.addEventListener('load', function() {
+    if (!carouselTimer) startCarousel();
+  });
 
   function checkWelcomeReady() {
     const hasAnimal = state.animal !== null;
