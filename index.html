@@ -538,7 +538,7 @@
 
   /* Hero — merged with why-cards into one green section */
   .intro-hero { position:relative; overflow:hidden; background:#0d1f10; padding:100px 80px 88px; display:flex; flex-direction:column; align-items:center; text-align:center; }
-  .intro-hero-bg { position:absolute; top:-24px; right:-24px; bottom:-24px; left:-24px; min-width:calc(100% + 48px); min-height:calc(100% + 48px); width:calc(100% + 48px); height:calc(100% + 48px); object-fit:cover; object-position:center 40%; filter:blur(8px); pointer-events:none; z-index:0; display:block; opacity:.85; }
+  .intro-hero-bg { position:absolute; top:-30px; right:-30px; bottom:-30px; left:-30px; background-image:url('solar-bg.jpg'); background-size:cover; background-position:center 40%; background-repeat:no-repeat; filter:blur(8px); pointer-events:none; z-index:0; opacity:.9; }
   .intro-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(8,28,14,.55) 0%, rgba(8,28,14,.35) 40%, rgba(8,28,14,.80) 75%, #0d1f10 100%); pointer-events:none; z-index:1; }
   .intro-hero > * { position:relative; z-index:2; }
   .intro-hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(95,165,38,.18); border:1px solid rgba(95,165,38,.4); border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); letter-spacing:.5px; text-transform:uppercase; margin-bottom:32px; }
@@ -1023,7 +1023,7 @@
           <p style="font-size:12px">I'm happy to receive my personalised recommendation and occasional updates by email. Unsubscribe anytime.</p>
         </div>
         <div class="btn-row" style="padding-top:0">
-          <button class="btn btn-primary" id="welcome-continue" disabled onclick="goTo('screen-email-confirm')">Continue</button>
+          <button class="btn btn-primary" id="welcome-continue" disabled onclick="goTo('screen-intro')">Continue</button>
         </div>
         <div class="trust-row">
           <span class="trust-item">🔒 GDPR safe</span>
@@ -1099,7 +1099,7 @@
 
   <!-- ── HERO ──────────────────────────────────────────────────── -->
   <div class="intro-hero">
-    <img class="intro-hero-bg" src="solar-bg.jpg" alt="">
+    <div class="intro-hero-bg"></div>
     <div class="intro-hero-overlay"></div>
     <div class="intro-hero-badge">Built for working farmers</div>
     <h1 class="intro-hero-h1">The right Nofence setup,<br><em>built around your farm</em></h1>
