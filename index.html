@@ -3411,7 +3411,15 @@
   function updateSummaryQty(id, delta) {
     const item = (state.summaryItems || []).find(i => i.id === id);
     if (!item) return;
-    item.qty = Math.max(item.min, item.qty + delta);
+    const newQty = item.qty + delta;
+    // Removable items hitting 0 → auto-remove and return to upsell section
+    if (item.removable && newQty < 1) {
+      state.summaryItems = state.summaryItems.filter(i => i.id !== id);
+      renderSummaryCart();
+      buildSuggestedAddons();
+      return;
+    }
+    item.qty = Math.max(item.min, newQty);
     renderSummaryCart();
   }
 
@@ -3426,6 +3434,7 @@
   function removeSummaryItem(id) {
     state.summaryItems = (state.summaryItems || []).filter(i => i.id !== id);
     renderSummaryCart();
+    buildSuggestedAddons();
   }
 
   function applyDiscount() {
