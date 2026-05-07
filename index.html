@@ -1586,11 +1586,22 @@
           </div>
           <div class="inline-reveal" id="env-power-reveal" style="padding:0 4px">
             <div style="padding:4px 0 8px">
-              <div class="info-box" style="background:var(--yellow-50);border-color:var(--yellow-300);gap:12px">
+              <div class="info-box" style="background:var(--green-25);border:1px solid var(--green-100);gap:12px">
                 <div style="font-size:20px;flex-shrink:0">🔋</div>
-                <div>
-                  <div style="font-size:13px;font-weight:700;color:var(--neutral-900);margin-bottom:4px">Spare batteries recommended</div>
-                  <div style="font-size:12px;color:var(--neutral-700);line-height:1.5">The collar's built-in solar panel charges in daylight, but shade reduces output. <strong>Spare batteries</strong> ($49 each) let you swap and charge in rotation so no collar ever goes dark. <strong>A battery charger</strong> ($89) charges them overnight via a standard outlet. We'll add the right quantity to your setup — you can adjust in the summary.</div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                    <div style="font-size:13px;font-weight:700;color:var(--neutral-900)">Spare batteries + charger added to your setup</div>
+                    <button onclick="toggleInfoBox('battery-info-shade')" style="width:17px;height:17px;border-radius:50%;border:1.5px solid var(--green-400);background:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--green-700);font-size:10px;font-weight:700;font-style:italic;font-family:Georgia,serif;flex-shrink:0;padding:0;line-height:1" title="More info">i</button>
+                  </div>
+                  <div style="font-size:12px;color:var(--neutral-700);line-height:1.5">Based on your land type, we've included 1 battery per 10 collars + 1 charger. You can adjust quantities in the summary.</div>
+                  <div id="battery-info-shade" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--green-100)">
+                    <div style="font-size:12px;color:var(--neutral-700);line-height:1.6">
+                      <strong style="display:block;margin-bottom:4px;color:var(--neutral-900)">Additional collar batteries</strong>
+                      For a smooth operation in areas without consistent sun exposure, we recommend one additional battery for every 10 collars. Spare batteries let you charge some collars while others are in use, avoiding interruptions to your operation. <em style="color:var(--neutral-500)">Rechargeable lithium-ion — compatible with all Nofence cattle collar models.</em>
+                      <strong style="display:block;margin:10px 0 4px;color:var(--neutral-900)">Collar battery charger</strong>
+                      We recommend one charger for every 10 collars. Each battery takes around 14 hours to fully charge. Batteries are shipped at a low charge level — fully charge before the start of the season. <em style="color:var(--neutral-500)">Plugs into a standard outlet.</em>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1642,11 +1653,22 @@
           </div>
           <div class="inline-reveal" id="grazing-power-reveal" style="padding:0 4px">
             <div style="padding:4px 0 8px">
-              <div class="info-box" style="background:var(--yellow-50);border-color:var(--yellow-300);gap:12px">
-                <div style="font-size:20px;flex-shrink:0">⚡</div>
-                <div>
-                  <div style="font-size:13px;font-weight:700;color:var(--neutral-900);margin-bottom:4px">Higher battery demand on large land</div>
-                  <div style="font-size:12px;color:var(--neutral-700);line-height:1.5">Intensive rotational grazing on large properties drains collar batteries faster. <strong>Spare batteries</strong> ($49 each) and a <strong>battery charger</strong> ($89) mean you can always have a charged set ready for the next rotation. We'll calculate the right quantities for your herd size and add them to your summary.</div>
+              <div class="info-box" style="background:var(--green-25);border:1px solid var(--green-100);gap:12px">
+                <div style="font-size:20px;flex-shrink:0">🔋</div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                    <div style="font-size:13px;font-weight:700;color:var(--neutral-900)">Spare batteries + charger added to your setup</div>
+                    <button onclick="toggleInfoBox('battery-info-grazing')" style="width:17px;height:17px;border-radius:50%;border:1.5px solid var(--green-400);background:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--green-700);font-size:10px;font-weight:700;font-style:italic;font-family:Georgia,serif;flex-shrink:0;padding:0;line-height:1" title="More info">i</button>
+                  </div>
+                  <div style="font-size:12px;color:var(--neutral-700);line-height:1.5">Intensive grazing draws more from the battery. We've included 1 battery per 10 collars + 1 charger. You can adjust in the summary.</div>
+                  <div id="battery-info-grazing" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--green-100)">
+                    <div style="font-size:12px;color:var(--neutral-700);line-height:1.6">
+                      <strong style="display:block;margin-bottom:4px;color:var(--neutral-900)">Additional collar batteries</strong>
+                      For a smooth operation with intensive grazing set-ups, we recommend one additional battery for every 10 collars. Spare batteries let you charge some collars while others are in use, avoiding interruptions to your operation. <em style="color:var(--neutral-500)">Rechargeable lithium-ion — compatible with all Nofence cattle collar models.</em>
+                      <strong style="display:block;margin:10px 0 4px;color:var(--neutral-900)">Collar battery charger</strong>
+                      We recommend one charger for every 10 collars. Each battery takes around 14 hours to fully charge. Batteries are shipped at a low charge level — fully charge before the start of the season. <em style="color:var(--neutral-500)">Plugs into a standard outlet.</em>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3419,6 +3441,12 @@
         ${essentials.map(s => upsellCard(s)).join('')}
       </div>
       ${optionalSection}`;
+  }
+
+  function toggleInfoBox(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = el.style.display === 'none' ? '' : 'none';
   }
 
   function toggleUpsellInfo(id) {
