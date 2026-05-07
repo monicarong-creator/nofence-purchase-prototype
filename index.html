@@ -914,13 +914,13 @@
 <!-- ═══════════════ RETAKE QUIZ MODAL (from summary page) ══ -->
 <div class="modal-overlay" id="retakeModal" onclick="if(event.target===this)closeRetakeModal()">
   <div class="modal-card">
-    <div class="modal-icon" style="font-size:32px">🔄</div>
-    <div class="modal-title" style="font-size:19px">Start the quiz over?</div>
-    <p class="modal-desc">This will reset your answers and clear everything currently in your cart. <strong style="color:var(--neutral-900)">Your current setup won't be saved.</strong></p>
-    <div id="retake-cart-summary" style="background:var(--neutral-50);border:1px solid var(--neutral-200);border-radius:var(--radius-md);padding:10px 14px;font-size:13px;color:var(--neutral-600);margin-bottom:24px;line-height:1.5"></div>
-    <div class="modal-btns" style="flex-direction:column;gap:10px">
-      <button class="modal-continue" onclick="closeRetakeModal()" style="background:var(--green-500);color:white">Keep my setup</button>
-      <button class="modal-skip" onclick="confirmRetakeQuiz()" style="background:white;color:var(--neutral-600);border:1.5px solid var(--neutral-300)">Yes, restart quiz</button>
+    <div class="modal-title">Start the quiz over?</div>
+    <p class="modal-desc" style="margin-bottom:12px">This will reset your answers and clear everything currently in your cart.</p>
+    <div id="retake-cart-summary" style="background:var(--neutral-50);border:1px solid var(--neutral-200);border-radius:var(--radius-md);padding:10px 14px;font-size:13px;color:var(--neutral-600);margin-bottom:10px;line-height:1.5"></div>
+    <p style="font-size:13px;color:var(--neutral-500);margin-bottom:24px">Your current setup won't be saved.</p>
+    <div class="modal-btns">
+      <button class="modal-skip" onclick="confirmRetakeQuiz()">Yes, restart quiz</button>
+      <button class="modal-continue" onclick="closeRetakeModal()">Keep my setup</button>
     </div>
   </div>
 </div>
