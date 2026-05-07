@@ -3256,13 +3256,14 @@
     const sub = mainTotal + accTotal;
     document.getElementById('summary-subtotal').textContent = `$${sub.toLocaleString()}`;
     document.getElementById('summary-grand-total').textContent = `$${sub.toLocaleString()}`;
-    document.getElementById('pay-btn-total').textContent = `$${sub.toLocaleString()}`;
-    document.getElementById('co-product-name').textContent = names[state.collarType];
-    document.getElementById('co-product-meta').textContent = `Qty: ${qty} · $${ppu} each`;
-    document.getElementById('co-product-total').textContent = `$${mainTotal.toLocaleString()}`;
-    document.getElementById('co-subtotal').textContent = `$${sub.toLocaleString()}`;
-    document.getElementById('co-vat').textContent = `$${(sub * .2).toLocaleString(undefined,{maximumFractionDigits:0})}`;
-    document.getElementById('co-grand-total').textContent = `$${(sub * 1.2).toLocaleString(undefined,{maximumFractionDigits:0})}`;
+    const setText = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    setText('pay-btn-total', `$${sub.toLocaleString()}`);
+    setText('co-product-name', names[state.collarType]);
+    setText('co-product-meta', `Qty: ${qty} · $${ppu} each`);
+    setText('co-product-total', `$${mainTotal.toLocaleString()}`);
+    setText('co-subtotal', `$${sub.toLocaleString()}`);
+    setText('co-vat', `$${(sub * .2).toLocaleString(undefined,{maximumFractionDigits:0})}`);
+    setText('co-grand-total', `$${(sub * 1.2).toLocaleString(undefined,{maximumFractionDigits:0})}`);
   }
 
   // ─── Checkout helpers ─────────────────────────────────────────
