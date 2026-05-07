@@ -505,7 +505,7 @@
 
   /* ─── PHOTO SCREENS ────────────────────────────────────────── */
   /* welcome screen left panel is now a carousel — no background-image needed here */
-  #screen-email-confirm .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/collars-group.webp'); }
+  #screen-email-confirm .wizard-left { background: var(--green-50); }
   /* screen-intro is now full-width — no split wizard left panel */
   #screen-q1 .wizard-left { background-image: url('collar-product.jpg'); background-position:center 30%; }
   #screen-q2 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
@@ -538,7 +538,7 @@
 
   /* Hero — merged with why-cards into one green section */
   .intro-hero { position:relative; overflow:hidden; background:#0d1f10; padding:100px 80px 88px; display:flex; flex-direction:column; align-items:center; text-align:center; }
-  .intro-hero-bg { position:absolute; inset:-20px; background:url('solar-bg.jpg') center/cover no-repeat; filter:blur(10px); transform:scale(1.08); pointer-events:none; z-index:0; }
+  .intro-hero-bg { position:absolute; inset:-20px; background:url('solar-bg.jpg') center/cover no-repeat; filter:blur(6px); transform:scale(1.08); pointer-events:none; z-index:0; }
   .intro-hero-overlay { position:absolute; inset:0; background:linear-gradient(170deg,rgba(8,28,14,.72) 0%,rgba(8,28,14,.48) 50%,rgba(8,28,14,.75) 100%); pointer-events:none; z-index:0; }
   .intro-hero > * { position:relative; z-index:1; }
   .intro-hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(95,165,38,.18); border:1px solid rgba(95,165,38,.4); border-radius:20px; padding:6px 16px; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); letter-spacing:.5px; text-transform:uppercase; margin-bottom:32px; }
@@ -686,7 +686,7 @@
 
   /* ─── Q1 REDESIGN ─────────────────────────────────────────── */
   /* Diagonal cut — white triangle overlay on right edge */
-  #screen-q1 .wizard-left::after { content:''; position:absolute; top:0; right:0; width:72px; height:100%; background:white; clip-path:polygon(100% 0, 100% 100%, 0 100%); z-index:2; pointer-events:none; }
+  /* Q1 left panel — straight edge, no diagonal cut */
   /* Animal chip */
   .q1-animal-chip { display:inline-flex; align-items:center; gap:8px; background:var(--green-25); border:1px solid var(--green-100); border-radius:20px; padding:5px 12px; font-size:13px; font-weight:600; color:var(--green-700); margin-bottom:10px; }
   .q1-chip-sep { color:var(--neutral-300); }
@@ -1038,10 +1038,26 @@
 <!-- ═══════════════ SCREEN: EMAIL CONFIRM ════════════════════ -->
 <div id="screen-email-confirm" class="screen">
   <div class="wizard-layout">
-    <aside class="wizard-left photo-overlay">
-      <div class="left-quote">
-        <p>"The setup process was surprisingly straightforward — the team walked us through every step."</p>
-        <cite>— Maria K., Sheep farmer, New Zealand</cite>
+    <aside class="wizard-left">
+      <div style="display:flex;flex-direction:column;gap:24px;margin-top:auto">
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:40px;height:40px;background:var(--green-100);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 5l8 5 8-5" stroke="var(--green-700)" stroke-width="1.6" stroke-linecap="round"/><rect x="1" y="3" width="16" height="12" rx="2" stroke="var(--green-700)" stroke-width="1.6"/></svg>
+          </div>
+          <div><div style="font-size:13px;font-weight:700;color:var(--green-900);margin-bottom:4px">Check your inbox</div><div style="font-size:12px;color:var(--green-700);line-height:1.5">The sign-in link expires in 10 minutes.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:40px;height:40px;background:var(--green-100);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="var(--green-700)" stroke-width="1.6"/><path d="M6 9l2 2 4-4" stroke="var(--green-700)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><div style="font-size:13px;font-weight:700;color:var(--green-900);margin-bottom:4px">One click to continue</div><div style="font-size:12px;color:var(--green-700);line-height:1.5">No password needed. Click the link and you're in.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:40px;height:40px;background:var(--green-100);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="11" width="14" height="5" rx="1.5" stroke="var(--green-700)" stroke-width="1.6"/><path d="M5.5 11V7a3.5 3.5 0 0 1 7 0v4" stroke="var(--green-700)" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div><div style="font-size:13px;font-weight:700;color:var(--green-900);margin-bottom:4px">Secure &amp; private</div><div style="font-size:12px;color:var(--green-700);line-height:1.5">We never store passwords. Magic link only.</div></div>
+        </div>
       </div>
     </aside>
     <main class="wizard-right" style="justify-content:center">
@@ -1078,8 +1094,8 @@
     <h1 class="intro-hero-h1">The right Nofence setup,<br><em>built around your farm</em></h1>
     <p class="intro-hero-sub">No guesswork. Answer 6 quick questions and we'll calculate the exact collar count, accessories, and pricing for your herd and land.</p>
     <div class="intro-hero-ctas">
-      <button class="btn btn-primary intro-hero-btn" onclick="goTo('screen-q1')">Start the quiz &nbsp;→</button>
       <button class="intro-hero-skip" onclick="showQuitModal()">Skip to shop</button>
+      <button class="btn btn-primary intro-hero-btn" onclick="goTo('screen-q1')">Start the quiz &nbsp;→</button>
     </div>
 
     <!-- divider -->
@@ -1267,7 +1283,7 @@
         </div>
         <div class="option-list">
           <div class="option-card" data-group="cattle-size" data-value="large" onclick="selectCattleSize(this,'large')">
-            <div class="option-icon">🐂</div>
+            <div class="option-icon"><svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 32C0 14.3269 14.3269 0 32 0C49.6731 0 64 14.3269 64 32C64 49.6731 49.6731 64 32 64C14.3269 64 0 49.6731 0 32Z" fill="#F5F5F5"/><path d="M52.6529 35.068C52.3126 34.0348 52.3142 33.1063 52.1181 32.1879C51.8733 30.7488 51.5987 30.0778 51.2727 29.5666V31.3528C51.4496 32.2869 52.2094 37.5528 53.3663 37.3167C53.4358 37.2539 53.5662 37.1419 53.5427 37.0459C53.3727 36.3442 52.902 35.8224 52.6529 35.068Z" fill="#151C17"/><path d="M12.7844 18C12.8634 18.1228 12.9409 19.1492 13.2845 19.5991C14.4136 21.0789 15.6902 21.0515 17.3739 21.251C17.7085 21.2907 18.6243 21.6059 18.7809 21.8924C18.9257 22.1571 18.0446 22.3969 17.8923 23.0235C17.9537 23.2478 18.0029 23.2362 18.1942 23.4103C19.5525 22.2468 19.8897 22.1167 21.6798 22.2306C20.8494 25.0337 19.1806 24.0586 18.7002 24.4981C18.6414 24.7165 18.6313 24.6406 18.6885 24.8391C18.7601 24.9169 18.8525 24.9991 18.9594 25.0099C20.7153 25.1879 21.971 23.908 22.3798 22.2915C22.4332 22.0799 22.4664 21.9283 22.3595 21.7486C22.0239 21.5308 20.836 21.5432 20.3685 21.5336C24.0935 18.9899 28.9743 20.5991 32.5331 22.6365C34.102 23.5347 35.6212 24.7569 37.4123 25.1721C40.1269 25.8015 42.8537 24.6292 45.5714 24.9402C47.2712 25.1348 48.9956 25.7656 50.0825 27.1489C51.2767 28.6692 51.7924 30.5544 51.032 32.3831C50.6467 33.3111 50.106 34.2239 50.1348 35.2624C50.1733 36.6269 51.1736 37.787 51.475 39.0953C51.7716 40.3843 50.9193 45.3079 50.72 46.9836C50.052 46.9928 49.3841 46.9899 48.7161 46.9748C49.3221 45.786 49.1992 44.6089 49.3306 43.3133C49.4177 42.4506 49.4482 41.8809 48.9395 41.1406C48.2256 40.2527 47.75 39.6092 47.0997 38.6593C45.7184 36.6408 43.6798 35.9799 41.3922 36.9089C40.9108 37.1043 40.4111 37.433 39.9527 37.696C39.1169 38.1753 37.92 38.5778 36.9587 38.6486C35.5656 38.751 34.2201 38.6821 32.9013 38.1771C32.2707 37.9539 31.6594 37.6859 30.9984 37.5604C29.3382 37.2448 27.4252 38.1767 26.7599 39.7526C26.3319 40.7673 26.1492 42.272 25.9285 43.3782C25.695 44.5462 25.4128 45.8165 25.237 46.9941L23.2978 46.9728C23.3753 46.8405 23.5581 46.5069 23.6126 46.3731C24.0347 45.335 23.8589 43.8649 23.9017 42.7162C23.946 41.5063 24.0881 40.2155 23.9417 39.0499C23.6371 36.6229 21.3838 35.4376 20.0179 33.6374C19.2148 32.5787 18.8247 31.6086 18.3689 30.3841C18.8001 30.1502 20.54 29.2639 20.0094 28.6465C19.6492 28.604 19.3682 28.9618 19.1042 29.1742C17.4723 30.4863 15.6421 30.2568 13.7029 30.3164C12.826 30.3434 11.7108 31.2251 10.7912 30.4676C9.61348 29.4975 9.84593 28.8003 10.8617 27.8504C11.3934 27.3334 11.8124 26.8145 12.2206 26.2065C12.826 25.3059 13.3417 23.7256 14.038 22.954C14.5226 23.0257 15.4246 23.3902 15.7377 22.9208C15.6448 22.434 14.6583 22.4804 14.2346 22.3352C12.0747 21.5946 11.394 19.9265 12.7844 18Z" fill="#151C17"/><path d="M44.042 37.2099C44.974 37.382 45.5778 37.8915 46.1998 38.5685C46.2618 40.6867 46.0699 42.7936 45.5169 44.837C45.4581 45.0547 45.4089 45.2852 45.3566 45.5051L45.3395 45.5501C45.1166 45.7011 43.9421 45.6136 43.6097 45.6027C44.5144 43.3329 44.2723 39.6272 44.042 37.2099Z" fill="#151C17"/><path d="M30.2059 38.1694C30.2658 38.1627 30.3272 38.1748 30.3903 38.1816C30.5137 38.3422 30.5175 39.0474 30.5383 39.2805C30.7558 41.7066 30.3694 43.7223 29.7148 46.0427C29.1842 46.0435 28.6536 46.0336 28.1235 46.0129C29.0913 43.2749 28.7952 41.5337 28.2203 38.8613C28.9064 38.3551 29.3803 38.2373 30.2059 38.1694Z" fill="#151C17"/><path d="M15.9359 25.347C15.9359 25.5956 15.7344 25.7971 15.4858 25.7971C15.2373 25.7971 15.0358 25.5956 15.0358 25.347C15.0358 25.0985 15.2373 24.8969 15.4858 24.8969C15.7344 24.8969 15.9359 25.0985 15.9359 25.347Z" fill="#FBF5EE"/><path d="M53.9231 37.5842C53.8514 37.3082 53.5237 36.7942 53.3559 36.566C53.2474 36.4958 53.0008 36.3857 52.8824 36.5066C52.8278 36.9182 52.4377 37.2089 52.453 37.8802C52.4703 38.6438 52.8049 38.8815 53.006 39.5925C53.1114 39.9648 52.8893 40.0277 53.1535 40.2554C53.4426 40.2599 53.5279 39.9521 53.6485 39.7191C53.9643 39.1091 54.0965 38.2512 53.9231 37.5842Z" fill="#151C17"/></svg></div>
             <div class="option-text">
               <div class="option-title">Yes — I have bulls or large breeds</div>
               <div class="option-desc">e.g. Limousin, Charolais, Simmental, or any breed of bulls</div>
@@ -1300,7 +1316,7 @@
             </div>
           </div>
           <div class="option-card" data-group="cattle-size" data-value="standard" onclick="selectCattleSize(this,'standard')">
-            <div class="option-icon">🐄</div>
+            <div class="option-icon"><svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 32C0 14.3269 14.3269 0 32 0C49.6731 0 64 14.3269 64 32C64 49.6731 49.6731 64 32 64C14.3269 64 0 49.6731 0 32Z" fill="#F5F5F5"/><path d="M52.9825 25.4809C52.7071 25.2315 52.317 25.0065 52.0032 24.7989L52.1768 25.6361C52.895 26.2393 53.1794 26.6355 53.2326 27.6049C53.3008 28.847 53.2668 30.1913 53.2641 31.4364C53.2625 32.1871 53.2933 33.6753 53.2018 34.365C53.114 35.0273 52.4862 35.4951 52.5108 36.5752C52.5388 37.8039 53.0771 38.1864 53.4008 39.3304C53.5703 39.9295 53.2129 40.0306 53.638 40.397C54.1032 40.4042 54.2405 39.909 54.4346 39.5341C54.9427 38.5525 55.1553 37.1722 54.8764 36.0989C54.7609 35.6549 54.2338 34.8278 53.9638 34.4606C53.8864 32.923 53.9843 31.3591 53.9608 29.8019C53.9396 28.4004 54.1478 26.5364 52.9825 25.4809Z" fill="#151C17"/><path d="M17.6613 18.5781C18.1583 18.5312 18.5293 18.6038 19.0139 18.7C18.9706 18.7851 18.9293 18.8711 18.8899 18.9579C18.7236 19.3255 18.7036 19.6881 18.8647 20.0646C19.2577 20.9831 20.12 20.6885 20.3092 20.7631C20.3397 20.9848 20.3157 21.0956 20.5323 21.1755C20.8181 21.1296 20.9364 21.0463 21.126 20.8292C22.0181 19.8077 23.0246 19.7867 24.3061 19.9959C23.0973 22.8954 21.3504 21.2145 20.7925 22.067C20.8018 22.1569 20.794 22.2342 20.8745 22.2894C21.98 23.0474 23.5082 22.1752 24.2531 21.4707C26.341 22.1523 27.0893 22.1654 29.2494 22.1619L32.7927 22.1591L44.7225 22.1605C46.3091 22.1586 48.4115 21.9776 49.9221 22.4657C50.5518 22.6692 51.2395 23.3301 51.5781 23.9009C53.5415 27.21 51.168 31.0376 51.1932 34.5396C51.2036 36.1109 51.7234 37.5221 52.3186 38.9319C51.9675 40.3961 51.7227 41.8538 51.5385 43.35C51.4212 43.9854 51.5251 44.8878 51.3919 45.494C51.2137 46.3053 50.9997 46.8225 50.9053 47.6755C50.369 47.7491 49.6077 47.7213 49.0533 47.7159C49.2398 47.1498 49.6338 46.4523 49.8423 45.8342C50.1859 44.8157 50.0637 44.1129 50.0761 43.1422C50.1363 38.4534 47.5279 38.747 45.4495 35.2464C45.123 34.6992 44.8604 34.1164 44.6669 33.5093C44.4632 32.8716 44.345 32.2011 44.1813 31.5569C44.1531 31.4462 44.0012 31.4298 43.9078 31.4138C43.8056 31.4495 43.6821 31.4766 43.6536 31.6031C43.4595 32.4644 44.2748 34.3336 44.601 35.0386C39.5325 38.1835 37.193 36.7795 31.8946 36.407C31.9591 36.0424 32.4371 33.1775 32.4093 32.9231C32.2581 32.7764 32.1176 32.7436 31.9145 32.7978C31.6748 33.1366 30.3878 41.1396 30.3709 42.1898C30.3606 42.8312 30.4459 44.8103 30.3602 45.4766C30.2635 46.2284 29.9077 46.7392 29.7429 47.7047C29.2042 47.7334 28.6312 47.7216 28.0894 47.7203C28.7569 46.1904 29.1529 45.0922 28.96 43.3813C28.7874 41.8513 28.4593 40.3024 28.289 38.7602C28.1832 37.8027 27.7772 36.6728 27.6377 35.6878C27.5909 35.3577 27.3987 34.4445 27.2624 34.1643C27.053 34.0098 26.8252 34.0271 26.6466 34.2136C26.6523 34.5709 27.1712 36.5533 27.2894 36.9918C25.9081 36.9986 24.9312 36.5984 23.9334 35.6427C22.6565 34.4198 22.5132 32.5825 21.6931 31.0997C21.0848 29.9998 20.2427 28.9317 19.4992 27.9064C20.0636 27.6218 21.9177 26.1138 21.1157 25.5275C20.6483 25.4677 20.4175 26.3669 20.0431 26.7584C18.2453 28.6378 15.7067 27.0841 13.7646 28.033C12.5214 28.6404 10.4887 27.1422 11.1181 26.1066C11.8767 24.9931 13.3015 23.9792 14.0144 22.8351C14.7167 21.7082 14.6255 20.9991 15.7833 20.0703C16.4713 19.5185 16.6891 18.8929 17.6613 18.5781Z" fill="#151C17"/><path d="M12.52 25.8912C12.712 25.9752 12.7032 25.9682 12.8417 26.1251C12.9186 26.5923 12.4472 26.7823 12.0641 26.8598C11.8528 26.8153 11.778 26.796 11.6786 26.596C11.7507 26.3034 12.2256 26.0857 12.52 25.8912Z" fill="#FBF5EE"/><path d="M25.1504 37.2251C25.8627 37.5598 26.616 37.6029 27.3864 37.5908C27.435 37.8229 27.5564 38.3225 27.5279 38.5346C27.4092 39.3608 27.0655 40.1301 26.9205 40.9541C26.7051 42.0358 26.8054 43.1854 26.6692 44.2646C26.5902 44.8914 26.2304 45.6529 26.0746 46.3154C26.0521 46.3943 26.0357 46.5178 25.9765 46.5496C25.6665 46.7164 24.7615 46.6173 24.387 46.5967C24.6241 46.0635 25.1529 45.3281 25.2989 44.7937C25.6858 43.3777 25.5644 41.4979 25.4631 40.0392C25.396 39.0728 25.1957 38.185 25.1504 37.2251Z" fill="#151C17"/><path d="M47.8112 38.9888L47.939 39.0005C48.0425 39.2342 47.887 39.5241 47.7877 39.7794C47.4309 40.7004 47.1103 41.621 46.8557 42.5744C46.6141 43.3974 46.5801 44.3406 46.1957 45.1105C45.9194 45.6637 45.8229 46.013 45.6944 46.6214C45.1874 46.6259 44.6803 46.621 44.1734 46.6067C44.1223 46.6022 44.1023 46.5848 44.0516 46.5607C44.0616 46.3539 44.6185 45.503 44.7485 45.173C45.496 43.2758 45.6424 41.7256 45.4672 39.7368C46.5073 39.7143 46.9264 39.4705 47.8112 38.9888Z" fill="#151C17"/><path d="M44.8417 35.614C44.9522 35.6687 45.5135 36.5216 45.6693 36.7158C46.1837 37.3575 46.731 37.9496 47.3151 38.5264C46.2343 39.1359 45.6228 39.1629 44.4138 38.9913C43.1473 38.7054 42.4738 38.1676 41.7692 37.1082C42.8212 36.7999 43.9055 36.1808 44.8417 35.614Z" fill="#151C17"/><path d="M53.588 35.2131C54.5629 36.1379 54.5761 37.8059 53.9733 38.9366C53.3072 37.4013 52.6537 36.8794 53.588 35.2131Z" fill="#FBF5EE"/><path d="M21.8284 17C21.8456 17.0182 21.8566 17.3102 21.8284 17.5962C21.7314 18.5788 21.0863 19.8546 20.1031 20.2169C19.8603 20.3064 19.7548 20.2169 19.5924 20.0102C19.5291 19.9297 19.234 19.5266 19.3383 19.446C20.329 18.6798 21.0354 18.0206 21.8284 17Z" fill="#151C17"/><path d="M14.4298 17.4286C14.551 17.5176 14.8118 17.8555 14.9423 17.9948C15.3039 18.3808 15.6591 18.5417 16.0888 18.8331L15.7475 19.2008L15.3839 19.6029C14.7064 18.9173 14.5661 18.3715 14.4298 17.4286Z" fill="#151C17"/><path d="M17.7055 22.6378C17.7055 22.8871 17.5034 23.0893 17.254 23.0893C17.0046 23.0893 16.8025 22.8871 16.8025 22.6378C16.8025 22.3884 17.0046 22.1862 17.254 22.1862C17.5034 22.1862 17.7055 22.3884 17.7055 22.6378Z" fill="#FBF5EE"/></svg></div>
             <div class="option-text">
               <div class="option-title">No — standard chains will fit my herd</div>
               <div class="option-desc">Smaller and mid-sized breeds, dairy cows, heifers</div>
@@ -1773,10 +1789,9 @@
           <span>🛡️ 5-yr warranty</span>
         </div>
 
-        <!-- Alt navigation links -->
-        <div class="summary-alt-actions">
-          <button class="summary-alt-link" onclick="skipToPurchase()">Browse product page instead</button>
-          <button class="summary-alt-link" onclick="goTo('screen-welcome')">Restart quiz from the beginning</button>
+        <!-- Retake quiz link — placed below checkout actions -->
+        <div style="margin-top:10px;text-align:center">
+          <button style="font-size:12px;color:var(--neutral-400);background:none;border:none;cursor:pointer;font-family:inherit;text-decoration:underline;padding:4px 8px;transition:color .15s" onmouseover="this.style.color='var(--neutral-700)'" onmouseout="this.style.color='var(--neutral-400)'" onclick="goTo('screen-q1')">↩ Retake quiz</button>
         </div>
 
         <!-- Grants box -->
@@ -2168,8 +2183,8 @@
       <h2 style="font-size:28px;font-weight:300;font-family:'Host Grotesk','Inter',sans-serif;color:var(--green-900);letter-spacing:-0.02em;margin-bottom:10px">On its way to your inbox</h2>
       <p style="font-size:16px;color:var(--neutral-500);line-height:1.6;max-width:420px;margin:0 auto 36px">Your personalised grants guide is heading to <strong id="grants-email-display"></strong>. It usually arrives within a few minutes — check your spam folder if you don't see it.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button onclick="goTo('screen-purchase')" style="height:52px;padding:0 28px;background:var(--green-500);color:white;border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s" onmouseover="this.style.background='#4C841E'" onmouseout="this.style.background='#5FA526'">
-          Back to purchase →
+        <button onclick="goTo(state.grantsReturnScreen)" style="height:52px;padding:0 28px;background:var(--green-500);color:white;border:none;border-radius:var(--radius-lg);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s" onmouseover="this.style.background='#4C841E'" onmouseout="this.style.background='#5FA526'">
+          Back to my setup →
         </button>
         <button onclick="alert('Our sales team will be in touch shortly.')" style="height:52px;padding:0 28px;background:white;color:var(--neutral-700);border:1.5px solid var(--neutral-200);border-radius:var(--radius-lg);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s">
           Talk to sales
@@ -2430,7 +2445,8 @@
     shelter: null, shelterQty: 1,
     leather: null, leatherQty: 5,
     collarType: 'cattle', purchaseQty: 5, accessories: {}, currentTier: 0,
-    summaryItems: [], cartAdded: false
+    summaryItems: [], cartAdded: false,
+    grantsReturnScreen: 'screen-purchase'
   };
 
   const prices = { cattle: [349,299,249], sheep: [299,249,199] };
@@ -2518,6 +2534,9 @@
       // Reset form/success view
       document.getElementById('grants-form-view').style.display = '';
       document.getElementById('grants-success-view').style.display = 'none';
+      // Remember where to go back to
+      const prev = navStack[navStack.length - 1] || 'screen-purchase';
+      state.grantsReturnScreen = prev;
     }
   }
 
