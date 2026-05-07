@@ -243,8 +243,10 @@
   .add-btn { flex: 1; height: 46px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
   .add-btn:hover { background: #4C841E; }
   /* 100+ tier callout */
-  .tier-100-callout { display:none; margin-top:8px; margin-bottom:8px; background:var(--green-25); border:1px solid var(--green-100); border-radius:10px; padding:12px 16px; font-size:13px; color:var(--green-900); align-items:center; gap:12px; }
+  .tier-100-callout { display:none; margin-top:8px; margin-bottom:8px; background:var(--green-25); border:1px solid var(--green-100); border-radius:10px; padding:12px 16px; font-size:13px; color:var(--green-900); align-items:center; gap:12px; justify-content:space-between; }
   .tier-100-callout.visible { display:flex; }
+  .tier-100-btn { height:34px; padding:0 14px; background:var(--green-600,#4C841E); color:white; border:none; border-radius:var(--radius-sm); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; white-space:nowrap; flex-shrink:0; transition:background .15s; }
+  .tier-100-btn:hover { background:var(--green-700,#396317); }
   .tier-100-callout strong { font-weight:700; }
   .tier-100-link { font-size:13px; font-weight:600; color:var(--green-700); background:none; border:none; cursor:pointer; font-family:inherit; text-decoration:underline; white-space:nowrap; padding:0; }
   /* Mixed setup view */
@@ -2099,8 +2101,11 @@
           </div>
           <!-- 100+ callout -->
           <div class="tier-100-callout" id="tier100Callout">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><path d="M8 1.5L9.545 5.785L14 6.18L10.75 9.065L11.795 13.5L8 11.1L4.205 13.5L5.25 9.065L2 6.18L6.455 5.785L8 1.5Z" fill="#5FA526" stroke="#5FA526" stroke-width=".5" stroke-linejoin="round"/></svg>
-            <span><strong>Looking for a custom quote?</strong> Our team will get back to you within one business day with our best bulk pricing. <button class="tier-100-link" onclick="showContactSalesModal()">Contact sales →</button></span>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><path d="M8 1.5L9.545 5.785L14 6.18L10.75 9.065L11.795 13.5L8 11.1L4.205 13.5L5.25 9.065L2 6.18L6.455 5.785L8 1.5Z" fill="#5FA526" stroke="#5FA526" stroke-width=".5" stroke-linejoin="round"/></svg>
+              <span><strong>Ordering 100+ collars?</strong> Contact our sales team for a custom quote.</span>
+            </div>
+            <button class="tier-100-btn" onclick="showContactSalesModal()">Contact sales →</button>
           </div>
 
           <!-- Price -->
