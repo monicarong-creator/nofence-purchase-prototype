@@ -464,6 +464,10 @@
   .carousel-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
   .carousel-dot { width: 8px; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.35s ease; border: none; padding: 0; flex-shrink: 0; outline: none; }
   .carousel-dot.active { background: rgba(255,255,255,0.95); width: 26px; }
+  /* ─── Carousel progress bar ───────────────────────────────── */
+  .carousel-progress-wrap { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,0.18); z-index: 11; }
+  .carousel-progress-bar  { height: 100%; width: 0; background: rgba(255,255,255,0.88); border-radius: 0 2px 2px 0; }
+  @keyframes carouselFill { from { width: 0% } to { width: 100% } }
 
   /* ─── INTRO SCREEN — full-width hero layout ──────────────── */
   #screen-intro.active { display:flex; flex-direction:column; min-height:calc(100vh - 80px); }
@@ -818,6 +822,10 @@
         <button class="carousel-dot" onclick="goToSlideManual(2)" aria-label="Slide 3"></button>
         <button class="carousel-dot" onclick="goToSlideManual(3)" aria-label="Slide 4"></button>
         <button class="carousel-dot" onclick="goToSlideManual(4)" aria-label="Slide 5"></button>
+      </div>
+      <!-- Progress bar timer -->
+      <div class="carousel-progress-wrap">
+        <div class="carousel-progress-bar" id="carouselProgressBar"></div>
       </div>
     </aside>
     <main class="wizard-right" style="padding:40px 56px;overflow-y:auto">
@@ -2779,11 +2787,20 @@
   const CAROUSEL_COUNT = 5;
   const CAROUSEL_INTERVAL = 7000; // ms between slides
 
+  function resetProgressBar() {
+    const bar = document.getElementById('carouselProgressBar');
+    if (!bar) return;
+    bar.style.animation = 'none';
+    void bar.offsetWidth; // force reflow so animation restarts from 0
+    bar.style.animation = `carouselFill ${CAROUSEL_INTERVAL / 1000}s linear forwards`;
+  }
+
   function goToSlide(idx) {
     carouselIdx = ((idx % CAROUSEL_COUNT) + CAROUSEL_COUNT) % CAROUSEL_COUNT;
     const track = document.getElementById('carouselTrack');
     if (track) track.style.transform = `translateX(-${carouselIdx * 100}%)`;
     document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
+    resetProgressBar();
   }
 
   function goToSlideManual(idx) {
@@ -2795,6 +2812,7 @@
 
   function startCarousel() {
     if (carouselTimer) clearInterval(carouselTimer);
+    resetProgressBar(); // kick off the bar immediately on page load
     carouselTimer = setInterval(() => goToSlide(carouselIdx + 1), CAROUSEL_INTERVAL);
   }
 
