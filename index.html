@@ -49,7 +49,7 @@
   .wizard-left .illus, .wizard-left .caption { display: none; }
   .wizard-left .quote-card { display: none; }
   .wizard-left .brand { display: none !important; }
-  .wizard-right { background: var(--white); display: flex; flex-direction: column; padding: 48px 64px; overflow-y: auto; }
+  .wizard-right { background: var(--white); display: flex; flex-direction: column; padding: 48px 64px; overflow-y: auto; scrollbar-gutter: stable; }
 
   /* photo overlays */
   .photo-overlay::before { content: ''; position: absolute; inset: 0; background: linear-gradient(170deg,rgba(10,45,22,.55) 0%,rgba(10,45,22,.20) 50%,rgba(10,45,22,.60) 100%); pointer-events: none; z-index: 0; }
@@ -673,7 +673,7 @@
   .qty-hint { font-size:12px; color:var(--neutral-400); margin-top:3px; }
 
   /* ─── STEP INDICATOR (all quiz screens) ──────────────────── */
-  .step-indicator { display:flex; align-items:flex-start; margin-bottom:28px; }
+  .step-indicator { display:flex; align-items:flex-start; margin-bottom:28px; position:sticky; top:48px; background:white; z-index:2; margin-left:-64px; margin-right:-64px; padding-left:64px; padding-right:64px; }
   .si-step { display:flex; flex-direction:column; align-items:center; gap:5px; flex-shrink:0; }
   .si-circle { width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; background:white; border:2px solid var(--neutral-200); color:var(--neutral-400); transition:all .25s; font-family:inherit; }
   .si-step.done .si-circle { background:var(--green-500); border-color:var(--green-500); color:white; font-size:0; }
@@ -730,17 +730,16 @@
   .q1-bottom-links { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:12px; }
   .q1-bottom-links .quiz-skip-link { font-size:13px; }
   .q1-link-sep { color:var(--neutral-300); font-size:13px; }
-  .q1-right { padding:40px 56px; }
   @media (max-width:900px) {
     .q1-showcase-pair { grid-template-columns:1fr; }
     .q1-included-grid { grid-template-columns:1fr; }
-    .q1-right { padding:32px 24px; }
   }
 
   @media (max-width: 900px) {
     .wizard-layout { grid-template-columns: 1fr; }
     .wizard-left { display: none; position: static; height: auto; }
     .wizard-right { padding: 32px 24px; }
+    .step-indicator { top:32px; margin-left:-24px; margin-right:-24px; padding-left:24px; padding-right:24px; }
     .purchase-body, .checkout-page { flex-direction: column; padding: 16px; }
     .order-summary-panel, .checkout-summary { width: 100%; min-width: unset; position: static; max-height: none; }
     .product-detail { flex-direction: column; }
