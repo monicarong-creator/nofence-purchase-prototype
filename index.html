@@ -372,8 +372,8 @@
   .leather-qty-warning.visible { display:flex; }
   .leather-qty-error { display:none; align-items:center; gap:6px; font-size:12px; color:#D92D20; font-weight:500; margin-top:6px; }
   .leather-qty-error.visible { display:flex; }
-  .leather-apply-btn { margin-top:10px; background:none; border:1.5px solid var(--green-300); border-radius:var(--radius-md); font-family:inherit; font-size:13px; font-weight:600; color:var(--green-700); cursor:pointer; padding:8px 16px; width:100%; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:6px; }
-  .leather-apply-btn:hover { background:var(--green-25); border-color:var(--green-500); }
+  .leather-apply-btn { margin-top:6px; background:none; border:none; font-family:inherit; font-size:12px; font-weight:500; color:var(--green-600,#4C841E); cursor:pointer; padding:0; text-decoration:underline; text-underline-offset:2px; display:inline-block; }
+  .leather-apply-btn:hover { color:var(--green-900); }
 
   /* ─── SUMMARY MINI ITEMS (no icons) ──────────────────────── */
   .summary-mini-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; gap:12px; }
@@ -1914,7 +1914,7 @@
               <div class="rec-card-icon">🟫</div>
               <div class="rec-card-body">
                 <div class="rec-card-title">Leather Neck Straps — 55 cm (21.5″)</div>
-                <div class="rec-card-desc">Natural chrome-free leather. Replaces the nylon strap included with each collar. Compatible with C2.5 and S1. <strong>$18 each.</strong></div>
+                <div class="rec-card-desc">Natural chrome-free leather. Replaces the nylon strap included with each collar. Compatible with C2.5 and S1.</div>
                 <!-- Quantity row — stepper + direct input + price -->
                 <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
                   <div class="stepper-sm">
@@ -1922,7 +1922,10 @@
                     <input class="count" id="leather-qty-input" type="text" inputmode="numeric" min="1" max="999" value="5" oninput="onLeatherQtyInput(this.value)" onblur="onLeatherQtyBlur(this.value)">
                     <button class="inc" onclick="adjustLeatherQty(1)">+</button>
                   </div>
-                  <span class="rec-price" id="leather-total-price">$90</span>
+                  <div style="margin-left:auto;text-align:right">
+                    <div style="font-size:11px;color:var(--neutral-400);margin-bottom:1px">$18 each</div>
+                    <span class="rec-price" id="leather-total-price">$90</span>
+                  </div>
                 </div>
                 <!-- Inline error / warning messages -->
                 <div class="leather-qty-error" id="leather-qty-error">
