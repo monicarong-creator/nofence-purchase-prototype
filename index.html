@@ -383,7 +383,7 @@
   .success-page { max-width: 720px; margin: 0 auto; padding: 48px 32px 64px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:0; }
   /* Hero section */
   .success-hero { position:relative; width:100%; border-radius:var(--radius-xl); overflow:hidden; background:linear-gradient(150deg,#0d3828 0%,#1a5a3e 50%,#2a7048 100%); padding:56px 48px 52px; display:flex; flex-direction:column; align-items:center; margin-bottom:32px; }
-  .success-hero-bg { position:absolute; inset:0; background:url('https://identity.nofence.com/prototypes/images/field-cattle.jpg') center/cover; opacity:.12; animation:slowZoom 18s ease-in-out infinite alternate; pointer-events:none; }
+  .success-hero-bg { position:absolute; inset:0; background:url('images/field-cattle.jpg') center/cover; opacity:.12; animation:slowZoom 18s ease-in-out infinite alternate; pointer-events:none; }
   @keyframes slowZoom { from { transform:scale(1); } to { transform:scale(1.1); } }
   .success-hero > * { position:relative; z-index:1; }
   .success-check-wrap { width:72px; height:72px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; animation: popIn .5s cubic-bezier(0.175,0.885,0.32,1.275); box-shadow:0 4px 20px rgba(0,0,0,.2); }
@@ -509,12 +509,12 @@
   /* welcome screen left panel is now a carousel — no background-image needed here */
   /* screen-email-confirm — full-page centered layout, no left panel */
   /* screen-intro is now full-width — no split wizard left panel */
-  #screen-q1 .wizard-left { background-image: url('collar-product.jpg'); background-position:center 30%; }
-  #screen-q2 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/field-cattle.jpg'); }
-  #screen-q3 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
-  #screen-q4 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg'); }
-  #screen-q5 .wizard-left { background-image: url('https://identity.nofence.com/prototypes/images/setup-collar.jpg'); }
-  #screen-q6 .wizard-left { background-image: url('leather-strap.jpg'); background-position: center center; }
+  #screen-q1 .wizard-left { background-image: url('images/collar-product.jpg'); background-position:center 30%; }
+  #screen-q2 .wizard-left { background-image: url('images/field-cattle.jpg'); }
+  #screen-q3 .wizard-left { background-image: url('images/hero-landscape.jpg'); }
+  #screen-q4 .wizard-left { background-image: url('images/hero-landscape.jpg'); }
+  #screen-q5 .wizard-left { background-image: url('images/setup-collar.jpg'); }
+  #screen-q6 .wizard-left { background-image: url('images/leather-strap.jpg'); background-position: center center; }
 
   /* ─── WIZARD LEFT — sticky, no height growth ─────────────── */
   .wizard-left { position: sticky; top: 80px; height: calc(100vh - 80px); overflow: hidden; }
@@ -791,8 +791,8 @@
     <!-- Full site nav (purchase page) -->
     <div id="fullNav">
       <a class="nav-logo" href="https://nofence.com" target="_blank" style="gap:8px">
-        <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
-        <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
+        <img src="icons/nofence-logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
+        <img src="icons/nofence-logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </a>
       <ul class="site-nav-links" id="navLinks">
         <li><a href="#">Products</a></li><li><a href="#">Capabilities</a></li><li><a href="#">Knowledge hub</a></li><li><a href="#">Nofence community</a></li>
@@ -816,8 +816,8 @@
         <span id="navBackLabel">nofence.com</span>
       </button>
       <button class="checkout-nav-logo" onclick="showLeaveCheckoutModal()" style="gap:8px;background:none;border:none;cursor:pointer;padding:0">
-        <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
-        <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
+        <img src="icons/nofence-logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
+        <img src="icons/nofence-logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </button>
       <div style="min-width:140px;display:flex;justify-content:flex-end">
         <button class="nav-skip-quiz-btn" id="navSkipQuizBtn" onclick="showQuitModal()" style="display:none">Skip quiz <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -891,35 +891,35 @@
       <!-- Carousel track — 5 slides -->
       <div class="carousel-track" id="carouselTrack">
 
-        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/hero-landscape.jpg')">
+        <div class="carousel-slide" style="background-image:url('images/hero-landscape.jpg')">
           <div class="left-quote" style="margin-top:auto">
             <p>"Virtual fencing has completely changed how we manage our land — no wires, no stress for the animals."</p>
             <cite>— Lars H., Sheep farmer, Norway</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('sheep-aerial.jpg');background-position:center 30%">
+        <div class="carousel-slide" style="background-image:url('images/sheep-aerial.jpg');background-position:center 30%">
           <div class="left-quote" style="margin-top:auto">
             <p>"The cattle adapted within days. Now they know their boundaries better than we ever could with wire."</p>
             <cite>— Peter H., Beef farmer, Scotland</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/collars-group.webp')">
+        <div class="carousel-slide" style="background-image:url('images/collars-group.webp')">
           <div class="left-quote" style="margin-top:auto">
             <p>"We set up our first virtual paddock in under an hour. The Nofence app is incredibly intuitive."</p>
             <cite>— Sarah B., Beef farmer, Ireland</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('https://identity.nofence.com/prototypes/images/setup-collar.jpg')">
+        <div class="carousel-slide" style="background-image:url('images/setup-collar.jpg')">
           <div class="left-quote" style="margin-top:auto">
             <p>"We saved thousands on fencing costs and gained real flexibility in how we rotate our pastures."</p>
             <cite>— Aoife M., Sheep farmer, Ireland</cite>
           </div>
         </div>
 
-        <div class="carousel-slide" style="background-image:url('farmer-bull.jpg');background-position:center center">
+        <div class="carousel-slide" style="background-image:url('images/farmer-bull.jpg');background-position:center center">
           <div class="left-quote" style="margin-top:auto">
             <p>"The support team helped us optimise for our hilly terrain. Outstanding service from day one."</p>
             <cite>— Magnus O., Goat farmer, Norway</cite>
@@ -1115,7 +1115,7 @@
 
   <!-- ── HERO ──────────────────────────────────────────────────── -->
   <div class="intro-hero">
-    <img src="solar-bg.jpg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:blur(5px);transform:scale(1.08);opacity:0.38;pointer-events:none;z-index:0;display:block;">
+    <img src="images/solar-bg.jpg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:blur(5px);transform:scale(1.08);opacity:0.38;pointer-events:none;z-index:0;display:block;">
     <div class="intro-hero-overlay"></div>
     <div class="intro-hero-badge">Built for working farmers</div>
     <h1 class="intro-hero-h1">The right Nofence setup,<br><em>built around your farm</em></h1>
@@ -1888,9 +1888,9 @@
         <!-- LEFT: image gallery -->
         <div class="product-gallery">
           <div class="gallery-main" id="galleryMain">
-            <img id="gallery-img-0" src="collar-c25.jpg" alt="Nofence Cattle Collar C2.5">
-            <img id="gallery-img-1" src="cow-portrait.jpg" alt="Collar worn by cow in field" class="g-hidden">
-            <img id="gallery-img-2" src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="Herd of cattle with collars" class="g-hidden">
+            <img id="gallery-img-0" src="images/collar-c25.jpg" alt="Nofence Cattle Collar C2.5">
+            <img id="gallery-img-1" src="images/cow-portrait.jpg" alt="Collar worn by cow in field" class="g-hidden">
+            <img id="gallery-img-2" src="images/field-cattle.jpg" alt="Herd of cattle with collars" class="g-hidden">
           </div>
           <!-- Dot navigation -->
           <div class="gallery-dots">
@@ -1962,7 +1962,7 @@
           <!-- Cattle panel -->
           <div class="mixed-panel">
             <div class="mixed-panel-img">
-              <img src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="Cattle Collar C2.5">
+              <img src="images/collars-group.webp" alt="Cattle Collar C2.5">
             </div>
             <div class="mixed-panel-body">
               <div class="mixed-panel-name">Cattle Collar C2.5</div>
@@ -1978,7 +1978,7 @@
           <!-- Sheep panel -->
           <div class="mixed-panel">
             <div class="mixed-panel-img">
-              <img src="sheep-lambs.jpg" alt="Sheep & Goat Collar S1">
+              <img src="images/sheep-lambs.jpg" alt="Sheep & Goat Collar S1">
             </div>
             <div class="mixed-panel-body">
               <div class="mixed-panel-name">Sheep &amp; Goat Collar S1</div>
@@ -2678,7 +2678,7 @@
   // ─── Welcome: collar type selector ───────────────────────────
   const COLLAR_DATA = {
     cattle: {
-      img:   'https://identity.nofence.com/prototypes/images/collars-group.webp',
+      img:   'images/collars-group.webp',
       quote: '"With the C2.5 collar, managing 60 head across three fields is easier than it\'s ever been."',
       cite:  '— James R., Beef farmer, Ireland',
       chipEmoji: '🐄',
@@ -2690,7 +2690,7 @@
       tierPrices: [349, 299, 249],
     },
     sheep: {
-      img:   'sheep-lambs.jpg',
+      img:   'images/sheep-lambs.jpg',
       quote: '"The S1 is so lightweight — the sheep barely notice it\'s there, and we moved them to a new paddock in minutes."',
       cite:  '— Lars H., Sheep farmer, Norway',
       chipEmoji: '🐑',
@@ -2702,7 +2702,7 @@
       tierPrices: [299, 249, 199],
     },
     both: {
-      img:   'https://identity.nofence.com/prototypes/images/hero-landscape.jpg',
+      img:   'images/hero-landscape.jpg',
       quote: '"We run both cattle and sheep on the same land — Nofence works perfectly for the whole mixed operation."',
       cite:  '— Anna M., Mixed farm, Ireland',
       chipEmoji: '🐄🐑',
@@ -3158,14 +3158,14 @@
   // Gallery images per collar type
   const GALLERY_IMGS = {
     cattle: [
-      'collar-c25.jpg',
-      'cow-portrait.jpg',
-      'https://identity.nofence.com/prototypes/images/field-cattle.jpg'
+      'images/collar-c25.jpg',
+      'images/cow-portrait.jpg',
+      'images/field-cattle.jpg'
     ],
     sheep: [
-      'collar-sg25.jpg',
-      'sheep-collar-closeup.jpg',
-      'sheep-herd-aerial.jpg'
+      'images/collar-sg25.jpg',
+      'images/sheep-collar-closeup.jpg',
+      'images/sheep-herd-aerial.jpg'
     ]
   };
 
