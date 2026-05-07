@@ -188,7 +188,7 @@
 
   /* ─── PURCHASE PAGE ───────────────────────────────────────── */
   #screen-purchase { flex-direction: column; background: var(--neutral-100); }
-  .wizard-prompt-bar { background: linear-gradient(135deg,#EBF3E8 0%,#F0F5EE 100%); border-bottom: 1px solid #C5DEBC; padding: 14px 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .wizard-prompt-bar { background: linear-gradient(135deg,#EBF3E8 0%,#F0F5EE 100%); border-bottom: 1px solid #C5DEBC; padding: 14px 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; position: sticky; top: 80px; z-index: 999; }
   .wizard-prompt-bar .prompt-icon { width: 36px; height: 36px; background: var(--green-500); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
   .wizard-prompt-bar .prompt-text { flex: 1; min-width: 200px; }
   .wizard-prompt-bar .prompt-text strong { display: block; font-size: 14px; font-weight: 700; color: #0F4030; }
@@ -210,10 +210,10 @@
   .gallery-main { position: relative; overflow: hidden; flex: 1; min-height: 340px; }
   .gallery-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .4s; }
   .gallery-main img.g-hidden { opacity: 0; pointer-events: none; }
-  .gallery-thumbs { display: flex; gap: 8px; padding: 10px 12px; background: rgba(255,255,255,.6); border-top: 1px solid var(--neutral-200); }
-  .gallery-thumb { flex: 1; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; padding: 0; background: var(--neutral-200); transition: border-color .2s; }
-  .gallery-thumb.active { border-color: var(--green-500); }
-  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Gallery dot nav */
+  .gallery-dots { display: flex; gap: 7px; justify-content: center; padding: 12px 0; background: rgba(255,255,255,.7); border-top: 1px solid var(--neutral-100); }
+  .gallery-dot-btn { width: 8px; height: 8px; border-radius: 50%; background: var(--neutral-200); border: none; cursor: pointer; padding: 0; transition: background .2s, transform .2s; }
+  .gallery-dot-btn.active { background: var(--green-500); transform: scale(1.25); }
   /* Info panel */
   .product-info-panel { padding: 28px 28px 24px; display: flex; flex-direction: column; border-left: 1px solid var(--neutral-100); }
   .product-type-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--neutral-400); margin-bottom: 6px; }
@@ -232,11 +232,16 @@
   .includes-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--neutral-700); line-height: 1.45; }
   .inc-check { flex-shrink: 0; width: 17px; height: 17px; background: var(--green-25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
   /* Qty + add */
-  .qty-add-wrap { display: flex; gap: 12px; align-items: center; border-top: 1px solid var(--neutral-100); padding-top: 18px; margin-top: auto; }
+  .qty-add-wrap { display: flex; gap: 12px; align-items: flex-end; border-top: 1px solid var(--neutral-100); padding-top: 18px; margin-top: auto; }
   .qty-group-sm { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
   .qty-label-sm { font-size: 11px; color: var(--neutral-500); font-weight: 500; }
-  .add-btn { flex: 1; height: 52px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
+  .add-btn { flex: 1; height: 46px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
   .add-btn:hover { background: #4C841E; }
+  /* 100+ tier callout */
+  .tier-100-callout { display:none; margin-top:12px; background:var(--green-25); border:1px solid var(--green-100); border-radius:10px; padding:12px 16px; font-size:13px; color:var(--green-900); align-items:center; gap:12px; }
+  .tier-100-callout.visible { display:flex; }
+  .tier-100-callout strong { font-weight:700; }
+  .tier-100-link { font-size:13px; font-weight:600; color:var(--green-700); background:none; border:none; cursor:pointer; font-family:inherit; text-decoration:underline; white-space:nowrap; padding:0; }
   /* Mixed setup view */
   .product-hero-mixed { border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; margin-bottom: 32px; background: white; box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 28px 28px 24px; }
   .mixed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
@@ -250,26 +255,28 @@
   .mixed-qty-label { font-size: 12px; color: var(--neutral-500); margin-bottom: 7px; }
   .accessories-title { font-size: 18px; font-weight: 700; color: var(--neutral-900); margin-bottom: 6px; font-family: 'Host Grotesk','Inter',sans-serif; font-weight: 300; letter-spacing: -0.02em; }
   .accessories-subtitle { font-size: 13px; color: var(--neutral-500); margin-bottom: 16px; }
-  /* ─── REQUIRED ITEMS CARD GRID ────────────────────────────── */
+  /* ─── REQUIRED ITEMS FEATURE ROWS ─────────────────────────── */
   .req-section { margin: 32px 0 8px; }
   .req-section-info-bar { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: #93370D; background: #FFF6ED; border: 1px solid #FDDCAB; border-radius: 8px; padding: 7px 14px; margin-bottom: 18px; }
   .req-section-title { font-size: 28px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 6px; }
-  .req-section-sub { font-size: 14px; color: var(--neutral-600); line-height: 1.55; margin-bottom: 20px; }
-  .req-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .req-card { background: white; border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-  .req-card-img { aspect-ratio: 4/3; background: var(--neutral-100); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 56px; }
-  .req-card-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-  .req-card-body { padding: 16px 20px 20px; flex: 1; display: flex; flex-direction: column; }
-  .req-card-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
-  .req-card-tag.always { color: #B54708; }
-  .req-card-tag.conditional { color: #026AA2; }
-  .req-card-tag.annual { color: #5925DC; }
-  .req-card-name { font-size: 15px; font-weight: 700; color: var(--neutral-900); margin-bottom: 6px; }
-  .req-card-desc { font-size: 13px; color: var(--neutral-600); line-height: 1.6; flex: 1; margin-bottom: 14px; }
-  .req-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--neutral-100); }
-  .req-card-price { font-size: 15px; font-weight: 700; color: var(--neutral-900); }
-  .req-card-cta { font-size: 13px; font-weight: 600; color: var(--green-700); background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; transition: color .15s; }
-  .req-card-cta:hover { color: var(--green-900); text-decoration: underline; }
+  .req-section-sub { font-size: 14px; color: var(--neutral-500); line-height: 1.55; margin-bottom: 20px; }
+  .req-feature-list { display: flex; flex-direction: column; gap: 16px; }
+  .req-feature-card { display: flex; background: white; border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-height: 180px; }
+  .req-feature-img { width: 220px; flex-shrink: 0; background: var(--neutral-100); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .req-feature-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .req-feature-img-bg { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+  .req-feature-body { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; }
+  .req-feature-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
+  .req-feature-tag.always { color: #B54708; }
+  .req-feature-tag.conditional { color: #026AA2; }
+  .req-feature-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .req-feature-name { font-size: 18px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.02em; }
+  .req-feature-desc { font-size: 13px; color: var(--neutral-500); line-height: 1.65; flex: 1; margin-bottom: 16px; }
+  .req-feature-footer { display: flex; align-items: center; gap: 16px; }
+  .req-feature-price { font-size: 22px; font-weight: 900; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.03em; }
+  .req-feature-cta { height: 40px; padding: 0 20px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .15s; white-space: nowrap; }
+  .req-feature-cta:hover { background: #4C841E; }
+  .req-feature-cta.added { background: var(--green-50); color: var(--green-700); border: 1.5px solid var(--green-300); }
   .accessories-list { display: flex; flex-direction: column; gap: 10px; }
   .accessory-card { display: flex; gap: 16px; align-items: center; background: var(--neutral-50); border-radius: var(--radius-lg); padding: 16px 20px; border: 1.5px solid var(--neutral-200); transition: all .2s; }
   .accessory-card:hover { background: var(--green-25); border-color: var(--green-100); }
@@ -284,8 +291,8 @@
   .acc-add-btn.added { background: var(--green-25); color: var(--green-700); border: 1px solid var(--green-300); }
   .order-summary-panel { width: 340px; min-width: 340px; background: white; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); position: sticky; top: 96px; max-height: calc(100vh - 112px); overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
   .order-summary-panel h2 { font-size: 18px; font-weight: 700; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; font-weight: 300; letter-spacing: -0.02em; }
-  .order-item { display: flex; gap: 12px; align-items: flex-start; }
-  .order-item-img { width: 44px; height: 44px; background: var(--green-50); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .order-item { display: flex; gap: 8px; align-items: flex-start; }
+  .order-item-img { display: none; }
   .order-item-info { flex: 1; }
   .item-name { font-size: 14px; font-weight: 600; color: var(--neutral-900); }
   .item-meta { font-size: 12px; color: var(--neutral-500); margin-top: 2px; }
@@ -299,7 +306,7 @@
   .grand-total-row { display: flex; justify-content: space-between; padding-top: 12px; border-top: 2px solid var(--neutral-200); }
   .grand-key { font-size: 16px; font-weight: 700; color: var(--neutral-900); }
   .grand-val { font-size: 20px; font-weight: 700; color: var(--green-900); }
-  .checkout-btn { width: 100%; height: 52px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
+  .checkout-btn { width: 100%; height: 60px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-lg); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
   .checkout-btn:hover { background: #4C841E; }
   .financing-note { background: var(--neutral-50); border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; color: var(--neutral-700); text-align: center; line-height: 1.4; }
   .trust-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
@@ -787,7 +794,6 @@
       </ul>
       <div class="nav-actions">
         <a href="#" class="nav-btn-outline">Talk to sales</a>
-        <a href="#" class="nav-btn-text" style="height:40px;padding:0 16px;border:1.5px solid var(--green-500);border-radius:6px;background:var(--green-500);color:white;font-weight:600;display:flex;align-items:center;text-decoration:none;font-size:14px;font-family:inherit">Buy now</a>
       </div>
     </div>
 
@@ -1800,20 +1806,15 @@
         <!-- LEFT: image gallery -->
         <div class="product-gallery">
           <div class="gallery-main" id="galleryMain">
-            <img id="gallery-img-0" src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="Nofence Collar — product view">
-            <img id="gallery-img-1" src="https://identity.nofence.com/prototypes/images/setup-collar.jpg" alt="Collar being fitted" class="g-hidden">
-            <img id="gallery-img-2" src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="Collar on animal" class="g-hidden">
+            <img id="gallery-img-0" src="collar-c25.jpg" alt="Nofence Cattle Collar C2.5">
+            <img id="gallery-img-1" src="cow-portrait.jpg" alt="Collar worn by cow in field" class="g-hidden">
+            <img id="gallery-img-2" src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="Herd of cattle with collars" class="g-hidden">
           </div>
-          <div class="gallery-thumbs">
-            <button class="gallery-thumb active" onclick="switchGalleryImg(0)" aria-label="Product view">
-              <img src="https://identity.nofence.com/prototypes/images/collars-group.webp" alt="">
-            </button>
-            <button class="gallery-thumb" onclick="switchGalleryImg(1)" aria-label="In use">
-              <img src="https://identity.nofence.com/prototypes/images/setup-collar.jpg" alt="">
-            </button>
-            <button class="gallery-thumb" onclick="switchGalleryImg(2)" aria-label="On animal">
-              <img src="https://identity.nofence.com/prototypes/images/field-cattle.jpg" alt="">
-            </button>
+          <!-- Dot navigation -->
+          <div class="gallery-dots">
+            <button class="gallery-dot-btn active" onclick="switchGalleryImg(0)" aria-label="Product view"></button>
+            <button class="gallery-dot-btn" onclick="switchGalleryImg(1)" aria-label="Collar on cow"></button>
+            <button class="gallery-dot-btn" onclick="switchGalleryImg(2)" aria-label="Herd view"></button>
           </div>
         </div>
 
@@ -1828,6 +1829,11 @@
             <button class="tier-btn" onclick="selectTier(1,this)">25–99</button>
             <button class="tier-btn" onclick="selectTier(2,this)">100+</button>
             <span style="font-size:13px;color:var(--neutral-400);margin-left:2px">collars</span>
+          </div>
+          <!-- 100+ callout -->
+          <div class="tier-100-callout" id="tier100Callout">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="7.5" stroke="#396317"/><rect x="7.25" y="4" width="1.5" height="5" rx=".75" fill="#396317"/><circle cx="8" cy="11.5" r=".75" fill="#396317"/></svg>
+            <span><strong>Ordering 100+ collars?</strong> Volume pricing is available — <button class="tier-100-link" onclick="alert('This would open the sales contact form.')">contact our sales team</button> for a custom quote.</span>
           </div>
 
           <!-- Price -->
@@ -1849,6 +1855,7 @@
             <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>5-year hardware warranty</li>
             <li><span class="inc-check"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="#4A8C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free software updates for the lifetime of the collar</li>
           </ul>
+          <hr style="border:none;border-top:1px solid var(--neutral-100);margin:14px 0 10px">
           <p style="font-size:11px;color:var(--neutral-400);margin-bottom:0">*Counted from delivery date</p>
 
           <!-- Qty + add -->
@@ -1906,59 +1913,58 @@
         <button class="add-btn" style="width:100%" onclick="addMixedToCart()">Add both to setup →</button>
       </div>
       <!-- ── Required items ───────────────────────────────── -->
+      <!-- ── Required items ───────────────────────────── -->
       <div class="req-section">
         <div class="req-section-info-bar">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#93370D"/><rect x="6.25" y="3.5" width="1.5" height="4.5" rx=".75" fill="#93370D"/><circle cx="7" cy="10" r=".75" fill="#93370D"/></svg>
           Not included in collar price — needed to get started
         </div>
         <h2 class="req-section-title">You'll need these too</h2>
-        <p class="req-section-sub">Your collars don't come with everything you need on day one. These items are essential to charge, activate, and track your herd from the moment they arrive.</p>
-        <div class="req-grid">
+        <p class="req-section-sub">Your collars don't arrive complete. These two items are essential to get up and running from day one.</p>
+        <div class="req-feature-list">
 
-          <!-- Card 1: Battery Charger -->
-          <div class="req-card">
-            <div class="req-card-img" style="background:#F0F4EE">
-              🔌
+          <!-- Feature row 1: Battery Charger -->
+          <div class="req-feature-card">
+            <div class="req-feature-img">
+              <div class="req-feature-img-bg" style="background:linear-gradient(135deg,#EBF5E0 0%,#D1E8BE 100%)">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><rect x="18" y="14" width="36" height="42" rx="5" stroke="#5FA526" stroke-width="2.5" fill="none"/><rect x="28" y="7" width="16" height="9" rx="3" fill="#5FA526"/><path d="M26 36h8l-4 10h8" stroke="#5FA526" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
             </div>
-            <div class="req-card-body">
-              <div class="req-card-tag always">⚡ Always required</div>
-              <div class="req-card-name">Collar Battery Charger</div>
-              <div class="req-card-desc">Batteries are shipped depleted and must be fully charged before your collars will work — a process that takes around 14 hours. Recommend 1 charger per 10 collars to rotate efficiently.</div>
-              <div class="req-card-footer">
-                <span class="req-card-price">$89</span>
-                <button class="req-card-cta" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order →</button>
+            <div class="req-feature-body">
+              <div class="req-feature-tag always">⚡ Always required</div>
+              <div class="req-feature-name-row">
+                <span class="req-feature-name">Collar Battery Charger</span>
+                <span class="info-tip solid" data-tip="Batteries are shipped depleted and must be fully charged before your first use — a process that takes around 14 hours per battery. We recommend 1 charger per 10 collars to allow efficient rotation between charges.">
+                  <svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg>
+                </span>
+              </div>
+              <p class="req-feature-desc">Batteries ship depleted and need a full charge before use — about 14 hours each. Recommended: 1 charger per 10 collars so you can always keep a rotation going.</p>
+              <div class="req-feature-footer">
+                <span class="req-feature-price">$89</span>
+                <button class="req-feature-cta" id="req-charger-btn" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order →</button>
               </div>
             </div>
           </div>
 
-          <!-- Card 2: Shelter Beacon -->
-          <div class="req-card">
-            <div class="req-card-img" style="background:#EFF8FF">
-              📶
-            </div>
-            <div class="req-card-body">
-              <div class="req-card-tag conditional">🏠 Required if animals go indoors</div>
-              <div class="req-card-name">Shelter Beacon</div>
-              <div class="req-card-desc">GPS signals cannot penetrate buildings. If your animals use barns, stables, or covered shelters, a beacon mounted inside is essential to maintain accurate tracking. One per building.</div>
-              <div class="req-card-footer">
-                <span class="req-card-price">$149</span>
-                <button class="req-card-cta" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order →</button>
+          <!-- Feature row 2: Shelter Beacon -->
+          <div class="req-feature-card">
+            <div class="req-feature-img">
+              <div class="req-feature-img-bg" style="background:linear-gradient(135deg,#EFF6FF 0%,#BFDBFE 100%)">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><rect x="22" y="22" width="28" height="34" rx="5" stroke="#3B82F6" stroke-width="2.5" fill="none"/><rect x="29" y="15" width="14" height="9" rx="3" fill="#BFDBFE" stroke="#3B82F6" stroke-width="1.5"/><circle cx="36" cy="39" r="5.5" stroke="#3B82F6" stroke-width="2"/><circle cx="36" cy="39" r="2.2" fill="#3B82F6"/><path d="M28 30 Q36 22 44 30" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M23 25 Q36 13 49 25" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".4"/></svg>
               </div>
             </div>
-          </div>
-
-          <!-- Card 3: Annual Subscription -->
-          <div class="req-card">
-            <div class="req-card-img" style="background:#F4F3FF">
-              📱
-            </div>
-            <div class="req-card-body">
-              <div class="req-card-tag annual">📅 Required from year 2</div>
-              <div class="req-card-name">Annual Subscription</div>
-              <div class="req-card-desc">Your first 12 months are included with your collar purchase. From year 2 onwards, an active subscription is required to use the Nofence app, virtual fencing, and real-time tracking.</div>
-              <div class="req-card-footer">
-                <span class="req-card-price" style="font-size:13px;color:var(--neutral-500)">Billed annually</span>
-                <button class="req-card-cta" onclick="alert('Contact our team for subscription renewal pricing.')">Get pricing →</button>
+            <div class="req-feature-body">
+              <div class="req-feature-tag conditional">🏠 Required if animals go indoors</div>
+              <div class="req-feature-name-row">
+                <span class="req-feature-name">Shelter Beacon</span>
+                <span class="info-tip solid" data-tip="The shelter beacon transmits a low-frequency signal that the collar detects when GPS coverage drops — typically inside barns, stables, or covered areas. Install with adhesive tape or screws. No technical setup required. Battery life: 2–3 years on standard AA batteries.">
+                  <svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg>
+                </span>
+              </div>
+              <p class="req-feature-desc">GPS doesn't reach inside buildings. If your animals use barns, stables, or covered shelters, a beacon mounted inside maintains accurate tracking. One per enclosed space.</p>
+              <div class="req-feature-footer">
+                <span class="req-feature-price">$149</span>
+                <button class="req-feature-cta" id="req-beacon-btn" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order →</button>
               </div>
             </div>
           </div>
@@ -2033,18 +2039,12 @@
       <hr class="divider">
       <div id="order-items-list">
         <div class="order-item" id="main-order-item">
-          <div class="order-item-img">🐄</div>
           <div class="order-item-info">
             <div class="item-name" id="summary-product-name">Cattle Collar C2.5</div>
             <div class="item-meta" id="summary-product-meta">Qty: 5 · $349 each</div>
           </div>
           <span class="order-item-price" id="summary-product-total">$1,745</span>
         </div>
-      </div>
-      <hr class="divider">
-      <div class="subscription-box">
-        <div class="sub-title">12-month subscription included</div>
-        <div class="sub-desc">Nofence app, pasture management, alerts, and support. Counted from delivery.</div>
       </div>
       <hr class="divider">
       <div class="grants-box">
@@ -2063,7 +2063,6 @@
         <span class="grand-val" id="summary-grand-total">$1,745</span>
       </div>
       <button class="checkout-btn" onclick="goTo('screen-checkout')">Proceed to checkout &nbsp;→</button>
-      <div class="financing-note">🟣 Pay in 3 interest-free instalments with Klarna</div>
       <div class="trust-badges">
         <div class="trust-badge">🔒 Secure payment</div>
         <div class="trust-badge">↩️ 30-day returns</div>
@@ -2924,20 +2923,20 @@
   // Gallery images per collar type
   const GALLERY_IMGS = {
     cattle: [
-      'https://identity.nofence.com/prototypes/images/collars-group.webp',
-      'https://identity.nofence.com/prototypes/images/setup-collar.jpg',
+      'collar-c25.jpg',
+      'cow-portrait.jpg',
       'https://identity.nofence.com/prototypes/images/field-cattle.jpg'
     ],
     sheep: [
-      'https://identity.nofence.com/prototypes/images/collars-group.webp',
-      'https://identity.nofence.com/prototypes/images/setup-collar.jpg',
+      'collar-c25.jpg',
+      'cow-portrait.jpg',
       'https://identity.nofence.com/prototypes/images/field-cattle.jpg'
     ]
   };
 
   function switchGalleryImg(idx) {
     document.querySelectorAll('#galleryMain img').forEach((img, i) => img.classList.toggle('g-hidden', i !== idx));
-    document.querySelectorAll('.gallery-thumb').forEach((th, i) => th.classList.toggle('active', i === idx));
+    document.querySelectorAll('.gallery-dot-btn').forEach((d, i) => d.classList.toggle('active', i === idx));
   }
 
   function switchCollar(type, btn) {
@@ -2955,7 +2954,6 @@
         const img = document.getElementById(id);
         if (img) img.src = imgs[i];
       });
-      document.querySelectorAll('.gallery-thumb img').forEach((img, i) => { img.src = imgs[i]; });
       switchGalleryImg(0);
       updatePurchasePrice();
     }
@@ -2965,6 +2963,8 @@
     document.querySelectorAll('.tier-btn').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     state.currentTier = idx;
+    const callout = document.getElementById('tier100Callout');
+    if (callout) callout.classList.toggle('visible', idx === 2);
     updatePurchasePrice();
   }
 
@@ -2992,8 +2992,13 @@
   function addToCart() { updateSummary(); }
 
   function addAccessory(id, price, name, btn) {
-    if (state.accessories[id]) { delete state.accessories[id]; btn.textContent = '+ Add'; btn.classList.remove('added'); }
-    else { state.accessories[id] = { price, name }; btn.textContent = '✓ Added'; btn.classList.add('added'); }
+    const isAdding = !state.accessories[id];
+    if (!isAdding) { delete state.accessories[id]; } else { state.accessories[id] = { price, name }; }
+    // Sync all buttons that fire addAccessory for the same id
+    document.querySelectorAll(`[onclick*="addAccessory('${id}'"]`).forEach(b => {
+      b.classList.toggle('added', isAdding);
+      b.textContent = isAdding ? '✓ Added' : (b.classList.contains('req-feature-cta') ? 'Add to order →' : '+ Add');
+    });
     updateSummary();
   }
 
@@ -3003,8 +3008,6 @@
     const qty = state.purchaseQty;
     const mainTotal = ppu * qty;
     const names = { cattle:'Cattle Collar C2.5', sheep:'Sheep & Goat Collar S1', both:'Mixed Setup' };
-    const emojis = { cattle:'🐄', sheep:'🐑', both:'🐄🐑' };
-    document.getElementById('main-order-item').querySelector('.order-item-img').textContent = emojis[state.collarType];
     document.getElementById('summary-product-name').textContent = names[state.collarType];
     document.getElementById('summary-product-meta').textContent = `Qty: ${qty} · $${ppu} each`;
     document.getElementById('summary-product-total').textContent = `$${mainTotal.toLocaleString()}`;
@@ -3016,7 +3019,7 @@
       const div = document.createElement('div');
       div.className = 'order-item acc-summary-item';
       div.style.marginTop = '10px';
-      div.innerHTML = `<div class="order-item-img">➕</div><div class="order-item-info"><div class="item-name">${acc.name}</div><div class="item-meta">Qty: 1</div></div><span class="order-item-price">$${acc.price}</span>`;
+      div.innerHTML = `<div class="order-item-info"><div class="item-name">${acc.name}</div><div class="item-meta">Qty: 1</div></div><span class="order-item-price">$${acc.price}</span>`;
       list.appendChild(div);
     }
     const sub = mainTotal + accTotal;
