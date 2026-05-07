@@ -919,7 +919,7 @@
           <p style="font-size:12px">I'm happy to receive my personalised recommendation and occasional updates by email. Unsubscribe anytime.</p>
         </div>
         <div class="btn-row" style="padding-top:0">
-          <button class="btn btn-primary" id="welcome-continue" disabled onclick="goTo('screen-email-confirm')">Continue &nbsp;→</button>
+          <button class="btn btn-primary" id="welcome-continue" disabled onclick="goTo('screen-email-confirm')">Continue</button>
         </div>
         <div class="trust-row">
           <span class="trust-item">🔒 GDPR safe</span>
@@ -2161,6 +2161,9 @@
     if (id === 'screen-purchase') {
       setTimeout(() => document.querySelectorAll('#screen-purchase .reveal').forEach(el => el.classList.add('in-view')), 80);
     }
+    if (id === 'screen-welcome') {
+      checkWelcomeReady();
+    }
   }
 
   function updateNav(id) {
@@ -2263,26 +2266,27 @@
 
     const data = COLLAR_DATA[type];
 
-    // Enable continue (requires email too)
-    checkWelcomeReady();
+    // Pre-configure Q1 content (null-guard every access)
+    const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    setEl('q1-chip-emoji',      data.chipEmoji);
+    setEl('q1-chip-label',      data.chipLabel);
+    setEl('q1-heading',         data.heading);
+    setEl('collar-type-emoji',  data.chipEmoji);
+    setEl('collar-type-label',  data.collarLabel);  // may not exist — safe
+    setEl('collar-type-desc',   data.collarDesc);   // may not exist — safe
+    setEl('qty-stepper-label',  data.stepperLabel);
+    setEl('all-collar-count',   state.qty);
+    setEl('leather-all-label',  state.qty);
 
-    // Pre-configure Q1 content
-    document.getElementById('q1-chip-emoji').textContent  = data.chipEmoji;
-    document.getElementById('q1-chip-label').textContent  = data.chipLabel;
-    document.getElementById('q1-heading').textContent     = data.heading;
-    const emojiEl = document.getElementById('collar-type-emoji');
-    if (emojiEl) emojiEl.textContent = data.chipEmoji;
-    document.getElementById('collar-type-label').textContent = data.collarLabel;
-    document.getElementById('collar-type-desc').textContent  = data.collarDesc;
-    document.getElementById('qty-stepper-label').textContent = data.stepperLabel;
-    const countEl = document.getElementById('all-collar-count');
-    if (countEl) countEl.textContent = state.qty;
     // Update price preview for new collar type
     q1UpdatePricePreview();
 
-    // Swap left-panel image for Q1 too
+    // Swap left-panel image for Q1 if needed
     const q1left = document.querySelector('#screen-q1 .wizard-left');
     if (q1left) q1left.style.backgroundImage = `url('${data.img}')`;
+
+    // Enable Continue — must come AFTER all DOM updates to avoid any crash blocking it
+    checkWelcomeReady();
   }
 
   // ─── Q1: quantity (animal already set on welcome screen) ─────
