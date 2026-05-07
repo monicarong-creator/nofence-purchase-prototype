@@ -493,6 +493,8 @@
   .back-chevron { display: inline-block; transition: transform .15s; }
   .checkout-nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #0F4030; text-decoration: none; letter-spacing: -0.4px; position: absolute; left: 50%; transform: translateX(-50%); }
   .nav-secure-label { font-size: 13px; color: #9EA3A8; display: flex; align-items: center; gap: 5px; min-width: 140px; justify-content: flex-end; }
+  .nav-skip-quiz-btn { font-size: 13px; font-weight: 500; color: #717680; background: none; border: 1.5px solid #C2C4C8; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-family: inherit; white-space: nowrap; min-width: 140px; text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 4px; transition: color .15s, border-color .15s; }
+  .nav-skip-quiz-btn:hover { color: #0F4030; border-color: #717680; }
 
   /* Progress strip — sits just below nav bar edge, no layout shift */
   .nav-progress-strip { position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: var(--neutral-200); overflow: hidden; display: none; }
@@ -817,10 +819,13 @@
         <img src="https://www.nofence.com/static/img/logo.svg" height="30" alt="" style="display:block;flex-shrink:0">
         <img src="https://www.nofence.com/static/img/logoname.svg" height="24" alt="Nofence" style="display:block;flex-shrink:0">
       </button>
-      <span class="nav-secure-label" id="navSecureLabel">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="#9EA3A8" stroke-width="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#9EA3A8" stroke-width="1.2" stroke-linecap="round"/></svg>
-        Secure checkout
-      </span>
+      <div style="min-width:140px;display:flex;justify-content:flex-end">
+        <button class="nav-skip-quiz-btn" id="navSkipQuizBtn" onclick="showQuitModal()" style="display:none">Skip quiz <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="nav-secure-label" id="navSecureLabel" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="#9EA3A8" stroke-width="1.2"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#9EA3A8" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Secure checkout
+        </span>
+      </div>
     </div>
 
   </div>
@@ -1251,14 +1256,9 @@
         <span id="q1-price-per" style="display:none"></span>
         <span id="q1-price-total" style="display:none"></span>
 
-        <div class="btn-row" style="padding-top:12px">
+        <div class="btn-row" style="padding-top:12px;gap:10px">
+          <button class="btn btn-secondary" onclick="goTo('screen-intro')" style="flex-shrink:0">← Introduction</button>
           <button class="btn btn-primary" onclick="continueFromQ1()">Continue</button>
-        </div>
-        <!-- Restart + Skip below the button -->
-        <div class="q1-bottom-links">
-          <button class="quiz-skip-link" onclick="goTo('screen-welcome')">↩ Restart quiz</button>
-          <span class="q1-link-sep">·</span>
-          <button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz and browse products</button>
         </div>
       </div>
     </main>
@@ -1275,7 +1275,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1336,7 +1335,8 @@
           </div>
         </div>
 
-        <div class="btn-row">
+        <div class="btn-row" style="gap:10px">
+          <button class="btn btn-secondary" onclick="goTo('screen-q1')" style="flex-shrink:0">← Collar type</button>
           <button class="btn btn-primary" id="q2-continue" disabled onclick="goTo('screen-q3')">Continue →</button>
         </div>
       </div>
@@ -1354,7 +1354,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1408,7 +1407,8 @@
             </div>
           </div>
         </div>
-        <div class="btn-row">
+        <div class="btn-row" style="gap:10px">
+          <button class="btn btn-secondary" onclick="backFromQ3()" style="flex-shrink:0">← Herd details</button>
           <button class="btn btn-primary" id="q3-continue" disabled onclick="goTo('screen-q4')">Continue →</button>
         </div>
       </div>
@@ -1426,7 +1426,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1480,7 +1479,8 @@
             <div class="option-radio"></div>
           </div>
         </div>
-        <div class="btn-row">
+        <div class="btn-row" style="gap:10px">
+          <button class="btn btn-secondary" onclick="goTo('screen-q3')" style="flex-shrink:0">← Land type</button>
           <button class="btn btn-primary" id="q4-continue" disabled onclick="continueFromQ4()">Continue →</button>
         </div>
       </div>
@@ -1498,7 +1498,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1583,7 +1582,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1645,7 +1643,8 @@
           </div>
         </div>
 
-        <div class="btn-row">
+        <div class="btn-row" style="gap:10px">
+          <button class="btn btn-secondary" onclick="backFromQ5()" style="flex-shrink:0">← Grazing size</button>
           <button class="btn btn-primary" id="q5-continue" disabled onclick="goTo('screen-q6')">Continue →</button>
         </div>
       </div>
@@ -1663,7 +1662,6 @@
       </div>
     </aside>
     <main class="wizard-right">
-      <div class="quiz-topbar"><button class="quiz-skip-link" onclick="showQuitModal()">Skip quiz →</button></div>
       <div class="step-indicator">
         <div class="si-step done"><div class="si-circle">1</div><div class="si-label">Collars</div></div>
         <div class="si-line done"></div>
@@ -1734,7 +1732,8 @@
           </div>
         </div>
 
-        <div class="btn-row">
+        <div class="btn-row" style="gap:10px">
+          <button class="btn btn-secondary" onclick="goTo('screen-q5')" style="flex-shrink:0">← Shelter</button>
           <button class="btn btn-primary" id="q6-continue" disabled onclick="buildSetupSummary();goTo('screen-setup-summary')">See my setup →</button>
         </div>
       </div>
@@ -2552,7 +2551,7 @@
 
   // Screens that use the checkout shell nav (everything except purchase page)
   const CHECKOUT_SHELL_SCREENS = new Set([
-    'screen-welcome',
+    'screen-welcome','screen-intro',
     'screen-q1','screen-q2','screen-q3','screen-q4','screen-power',
     'screen-q5','screen-q6','screen-setup-summary',
     'screen-grants','screen-checkout','screen-success'
@@ -2589,6 +2588,18 @@
     }
   }
 
+  // Screens where top-left "← nofence.com" exits with a warning
+  const QUIZ_IN_PROGRESS = new Set([
+    'screen-intro','screen-q1','screen-q2','screen-q3','screen-q4',
+    'screen-power','screen-q5','screen-q6','screen-setup-summary'
+  ]);
+
+  // Screens that show the "Skip quiz" button in the nav
+  const QUIZ_SKIP_SCREENS = new Set([
+    'screen-intro','screen-q1','screen-q2','screen-q3','screen-q4',
+    'screen-q5','screen-q6'
+  ]);
+
   function updateNav(id) {
     const useCheckoutShell = CHECKOUT_SHELL_SCREENS.has(id);
 
@@ -2596,15 +2607,15 @@
     document.getElementById('checkoutNav').classList.toggle('active', useCheckoutShell);
 
     if (useCheckoutShell) {
-      // Back button label: "nofence.com" when at the start, otherwise "Back"
-      const prevScreen = navStack[navStack.length - 1];
-      const backLabel = !prevScreen ? 'nofence.com' : 'Back';
-      document.getElementById('navBackLabel').textContent = backLabel;
+      // Top-left back button always says "nofence.com" — it exits the whole flow
+      document.getElementById('navBackLabel').textContent = 'nofence.com';
       // Hide back button on success screen
       document.getElementById('navBackBtn').style.visibility = id === 'screen-success' ? 'hidden' : 'visible';
-      // Secure label only visible during checkout
-      document.getElementById('navSecureLabel').style.visibility =
-        (id === 'screen-checkout' || id === 'screen-success') ? 'visible' : 'hidden';
+      // Right side: Skip quiz on quiz screens, Secure checkout on payment/success
+      const showSkip   = QUIZ_SKIP_SCREENS.has(id);
+      const showSecure = (id === 'screen-checkout' || id === 'screen-success');
+      document.getElementById('navSkipQuizBtn').style.display  = showSkip   ? 'flex'  : 'none';
+      document.getElementById('navSecureLabel').style.display  = showSecure ? 'flex'  : 'none';
       // Progress bar
       const progress = WIZARD_PROGRESS[id] ?? 0;
       const strip = document.getElementById('navProgressStrip');
@@ -2613,15 +2624,10 @@
     }
   }
 
-  // Screens where the back button should show the abandon-quiz warning
-  const QUIZ_IN_PROGRESS = new Set([
-    'screen-q1','screen-q2','screen-q3','screen-q4',
-    'screen-power','screen-q5','screen-q6','screen-setup-summary'
-  ]);
-
   function navGoBack() {
     const current = document.querySelector('.screen.active')?.id;
     if (QUIZ_IN_PROGRESS.has(current)) {
+      // Show warning — user has started or is in the quiz
       document.getElementById('abandonModal').classList.add('open');
       return;
     }
@@ -2850,8 +2856,7 @@
   }
 
   function backFromQ5() {
-    const needsPower = (state.env === 'forested' || state.env === 'mixed') || state.grazing === 'large';
-    goTo(needsPower ? 'screen-power' : 'screen-q4');
+    goTo('screen-q4');
   }
 
   // ─── Q6: Leather strap ────────────────────────────────────────
