@@ -775,19 +775,26 @@
   .q1-app-float-tag { background:rgba(95,165,38,.94); backdrop-filter:blur(6px); padding:6px 10px; font-size:11px; font-weight:700; color:white; text-align:center; letter-spacing:.2px; }
 
   /* ─── SUGGESTED ADDONS (setup summary left col) ───────────── */
-  .upsell-section { background:white; border-radius:var(--radius-xl); border:1px solid var(--neutral-200); overflow:hidden; box-shadow:var(--shadow-sm); }
-  .upsell-section-header { padding:16px 20px 12px; border-bottom:1px solid var(--neutral-100); }
-  .upsell-section-title { font-size:14px; font-weight:700; color:var(--neutral-900); }
-  .upsell-section-sub { font-size:12px; color:var(--neutral-500); margin-top:2px; }
-  .upsell-item { display:flex; align-items:center; gap:14px; padding:14px 20px; border-top:1px solid var(--neutral-100); }
-  .upsell-item:first-child { border-top:none; }
-  .upsell-item-icon { font-size:20px; flex-shrink:0; width:36px; text-align:center; }
-  .upsell-item-info { flex:1; }
-  .upsell-item-name { font-size:13px; font-weight:600; color:var(--neutral-900); }
-  .upsell-item-desc { font-size:12px; color:var(--neutral-500); margin-top:1px; line-height:1.35; }
-  .upsell-item-price { font-size:13px; font-weight:700; color:var(--neutral-900); flex-shrink:0; margin-right:10px; }
-  .upsell-add-btn { height:32px; padding:0 12px; background:var(--green-500); color:white; border:none; border-radius:var(--radius-sm); font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; transition:background .15s; white-space:nowrap; flex-shrink:0; }
+  /* ─── Upsell cards on summary page ───────────────────────── */
+  .upsell-section-title { font-size:15px; font-weight:700; color:var(--neutral-900); margin-bottom:4px; }
+  .upsell-section-sub { font-size:13px; color:var(--neutral-500); margin-bottom:14px; }
+  .upsell-cards { display:flex; flex-direction:column; gap:10px; }
+  .upsell-card { background:white; border:1.5px solid var(--neutral-200); border-radius:var(--radius-lg); padding:16px 18px; display:flex; gap:14px; align-items:flex-start; transition:border-color .2s,background .2s; }
+  .upsell-card:hover { border-color:var(--green-300); background:var(--green-25); }
+  .upsell-card-icon { font-size:24px; width:44px; height:44px; background:var(--neutral-100); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .upsell-card-body { flex:1; min-width:0; }
+  .upsell-card-top { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
+  .upsell-card-name { font-size:14px; font-weight:600; color:var(--neutral-900); }
+  .upsell-info-btn { width:17px; height:17px; border-radius:50%; border:1.5px solid var(--neutral-300); background:none; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:var(--neutral-500); font-size:10px; font-weight:700; font-style:italic; transition:all .15s; font-family:Georgia,serif; flex-shrink:0; line-height:1; padding:0; }
+  .upsell-info-btn:hover { border-color:var(--neutral-600); color:var(--neutral-900); }
+  .upsell-card-desc { font-size:12px; color:var(--neutral-500); line-height:1.45; }
+  .upsell-card-extra { font-size:12px; color:var(--neutral-700); line-height:1.5; background:var(--neutral-50); border-radius:var(--radius-sm); padding:8px 10px; margin-top:8px; border-left:2px solid var(--neutral-300); display:none; }
+  .upsell-card-extra.open { display:block; }
+  .upsell-card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:12px; }
+  .upsell-card-price { font-size:15px; font-weight:700; color:var(--neutral-900); }
+  .upsell-add-btn { background:var(--green-500); color:white; border:1.5px solid transparent; border-radius:var(--radius-sm); padding:7px 14px; font-size:13px; font-weight:600; cursor:pointer; transition:background .15s; font-family:inherit; white-space:nowrap; }
   .upsell-add-btn:hover { background:#4C841E; }
+  .upsell-add-btn.added { background:white; color:var(--green-700); border-color:var(--green-400); cursor:default; }
 
   /* ─── SUMMARY NAV LINKS (below proceed btn) ───────────────── */
   .summary-alt-actions { display:flex; flex-direction:column; gap:6px; margin-top:12px; padding-top:12px; border-top:1px solid var(--neutral-200); }
@@ -3098,40 +3105,83 @@
     buildSuggestedAddons();
   }
 
+  // Full definitions for each optional accessory
+  const UPSELL_DEFS = {
+    chains:    { id:'chains',    icon:'⛓️', name:'Extra-long Chain Pairs (28″)', unitPrice:12,  defaultQty:5,  min:1, removable:true,
+                 price:'$12 / pair',
+                 desc:'For bulls and large breeds — replaces the standard 20″ chains included with each collar.',
+                 info:'Each pair is 70 cm (28 inches). Compatible with Cattle C2.5 only. Order one pair per large-breed animal.' },
+    batteries: { id:'batteries', icon:'🔋', name:'Spare Collar Batteries',       unitPrice:49,  defaultQty:2,  min:1, removable:true,
+                 price:'$49 each',
+                 desc:'Keep collars running during low-sun periods by swapping in a fresh battery.',
+                 info:'One spare battery per collar is recommended for heavily shaded land or winter use. Batteries take ~14 hours to fully charge.' },
+    chargers:  { id:'chargers',  icon:'🔌', name:'Battery Charger',               unitPrice:89,  defaultQty:1,  min:1, removable:true,
+                 price:'$89 each',
+                 desc:'Required to recharge spare batteries. One charger handles up to 4 batteries at a time.',
+                 info:'Without a charger, spare batteries cannot be recharged. If you order spare batteries, you need at least one charger.' },
+    beacons:   { id:'beacons',   icon:'📡', name:'Shelter Beacon',                unitPrice:149, defaultQty:1,  min:1, removable:true,
+                 price:'$149 each',
+                 desc:'Tracks animals indoors where GPS signal is unavailable — barns, sheds, stables.',
+                 info:'Place one beacon per shelter or enclosed structure. The beacon communicates with collars via Bluetooth and reports location to the app.' },
+    straps:    { id:'straps',    icon:'🟫', name:'Leather Neck Straps',           unitPrice:18,  defaultQty:5,  min:1, removable:true,
+                 price:'$18 each',
+                 desc:'A softer, natural alternative to the standard nylon strap — ideal for animals with sensitive skin.',
+                 info:'Compatible with all Nofence collar models. Order one strap per affected animal. The leather is chrome-free and weather-resistant.' },
+  };
+
   function buildSuggestedAddons() {
     const section = document.getElementById('summary-upsell-section');
     if (!section) return;
     const itemIds = (state.summaryItems || []).map(i => i.id);
-    // Potential upsell items not in the cart
     const suggestions = [];
-    if (!itemIds.includes('chains') && state.animal === 'cattle')
-      suggestions.push({ icon:'⛓️', name:'Extra-long Chain Pairs', price:'$12 / pair', desc:'For bulls and large breeds — replaces the standard 20″ chains.' });
-    if (!itemIds.includes('batteries'))
-      suggestions.push({ icon:'🔋', name:'Spare Collar Batteries', price:'$49 each', desc:'Keep collars running during low-sun periods by rotating batteries.' });
-    if (!itemIds.includes('chargers'))
-      suggestions.push({ icon:'🔌', name:'Battery Charger', price:'$89', desc:'Required to recharge spare batteries (~14 hrs per charge).' });
-    if (!itemIds.includes('beacons'))
-      suggestions.push({ icon:'📶', name:'Shelter Beacon', price:'$149 each', desc:'Tracks animals indoors where GPS is unavailable.' });
-    if (!itemIds.includes('straps'))
-      suggestions.push({ icon:'🟫', name:'Leather Neck Straps', price:'$18 each', desc:'Softer alternative for animals with sensitive skin.' });
+    if (!itemIds.includes('chains') && state.animal === 'cattle') suggestions.push(UPSELL_DEFS.chains);
+    if (!itemIds.includes('batteries'))  suggestions.push(UPSELL_DEFS.batteries);
+    if (!itemIds.includes('chargers'))   suggestions.push(UPSELL_DEFS.chargers);
+    if (!itemIds.includes('beacons'))    suggestions.push(UPSELL_DEFS.beacons);
+    if (!itemIds.includes('straps'))     suggestions.push(UPSELL_DEFS.straps);
     if (suggestions.length === 0) { section.innerHTML = ''; return; }
     section.innerHTML = `
-      <div class="upsell-section">
-        <div class="upsell-section-header">
-          <div class="upsell-section-title">Other items you may need</div>
-          <div class="upsell-section-sub">Browse the full range on the product page, or add directly here.</div>
-        </div>
+      <div class="upsell-section-title">Other items you may need</div>
+      <div class="upsell-section-sub">Not included in your recommendation — add any that apply to your setup.</div>
+      <div class="upsell-cards">
         ${suggestions.map(s => `
-          <div class="upsell-item">
-            <div class="upsell-item-icon">${s.icon}</div>
-            <div class="upsell-item-info">
-              <div class="upsell-item-name">${s.name}</div>
-              <div class="upsell-item-desc">${s.desc}</div>
+          <div class="upsell-card" id="upsell-card-${s.id}">
+            <div class="upsell-card-icon">${s.icon}</div>
+            <div class="upsell-card-body">
+              <div class="upsell-card-top">
+                <div class="upsell-card-name">${s.name}</div>
+                <button class="upsell-info-btn" onclick="toggleUpsellInfo('${s.id}')" title="More info">i</button>
+              </div>
+              <div class="upsell-card-desc">${s.desc}</div>
+              <div class="upsell-card-extra" id="upsell-extra-${s.id}">${s.info}</div>
+              <div class="upsell-card-footer">
+                <div class="upsell-card-price">${s.price}</div>
+                <button class="upsell-add-btn" id="upsell-btn-${s.id}" onclick="addUpsellToCart('${s.id}')">+ Add to cart</button>
+              </div>
             </div>
-            <div class="upsell-item-price">${s.price}</div>
-            <button class="upsell-add-btn" onclick="skipToPurchase()">View →</button>
           </div>`).join('')}
       </div>`;
+  }
+
+  function toggleUpsellInfo(id) {
+    const el = document.getElementById(`upsell-extra-${id}`);
+    if (el) el.classList.toggle('open');
+  }
+
+  function addUpsellToCart(id) {
+    const def = UPSELL_DEFS[id];
+    if (!def) return;
+    // Show added state on button briefly
+    const btn = document.getElementById(`upsell-btn-${id}`);
+    if (btn) { btn.textContent = '✓ Added'; btn.classList.add('added'); btn.disabled = true; }
+    // Add to cart after short delay so user sees feedback, then rebuild
+    setTimeout(() => {
+      if (!state.summaryItems.find(i => i.id === id)) {
+        state.summaryItems.push({ id:def.id, icon:def.icon, name:def.name, unitPrice:def.unitPrice, qty:def.defaultQty, min:def.min, removable:def.removable });
+      }
+      renderSummaryCart();
+      buildSuggestedAddons();
+    }, 600);
   }
 
   function renderSummaryCart() {
