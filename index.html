@@ -904,6 +904,20 @@
   </div>
 </div>
 
+<!-- ═══════════════ RETAKE QUIZ MODAL (from summary page) ══ -->
+<div class="modal-overlay" id="retakeModal" onclick="if(event.target===this)closeRetakeModal()">
+  <div class="modal-card">
+    <div class="modal-icon" style="font-size:32px">🔄</div>
+    <div class="modal-title" style="font-size:19px">Start the quiz over?</div>
+    <p class="modal-desc">This will reset your answers and clear everything currently in your cart. <strong style="color:var(--neutral-900)">Your current setup won't be saved.</strong></p>
+    <div id="retake-cart-summary" style="background:var(--neutral-50);border:1px solid var(--neutral-200);border-radius:var(--radius-md);padding:10px 14px;font-size:13px;color:var(--neutral-600);margin-bottom:24px;line-height:1.5"></div>
+    <div class="modal-btns" style="flex-direction:column;gap:10px">
+      <button class="modal-continue" onclick="closeRetakeModal()" style="background:var(--green-500);color:white">Keep my setup</button>
+      <button class="modal-skip" onclick="confirmRetakeQuiz()" style="background:white;color:var(--neutral-600);border:1.5px solid var(--neutral-300)">Yes, restart quiz</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════ CONTACT SALES MODAL ════════════════════ -->
 <div class="modal-overlay" id="contactSalesModal">
   <div class="modal-card">
@@ -1931,7 +1945,7 @@
       <div class="summary-cart-header">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
           <div class="all-set-badge">✓ Your personalised setup is ready</div>
-          <button onclick="showQuitModal()" style="background:none;border:1.5px solid var(--neutral-300);border-radius:var(--radius-md);padding:5px 13px;font-size:12px;font-weight:600;color:var(--neutral-700);cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .15s" onmouseover="this.style.borderColor='var(--neutral-500)';this.style.color='var(--neutral-900)'" onmouseout="this.style.borderColor='var(--neutral-300)';this.style.color='var(--neutral-700)'">Retake quiz</button>
+          <button onclick="showRetakeModal()" style="background:none;border:1.5px solid var(--neutral-300);border-radius:var(--radius-md);padding:5px 13px;font-size:12px;font-weight:600;color:var(--neutral-700);cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .15s" onmouseover="this.style.borderColor='var(--neutral-500)';this.style.color='var(--neutral-900)'" onmouseout="this.style.borderColor='var(--neutral-300)';this.style.color='var(--neutral-700)'">Retake quiz</button>
         </div>
         <h1 class="wizard-heading" style="font-size:30px">Review your order</h1>
         <p class="wizard-sub" style="margin-top:6px">Based on your answers — edit quantities or remove items below.</p>
@@ -2880,6 +2894,33 @@
   // ─── Quit modal (skip to shop) ───────────────────────────────
   function showQuitModal() { document.getElementById('quitModal').classList.add('open'); }
   function closeQuitModal() { document.getElementById('quitModal').classList.remove('open'); }
+
+  function showRetakeModal() {
+    // Build a one-liner describing what's currently in the cart
+    const items = state.summaryItems || [];
+    const collarItem = items.find(i => i.id === 'collars');
+    const extraCount = items.filter(i => i.id !== 'collars').length;
+    let summary = '';
+    if (collarItem) {
+      summary = `Your cart has <strong style="color:var(--neutral-900)">${collarItem.qty} collars</strong>`;
+      if (extraCount > 0) summary += ` + <strong style="color:var(--neutral-900)">${extraCount} extra item${extraCount > 1 ? 's' : ''}</strong>`;
+      summary += ' — all of this will be cleared.';
+    } else {
+      summary = 'Your current cart will be cleared.';
+    }
+    document.getElementById('retake-cart-summary').innerHTML = summary;
+    document.getElementById('retakeModal').classList.add('open');
+  }
+  function closeRetakeModal() { document.getElementById('retakeModal').classList.remove('open'); }
+  function confirmRetakeQuiz() {
+    closeRetakeModal();
+    // Reset quiz state
+    state.animal = null; state.qty = 20; state.maxStepReached = 0;
+    state.summaryItems = []; state.cartAdded = false;
+    state.extraBatteries = 0; state.chargers = 0; state.shelterQty = 0;
+    state.leatherQty = 0; state.chainQty = 5;
+    goTo('screen-welcome');
+  }
   function skipToPurchase() { closeQuitModal(); goTo('screen-purchase'); }
 
   // ─── Contact sales modal ──────────────────────────────────────
