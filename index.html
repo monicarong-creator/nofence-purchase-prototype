@@ -1372,7 +1372,7 @@
           <p class="wizard-sub" style="margin-top:10px">The collar's solar panel charges in daylight. Heavily shaded or forested land may need extra battery capacity to keep collars running.</p>
         </div>
         <div class="option-list">
-          <div class="option-card" data-group="env" data-value="open" onclick="selectOption(this,'env')">
+          <div class="option-card" data-group="env" data-value="open" onclick="selectEnv(this,'open')">
             <div class="option-icon">☀️</div>
             <div class="option-text">
               <div class="option-title">Open pasture</div>
@@ -1380,7 +1380,7 @@
             </div>
             <div class="option-radio"></div>
           </div>
-          <div class="option-card" data-group="env" data-value="mixed" onclick="selectOption(this,'env')">
+          <div class="option-card" data-group="env" data-value="mixed" onclick="selectEnv(this,'mixed')">
             <div class="option-icon">🌥️</div>
             <div class="option-text">
               <div class="option-title">Mixed terrain</div>
@@ -1388,7 +1388,18 @@
             </div>
             <div class="option-radio"></div>
           </div>
-          <div class="option-card" data-group="env" data-value="forested" onclick="selectOption(this,'env')">
+          <div class="inline-reveal" id="env-power-reveal" style="padding:0 4px">
+            <div style="padding:4px 0 8px">
+              <div class="info-box" style="background:var(--yellow-50);border-color:var(--yellow-300);gap:12px">
+                <div style="font-size:20px;flex-shrink:0">🔋</div>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--neutral-900);margin-bottom:4px">Spare batteries recommended</div>
+                  <div style="font-size:12px;color:var(--neutral-700);line-height:1.5">The collar's built-in solar panel charges in daylight, but shade reduces output. <strong>Spare batteries</strong> ($49 each) let you swap and charge in rotation so no collar ever goes dark. <strong>A battery charger</strong> ($89) charges them overnight via a standard outlet. We'll add the right quantity to your setup — you can adjust in the summary.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="option-card" data-group="env" data-value="forested" onclick="selectEnv(this,'forested')">
             <div class="option-icon">🌲</div>
             <div class="option-text">
               <div class="option-title">Dense forest or heavy shade</div>
@@ -1433,7 +1444,7 @@
           <p class="wizard-sub" style="margin-top:10px">Larger properties and intensive rotational grazing draw more from the battery. We'll use this to refine your power recommendation.</p>
         </div>
         <div class="option-list">
-          <div class="option-card" data-group="grazing" data-value="large" onclick="selectOption(this,'grazing')">
+          <div class="option-card" data-group="grazing" data-value="large" onclick="selectGrazing(this,'large')">
             <div class="option-icon">🏞️</div>
             <div class="option-text">
               <div class="option-title">Large property — 30+ acres / 12+ hectares</div>
@@ -1441,7 +1452,18 @@
             </div>
             <div class="option-radio"></div>
           </div>
-          <div class="option-card" data-group="grazing" data-value="medium" onclick="selectOption(this,'grazing')">
+          <div class="inline-reveal" id="grazing-power-reveal" style="padding:0 4px">
+            <div style="padding:4px 0 8px">
+              <div class="info-box" style="background:var(--yellow-50);border-color:var(--yellow-300);gap:12px">
+                <div style="font-size:20px;flex-shrink:0">⚡</div>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--neutral-900);margin-bottom:4px">Higher battery demand on large land</div>
+                  <div style="font-size:12px;color:var(--neutral-700);line-height:1.5">Intensive rotational grazing on large properties drains collar batteries faster. <strong>Spare batteries</strong> ($49 each) and a <strong>battery charger</strong> ($89) mean you can always have a charged set ready for the next rotation. We'll calculate the right quantities for your herd size and add them to your summary.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="option-card" data-group="grazing" data-value="medium" onclick="selectGrazing(this,'medium')">
             <div class="option-icon">🌿</div>
             <div class="option-text">
               <div class="option-title">Medium property — 10–30 acres</div>
@@ -1449,7 +1471,7 @@
             </div>
             <div class="option-radio"></div>
           </div>
-          <div class="option-card" data-group="grazing" data-value="small" onclick="selectOption(this,'grazing')">
+          <div class="option-card" data-group="grazing" data-value="small" onclick="selectGrazing(this,'small')">
             <div class="option-icon">🟩</div>
             <div class="option-text">
               <div class="option-title">Small paddocks — under 10 acres</div>
@@ -1542,7 +1564,8 @@
           <div class="info-icon"><svg width="8" height="11" viewBox="0 0 8 11" fill="white"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></div>
           <p>These are recommendations based on your answers. You can adjust quantities now or add more from your account later.</p>
         </div>
-        <div class="btn-row">
+        <div class="btn-row" style="gap:12px">
+          <button class="btn btn-secondary" onclick="goTo('screen-q4')" style="flex-shrink:0">← Back</button>
           <button class="btn btn-primary" onclick="goTo('screen-q5')">Continue →</button>
         </div>
       </div>
@@ -2915,6 +2938,26 @@
     state[group] = el.dataset.value;
     const btn = document.getElementById(group === 'env' ? 'q3-continue' : 'q4-continue');
     if (btn) btn.disabled = false;
+  }
+
+  function selectEnv(el, val) {
+    document.querySelectorAll('[data-group="env"]').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.env = val;
+    document.getElementById('q3-continue').disabled = false;
+    // Show battery info for mixed/forested, hide for open
+    const reveal = document.getElementById('env-power-reveal');
+    if (reveal) reveal.classList.toggle('visible', val === 'mixed' || val === 'forested');
+  }
+
+  function selectGrazing(el, val) {
+    document.querySelectorAll('[data-group="grazing"]').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.grazing = val;
+    document.getElementById('q4-continue').disabled = false;
+    // Show battery info for large properties
+    const reveal = document.getElementById('grazing-power-reveal');
+    if (reveal) reveal.classList.toggle('visible', val === 'large');
   }
 
   // ─── Setup summary builder ────────────────────────────────────
