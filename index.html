@@ -401,6 +401,10 @@
   /* Next steps link rows */
   .next-steps { width:100%; border-top:1px solid var(--neutral-200); margin-top:44px; text-align:left; }
   .next-step { display:flex; align-items:center; gap:16px; padding:18px 4px; border-bottom:1px solid var(--neutral-200); }
+  .next-step-link { text-decoration:none; cursor:pointer; transition:background .15s; border-radius:var(--radius-sm); }
+  .next-step-link:hover { background:var(--neutral-50); }
+  .next-step-link .next-step-title { color:var(--neutral-900); }
+  .next-step-link .next-step-desc { color:var(--neutral-500); }
   .next-step-icon { width:40px; height:40px; background:var(--neutral-100); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--neutral-700); }
   .next-step-body { flex:1; }
   .next-step-title { font-size:15px; font-weight:600; color:var(--neutral-900); margin-bottom:2px; }
@@ -2664,7 +2668,6 @@
           <div class="next-step-title">Check your inbox</div>
           <div class="next-step-desc">Order confirmation and VAT invoice sent. Estimated delivery: 5–7 business days.</div>
         </div>
-        <svg class="next-step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </div>
       <div class="next-step">
         <div class="next-step-icon">
@@ -2674,7 +2677,6 @@
           <div class="next-step-title">Download the Nofence app</div>
           <div class="next-step-desc">Get the app ready before your collars arrive. Available on App Store and Google Play — it's free.</div>
         </div>
-        <svg class="next-step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </div>
       <div class="next-step">
         <div class="next-step-icon">
@@ -2684,9 +2686,8 @@
           <div class="next-step-title">Set up your first pasture</div>
           <div class="next-step-desc">Draw your grazing area and activate collars when they arrive. Step-by-step guide is inside the app.</div>
         </div>
-        <svg class="next-step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </div>
-      <div class="next-step">
+      <a class="next-step next-step-link" href="https://nofence.com/contact" onclick="event.preventDefault();alert('This would open our contact/support page.')">
         <div class="next-step-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
@@ -2695,13 +2696,13 @@
           <div class="next-step-desc">Our support team is always available. You can also book a free onboarding call with a Nofence specialist.</div>
         </div>
         <svg class="next-step-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
+      </a>
     </div>
 
     <!-- Actions -->
     <div class="success-actions">
-      <a href="https://app.nofence.com" class="btn btn-primary" style="width:100%;max-width:320px;height:52px;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:15px" onclick="event.preventDefault();alert('This would open your Nofence account.')">Go to my Nofence account →</a>
-      <a href="https://www.nofence.com" style="font-size:14px;color:var(--neutral-500);text-decoration:none;padding:6px 0" onmouseover="this.style.color='var(--neutral-900)'" onmouseout="this.style.color='var(--neutral-500)'">← Back to nofence.com</a>
+      <a href="https://app.nofence.com" class="btn btn-primary" style="width:100%;max-width:320px;text-decoration:none;font-size:15px" onclick="event.preventDefault();alert('This would open your Nofence account.')">Go to my Nofence account</a>
+      <a href="https://www.nofence.com/knowledge-hub" style="font-size:14px;color:var(--neutral-500);text-decoration:none;padding:6px 0" onmouseover="this.style.color='var(--neutral-900)'" onmouseout="this.style.color='var(--neutral-500)'">Read our setup guides →</a>
     </div>
 
   </div>
@@ -2789,7 +2790,7 @@
   const CHECKOUT_SHELL_SCREENS = new Set([
     'screen-q1','screen-q2','screen-q3','screen-q4','screen-power',
     'screen-q5','screen-q6','screen-setup-summary',
-    'screen-grants','screen-checkout','screen-success'
+    'screen-grants','screen-checkout'
   ]);
 
   // Step indicator mappings
@@ -2905,11 +2906,10 @@
     if (useCheckoutShell) {
       // Top-left back button always says "nofence.com" — it exits the whole flow
       document.getElementById('navBackLabel').textContent = 'nofence.com';
-      // Hide back button on success screen
-      document.getElementById('navBackBtn').style.visibility = id === 'screen-success' ? 'hidden' : 'visible';
-      // Right side: Skip quiz on quiz screens, Secure checkout on payment/success
+      document.getElementById('navBackBtn').style.visibility = 'visible';
+      // Right side: Skip quiz on quiz screens, Secure checkout on payment
       const showSkip   = QUIZ_SKIP_SCREENS.has(id);
-      const showSecure = (id === 'screen-checkout' || id === 'screen-success');
+      const showSecure = (id === 'screen-checkout');
       document.getElementById('navSkipQuizBtn').style.display  = showSkip   ? 'flex'  : 'none';
       document.getElementById('navSecureLabel').style.display  = showSecure ? 'flex'  : 'none';
       // Progress bar
@@ -2917,6 +2917,11 @@
       const strip = document.getElementById('navProgressStrip');
       strip.classList.toggle('active', progress > 0);
       document.getElementById('navProgressFill').style.width = (progress * 100) + '%';
+    } else {
+      // Hide progress strip for non-shell screens (e.g. success, purchase)
+      const strip = document.getElementById('navProgressStrip');
+      strip.classList.remove('active');
+      document.getElementById('navProgressFill').style.width = '0%';
     }
   }
 
