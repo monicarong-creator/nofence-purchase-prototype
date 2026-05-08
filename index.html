@@ -2161,7 +2161,7 @@
                 <button class="inc" onclick="adjustPurchaseQty(1)">+</button>
               </div>
             </div>
-            <button class="add-btn" onclick="addToCart()">Add to setup →</button>
+            <button class="add-btn" id="add-to-order-btn" onclick="addToCart()">Add to order</button>
           </div>
         </div>
       </div>
@@ -2203,7 +2203,7 @@
             </div>
           </div>
         </div>
-        <button class="add-btn" style="width:100%" onclick="addMixedToCart()">Add both to setup →</button>
+        <button class="add-btn" id="add-both-btn" style="width:100%" onclick="addMixedToCart()">Add 5 cattle + 5 sheep collars to order</button>
       </div>
       <!-- ── Required items ───────────────────────────────── -->
       <!-- ── Required items ───────────────────────────── -->
@@ -3681,6 +3681,8 @@
   function adjustPurchaseQty(delta) {
     state.purchaseQty = Math.max(5, Math.min(999, state.purchaseQty + delta));
     document.getElementById('purchase-qty').value = state.purchaseQty;
+    const btn = document.getElementById('add-to-order-btn');
+    if (btn) btn.textContent = `Add ${state.purchaseQty} collars to order`;
     updateSummary();
   }
 
@@ -3688,6 +3690,8 @@
   function adjustMixedQty(type, delta) {
     mixedQtys[type] = Math.max(5, Math.min(999, mixedQtys[type] + delta));
     document.getElementById('mixed-qty-' + type).value = mixedQtys[type];
+    const btn = document.getElementById('add-both-btn');
+    if (btn) btn.textContent = `Add ${mixedQtys.cattle} cattle + ${mixedQtys.sheep} sheep collars to order`;
     updateSummary();
   }
 
