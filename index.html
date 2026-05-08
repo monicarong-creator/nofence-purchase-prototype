@@ -3734,11 +3734,11 @@
   }
 
   function completeOrder() {
-    // Clear cart state before navigating to success
+    // Clear cart state then navigate to success
     state.cartAdded = false;
     state.accessories = {};
-    updateCartBadge();
     goTo('screen-success');
+    updateCartBadge(); // called AFTER goTo so success screen is already active
   }
 
   function addAccessory(id, price, name, btn) {
