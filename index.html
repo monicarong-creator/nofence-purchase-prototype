@@ -3798,11 +3798,14 @@
   }
 
   function shopProceedToCheckout() {
-    if (state.accessories['charger']) {
+    const w = document.getElementById('shop-charger-warning');
+    const warningVisible = w && w.style.display !== 'none';
+    if (state.accessories['charger'] || warningVisible) {
+      // Has charger, or user has already seen the warning and is choosing to continue
       buildShopCheckoutItems();
       buildCheckoutAndGo();
     } else {
-      const w = document.getElementById('shop-charger-warning');
+      // First click with no charger — show warning
       if (w) { w.style.display = 'block'; w.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
     }
   }
