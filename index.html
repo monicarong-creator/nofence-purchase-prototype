@@ -278,7 +278,7 @@
   .req-feature-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .req-feature-name { font-size: 18px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.02em; }
   .req-feature-desc { font-size: 13px; color: var(--neutral-500); line-height: 1.65; flex: 1; margin-bottom: 16px; }
-  .req-feature-footer { display: flex; align-items: center; gap: 16px; }
+  .req-feature-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .req-feature-price { font-size: 22px; font-weight: 900; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.03em; }
   .req-feature-cta { height: 40px; padding: 0 20px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .15s; white-space: nowrap; }
   .req-feature-cta:hover { background: #4C841E; }
@@ -2211,7 +2211,7 @@
               <p class="req-feature-desc">Batteries ship depleted and need a full charge before use — about 14 hours each. Recommended: 1 charger per 10 collars so you can always keep a rotation going.</p>
               <div class="req-feature-footer">
                 <span class="req-feature-price">$89</span>
-                <button class="req-feature-cta" id="req-charger-btn" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order →</button>
+                <button class="req-feature-cta" id="req-charger-btn" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order</button>
               </div>
             </div>
           </div>
@@ -2234,7 +2234,7 @@
               <p class="req-feature-desc">GPS doesn't reach inside buildings. If your animals use barns, stables, or covered shelters, a beacon mounted inside maintains accurate tracking. One per enclosed space.</p>
               <div class="req-feature-footer">
                 <span class="req-feature-price">$149</span>
-                <button class="req-feature-cta" id="req-beacon-btn" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order →</button>
+                <button class="req-feature-cta" id="req-beacon-btn" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order</button>
               </div>
             </div>
           </div>
@@ -2259,7 +2259,7 @@
             <p class="req-feature-desc">Batteries ship depleted — a full charge takes ~14 hours each. Recommended: 1 charger per 10 collars to keep a rotation going.</p>
             <div class="req-feature-footer">
               <span class="req-feature-price">$89</span>
-              <button class="req-feature-cta" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order →</button>
+              <button class="req-feature-cta" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order</button>
             </div>
           </div>
         </div>
@@ -2276,7 +2276,7 @@
             <p class="req-feature-desc">For shaded land or intensive grazing — charge one battery while the other is in use. 1 spare per 10 collars is standard.</p>
             <div class="req-feature-footer">
               <span class="req-feature-price">$49</span>
-              <button class="req-feature-cta" onclick="addAccessory('battery',49,'Spare Battery',this)">Add to order →</button>
+              <button class="req-feature-cta" onclick="addAccessory('battery',49,'Spare Battery',this)">Add to order</button>
             </div>
           </div>
         </div>
@@ -2299,7 +2299,7 @@
             <p class="req-feature-desc">For bulls and large breeds — Limousin, Charolais, Simmental. Replaces the standard 20″ chains included with each collar.</p>
             <div class="req-feature-footer">
               <span class="req-feature-price">$12</span>
-              <button class="req-feature-cta" onclick="addAccessory('chain',12,'Extra Chain Pair',this)">Add to order →</button>
+              <button class="req-feature-cta" onclick="addAccessory('chain',12,'Extra Chain Pair',this)">Add to order</button>
             </div>
           </div>
         </div>
@@ -2316,7 +2316,7 @@
             <p class="req-feature-desc">GPS doesn't reach inside buildings. Mounted indoors, it keeps accurate tracking when animals shelter in barns or covered areas. One per building.</p>
             <div class="req-feature-footer">
               <span class="req-feature-price">$149</span>
-              <button class="req-feature-cta" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order →</button>
+              <button class="req-feature-cta" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order</button>
             </div>
           </div>
         </div>
@@ -2333,7 +2333,7 @@
             <p class="req-feature-desc">Softer natural leather alternative to the standard nylon strap. Ideal for animals with sensitive skin or where comfort is a priority.</p>
             <div class="req-feature-footer">
               <span class="req-feature-price">$18</span>
-              <button class="req-feature-cta" onclick="addAccessory('strap',18,'Leather Strap',this)">Add to order →</button>
+              <button class="req-feature-cta" onclick="addAccessory('strap',18,'Leather Strap',this)">Add to order</button>
             </div>
           </div>
         </div>
@@ -3689,7 +3689,7 @@
     // Sync all buttons that fire addAccessory for the same id
     document.querySelectorAll(`[onclick*="addAccessory('${id}'"]`).forEach(b => {
       b.classList.toggle('added', isAdding);
-      b.textContent = isAdding ? '✓ Added' : (b.classList.contains('req-feature-cta') ? 'Add to order →' : '+ Add');
+      b.textContent = isAdding ? '✓ Added' : (b.classList.contains('req-feature-cta') ? 'Add to order' : '+ Add');
     });
     updateSummary();
     updateCartBadge();
