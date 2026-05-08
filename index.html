@@ -1825,9 +1825,17 @@
                 <div class="rec-card-body">
                   <div class="rec-card-title">
                     Shelter Beacon
-                    <span class="info-tip solid" data-tip="The beacon emits a low-frequency signal that collars detect when GPS drops inside buildings. Mount with adhesive tape or screws — no tools needed. Runs on 2× AA batteries (2–3 year life). Range: ~5 m. One per enclosed space; two for large open barns."><svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg></span>
+                    <button onclick="toggleInfoBox('beacon-info')" style="width:18px;height:18px;border-radius:50%;border:none;background:var(--green-500);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:10px;font-weight:700;font-style:italic;font-family:Georgia,serif;flex-shrink:0;padding:0;line-height:1;opacity:.85;transition:opacity .15s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity='.85'" title="More info">i</button>
                   </div>
                   <div class="rec-card-desc">One per standard-sized building is usually enough — use two for larger rooms or open barns.</div>
+                  <div id="beacon-info" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--neutral-200)">
+                    <div style="font-size:12px;color:var(--neutral-700);line-height:1.6">
+                      <strong style="display:block;margin-bottom:4px;color:var(--neutral-900)">How it works</strong>
+                      The beacon emits a low-frequency signal that collars detect when GPS drops inside buildings — typically barns, stables, or covered shelters. This keeps your animals' location accurate even without a clear sky view.
+                      <strong style="display:block;margin:10px 0 4px;color:var(--neutral-900)">Installation</strong>
+                      Mount with double-sided adhesive tape or screws — no tools or technical setup required. Works immediately after mounting. <em style="color:var(--neutral-500)">Range: ~5 m. Runs on 2× AA batteries (2–3 year life).</em>
+                    </div>
+                  </div>
                   <div class="rec-card-row">
                     <span class="rec-qty-label">How many buildings?</span>
                     <div class="stepper-sm">
