@@ -275,6 +275,9 @@
   .req-feature-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
   .req-feature-tag.always { color: #B54708; }
   .req-feature-tag.conditional { color: #026AA2; }
+  .req-feature-tag.recommended { color: var(--green-700); }
+  .req-feature-card.wide { flex-direction: row; grid-column: span 2; }
+  .req-feature-card.wide .req-feature-img { width: 220px; height: auto; flex-shrink: 0; }
   .req-feature-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .req-feature-name { font-size: 18px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.02em; }
   .req-feature-desc { font-size: 13px; color: var(--neutral-500); line-height: 1.65; flex: 1; margin-bottom: 16px; }
@@ -2198,7 +2201,7 @@
       <!-- ── Required items ───────────────────────────── -->
       <div class="req-section">
         <h2 class="req-section-title">You'll need these too</h2>
-        <p class="req-section-sub">Your collars don't arrive complete. These two items are essential to get up and running from day one.</p>
+        <p class="req-section-sub">Your collars don't arrive ready to use. Add these before your first day.</p>
         <div class="req-feature-list">
 
           <!-- Feature row 1: Battery Charger -->
@@ -2247,47 +2250,31 @@
             </div>
           </div>
 
+          <!-- Spare Collar Battery — full width, recommended -->
+          <div class="req-feature-card wide">
+            <div class="req-feature-img">
+              <div class="req-feature-img-bg" style="background:linear-gradient(135deg,#EBF5E0 0%,#D1E8BE 100%)">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><rect x="20" y="18" width="32" height="40" rx="5" stroke="#5FA526" stroke-width="2.5" fill="none"/><rect x="28" y="12" width="16" height="8" rx="3" fill="#5FA526"/><rect x="28" y="30" width="16" height="16" rx="3" fill="#D1E8BE" stroke="#5FA526" stroke-width="1.5"/><path d="M36 34v8M32 38h8" stroke="#5FA526" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="req-feature-body">
+              <div class="req-feature-tag recommended">Recommended for most setups</div>
+              <div class="req-feature-name-row"><span class="req-feature-name">Spare Collar Battery</span></div>
+              <p class="req-feature-desc">Collars stop working when the battery runs flat. A spare means you always have one charged and ready — charge one while the other is in use. One spare per 10 collars is standard for most operations.</p>
+              <div class="req-feature-footer">
+                <span class="req-feature-price">$49</span>
+                <button class="req-feature-cta" onclick="addAccessory('battery',49,'Spare Battery',this)">Add to order</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <!-- ── Optional accessories ─────────────────────────── -->
       <div class="accessories-title" style="margin-top:32px">While you're at it</div>
-      <p class="accessories-subtitle">These extras aren't essential, but many farmers find them useful. Add what suits your operation.</p>
+      <p class="accessories-subtitle">Breed-specific or comfort extras — not essential, but useful for some setups.</p>
       <div class="accessories-list">
-
-        <!-- Collar Battery Charger -->
-        <div class="req-feature-card">
-          <div class="req-feature-img">
-            <div class="req-feature-img-bg" style="background:linear-gradient(135deg,#EBF5E0 0%,#D1E8BE 100%)">
-              <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><rect x="18" y="14" width="36" height="42" rx="5" stroke="#5FA526" stroke-width="2.5" fill="none"/><rect x="28" y="7" width="16" height="9" rx="3" fill="#5FA526"/><path d="M26 36h8l-4 10h8" stroke="#5FA526" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-          <div class="req-feature-body">
-            <div class="req-feature-name-row"><span class="req-feature-name">Collar Battery Charger</span></div>
-            <p class="req-feature-desc">Batteries ship depleted — a full charge takes ~14 hours each. Recommended: 1 charger per 10 collars to keep a rotation going.</p>
-            <div class="req-feature-footer">
-              <span class="req-feature-price">$89</span>
-              <button class="req-feature-cta" onclick="addAccessory('charger',89,'Battery Charger',this)">Add to order</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Spare Collar Battery -->
-        <div class="req-feature-card">
-          <div class="req-feature-img">
-            <div class="req-feature-img-bg" style="background:linear-gradient(135deg,#EBF5E0 0%,#D1E8BE 100%)">
-              <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><rect x="20" y="18" width="32" height="40" rx="5" stroke="#5FA526" stroke-width="2.5" fill="none"/><rect x="28" y="12" width="16" height="8" rx="3" fill="#5FA526"/><rect x="28" y="30" width="16" height="16" rx="3" fill="#D1E8BE" stroke="#5FA526" stroke-width="1.5"/><path d="M36 34v8M32 38h8" stroke="#5FA526" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </div>
-          <div class="req-feature-body">
-            <div class="req-feature-name-row"><span class="req-feature-name">Spare Collar Battery</span></div>
-            <p class="req-feature-desc">For shaded land or intensive grazing — charge one battery while the other is in use. 1 spare per 10 collars is standard.</p>
-            <div class="req-feature-footer">
-              <span class="req-feature-price">$49</span>
-              <button class="req-feature-cta" onclick="addAccessory('battery',49,'Spare Battery',this)">Add to order</button>
-            </div>
-          </div>
-        </div>
 
         <!-- Extra-long Chain Pair -->
         <div class="req-feature-card">
@@ -2308,23 +2295,6 @@
             <div class="req-feature-footer">
               <span class="req-feature-price">$12</span>
               <button class="req-feature-cta" onclick="addAccessory('chain',12,'Extra Chain Pair',this)">Add to order</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Shelter Beacon -->
-        <div class="req-feature-card">
-          <div class="req-feature-img">
-            <div class="req-feature-img-bg" style="background:linear-gradient(135deg,#EFF6FF 0%,#BFDBFE 100%)">
-              <svg width="72" height="72" viewBox="0 0 72 72" fill="none"><rect x="22" y="22" width="28" height="34" rx="5" stroke="#3B82F6" stroke-width="2.5" fill="none"/><rect x="29" y="15" width="14" height="9" rx="3" fill="#BFDBFE" stroke="#3B82F6" stroke-width="1.5"/><circle cx="36" cy="39" r="5.5" stroke="#3B82F6" stroke-width="2"/><circle cx="36" cy="39" r="2.2" fill="#3B82F6"/><path d="M28 30 Q36 22 44 30" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M23 25 Q36 13 49 25" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".4"/></svg>
-            </div>
-          </div>
-          <div class="req-feature-body">
-            <div class="req-feature-name-row"><span class="req-feature-name">Shelter Beacon</span></div>
-            <p class="req-feature-desc">GPS doesn't reach inside buildings. Mounted indoors, it keeps accurate tracking when animals shelter in barns or covered areas. One per building.</p>
-            <div class="req-feature-footer">
-              <span class="req-feature-price">$149</span>
-              <button class="req-feature-cta" onclick="addAccessory('beacon',149,'Shelter Beacon',this)">Add to order</button>
             </div>
           </div>
         </div>
