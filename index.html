@@ -302,6 +302,14 @@
   .grand-key { font-size: 16px; font-weight: 700; color: var(--neutral-900); }
   .grand-val { font-size: 20px; font-weight: 700; color: var(--green-900); }
   .checkout-btn { width: 100%; height: 60px; background: var(--green-500); color: white; border: none; border-radius: var(--radius-lg); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; }
+  .shop-charger-warning { background:#FFFBEB; border:1px solid #FDE68A; border-left:3px solid #F59E0B; border-radius:var(--radius-md); padding:14px 16px; animation:fadeInBanner .25s ease; }
+  .shop-charger-warning-title { font-size:13px; font-weight:700; color:#92400E; margin-bottom:4px; }
+  .shop-charger-warning-desc { font-size:12px; color:#92400E; line-height:1.5; margin-bottom:12px; opacity:.85; }
+  .shop-charger-warning-btns { display:flex; gap:8px; }
+  .shop-charger-add-btn { flex:1; height:34px; background:#F59E0B; color:white; border:none; border-radius:var(--radius-sm); font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; transition:background .15s; }
+  .shop-charger-add-btn:hover { background:#D97706; }
+  .shop-charger-skip-btn { height:34px; padding:0 12px; background:none; border:1px solid #FDE68A; color:#92400E; border-radius:var(--radius-sm); font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; white-space:nowrap; transition:background .15s; }
+  .shop-charger-skip-btn:hover { background:#FEF3C7; }
   .checkout-btn:hover { background: #4C841E; }
   .financing-note { background: var(--neutral-50); border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; color: var(--neutral-700); text-align: center; line-height: 1.4; }
   .trust-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
@@ -2369,7 +2377,26 @@
         <span class="grand-key">Total</span>
         <span class="grand-val" id="summary-grand-total">$1,745</span>
       </div>
-      <button class="checkout-btn" onclick="goTo('screen-checkout')">Proceed to checkout &nbsp;→</button>
+      <!-- Fully equipped banner — shown when charger is added -->
+      <div id="shop-equipped-banner" style="display:none">
+        <div class="fully-equipped-banner">
+          <div class="feb-icon">✓</div>
+          <div class="feb-body">
+            <div class="feb-title">You're set to start</div>
+            <div class="feb-sub">Collars and a charger — everything you need to get going.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Charger warning — shown on proceed click if no charger -->
+      <div id="shop-charger-warning" style="display:none" class="shop-charger-warning">
+        <div class="shop-charger-warning-title">No charger in your order</div>
+        <div class="shop-charger-warning-desc">Collars ship depleted — you won't be able to activate them without a charger to charge the batteries first.</div>
+        <div class="shop-charger-warning-btns">
+          <button class="shop-charger-add-btn" onclick="quickAddCharger()">Add charger — $89</button>
+          <button class="shop-charger-skip-btn" onclick="goTo('screen-checkout')">Continue anyway</button>
+        </div>
+      </div>
+      <button class="checkout-btn" onclick="shopProceedToCheckout()">Proceed to checkout &nbsp;→</button>
       <div class="trust-badges">
         <div class="trust-badge">🔒 Secure payment</div>
         <div class="trust-badge">↩️ 30-day returns</div>
@@ -3726,6 +3753,27 @@
     setText('co-subtotal', `$${sub.toLocaleString()}`);
     setText('co-vat', `$${(sub * .2).toLocaleString(undefined,{maximumFractionDigits:0})}`);
     setText('co-grand-total', `$${(sub * 1.2).toLocaleString(undefined,{maximumFractionDigits:0})}`);
+    // Shop page: toggle equipped banner + hide charger warning if charger added
+    const hasCharger = !!state.accessories['charger'];
+    const equippedBanner = document.getElementById('shop-equipped-banner');
+    if (equippedBanner) equippedBanner.style.display = hasCharger ? 'block' : 'none';
+    const chargerWarning = document.getElementById('shop-charger-warning');
+    if (chargerWarning && hasCharger) chargerWarning.style.display = 'none';
+  }
+
+  function shopProceedToCheckout() {
+    if (state.accessories['charger']) {
+      goTo('screen-checkout');
+    } else {
+      const w = document.getElementById('shop-charger-warning');
+      if (w) { w.style.display = 'block'; w.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+    }
+  }
+
+  function quickAddCharger() {
+    const btn = document.getElementById('req-charger-btn') || document.querySelector('[onclick*="addAccessory(\'charger\'"]');
+    addAccessory('charger', 89, 'Battery Charger', btn || document.createElement('button'));
+    document.getElementById('shop-charger-warning').style.display = 'none';
   }
 
   // ─── Checkout helpers ─────────────────────────────────────────
