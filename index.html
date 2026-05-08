@@ -610,8 +610,8 @@
   .info-tip::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); background:var(--neutral-900); color:white; font-size:12px; line-height:1.5; padding:10px 14px; border-radius:var(--radius-md); width:260px; text-align:left; white-space:normal; opacity:0; pointer-events:none; transition:opacity .18s; z-index:1000; font-weight:400; box-shadow:0 4px 12px rgba(0,0,0,.25); }
   .info-tip:hover::after { opacity:1; }
   /* Filled circle variant for in-card i-icons */
-  .info-tip.solid { background:var(--green-50); border-color:var(--green-300); color:var(--green-700); width:18px; height:18px; }
-  .info-tip.solid:hover { background:var(--green-100); border-color:var(--green-500); }
+  .info-tip.solid { background:var(--green-500); border-color:transparent; color:#fff; width:18px; height:18px; opacity:.85; transition:opacity .15s; }
+  .info-tip.solid:hover { background:var(--green-500); border-color:transparent; color:#fff; opacity:1; }
   .info-tip.solid::after { width:280px; }
 
   /* ─── QUIZ SCREEN TOPBAR (skip link row) ─────────────────── */
@@ -813,8 +813,8 @@
   .upsell-card-body { flex:1; min-width:0; }
   .upsell-card-top { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
   .upsell-card-name { font-size:14px; font-weight:600; color:var(--neutral-900); }
-  .upsell-info-btn { width:17px; height:17px; border-radius:50%; border:1.5px solid var(--neutral-300); background:none; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:var(--neutral-500); font-size:10px; font-weight:700; font-style:italic; transition:all .15s; font-family:Georgia,serif; flex-shrink:0; line-height:1; padding:0; }
-  .upsell-info-btn:hover { border-color:var(--neutral-600); color:var(--neutral-900); }
+  .upsell-info-btn { width:18px; height:18px; border-radius:50%; border:none; background:var(--green-500); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:#fff; font-size:10px; font-weight:700; font-style:italic; transition:opacity .15s; font-family:Georgia,serif; flex-shrink:0; line-height:1; padding:0; opacity:.85; }
+  .upsell-info-btn:hover { opacity:1; }
   .upsell-card-desc { font-size:12px; color:var(--neutral-500); line-height:1.45; }
   .upsell-card-extra { font-size:12px; color:var(--neutral-700); line-height:1.5; background:var(--neutral-50); border-radius:var(--radius-sm); padding:8px 10px; margin-top:8px; border-left:2px solid var(--neutral-300); display:none; }
   .upsell-card-extra.open { display:block; }
@@ -1819,7 +1819,7 @@
 
           <!-- Shelter beacon reveal — directly under the "yes" option -->
           <div class="inline-reveal" id="shelter-reveal" style="padding:0 4px">
-            <div style="padding:14px 0 4px">
+            <div style="padding:4px 0 14px">
               <div class="rec-card">
                 <div class="rec-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.1719 10.7232C22.5165 10.9529 22.9822 10.8598 23.2119 10.5152C23.4417 10.1705 23.3486 9.70486 23.0039 9.47509L22.5879 10.0991L22.1719 10.7232ZM0.996084 9.47509C0.651438 9.70486 0.558307 10.1705 0.788072 10.5152C1.01784 10.8598 1.48349 10.9529 1.82813 10.7232L1.41211 10.0991L0.996084 9.47509ZM11.135 3.34425L10.7025 2.73152L11.135 3.34425ZM12.865 3.34425L12.4325 3.95697L12.865 3.34425ZM4.17417 8.25776L4.60668 8.87048L11.5675 3.95697L11.135 3.34425L10.7025 2.73152L3.74166 7.64503L4.17417 8.25776ZM12.865 3.34425L12.4325 3.95697L19.3933 8.87048L19.8258 8.25776L20.2583 7.64503L13.2975 2.73152L12.865 3.34425ZM19.8258 8.25776H19.0758V20.7663H19.8258H20.5758V8.25776H19.8258ZM4.17417 20.7663H4.92417V8.25776H4.17417H3.42417V20.7663H4.17417ZM19.8258 8.25776L19.4098 8.8818L22.1719 10.7232L22.5879 10.0991L23.0039 9.47509L20.2419 7.63372L19.8258 8.25776ZM4.17417 8.25776C3.75814 7.63372 3.75814 7.63373 3.75812 7.63373C3.75811 7.63374 3.75809 7.63376 3.75807 7.63377C3.75801 7.63381 3.75794 7.63386 3.75784 7.63393C3.75763 7.63406 3.75732 7.63427 3.75692 7.63454C3.7561 7.63508 3.75489 7.63589 3.75328 7.63696C3.75006 7.63911 3.74527 7.6423 3.73897 7.6465C3.72638 7.6549 3.70777 7.6673 3.6837 7.68335C3.63556 7.71544 3.56559 7.76209 3.47826 7.82031C3.30358 7.93676 3.05945 8.09952 2.78161 8.28474C2.22592 8.6552 1.53541 9.11554 0.996084 9.47509L1.41211 10.0991L1.82813 10.7232C2.36746 10.3636 3.05797 9.90328 3.61366 9.53282C3.8915 9.34759 4.13563 9.18484 4.31031 9.06839C4.39764 9.01016 4.46761 8.96352 4.51575 8.93142C4.53982 8.91538 4.55843 8.90297 4.57102 8.89458C4.57732 8.89038 4.58211 8.88718 4.58533 8.88504C4.58694 8.88397 4.58816 8.88315 4.58897 8.88261C4.58938 8.88234 4.58968 8.88214 4.58989 8.882C4.58999 8.88193 4.59006 8.88188 4.59012 8.88185C4.59014 8.88183 4.59016 8.88182 4.59017 8.88181C4.59019 8.8818 4.59019 8.8818 4.17417 8.25776ZM11.135 3.34425L11.5675 3.95697C11.8268 3.77394 12.1732 3.77394 12.4325 3.95697L12.865 3.34425L13.2975 2.73152C12.5197 2.18243 11.4804 2.18242 10.7025 2.73152L11.135 3.34425Z" fill="#0A0D12"/><path d="M9.95572 11.791C8.78392 13.0118 8.82365 14.9514 10.0445 16.1232" stroke="#0A0D12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.9467 16.1236C15.1433 14.927 15.1433 12.987 13.9467 11.7905" stroke="#0A0D12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.11846 10.7116C7.8874 11.0328 7.68705 11.3834 7.52336 11.7613C6.71071 13.6374 7.00535 15.7142 8.11846 17.2614" stroke="#0A0D12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8815 10.6596C16.1126 10.9807 16.313 11.3314 16.4766 11.7093C17.2893 13.5853 16.9946 15.6621 15.8815 17.2094" stroke="#0A0D12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="12.5273" y="14.2271" width="0.800606" height="0.800606" rx="0.400303" transform="rotate(156.579 12.5273 14.2271)" fill="#0A0D12" stroke="#0A0D12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 <div class="rec-card-body">
