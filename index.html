@@ -940,12 +940,11 @@
 <!-- ═══════════════ ABANDON MODAL (nav back during quiz) ════ -->
 <div class="modal-overlay" id="abandonModal">
   <div class="modal-card">
-    <div class="modal-icon" style="font-size:36px">⚠️</div>
     <div class="modal-title">Abandon your setup?</div>
     <p class="modal-desc">You're partway through building your personalised Nofence setup. Going back will lose your quiz answers and recommendations.</p>
     <div class="modal-btns">
-      <button class="modal-continue" onclick="closeAbandonModal()">Keep going</button>
       <button class="modal-skip" onclick="window.location.href='https://nofence.com'">Leave to nofence.com</button>
+      <button class="modal-continue" onclick="closeAbandonModal()">Keep going</button>
     </div>
   </div>
 </div>
@@ -953,11 +952,11 @@
 <!-- ═══════════════ LEAVE CHECKOUT MODAL ════════════════════ -->
 <div class="modal-overlay" id="leaveCheckoutModal">
   <div class="modal-card">
-    <div class="modal-title" style="font-size:20px;margin-bottom:10px">Leave checkout?</div>
-    <p class="modal-desc" style="margin-bottom:24px">Your cart is saved — you can pick up exactly where you left off. Come back any time and your items will still be here.</p>
+    <div class="modal-title">Leave checkout?</div>
+    <p class="modal-desc">Your cart is saved — you can pick up exactly where you left off. Come back any time and your items will still be here.</p>
     <div class="modal-btns">
-      <button class="modal-continue" onclick="closeLeaveCheckoutModal()">Stay in checkout</button>
       <button class="modal-skip" onclick="closeLeaveCheckoutModal();goTo('screen-purchase')">Back to shop</button>
+      <button class="modal-continue" onclick="closeLeaveCheckoutModal()">Stay in checkout</button>
     </div>
   </div>
 </div>
