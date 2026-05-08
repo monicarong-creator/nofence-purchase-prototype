@@ -3721,8 +3721,16 @@
     const btn = document.getElementById('navCartBtn');
     const badge = document.getElementById('navCartBadge');
     if (!btn || !badge) return;
-    btn.style.display = count > 0 ? '' : 'none';
-    badge.textContent = count;
+    const onSuccess = !!document.querySelector('#screen-success.active');
+    if (onSuccess) {
+      // On success page: always show the cart icon (no badge) so user can navigate back to shop
+      btn.style.display = '';
+      badge.style.display = 'none';
+    } else {
+      btn.style.display = count > 0 ? '' : 'none';
+      badge.style.display = '';
+      badge.textContent = count;
+    }
   }
 
   function completeOrder() {
