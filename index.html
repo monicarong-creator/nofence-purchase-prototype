@@ -3759,9 +3759,23 @@
     if (chargerWarning && hasCharger) chargerWarning.style.display = 'none';
   }
 
+  function buildShopCheckoutItems() {
+    const type = state.collarType === 'both' ? 'cattle' : state.collarType;
+    const ppu = prices[type][state.currentTier];
+    const qty = state.purchaseQty;
+    const names = { cattle:'Cattle Collar C2.5', sheep:'Sheep & Goat Collar S1', both:'Mixed Setup' };
+    state.summaryItems = [
+      { id:'collars', name: names[state.collarType] || 'Collar', unitPrice: ppu, qty }
+    ];
+    for (const [id, acc] of Object.entries(state.accessories)) {
+      state.summaryItems.push({ id, name: acc.name, unitPrice: acc.price, qty: 1 });
+    }
+  }
+
   function shopProceedToCheckout() {
     if (state.accessories['charger']) {
-      goTo('screen-checkout');
+      buildShopCheckoutItems();
+      buildCheckoutAndGo();
     } else {
       const w = document.getElementById('shop-charger-warning');
       if (w) { w.style.display = 'block'; w.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
