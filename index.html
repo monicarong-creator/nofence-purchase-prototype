@@ -287,7 +287,9 @@
   .req-feature-cta:hover { background: #4C841E; }
   .req-feature-cta.added { background: var(--green-50); color: var(--green-700); border: 1.5px solid var(--green-300); }
   .accessories-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .order-summary-panel { width: 340px; min-width: 340px; background: white; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); position: sticky; top: 96px; max-height: calc(100vh - 112px); overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+  .order-summary-panel { width: 340px; min-width: 340px; background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); position: sticky; top: 96px; max-height: calc(100vh - 112px); overflow: hidden; display: flex; flex-direction: column; }
+  .order-summary-scroll { flex: 1; overflow-y: auto; padding: 28px 28px 0; display: flex; flex-direction: column; gap: 14px; }
+  .order-summary-footer { padding: 14px 28px 24px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--neutral-100); }
   .order-summary-panel h2 { font-size: 18px; font-weight: 700; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; font-weight: 300; letter-spacing: -0.02em; }
   .order-item { display: flex; gap: 8px; align-items: flex-start; }
   .order-item-img { display: none; }
@@ -783,7 +785,8 @@
     .wizard-left { display: none; position: static; height: auto; }
     .wizard-right { padding: 32px 24px; }
     .purchase-body, .checkout-page { flex-direction: column; padding: 16px; }
-    .order-summary-panel, .checkout-summary { width: 100%; min-width: unset; position: static; max-height: none; }
+    .order-summary-panel, .checkout-summary { width: 100%; min-width: unset; position: static; max-height: none; overflow: visible; }
+    .order-summary-scroll { overflow-y: visible; }
     .product-detail { flex-direction: column; }
     .product-image { width: 100%; min-width: unset; }
     .payment-methods { grid-template-columns: repeat(2, 1fr); }
@@ -2325,58 +2328,64 @@
     </div>
     <!-- Order summary panel -->
     <div class="order-summary-panel">
-      <h2>Order summary</h2>
-      <hr class="divider">
-      <div id="order-items-list">
-        <div class="order-item" id="main-order-item">
-          <div class="order-item-info">
-            <div class="item-name" id="summary-product-name">Cattle Collar C2.5</div>
-            <div class="item-meta" id="summary-product-meta">Qty: 5 · $349 each</div>
-          </div>
-          <span class="order-item-price" id="summary-product-total">$1,745</span>
-        </div>
-      </div>
-      <hr class="divider">
-      <div class="grants-box">
-        <div class="grants-title">💶 Grants may be available</div>
-        <div class="grants-desc">Check if you qualify for agricultural technology funding in your region.</div>
-        <button class="grants-btn" onclick="showGrantsModal()">Generate cost estimate →</button>
-      </div>
-      <hr class="divider">
-      <div class="totals-section">
-        <div class="total-row"><span class="total-key">Subtotal</span><span id="summary-subtotal">$1,745</span></div>
-        <div class="total-row"><span class="total-key">VAT</span><span>Calculated at checkout</span></div>
-        <div class="total-row"><span class="total-key">Shipping</span><span>Free over $500</span></div>
-      </div>
-      <div class="grand-total-row">
-        <span class="grand-key">Total</span>
-        <span class="grand-val" id="summary-grand-total">$1,745</span>
-      </div>
-      <!-- Fully equipped banner — shown when charger is added -->
-      <div id="shop-equipped-banner" style="display:none">
-        <div class="fully-equipped-banner">
-          <div class="feb-icon">✓</div>
-          <div class="feb-body">
-            <div class="feb-title">You're set to start</div>
-            <div class="feb-sub">Collars and a charger — everything you need to get going.</div>
+      <!-- Scrollable body -->
+      <div class="order-summary-scroll">
+        <h2>Order summary</h2>
+        <hr class="divider">
+        <div id="order-items-list">
+          <div class="order-item" id="main-order-item">
+            <div class="order-item-info">
+              <div class="item-name" id="summary-product-name">Cattle Collar C2.5</div>
+              <div class="item-meta" id="summary-product-meta">Qty: 5 · $349 each</div>
+            </div>
+            <span class="order-item-price" id="summary-product-total">$1,745</span>
           </div>
         </div>
-      </div>
-      <!-- Charger warning — shown on proceed click if no charger -->
-      <div id="shop-charger-warning" style="display:none" class="shop-charger-warning">
-        <div class="shop-charger-warning-title">Your order might not be complete</div>
-        <div class="shop-charger-warning-desc">Collars ship depleted and can't be activated without a charger. A beacon and spare battery are also recommended before day one.</div>
-        <div class="shop-charger-warning-btns">
-          <button class="shop-charger-add-btn" onclick="scrollToAccessories()">Review accessories</button>
-          <button class="shop-charger-skip-btn" onclick="goTo('screen-checkout')">Continue anyway</button>
+        <hr class="divider">
+        <div class="grants-box">
+          <div class="grants-title">💶 Grants may be available</div>
+          <div class="grants-desc">Check if you qualify for agricultural technology funding in your region.</div>
+          <button class="grants-btn" onclick="showGrantsModal()">Generate cost estimate →</button>
+        </div>
+        <hr class="divider">
+        <div class="totals-section">
+          <div class="total-row"><span class="total-key">Subtotal</span><span id="summary-subtotal">$1,745</span></div>
+          <div class="total-row"><span class="total-key">VAT</span><span>Calculated at checkout</span></div>
+          <div class="total-row"><span class="total-key">Shipping</span><span>Free over $500</span></div>
+        </div>
+        <div class="grand-total-row">
+          <span class="grand-key">Total</span>
+          <span class="grand-val" id="summary-grand-total">$1,745</span>
         </div>
       </div>
-      <button class="checkout-btn" onclick="shopProceedToCheckout()">Proceed to checkout</button>
-      <div class="trust-badges">
-        <div class="trust-badge">🔒 Secure payment</div>
-        <div class="trust-badge">↩️ 30-day returns</div>
-        <div class="trust-badge">🛡️ 5-year warranty</div>
-        <div class="trust-badge">💬 24/7 support</div>
+      <!-- Pinned footer — always visible -->
+      <div class="order-summary-footer">
+        <!-- Fully equipped banner — shown when charger is added -->
+        <div id="shop-equipped-banner" style="display:none">
+          <div class="fully-equipped-banner">
+            <div class="feb-icon">✓</div>
+            <div class="feb-body">
+              <div class="feb-title">You're set to start</div>
+              <div class="feb-sub">Collars and a charger — everything you need to get going.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Charger warning — shown on proceed click if no charger -->
+        <div id="shop-charger-warning" style="display:none" class="shop-charger-warning">
+          <div class="shop-charger-warning-title">Your order might not be complete</div>
+          <div class="shop-charger-warning-desc">Collars ship depleted and can't be activated without a charger. A beacon and spare battery are also recommended before day one.</div>
+          <div class="shop-charger-warning-btns">
+            <button class="shop-charger-add-btn" onclick="scrollToAccessories()">Review accessories</button>
+            <button class="shop-charger-skip-btn" onclick="goTo('screen-checkout')">Continue anyway</button>
+          </div>
+        </div>
+        <button class="checkout-btn" onclick="shopProceedToCheckout()">Proceed to checkout</button>
+        <div class="trust-badges">
+          <div class="trust-badge">🔒 Secure payment</div>
+          <div class="trust-badge">↩️ 30-day returns</div>
+          <div class="trust-badge">🛡️ 5-year warranty</div>
+          <div class="trust-badge">💬 24/7 support</div>
+        </div>
       </div>
     </div>
   </div>
