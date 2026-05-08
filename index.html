@@ -264,15 +264,14 @@
   .accessories-subtitle { font-size: 13px; color: var(--neutral-500); margin-bottom: 16px; }
   /* ─── REQUIRED ITEMS FEATURE ROWS ─────────────────────────── */
   .req-section { margin: 32px 0 8px; }
-  .req-section-info-bar { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: #93370D; background: #FFF6ED; border: 1px solid #FDDCAB; border-radius: 8px; padding: 7px 14px; margin-bottom: 18px; }
   .req-section-title { font-size: 28px; font-weight: 800; color: var(--neutral-900); font-family: 'Host Grotesk','Inter',sans-serif; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 6px; }
   .req-section-sub { font-size: 14px; color: var(--neutral-500); line-height: 1.55; margin-bottom: 20px; }
-  .req-feature-list { display: flex; flex-direction: column; gap: 16px; }
-  .req-feature-card { display: flex; background: white; border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-height: 180px; }
-  .req-feature-img { width: 220px; flex-shrink: 0; background: var(--neutral-100); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .req-feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .req-feature-card { display: flex; flex-direction: column; background: white; border-radius: 16px; border: 1px solid var(--neutral-200); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .req-feature-img { width: 100%; height: 180px; flex-shrink: 0; background: var(--neutral-100); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
   .req-feature-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .req-feature-img-bg { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
-  .req-feature-body { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; }
+  .req-feature-body { flex: 1; padding: 20px 24px 24px; display: flex; flex-direction: column; }
   .req-feature-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
   .req-feature-tag.always { color: #B54708; }
   .req-feature-tag.conditional { color: #026AA2; }
@@ -2201,10 +2200,6 @@
       <!-- ── Required items ───────────────────────────────── -->
       <!-- ── Required items ───────────────────────────── -->
       <div class="req-section">
-        <div class="req-section-info-bar">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#93370D"/><rect x="6.25" y="3.5" width="1.5" height="4.5" rx=".75" fill="#93370D"/><circle cx="7" cy="10" r=".75" fill="#93370D"/></svg>
-          Not included in collar price — needed to get started
-        </div>
         <h2 class="req-section-title">You'll need these too</h2>
         <p class="req-section-sub">Your collars don't arrive complete. These two items are essential to get up and running from day one.</p>
         <div class="req-feature-list">
@@ -2217,10 +2212,10 @@
               </div>
             </div>
             <div class="req-feature-body">
-              <div class="req-feature-tag always">⚡ Always required</div>
+              <div class="req-feature-tag always">Always required</div>
               <div class="req-feature-name-row">
                 <span class="req-feature-name">Collar Battery Charger</span>
-                <span class="info-tip solid" data-tip="Batteries are shipped depleted and must be fully charged before your first use — a process that takes around 14 hours per battery. We recommend 1 charger per 10 collars to allow efficient rotation between charges.">
+                <span class="info-tip" data-tip="Batteries are shipped depleted and must be fully charged before your first use — a process that takes around 14 hours per battery. We recommend 1 charger per 10 collars to allow efficient rotation between charges.">
                   <svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg>
                 </span>
               </div>
@@ -2240,10 +2235,10 @@
               </div>
             </div>
             <div class="req-feature-body">
-              <div class="req-feature-tag conditional">🏠 Required if animals go indoors</div>
+              <div class="req-feature-tag conditional">Required if animals go indoors</div>
               <div class="req-feature-name-row">
                 <span class="req-feature-name">Shelter Beacon</span>
-                <span class="info-tip solid" data-tip="The shelter beacon transmits a low-frequency signal that the collar detects when GPS coverage drops — typically inside barns, stables, or covered areas. Install with adhesive tape or screws. No technical setup required. Battery life: 2–3 years on standard AA batteries.">
+                <span class="info-tip" data-tip="The shelter beacon transmits a low-frequency signal that the collar detects when GPS coverage drops — typically inside barns, stables, or covered areas. Install with adhesive tape or screws. No technical setup required. Battery life: 2–3 years on standard AA batteries.">
                   <svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor"><circle cx="4" cy="1.8" r="1.2"/><rect x="2.8" y="4.2" width="2.4" height="5.8" rx="1.2"/></svg>
                 </span>
               </div>
