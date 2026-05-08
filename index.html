@@ -135,7 +135,7 @@
 
   /* ─── BUTTONS ─────────────────────────────────────────────── */
   .btn-row { display: flex; gap: 12px; margin-top: auto; padding-top: 20px; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-md); font-size: 15px; font-weight: 600; cursor: pointer; transition: all .2s; border: 2px solid transparent; height: 52px; padding: 0 24px; text-decoration: none; font-family: inherit; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-md); font-size: 15px; font-weight: 600; cursor: pointer; transition: all .2s; border: 2px solid transparent; height: 52px; min-height: 52px; flex-shrink: 0; padding: 0 24px; text-decoration: none; font-family: inherit; box-sizing: border-box; }
   .btn-primary { background: var(--green-500); color: white; flex: 1; }
   .btn-primary:hover { background: #4C841E; transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgba(95,165,38,.55); }
   .btn-primary:disabled { background: var(--neutral-200); color: var(--neutral-500); transform: none; box-shadow: none; cursor: not-allowed; }
@@ -2710,7 +2710,7 @@
 
     <!-- Actions -->
     <div class="success-actions">
-      <a href="https://app.nofence.com" class="btn btn-primary" style="width:100%;max-width:320px;text-decoration:none;font-size:15px" onclick="event.preventDefault();alert('This would open your Nofence account.')">Go to my Nofence account</a>
+      <button class="btn btn-primary" style="width:100%;max-width:320px;font-size:15px" onclick="alert('This would open your Nofence account.')">Go to my Nofence account</button>
       <a href="https://www.nofence.com/knowledge-hub" style="font-size:14px;color:var(--neutral-500);text-decoration:none;padding:6px 0" onmouseover="this.style.color='var(--neutral-900)'" onmouseout="this.style.color='var(--neutral-500)'">Read our setup guides →</a>
     </div>
 
