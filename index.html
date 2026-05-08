@@ -350,12 +350,13 @@
   .pm-card .pm-badge { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--green-500); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
   .pm-details { animation: slideDown .2s ease; }
   .pm-details.hidden { display: none; }
-  .klarna-installments { background: var(--purple-50); border-radius: var(--radius-lg); padding: 16px 20px; }
-  .klarna-title { font-size: 14px; font-weight: 700; color: var(--purple-500); margin-bottom: 10px; }
+  .klarna-installments { background: var(--neutral-50); border: 1px solid #FFCCD5; border-left: 3px solid #FF9BAA; border-radius: var(--radius-lg); padding: 16px 20px; }
+  .klarna-title { font-size: 14px; font-weight: 700; color: var(--neutral-900); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .klarna-wordmark { display:inline-flex; align-items:center; background:#FFB3C7; color:#1a1a1a; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; letter-spacing:0.2px; line-height:1.6; }
   .klarna-rows { display: flex; flex-direction: column; gap: 8px; }
   .klarna-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--neutral-700); }
   .klarna-row .kl-label { color: var(--neutral-500); }
-  .klarna-note { font-size: 12px; color: var(--purple-500); margin-top: 8px; font-weight: 500; }
+  .klarna-note { font-size: 12px; color: var(--neutral-500); margin-top: 8px; font-weight: 500; }
   .card-fields { display: flex; flex-direction: column; gap: 12px; }
   .tc-row { display: flex; gap: 12px; align-items: flex-start; }
   .tc-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--green-500); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
@@ -2535,20 +2536,20 @@
             <div class="pm-logo">🅿️</div>
             <div class="pm-name">PayPal</div>
           </div>
-          <div class="pm-card selected" onclick="selectPayment('klarna',this)">
-            <div class="pm-badge">Recommended</div>
-            <div class="pm-logo">🟣</div>
+          <div class="pm-card" onclick="selectPayment('klarna',this)">
+            <div class="pm-logo" style="font-size:0;padding:4px 0"><span class="klarna-wordmark">Klarna</span></div>
             <div class="pm-name">Klarna</div>
           </div>
-          <div class="pm-card" onclick="selectPayment('invoice',this)">
+          <div class="pm-card selected" onclick="selectPayment('invoice',this)">
+            <div class="pm-badge">Recommended</div>
             <div class="pm-logo">📄</div>
             <div class="pm-name">Invoice</div>
           </div>
         </div>
-        <!-- Klarna details (default) -->
-        <div class="pm-details" id="pm-klarna">
+        <!-- Klarna details -->
+        <div class="pm-details hidden" id="pm-klarna">
           <div class="klarna-installments">
-            <div class="klarna-title">🟣 Pay in 3 interest-free instalments</div>
+            <div class="klarna-title"><span class="klarna-wordmark">Klarna</span> Pay in 3 interest-free instalments</div>
             <div class="klarna-rows">
               <div class="klarna-row"><span class="kl-label">1st payment (today)</span><span id="klarna-pay1">$582</span></div>
               <div class="klarna-row"><span class="kl-label">2nd payment (30 days)</span><span id="klarna-pay2">$582</span></div>
@@ -2572,7 +2573,7 @@
             <p style="font-size:14px;color:var(--blue-500);font-weight:600">You'll be redirected to PayPal to complete your payment securely.</p>
           </div>
         </div>
-        <div class="pm-details hidden" id="pm-invoice">
+        <div class="pm-details" id="pm-invoice">
           <div style="background:var(--neutral-50);border-radius:var(--radius-lg);padding:16px 20px">
             <p style="font-size:14px;color:var(--neutral-700);line-height:1.5">Invoice payment is available for registered businesses. Payment terms: net 30 days. A VAT invoice will be emailed on dispatch.</p>
             <input class="form-input" type="text" placeholder="Company / VAT number" style="margin-top:12px">
