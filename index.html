@@ -56,7 +56,7 @@
 
   /* ─── LEFT PANEL CONTENT ──────────────────────────────────── */
   .left-quote { margin-top: auto; background: rgba(10,45,22,0.5); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); padding: 20px 24px; }
-  .left-quote p { font-size: 14px; color: rgba(255,255,255,0.92); line-height: 1.5; margin-bottom: 8px; }
+  .left-quote p { font-size: 14px; font-family: 'Gelasio', Georgia, serif; font-style: italic; color: rgba(255,255,255,0.92); line-height: 1.55; margin-bottom: 8px; }
   .left-quote cite { font-size: 13px; font-style: normal; font-weight: 500; color: rgba(255,255,255,0.7); }
   .left-feature-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
   .left-feature { display: flex; align-items: flex-start; gap: 12px; }
@@ -499,27 +499,27 @@
   /* Full site nav (purchase page) */
   #fullNav { display: flex; width: 100%; align-items: center; gap: 20px; max-width: 1280px; margin: 0 auto; }
   .site-nav-links { display: flex; gap: 2px; list-style: none; flex: 1; margin: 0; padding: 0; }
-  .site-nav-links a { padding: 6px 8px; font-size: 15px; font-weight: 600; color: #535862; text-decoration: none; border-radius: 8px; white-space: nowrap; transition: background .15s, color .15s; }
-  .site-nav-links a:hover { background: #f5f5f5; color: #0F4030; }
+  .site-nav-links a { padding: 6px 8px; font-size: 15px; font-weight: 600; color: var(--neutral-700); text-decoration: none; border-radius: 8px; white-space: nowrap; transition: background .15s, color .15s; }
+  .site-nav-links a:hover { background: var(--neutral-100); color: var(--green-900); }
   .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .nav-cart-btn { position: relative; width: 40px; height: 40px; border: 1.5px solid var(--neutral-200); border-radius: 8px; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .15s; }
   .nav-cart-btn:hover { border-color: var(--neutral-300); background: var(--neutral-50); }
   .nav-cart-badge { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; background: var(--green-500); color: white; font-size: 11px; font-weight: 700; border-radius: 9px; display: flex; align-items: center; justify-content: center; padding: 0 4px; border: 2px solid white; font-family: inherit; }
-  .nav-btn-text { font-size: 14px; font-weight: 500; color: #535862; text-decoration: none; white-space: nowrap; cursor: pointer; background: none; border: none; font-family: inherit; }
-  .nav-btn-login { height: 40px; padding: 0 16px; border: 1.5px solid #e9eaeb; border-radius: 6px; background: white; font-size: 14px; font-weight: 600; color: #414651; cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: border-color .15s; font-family: inherit; }
-  .nav-btn-login:hover { border-color: #c8cacc; }
-  .nav-btn-outline { height: 40px; padding: 0 18px; border: 1.5px solid #D0D5DD; border-radius: 8px; background: white; font-size: 14px; font-weight: 600; color: #344054; cursor: pointer; text-decoration: none; display: flex; align-items: center; white-space: nowrap; font-family: inherit; transition: border-color .15s, background .15s; }
-  .nav-btn-outline:hover { border-color: #98A2B3; background: #F9FAFB; }
+  .nav-btn-text { font-size: 14px; font-weight: 500; color: var(--neutral-700); text-decoration: none; white-space: nowrap; cursor: pointer; background: none; border: none; font-family: inherit; }
+  .nav-btn-login { height: 40px; padding: 0 16px; border: 1.5px solid var(--neutral-200); border-radius: 6px; background: white; font-size: 14px; font-weight: 600; color: var(--neutral-700); cursor: pointer; text-decoration: none; display: flex; align-items: center; transition: border-color .15s; font-family: inherit; }
+  .nav-btn-login:hover { border-color: var(--neutral-300); }
+  .nav-btn-outline { height: 40px; padding: 0 18px; border: 1.5px solid var(--neutral-300); border-radius: 8px; background: white; font-size: 14px; font-weight: 600; color: var(--neutral-700); cursor: pointer; text-decoration: none; display: flex; align-items: center; white-space: nowrap; font-family: inherit; transition: border-color .15s, background .15s; }
+  .nav-btn-outline:hover { border-color: var(--neutral-500); background: var(--neutral-50); }
 
   /* Checkout shell nav (wizard + checkout + success) */
   #checkoutNav { display: none; width: 100%; align-items: center; justify-content: space-between; position: relative; }
   #checkoutNav.active { display: flex; align-items: center; height: 100%; }
-  .nav-back-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 500; color: #535862; background: none; border: none; cursor: pointer; font-family: inherit; padding: 8px 0; transition: color .15s; min-width: 140px; }
+  .nav-back-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 500; color: var(--neutral-700); background: none; border: none; cursor: pointer; font-family: inherit; padding: 8px 0; transition: color .15s; min-width: 140px; }
   .nav-back-btn:hover { color: #0F4030; }
   .nav-back-btn:hover .back-chevron { transform: translateX(-2px); }
   .back-chevron { display: inline-block; transition: transform .15s; }
   .checkout-nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #0F4030; text-decoration: none; letter-spacing: -0.4px; position: absolute; left: 50%; transform: translateX(-50%); }
-  .nav-secure-label { font-size: 13px; color: #9EA3A8; display: flex; align-items: center; gap: 5px; min-width: 140px; justify-content: flex-end; }
+  .nav-secure-label { font-size: 13px; color: var(--neutral-500); display: flex; align-items: center; gap: 5px; min-width: 140px; justify-content: flex-end; }
   .nav-skip-quiz-btn { font-size: 13px; font-weight: 500; color: #717680; background: none; border: 1.5px solid #C2C4C8; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; transition: color .15s, border-color .15s; }
   .nav-skip-quiz-btn:hover { color: #0F4030; border-color: #717680; }
 
@@ -566,7 +566,7 @@
   #screen-intro.active { display:flex; flex-direction:column; min-height:calc(100vh - 80px); }
 
   /* Hero — merged with why-cards into one green section */
-  .intro-hero { position:relative; overflow:hidden; background:#0d1f10; padding:100px 80px 88px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .intro-hero { position:relative; overflow:hidden; background:var(--green-900); padding:100px 80px 88px; display:flex; flex-direction:column; align-items:center; text-align:center; }
   /* intro-hero-bg and overlay are fully inline-styled on the elements */
   .intro-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(8,28,14,.65) 0%, rgba(8,28,14,.55) 40%, rgba(8,28,14,.85) 75%, #0d1f10 100%); pointer-events:none; z-index:1; }
   .intro-hero > * { position:relative; z-index:2; }
@@ -843,7 +843,7 @@
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Host+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Host+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Gelasio:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="scroll-progress" id="scroll-progress"></div>
@@ -1220,7 +1220,7 @@
         </div>
         <div class="trust-row">
           <span class="trust-item">🔒 GDPR safe</span>
-          <span class="trust-item">⭐ 4.8/5 rating</span>
+          <span class="trust-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="var(--green-500)" stroke="var(--green-500)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 4.8/5 rating</span>
           <span class="trust-item">🌍 15+ countries</span>
         </div>
       </div>
@@ -1585,7 +1585,7 @@
           <div class="inline-reveal" id="env-power-reveal" style="padding:0 4px">
             <div style="padding:4px 0 8px">
               <div class="info-box" style="background:var(--green-25);border:1px solid var(--green-100);gap:12px">
-                <div style="font-size:20px;flex-shrink:0">🔋</div>
+                <div style="flex-shrink:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--green-700)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11h4"/><path d="M8 9v6"/></svg></div>
                 <div style="flex:1">
                   <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
                     <div style="font-size:13px;font-weight:700;color:var(--neutral-900)">Spare batteries + charger added to your setup</div>
@@ -1652,7 +1652,7 @@
           <div class="inline-reveal" id="grazing-power-reveal" style="padding:0 4px">
             <div style="padding:4px 0 8px">
               <div class="info-box" style="background:var(--green-25);border:1px solid var(--green-100);gap:12px">
-                <div style="font-size:20px;flex-shrink:0">🔋</div>
+                <div style="flex-shrink:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--green-700)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11h4"/><path d="M8 9v6"/></svg></div>
                 <div style="flex:1">
                   <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
                     <div style="font-size:13px;font-weight:700;color:var(--neutral-900)">Spare batteries + charger added to your setup</div>
@@ -1672,7 +1672,7 @@
             </div>
           </div>
           <div class="option-card" data-group="grazing" data-value="medium" onclick="selectGrazing(this,'medium')">
-            <div class="option-icon">🌿</div>
+            <div class="option-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
             <div class="option-text">
               <div class="option-title">Medium property — 10–30 acres</div>
               <div class="option-desc">Standard grazing patterns with some rotation</div>
@@ -1727,7 +1727,7 @@
 
           <!-- Battery card -->
           <div class="rec-card">
-            <div class="rec-card-icon">🔋</div>
+            <div class="rec-card-icon" style="color:var(--green-700)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11h4"/><path d="M8 9v6"/></svg></div>
             <div class="rec-card-body">
               <div class="rec-card-title">
                 Additional cattle collar batteries
@@ -1748,7 +1748,7 @@
 
           <!-- Charger card -->
           <div class="rec-card">
-            <div class="rec-card-icon">🔌</div>
+            <div class="rec-card-icon" style="color:var(--green-700)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v3a6 6 0 0 0 12 0v-3a2 2 0 0 0-2-2z"/></svg></div>
             <div class="rec-card-body">
               <div class="rec-card-title">
                 Cattle collar battery chargers
@@ -2009,7 +2009,7 @@
           <div style="font-size:14px;font-weight:600;color:var(--neutral-900)">Book a free 20-minute call before you order</div>
           <div style="font-size:13px;color:var(--neutral-500);margin-top:3px">A Nofence specialist will walk through your setup with you — no commitment.</div>
         </div>
-        <a href="https://www.nofence.com/build-your-setup/chat-with-us/" target="_blank" class="btn-outline-green" style="height:40px;font-size:13px;padding:0 18px;flex-shrink:0;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📞 Talk to a specialist</a>
+        <a href="https://www.nofence.com/build-your-setup/chat-with-us/" target="_blank" class="btn-outline-green" style="height:40px;font-size:13px;padding:0 18px;flex-shrink:0;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.27 6.27l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Talk to a specialist</a>
       </div>
     </div>
 
@@ -3518,6 +3518,19 @@
     }, 600);
   }
 
+  const ITEM_SVG_ICONS = {
+    collars:    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>`,
+    batteries:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11h4"/><path d="M8 9v6"/></svg>`,
+    chargers:   `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v3a6 6 0 0 0 12 0v-3a2 2 0 0 0-2-2z"/></svg>`,
+    beacons:    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.35a7 7 0 0 0 0 7.3"/><path d="M18 8.35a7 7 0 0 1 0 7.3"/><path d="M9.46 10.18a3.5 3.5 0 0 0 0 3.64"/><path d="M14.54 10.18a3.5 3.5 0 0 1 0 3.64"/><circle cx="12" cy="12" r="1"/></svg>`,
+    chains:     `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+    straps:     `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 16.98h-5c-1.66 0-3-1.34-3-3s1.34-3 3-3h5c1.66 0 3 1.34 3 3s-1.34 3-3 3z"/><path d="M6 7.02h5c1.66 0 3 1.34 3 3s-1.34 3-3 3H6c-1.66 0-3-1.34-3-3s1.34-3 3-3z"/></svg>`,
+    charger:    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v3a6 6 0 0 0 12 0v-3a2 2 0 0 0-2-2z"/></svg>`,
+  };
+  function getSummaryIcon(item) {
+    return ITEM_SVG_ICONS[item.id] || `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>`;
+  }
+
   function renderSummaryCart() {
     const items = state.summaryItems || [];
     const grandTotal = items.reduce((s, i) => s + i.unitPrice * i.qty, 0);
@@ -3526,7 +3539,7 @@
     if (cartList) {
       cartList.innerHTML = items.map(item => `
         <div class="summary-line-item" data-id="${item.id}">
-          <div class="sli-icon">${item.icon}</div>
+          <div class="sli-icon" style="color:var(--green-700)">${getSummaryIcon(item)}</div>
           <div class="sli-info">
             <div class="sli-name">${item.name}</div>
             <div class="sli-meta">$${item.unitPrice.toLocaleString()} each</div>
